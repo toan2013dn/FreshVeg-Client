@@ -1,9 +1,9 @@
-import PartnershipIcon from "@/assets/icons/partnership.svg";
+import { ReactComponent as PartnershipIcon } from "@/assets/icons/partnership.svg";
 
 const Item = ({ imageUrl }) => {
   return (
-    <div>
-        <img src={PartnershipIcon} alt="dog" />
+    <div style={{ backgroundColor: "black" }}>
+      <PartnershipIcon />
     </div>
   );
 };
