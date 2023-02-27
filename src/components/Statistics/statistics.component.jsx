@@ -1,7 +1,7 @@
 import "./statistics.component.scss";
-import { Reactcomponent as Connection } from "@/assets/icons/Connection.svg";
-import { Reactcomponent as ShakeHand } from "@/assets/icons/Shakehand.svg";
-import { Reactcomponent as RecipeBook } from "@/assets/icons/RecipeBook.svg";
+import { ReactComponent as Connection } from "@/assets/icons/Connection.svg";
+import { ReactComponent as ShakeHand } from "@/assets/icons/Shakehand.svg";
+import { ReactComponent as RecipeBook } from "@/assets/icons/RecipeBook.svg";
 
 function Statistics() {
   return (
