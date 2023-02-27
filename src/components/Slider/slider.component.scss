@@ -79,6 +79,13 @@
             saturate(780%) hue-rotate(105deg) brightness(94%) contrast(93%);
         }
       }
+
+      &:first-child {
+        svg {
+          filter: brightness(0) saturate(100%) invert(28%) sepia(75%)
+            saturate(775%) hue-rotate(167deg) brightness(95%) contrast(93%);
+        }
+      }
     }
 
     &--button a {
