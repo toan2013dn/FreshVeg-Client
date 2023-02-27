@@ -1,6 +1,5 @@
 import "./productinfo.component.scss";
 import { ReactComponent as AddToCart } from "@/assets/icons/AddToCart.svg";
-import { ReactComponent as Money } from "@/assets/icons/Money.svg";
 
 function ProductInfo(props) {
   return (
@@ -10,7 +9,7 @@ function ProductInfo(props) {
         <div>
           <h4 className="product-info--name">{props.name}</h4>
           <h4 className="product-info--price">
-            <Money className="product-info--icon" />
+            
             {props.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ
           </h4>
         </div>

@@ -1,6 +1,7 @@
 import "./homerecipe.component.scss";
 import Recipe from "@/assets/images/Recipe.webp";
 import RecipeInfo from "../RecipeInfo/recipeinfo.component";
+import { Link } from "react-router-dom";
 
 function HomeRecipe() {
   return (
@@ -21,12 +22,18 @@ function HomeRecipe() {
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
+          <Link to="/">
+            <button className="home-products--button">Xem Thêm</button>
+          </Link>
         </div>
         <div className="recipe-drink">
           <h3 className="recipe-drink--text">Công Thức Sinh Tố</h3>
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
           <RecipeInfo image={Recipe} name="Cơm Chiên" hour="1" minute="30" />
+          <Link to="/">
+            <button className="home-products--button">Xem Thêm</button>
+          </Link>
         </div>
       </div>
 

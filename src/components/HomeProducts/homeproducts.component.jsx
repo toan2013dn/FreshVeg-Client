@@ -15,11 +15,13 @@ function HomeProducts() {
 
       <div className="product">
         <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
       </div>
 
       <div className="button">

@@ -33,7 +33,7 @@ function Slider() {
 
       {/* Làm răn để css mỗi button mỗi màu */}
       <div className="slider-buttons">
-        <button className="slider-buttons--button">
+        <button className="slider-buttons--button ">
           <a to={"/"}>
             Xem Sản Phẩm
             <Arrow className="slider-buttons--icon" />

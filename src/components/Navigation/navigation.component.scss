@@ -2,16 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 25px;
 
     .navigation-item{
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
 
         &--icon {
-            width: var(--icon-width);
-            height: var(--icon-height);
+            width: calc(var(--icon-width) * 1.5);
+            height: calc(var(--icon-height) * 1.5);
             cursor: pointer;
           }
           .navigation-item--text {
@@ -20,9 +21,9 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            position: relative;
-            bottom: 25px;
-            right: 5px;
+            position: absolute;
+            bottom: 30px;
+            left: 25px;
             display: flex;
             justify-content: center;
             align-items: center;

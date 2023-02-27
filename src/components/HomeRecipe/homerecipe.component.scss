@@ -19,6 +19,22 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 40px;
+    
+    &-food{
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    &-drink{
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .home-products--button{
+      margin-left: 150px;
+    }
   }
 
   .button {

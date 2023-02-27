@@ -1,11 +1,9 @@
 .recipe-info{
     display: flex;
-    max-width: 480px;
 
-  
-
-    
     .flex{
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
