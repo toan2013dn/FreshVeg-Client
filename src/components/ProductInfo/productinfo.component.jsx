@@ -6,11 +6,14 @@ function ProductInfo(props) {
   return (
     <div className="product-info">
       <img src={props.image} alt="product" className="product-info--image" />
-      <h4 className="product-info--name">{props.name}</h4>
       <div className="product-info--flex">
-        <h4 className="product-info--price">
-          <Money className="product-info--icon" />{props.price}đ
-        </h4>
+        <div>
+          <h4 className="product-info--name">{props.name}</h4>
+          <h4 className="product-info--price">
+            <Money className="product-info--icon" />
+            {props.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ
+          </h4>
+        </div>
         <AddToCart className="product-info--button" />
       </div>
     </div>

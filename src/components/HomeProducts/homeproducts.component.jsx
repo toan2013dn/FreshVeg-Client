@@ -14,7 +14,7 @@ function HomeProducts() {
       </div>
 
       <div className="product">
-        <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
+        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
         <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
         <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
         <ProductInfo image={Products} name="Hạt chi đó" price="50.000" />
@@ -23,11 +23,9 @@ function HomeProducts() {
       </div>
 
       <div className="button">
-          <button className="home-products--button">
-              <a to={"/"}>
-                Xem Tất Cả
-              </a>
-            </button>
+        <button className="home-products--button">
+          <a to={"/"}>Xem Tất Cả</a>
+        </button>
       </div>
     </div>
   );
