@@ -1,0 +1,39 @@
+.statistics {
+  background-color: var(--primary-color);
+  margin-top: 50px;
+  gap: 200px;
+  height: 400px;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+//One icon
+  &-connection--icon{
+    width: calc(var(--icon-width) * 4);
+    height: calc(var(--icon-height) * 4); 
+  }
+
+  &-partner--icon{
+    width: calc(var(--icon-width) * 4);
+    height: calc(var(--icon-height) * 4); 
+  }
+
+  &-resource--icon{
+    width: calc(var(--icon-width) * 4);
+    height: calc(var(--icon-height) * 4); 
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 15px; 
+    margin-left: 10px;
+  }
+
+  .text {
+    width: fit-content;
+    font-weight: 700;
+  }
+}

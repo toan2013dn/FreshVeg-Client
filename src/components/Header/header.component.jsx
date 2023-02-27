@@ -8,7 +8,7 @@ import SearchBar from "../SearchBar/searchbar.component";
 const Header = () => {
   return (
     <header className="header">
-        <Logo className='logo' />
+        <Logo to="/" className='logo' />
 
         <Menu />
 

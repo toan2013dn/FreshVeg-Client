@@ -9,7 +9,7 @@ function ProductInfo(props) {
       <h4 className="product-info--name">{props.name}</h4>
       <div className="product-info--flex">
         <h4 className="product-info--price">
-          <Money className="product-info--icon" />{props.price} <span>đ</span>
+          <Money className="product-info--icon" />{props.price}đ
         </h4>
         <AddToCart className="product-info--button" />
       </div>
