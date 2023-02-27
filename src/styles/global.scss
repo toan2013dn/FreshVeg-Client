@@ -1,4 +1,53 @@
 :root {
-    --header-text-color: red;
+    --primary-color: #4CAF50;
+    --second-color: #F4F4F4;
+    --hover-color: #3e8e41;
+    --icon-width: 30px;
+    --icon-height: 30px;
     font-family: 'Roboto', sans-serif;
+
+    h1{
+        font-size: 64px;
+        font-weight: 700;
+    }
+
+    h2{
+        font-size: 48px;
+        font-weight: 700;
+    }
+
+    h3{
+        font-size: 32px;
+        font-weight: 400;
+    }
+
+    h4{
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    p{
+        font-size: 16px;
+        font-weight: 100;
+    }
+
+    span{
+        font-size: 14px;
+        font-weight: 100;
+    }
+}
+
+body{
+    .wrapper{
+        width: 1440px;
+        margin: 0 auto;
+    }
+    .container{
+        width: 1140px;
+        margin: 0 auto;
+    }
+
+
+
+
 }

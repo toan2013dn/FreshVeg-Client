@@ -1,0 +1,34 @@
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+    .navigation-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--icon {
+            width: var(--icon-width);
+            height: var(--icon-height);
+            cursor: pointer;
+          }
+          .navigation-item--text {
+            color: white;
+            background-color: var(--primary-color);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: relative;
+            bottom: 25px;
+            right: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+          }
+    }
+
+
+}
