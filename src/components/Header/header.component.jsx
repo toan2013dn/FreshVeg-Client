@@ -1,4 +1,4 @@
-import '@/components/Header/header.styles.scss'
+import './header.styles.scss'
 import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
 
 import Menu from "../Menu/menu.component";

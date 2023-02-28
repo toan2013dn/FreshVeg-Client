@@ -75,8 +75,6 @@
         background-color: var(--hover-color);
         svg {
           transform: translateX(5px);
-          filter: brightness(0) saturate(100%) invert(56%) sepia(46%)
-            saturate(549%) hue-rotate(73deg) brightness(95%) contrast(91%);
         }
       }
       svg {
@@ -88,13 +86,6 @@
         svg {
           filter: brightness(0) saturate(100%) invert(99%) sepia(1%)
             saturate(0%) hue-rotate(136deg) brightness(103%) contrast(101%);
-        }
-      }
-
-      &:first-child {
-        svg {
-          filter: brightness(0) saturate(100%) invert(28%) sepia(75%)
-            saturate(775%) hue-rotate(167deg) brightness(95%) contrast(93%);
         }
       }
     }
