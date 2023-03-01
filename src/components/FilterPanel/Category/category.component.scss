@@ -1,0 +1,23 @@
+.category {
+  width: 345px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  &--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+
+    input{
+        width: 20px;
+        height: 20px;
+    }
+  }
+  h4 {
+    padding: 10px 15px;
+    font-weight: 700;
+  }
+}
