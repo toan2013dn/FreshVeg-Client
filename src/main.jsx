@@ -6,6 +6,7 @@ import Home from "./pages/Home/home.page";
 import Login from "./pages/Login/login.page";
 import SignUp from "./pages/SignUp/signup.page";
 import Categories from "./pages/Categories/categories.page";
+import FilterPanel from "./components/FilterPanel/filter-panel.component";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/categories",
     element: <Categories />,
+  },
+  {
+    path: "/filter-panel",
+    element: <FilterPanel />,
   }
 ]);
 
