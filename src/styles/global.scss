@@ -1,59 +1,61 @@
 :root {
-    --primary-color: #4CAF50;
-    --second-color: #F4F4F4;
-    --hover-color: #3e8e41;
-    --icon-width: 20px;
-    --icon-height: 20px;
-    --footer-background-color: #1B212E;
-    font-family: 'Roboto', sans-serif;
+  --primary-color: #4caf50;
+  --second-color: #f4f4f4;
+  --hover-color: #3e8e41;
+  --icon-width: 20px;
+  --icon-height: 20px;
+  --footer-background-color: #1b212e;
+  --primary-fade-color: #add781;
+  --background-color: #F4F4F4;
+  font-family: "Roboto", sans-serif;
 
-    h1{
-        font-size: 64px;
-        font-weight: 700;
-    }
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+  }
 
-    h2{
-        font-size: 48px;
-        font-weight: 700;
-    }
+  h2 {
+    font-size: 48px;
+    font-weight: 700;
+  }
 
-    h3{
-        font-size: 32px;
-        font-weight: 400;
-    }
+  h3 {
+    font-size: 32px;
+    font-weight: 400;
+  }
 
-    h4{
-        font-size: 20px;
-        font-weight: 400;
-    }
+  h4 {
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-    p{
-        font-size: 16px;
-        font-weight: 300;
-    }
+  p {
+    font-size: 16px;
+    font-weight: 300;
+  }
 
-    span{
-        font-size: 14px;
-        font-weight: 100;
-    }
+  span {
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
 
-body{
-    .wrapper{
-        width: 1440px;
-        margin: 0 auto;
-    }
-    .container{
-        width: 1140px;
-        margin: 0 auto;
-    }
+body {
 
-    .login{
-        width: 700px;
-        margin: 0 auto;
-    }
+  .wrapper {
+    width: 1440px;
+  }
+  .container {
+    width: 1140px;
+    margin: 0 auto;
+  }
 
-
-
-
+  .login {
+    width: 700px;
+    margin: 0 auto;
+  }
 }

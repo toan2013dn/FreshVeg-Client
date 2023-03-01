@@ -48,7 +48,7 @@ function LoginForm() {
             <label htmlFor="remember" style={{fontSize: "14px"}}>Remember me</label>
           </div>
           <div className="form-option--forgot">
-            <Link to={""} style={{fontSize: "14px", textDecoration: "none"}}>Forgot password?</Link>
+            <Link to={""}>Forgot password?</Link>
           </div>
         </div>
 

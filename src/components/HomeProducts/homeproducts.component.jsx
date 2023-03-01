@@ -3,6 +3,57 @@ import ProductInfo from "../ProductInfo/productinfo.component";
 import Products from "@/assets/images/Products.webp";
 
 function HomeProducts() {
+  const productLists = [
+    {
+      id: 1,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 2,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 3,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 4,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 5,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 6,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 7,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+    {
+      id: 8,
+      image: Products,
+      name: "Hạt chi đó",
+      price: 50000,
+    },
+  ];
+
   return (
     <div className="home-products container">
       <div className="introduction">
@@ -14,14 +65,9 @@ function HomeProducts() {
       </div>
 
       <div className="product">
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
-        <ProductInfo image={Products} name="Hạt chi đó" price={50000} />
+        {productLists.map((product) => {
+          return <ProductInfo key={product.id} product={product} />;
+        })}
       </div>
 
       <div className="button">

@@ -1,6 +1,7 @@
 import "./footer.component.scss";
 import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
 import SendingBar from "../SendingBar/sendingbar.component";
+import {Link} from "react-router-dom";
 
 function Footer() {
   return (
@@ -24,11 +25,13 @@ function Footer() {
       </div>
 
       <div className="footer-links">
-        <h4 className="footer-links--title">Các Trang Chính</h4>
-        <h4 className="footer-links--title">Trang Chủ</h4>
-        <h4 className="footer-links--title">Đi Chợ</h4>
-        <h4 className="footer-links--title">Công Thức</h4>
-        <h4 className="footer-links--title">Liên Hệ</h4>
+        <Link>
+          <h4 className="footer-links--title">Các Trang Chính</h4>
+        </Link>
+        <h4 className="footer-links--title"><Link to={"/"}>Trang Chủ</Link></h4>
+        <h4 className="footer-links--title"><Link to={"/"}>Đi Chợ</Link></h4>
+        <h4 className="footer-links--title"><Link to={"/"}>Công Thức</Link></h4>
+        <h4 className="footer-links--title"><Link to={"/"}>Liên Hệ</Link></h4>
       </div>
 
       <div className="footer-register">

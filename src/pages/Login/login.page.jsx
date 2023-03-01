@@ -16,7 +16,7 @@ function Login() {
 
       <div className="register">
         <span>
-          Bạn không có tài khoản? <Link to={""}>Đăng Kí</Link>
+          Bạn không có tài khoản? <Link to={"/signup"}>Đăng Kí</Link>
         </span>
       </div>
     </div>
