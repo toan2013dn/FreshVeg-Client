@@ -3,12 +3,27 @@
   border: 1px solid #e8e8e8;
   border-radius: 5px;
 
-  &--items{
+  &--items {
     padding: 30px 35px;
-    
-    div {
-        display: flex;
-        justify-content: space-between;
+
+    &--content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      > span {
+        color: #88be4c;
+      }
+      .MuiSlider-valueLabelOpen {
+        background-color: #88be4c;
+      }
+      .MuiSlider-valueLabelLabel {
+        font-weight: 700;
+      }
     }
   }
 
