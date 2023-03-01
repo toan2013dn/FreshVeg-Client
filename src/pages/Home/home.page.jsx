@@ -1,12 +1,26 @@
-import Header from "../../components/Header/header.component";
-import Item from "../../components/Item/item.component";
+import Header from "@/components/Header/header.component";
+import HomeProducts from "@/components/HomeProducts/homeproducts.component";
+import Slider from "@/components/Slider/slider.component";
+import Statistics from "@/components/Statistics/statistics.component";
+import HomeRecipe from "@/components/HomeRecipe/homerecipe.component";
+import Footer from "@/components/Footer/footer.component";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <Item imageUrl='https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg' />
-    </div>
+
+      <Slider />
+
+      <HomeProducts />
+
+      <Statistics />
+
+      <HomeRecipe />
+
+      <Footer />
+      
+    </div>  
   );
 };
 

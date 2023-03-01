@@ -1,0 +1,35 @@
+.sending {
+    display: flex;
+    height: 40px;
+    position: relative;
+
+    &--input {
+      border-radius: 50px;
+      background-color: var(--second-color);
+      border: none;
+      height: 50px;
+      &:focus {
+        background: var(--second-color);
+        outline: none;
+      }
+    }
+
+    .icon {
+      background-color: var(--primary-color);
+      border-radius: 50px;
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      height: 40px;
+      width: 60px;
+      position: absolute;
+      right: 25px;
+
+      .icon--sending {
+        width: var(--icon-width);
+        height: var(--icon-height);
+      }
+    }
+  }

@@ -1,6 +1,12 @@
 .header {
-    background-color: #000;
-    color: var(--header-text-color);
-    padding: 20px;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+
+  .logo{
+    cursor: pointer;
+  }
 }

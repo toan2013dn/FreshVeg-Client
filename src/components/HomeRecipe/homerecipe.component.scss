@@ -1,0 +1,47 @@
+.home-recipe {
+  .introduction {
+    text-align: center;
+    margin-top: 40px;
+    .home-recipe--line {
+      width: 1140px;
+      height: 1px;
+      background-color: #000;
+      margin: 0 auto;
+      margin-bottom: 30px;
+    }
+    .home-recipe--text {
+      margin-top: 20px;
+    }
+  }
+
+  .recipe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    
+    &-food{
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    &-drink{
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .home-products--button{
+      margin-left: 150px;
+    }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
