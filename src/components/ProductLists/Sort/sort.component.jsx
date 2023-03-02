@@ -17,7 +17,7 @@ const MenuProps = {
   },
 }
 
-const names = ['Giá từ cao đến thấp', 'Bán chạy nhất', 'Mới nhất']
+const names = ['Giá từ thấp đến cao', 'Giá từ cao đến thấp', 'Bán chạy nhất', 'Mới nhất']
 
 function Sort() {
   const theme = useTheme()
@@ -52,9 +52,6 @@ function Sort() {
             MenuProps={MenuProps}
             inputProps={{ 'aria-label': 'Without label' }}
           >
-            <MenuItem disabled value="">
-              <em>Giá từ thấp đến cao</em>
-            </MenuItem>
             {names.map((name) => (
               <MenuItem key={name} value={name}>
                 {name}
