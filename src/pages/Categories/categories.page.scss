@@ -1,25 +1,52 @@
-.categories-background{
+.categories {
+  &-background {
     position: relative;
     width: 100%;
 
-    &--content{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 40%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+    &--content {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
 
-        h3{
-            color: var(--primary-color);
-            font-weight: 700;
-        }
+      h3 {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
 
-        h4{
-            font-weight: 400;
-            color: var(--primary-color);
-        }
+      h4 {
+        font-weight: 400;
+        color: var(--primary-color);
+      }
     }
+  }
+
+  &-links {
+    display: flex;
+    gap: 10px;
+    margin: 30px 0 10px 0;
+
+    a.active {
+      color: var(--primary-color);
+    }
+  }
+
+  .container {
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .categories-list {
+    margin-top: 30px;
+  }
+
+  .categories-filter{
+    margin-bottom: 30px;
+  }
 }
