@@ -1,6 +1,7 @@
 import "./slider.component.scss";
 import { ReactComponent as Recycle } from "@/assets/icons/Recycle.svg";
 import { ReactComponent as Arrow } from "@/assets/icons/Arrow.svg";
+import {Link} from "react-router-dom";
 
 function Slider() {
   return (
@@ -34,16 +35,16 @@ function Slider() {
       {/* Làm răn để css mỗi button mỗi màu */}
       <div className="slider-buttons">
         <button className="slider-buttons--button ">
-          <a to={"/"}>
+          <Link to={"/categories"}>
             Xem Sản Phẩm
             <Arrow className="slider-buttons--icon" />
-          </a>
+          </Link>
         </button>
         <button className="slider-buttons--button styles">
-          <a to={"/"}>
+          <Link to={"/recipe"}>
             Xem Công Thức
             <Arrow className="slider-buttons--icon"  />
-          </a>
+          </Link>
         </button>
       </div>
     </div>
