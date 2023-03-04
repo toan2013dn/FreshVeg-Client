@@ -7,6 +7,7 @@ import Login from "./pages/Login/login.page";
 import SignUp from "./pages/SignUp/signup.page";
 import Categories from "./pages/Categories/categories.page";
 import FilterPanel from "./components/FilterPanel/filter-panel.component";
+import ProductsDetails from "./pages/ProductsDetails/products-details.component";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
   {
     path: "/filter-panel",
     element: <FilterPanel />,
-  }
+  } ,
+  {
+    path: "/products-details",
+    element: <ProductsDetails />,
+  } ,
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

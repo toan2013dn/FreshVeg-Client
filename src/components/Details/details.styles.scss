@@ -1,0 +1,41 @@
+.details {
+  &-flex {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    &--left {
+      width: 100%;
+    }
+
+    &--right {
+      width: 100%;
+    }
+  }
+  &-more{
+    width: 100%;
+    margin-top: 30px;
+
+    .css-13xfq8m-MuiTabPanel-root{
+        padding: 0;
+        width: 745px;
+        font-size: 20px;
+        margin-top: 20px;
+        align-items: flex-start ;
+    }
+
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+        color: var(--primary-color);
+        font-weight: 400;
+        font-size: 20px;
+    }
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+        color: var(--secondary-color);
+        font-weight: 400;
+        font-size: 20px;
+    }
+    .css-1aquho2-MuiTabs-indicator{
+        background-color: var(--primary-color);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.social-media {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+  svg {
+    width: calc(var(--icon-width) * 2);
+    height: calc(var(--icon-height) * 2);
+  }
+
+  .share{
+    display: flex;
+    align-items: center;
+    gap: 35px;
+  }
+
+
+}
