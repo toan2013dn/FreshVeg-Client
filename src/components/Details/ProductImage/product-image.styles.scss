@@ -27,6 +27,11 @@
       overflow: hidden;
       border-radius: 20px;
       overflow: hidden;
+
+      &.active{
+        border: 5px solid var(--primary-color);
+        opacity: .7;
+      }
     
 
       img {

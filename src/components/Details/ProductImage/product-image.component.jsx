@@ -27,10 +27,16 @@ function ProductImage() {
 
   ]
   const [selectedImage, setSelectedImage] = useState(images[0].image)
+  const [activeImage, setActiveImage] = useState(images[0].id);
+
+  const isThumbnailActive = (id) => {
+    return activeImage === id ? "active" : "";
+  };
 
   const handleClick = (id) => {
     const image = images.find((image) => image.id === id)
     setSelectedImage(image.image)
+    setActiveImage(id)
   }
 
   return (
@@ -40,7 +46,7 @@ function ProductImage() {
       </div>
       <ul className="product-image--list">
         {images.map((image) => (
-          <li key={image.id} onClick={() => handleClick(image.id)}>
+          <li className={isThumbnailActive(image.id)} key={image.id} onClick={() => handleClick(image.id)}>
             <img className="image" src={image.image} alt="product"  />
           </li>
         ))}
