@@ -7,21 +7,22 @@ function Details() {
   return (
     <div className="details">
       <div className="details-flex">
-          <div className="details-flex--left">
-            <ProductImage />
-          </div>
-          <div className="details-flex--right">
-            <ProductContent />
-          </div>
+        <div className="details-flex--left">
+          <ProductImage />
+        </div>
+        <div className="details-flex--right">
+          <ProductContent />
+        </div>
       </div>
       <div className="details-more">
         <MoreProductInfo />
       </div>
-      <div className='details-carousel'>
-        <CarouselImage/>
+      <div className="details-carousel">
+        <CarouselImage />
       </div>
     </div>
   )
 }
 
 export default Details
+
