@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp/signup.page";
 import Categories from "./pages/Categories/categories.page";
 import FilterPanel from "./components/FilterPanel/filter-panel.component";
 import ProductsDetails from "./pages/ProductsDetails/products-details.component";
+import OrderDetail from "./pages/OrderDetail/order-detail.component";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     path: "/products-details",
     element: <ProductsDetails />,
   } ,
+  {
+    path: "/order-detail",
+    element: <OrderDetail />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -1,7 +1,8 @@
+import './products-details.styles.scss'
+
 import Header from '@/components/Header/header.component'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as Next } from '@/assets/icons/Next.svg'
-import './products-details.styles.scss'
 import Details from '@/components/Details/details.component'
 import FilterPanel from '@/components/FilterPanel/filter-panel.component'
 import Footer from '@/components/Footer/footer.component'
