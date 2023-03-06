@@ -5,6 +5,9 @@ import ProductOne from '@/assets/images/Product-Part-1.webp'
 import ProductInfo from '@/components/ProductInfo/productinfo.component'
 import AliceCarousel from 'react-alice-carousel'
 
+import ButtonNext from './button-next.component'
+import ButtonPrev from './button-prev.component'
+
 function CarouselImage() {
   const productLists = [
     {
@@ -45,16 +48,16 @@ function CarouselImage() {
         <AliceCarousel
           autoPlay
           autoPlayInterval="3000"
-          disableButtonsControls
           disableDotsControls
           infinite
-          mouseTracking
           items={items}
           responsive={{
             0: { items: 1 },
             568: { items: 2 },
             1024: { items: 3 },
           }}
+          renderPrevButton={() => <ButtonPrev />}
+          renderNextButton={() => <ButtonNext />}
         />
       </div>
     </div>

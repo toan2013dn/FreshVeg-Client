@@ -23,8 +23,23 @@
       height: calc(var(--icon-height) * 2);
     }
 
-    .product-info{
-        margin-top: 30px;
+    .product-info {
+      margin-top: 30px;
     }
   }
+
+  .alice-carousel__prev-btn {
+    width: 50px;
+    position: absolute;
+    top: -36px;
+    right: 80px;
+  }
+
+  .alice-carousel__next-btn {
+    width: 50px;
+    position: absolute;
+    top: -36px;
+    right: 20px;
+  }
 }
+
