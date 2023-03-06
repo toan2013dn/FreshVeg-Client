@@ -5,8 +5,9 @@ import ProductOne from '@/assets/images/Product-Part-1.webp'
 import ProductInfo from '@/components/ProductInfo/productinfo.component'
 import AliceCarousel from 'react-alice-carousel'
 
-import ButtonNext from './button-next.component'
-import ButtonPrev from './button-prev.component'
+
+import BackArrow from '@mui/icons-material/ArrowBackIosNew';
+import FowardArrow from '@mui/icons-material/ArrowForwardIos';
 
 function CarouselImage() {
   const productLists = [
@@ -56,8 +57,8 @@ function CarouselImage() {
             568: { items: 2 },
             1024: { items: 3 },
           }}
-          renderPrevButton={() => <ButtonPrev />}
-          renderNextButton={() => <ButtonNext />}
+          renderPrevButton={() => <BackArrow />}
+          renderNextButton={() => <FowardArrow />}
         />
       </div>
     </div>
