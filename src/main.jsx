@@ -10,6 +10,7 @@ import FilterPanel from "./components/FilterPanel/filter-panel.component";
 import ProductsDetails from "./pages/ProductsDetails/products-details.component";
 import OrderDetail from "./pages/OrderDetail/order-detail.component";
 import OrderConfirm from "./pages/OrderConfirm/order-confirm.component";
+import OrderSuccess from "./pages/OrderSuccess/order-success.component";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/order-confirm",
     element: <OrderConfirm />,
+  },
+  {
+    path: "/order-success",
+    element: <OrderSuccess />,
   }
 ]);
 

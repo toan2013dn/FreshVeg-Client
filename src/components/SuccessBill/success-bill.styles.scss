@@ -1,0 +1,64 @@
+.success-bill {
+  width: 600px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 20px;
+
+
+  &--header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+
+    svg {
+      width: calc((var(--icon-width) * 6));
+      height: calc((var(--icon-height) * 6));
+      filter: brightness(0) saturate(100%) invert(54%) sepia(88%) saturate(307%) hue-rotate(73deg) brightness(91%)
+        contrast(92%);
+    }
+  }
+
+  .home-products--button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: none;
+    background-color: white;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+
+    &::before {
+      content: '';
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      transition: all 0.5s ease;
+      color: white;
+    }
+
+    &:hover::before {
+      left: 0;
+    }
+
+    // &:hover {
+    //   color: var(--hover-color);
+    // }
+  }
+}
