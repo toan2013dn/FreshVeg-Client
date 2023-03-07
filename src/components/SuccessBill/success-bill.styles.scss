@@ -39,6 +39,7 @@
     font-size: 24px;
     transition: all 0.3s ease;
     color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &::before {
       content: '';
