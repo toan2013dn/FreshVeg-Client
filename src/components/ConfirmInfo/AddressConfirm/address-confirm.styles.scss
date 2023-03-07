@@ -1,0 +1,52 @@
+.address-confirm {
+  width: 700px;
+  &--item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: 20px 0;
+    border-radius: 10px;
+    &:hover,
+    &.active {
+      background-color: var(--primary-color);
+      color: white;
+      .edit a {
+        color: white;
+      }
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    gap: 10px;
+
+      .phone {
+        margin-left: 20px;
+      }
+
+      svg {
+        width: calc((var(--icon-width) * 1.5));
+        height: calc((var(--icon-height) * 1.5));
+      }
+    }
+
+    .address {
+      width: 580px;
+      margin-left: 40px;
+    }
+
+    .edit {
+      position: absolute;
+      left: 50%;
+      a {
+        text-decoration: none;
+        color: var(--primary-color);
+      }
+    }
+    h4{
+        font-size: 20px;
+    }
+  }
+}

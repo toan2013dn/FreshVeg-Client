@@ -9,6 +9,7 @@ import Categories from "./pages/Categories/categories.page";
 import FilterPanel from "./components/FilterPanel/filter-panel.component";
 import ProductsDetails from "./pages/ProductsDetails/products-details.component";
 import OrderDetail from "./pages/OrderDetail/order-detail.component";
+import OrderConfirm from "./pages/OrderConfirm/order-confirm.component";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/order-detail",
     element: <OrderDetail />,
+  },
+  {
+    path: "/order-confirm",
+    element: <OrderConfirm />,
   }
 ]);
 
