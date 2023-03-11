@@ -11,6 +11,7 @@ import ProductsDetails from "./pages/ProductsDetails/products-details.component"
 import OrderDetail from "./pages/OrderDetail/order-detail.component";
 import OrderConfirm from "./pages/OrderConfirm/order-confirm.component";
 import OrderSuccess from "./pages/OrderSuccess/order-success.component";
+import UserPage from "./pages/UserPage/user-page.component";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/order-success",
     element: <OrderSuccess />,
+  },
+  {
+    path: "/user-page",
+    element: <UserPage />,
   }
 ]);
 

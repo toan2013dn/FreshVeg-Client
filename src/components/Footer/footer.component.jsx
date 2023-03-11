@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="footer wrapper">
+    <footer className="footer">
       <div className="footer-logo">
         <Logo to="/" className="logo" />
         <h4 className="footer-logo--text">

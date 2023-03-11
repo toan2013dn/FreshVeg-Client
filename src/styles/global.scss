@@ -7,6 +7,8 @@
   --footer-background-color: #1b212e;
   --primary-fade-color: #add781;
   --background-color: #F4F4F4;
+  --profile-color: #ade792;
+  --profile-text-color: #344d67;
   font-family: "Roboto", sans-serif;
 
   h1 {
@@ -25,18 +27,18 @@
   }
 
   h4 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
   }
 
   p {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   span {
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 400;
   }
 
   a {

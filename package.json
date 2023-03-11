@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/lab": "^5.0.0-alpha.121",
     "@mui/material": "^5.11.11",
+    "@mui/x-date-pickers": "^6.0.0",
+    "dayjs": "^1.11.7",
     "mui-image-slider": "^1.0.7",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.7.0",
