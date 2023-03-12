@@ -6,6 +6,12 @@ import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 
+function StatusRender(props) {
+  const { value } = props
+
+  return <div className="status-render">{value}</div>
+}
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 80 },
   { field: 'date', headerName: 'Ngày Đặt', width: 130 },
@@ -20,9 +26,24 @@ const columns = [
     headerName: 'Tổng Số Tiền',
     width: 150,
   },
-  { field: 'status', headerName: 'Trạng Thái', width: 130 },
+  { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender },
   { field: 'action', headerName: '', width: 130 },
 ]
+
+const object = {
+  success: (
+    <>
+      <PendingOutlinedIcon />
+      <span>Chờ xác nhận</span>
+    </>
+  ),
+  failed: (
+    <>
+      <DeleteForeverOutlinedIcon />
+      <span>Đã hủy</span>
+    </>
+  ),
+}
 
 const rows = [
   {
@@ -39,7 +60,7 @@ const rows = [
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: 'Huy',
+    status: object.failed,
   },
   {
     id: 3,
@@ -47,7 +68,7 @@ const rows = [
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: <PendingOutlinedIcon />,
+    status: object.success,
   },
   {
     id: 4,
@@ -82,3 +103,4 @@ function UserOrder() {
 }
 
 export default UserOrder
+
