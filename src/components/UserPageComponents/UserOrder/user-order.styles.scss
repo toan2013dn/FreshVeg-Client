@@ -1,0 +1,21 @@
+.user-order {
+  width: 100%;
+  margin-left: 38px;
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-columnHeader:hover .MuiDataGrid-menuIcon {
+    display: none;
+  }
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .MuiDataGrid-cell.MuiDataGrid-cell--textLeft.MuiDataGrid-withBorderColor {
+    display: flex;
+    align-items: center;
+  }
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-sortIcon,
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-filterIcon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 5px;
+  }
+}
