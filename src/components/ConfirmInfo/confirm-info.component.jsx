@@ -23,7 +23,7 @@ function ConfirmInfo() {
             <h4>Địa Chỉ Nhận Hàng</h4>
           </div>
 
-          {/* <AddressConfirm /> */}
+          <AddressConfirm />
 
           <button className="home-products--button">
             <Link to={''} style={{ fontSize: '20px' }}>
@@ -70,4 +70,3 @@ function ConfirmInfo() {
 }
 
 export default ConfirmInfo
-

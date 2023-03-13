@@ -1,8 +1,13 @@
 .user-order {
   width: 100%;
   margin-left: 38px;
+  position: relative;
   .css-1usso8h-MuiDataGrid-root .MuiDataGrid-columnHeader:hover .MuiDataGrid-menuIcon {
     display: none;
+  }
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-cell:focus {
+    outline: none;
   }
   .css-1usso8h-MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
     display: flex;
@@ -17,5 +22,98 @@
     background-color: var(--primary-color);
     border-radius: 50%;
     padding: 5px;
+  }
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-cellContent {
+    word-wrap: break-word;
+  }
+  .css-1usso8h-MuiDataGrid-root .MuiDataGrid-row:not(.MuiDataGrid-row--dynamicHeight) > .MuiDataGrid-cell {
+    overflow: none;
+    white-space: normal;
+  }
+  .css-de9k3v-MuiDataGrid-selectedRowCount {
+    display: none;
+  }
+  .css-wop1k0-MuiDataGrid-footerContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .status-render {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    span {
+      margin-top: 3px;
+      color: white;
+    }
+
+    // CSS for status
+    .MuiAlert-root.MuiAlert-sizeMd.MuiAlert-colorSuccess.MuiAlert-variantSoft.css-1d8pku-JoyAlert-root {
+      background-color: var(--primary-color);
+    }
+    .MuiAlert-root.MuiAlert-sizeMd.MuiAlert-colorWarning.MuiAlert-variantSoft.css-bq089s-JoyAlert-root {
+      background-color: #d3222e;
+    }
+    .MuiAlert-root.MuiAlert-sizeMd.MuiAlert-colorPrimary.MuiAlert-variantSoft.css-8dzngp-JoyAlert-root {
+      background-color: #5b5b72;
+    }
+  }
+  input {
+    padding: 10px 10px;
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    border: none;
+    border: 1px solid var(--primary-color);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    &:focus {
+      outline: none;
+    }
+  }
+  .action-render {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    gap: 10px;
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 50%;
+      text-align: center;
+    }
+    .delete {
+      border: 1px solid #d11a2a;
+
+      &:hover {
+        background-color: #d11a2a;
+        .delete-btn {
+          filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)
+            contrast(100%);
+        }
+      }
+
+      .delete-btn {
+        filter: brightness(0) saturate(100%) invert(16%) sepia(49%) saturate(4724%) hue-rotate(341deg) brightness(113%)
+          contrast(102%);
+      }
+    }
+    .info {
+      border: 1px solid #3f51b5;
+      &:hover {
+        background-color: #3f51b5;
+        .info-btn {
+          filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)
+            contrast(100%);
+        }
+      }
+      .info-btn {
+        filter: brightness(0) saturate(100%) invert(28%) sepia(73%) saturate(1140%) hue-rotate(202deg) brightness(96%)
+          contrast(83%);
+      }
+    }
   }
 }

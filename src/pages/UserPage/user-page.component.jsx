@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { ReactComponent as Next } from '@/assets/icons/Next.svg'
 import UserFilter from '@/components/UserPageComponents/UserFilter/user-filter.component'
 import UserPagePart from '@/components/UserPageComponents/user-page-part.component'
+import Footer from '@/components/Footer/footer.component'
 
 function UserPage() {
   return (
@@ -19,8 +20,10 @@ function UserPage() {
           <Next />
           <NavLink to="/user-page">Hồ sơ</NavLink>
         </div>
-    <UserPagePart/>
+        <UserPagePart />
       </div>
+
+      <Footer />
     </div>
   )
 }

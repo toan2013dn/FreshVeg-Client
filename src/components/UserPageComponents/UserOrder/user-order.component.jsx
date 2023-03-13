@@ -1,15 +1,36 @@
 import './user-order.styles.scss'
 import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
+import { useState } from 'react'
+import Alert from '@mui/joy/Alert'
+import Box from '@mui/joy/Box'
 
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined'
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import PendingIcon from '@mui/icons-material/PendingOutlined'
+import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
+import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
+import TickIcon from '@mui/icons-material/DoneOutlined'
+import CancelIcon from '@mui/icons-material/DoNotDisturbAltRounded'
 
 function StatusRender(props) {
   const { value } = props
 
   return <div className="status-render">{value}</div>
+}
+
+// a function that renders the action buttons
+function ActionRender(props) {
+  const { value } = props
+
+  return (
+    <div className="action-render">
+      <button className="action-render__btn info">
+        <InfoDetailIcon className="info-btn" />
+      </button>
+      <button className="action-render__btn delete">
+        <DeleteIcon className="delete-btn" />
+      </button>
+    </div>
+  )
 }
 
 const columns = [
@@ -26,21 +47,57 @@ const columns = [
     headerName: 'Tổng Số Tiền',
     width: 150,
   },
-  { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender },
-  { field: 'action', headerName: '', width: 130 },
+  { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender, className: 'status-column' },
+  { width: 130, sortable: false, renderCell: ActionRender },
 ]
 
 const object = {
-  success: (
+  pending: (
     <>
-      <PendingOutlinedIcon />
-      <span>Chờ xác nhận</span>
+      <Alert color="primary" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+        <span
+          style={{
+            width: 90,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Chờ xác nhận
+        </span>
+      </Alert>
     </>
   ),
-  failed: (
+  success: (
     <>
-      <DeleteForeverOutlinedIcon />
-      <span>Đã hủy</span>
+      <Alert color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+        <span
+          style={{
+            width: 90,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Đã đặt hàng
+        </span>
+      </Alert>
+    </>
+  ),
+  cancel: (
+    <>
+      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+        <span
+          style={{
+            width: 90,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Đã hủy
+        </span>
+      </Alert>
     </>
   ),
 }
@@ -52,15 +109,15 @@ const rows = [
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: 'Huy',
+    status: object.pending,
   },
   {
     id: 2,
     date: '21/06/2021',
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.failed,
+    total: '200đ',
+    status: object.success,
   },
   {
     id: 3,
@@ -68,15 +125,15 @@ const rows = [
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: object.success,
+    status: object.cancel,
   },
   {
     id: 4,
     date: '21/06/2021',
     phone: '0934795670',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+    address: '124124 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: 'Huy',
+    status: object.success,
   },
   {
     id: 5,
@@ -84,15 +141,25 @@ const rows = [
     phone: '0934795670',
     address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
     total: '1000000đ',
-    status: 'Huy',
+    status: object.success,
+  },
+  {
+    id: 6,
+    date: '21/06/2021',
+    phone: '01245',
+    address: '22 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+    total: '1000000đ',
+    status: object.success,
   },
 ]
 
 function UserOrder() {
   return (
     <div className="user-order">
+      <input type="text" placeholder="Tìm kiếm đơn hàng..." />
       <DataGrid
-        style={{ fontSize: '16px', backgroundColor: 'var(--profile-color)' }}
+        style={{ fontSize: '16px' }}
+        rowHeight={100}
         rows={rows}
         columns={columns}
         pageSize={5}
@@ -103,4 +170,3 @@ function UserOrder() {
 }
 
 export default UserOrder
-
