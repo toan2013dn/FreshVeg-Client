@@ -1,7 +1,7 @@
-import "./statistics.component.scss";
-import { ReactComponent as Connection } from "@/assets/icons/Connection.svg";
-import { ReactComponent as ShakeHand } from "@/assets/icons/ShakeHand.svg";
-import { ReactComponent as RecipeBook } from "@/assets/icons/RecipeBook.svg";
+import './statistics.component.scss'
+import { ReactComponent as Connection } from '@/assets/icons/Connection.svg'
+import { ReactComponent as ShakeHand } from '@/assets/icons/Shakehand.svg'
+import { ReactComponent as RecipeBook } from '@/assets/icons/RecipeBook.svg'
 
 function Statistics() {
   return (
@@ -23,7 +23,8 @@ function Statistics() {
         <h3 className="statistics-resource--text text">Sản phẩm sạch</h3>
       </div>
     </div>
-  );
+  )
 }
 
-export default Statistics;
+export default Statistics
+

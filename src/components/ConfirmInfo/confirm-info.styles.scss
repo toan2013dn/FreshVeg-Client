@@ -1,0 +1,26 @@
+.left {
+  width: 700px;
+  margin-bottom: 30px;
+
+  .styles {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    gap: 10px;
+
+    svg {
+      width: calc((var(--icon-width) * 1.5));
+      height: calc((var(--icon-height) * 1.5));
+    }
+  }
+  .css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root{
+    height: 200px;
+    align-items: flex-start;
+  }
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+    font-size: 20px;
+  }
+}
+.right{
+  width: 600px;
+}

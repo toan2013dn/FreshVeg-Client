@@ -1,0 +1,46 @@
+.order-confirm {
+  position: relative;
+  &--header {
+    .line {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+  }
+  .container {
+    width: 1300px;
+    padding: 5px 0;
+    .order-confirm--links {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0 10px 0;
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      a.active {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+    }
+    .order-confirm--title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      h3 {
+        width: fit-content;
+      }
+      .line {
+        height: 5px;
+      }
+    }
+  }
+  &--image{
+    position: absolute;
+    right: 0;
+    bottom: 18%;
+    left: 57%;
+  }
+}
