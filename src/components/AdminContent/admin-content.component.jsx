@@ -4,8 +4,10 @@ import OrderManagementTable from './OrderManagement/order-management-table.compo
 function AdminContent() {
   return (
     <div className="admin-content">
-      <h3>Quản Lý Đơn Hàng</h3>
-      <OrderManagementTable />
+      <div className="order-table">
+        <h3>Quản Lý Đơn Hàng</h3>
+        <OrderManagementTable />
+      </div>
     </div>
   )
 }

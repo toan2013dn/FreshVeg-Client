@@ -1,7 +1,10 @@
 .admin-content {
   grid-area: content;
-  h3 {
-    margin-left: 10px;
-    margin-bottom: 55px;
+  .order-table {
+    height: 100%;
+    h3 {
+      margin-left: 10px;
+      margin-bottom: 55px;
+    }
   }
 }
