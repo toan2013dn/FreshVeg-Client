@@ -36,6 +36,11 @@
         background-color: var(--primary-color);
         transform: scale(0.95);
       }
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
     }
   }
 }
