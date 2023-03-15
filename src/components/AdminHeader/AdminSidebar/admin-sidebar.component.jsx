@@ -10,6 +10,11 @@ import AdminStatistic from '../AdminStatistic/admin-statistic.component'
 
 function AdminSideBar() {
   const [activeHomePage, setActiveHomePage] = useState(true)
+  const [activeId, setActiveId] = useState(null)
+
+  const handleClick = () => {
+    setActiveHomePage(true)
+  }
 
   return (
     <div className="admin-sidebar">
@@ -17,12 +22,22 @@ function AdminSideBar() {
         <Logo />
       </Link>
       <div className="admin-sidebar--categories">
-        <div className={`dashboard ${activeHomePage ? 'active' : ''}`}>
+        <div className={`dashboard ${activeHomePage ? 'active' : ''}`} onClick={handleClick}>
           <HomeOutlinedIcon />
           <h4>Trang Chủ</h4>
         </div>
-        <AdminManagement activeHomePage={activeHomePage} setActiveHomePage={setActiveHomePage} />
-        <AdminStatistic />
+        <AdminManagement
+          activeHomePage={activeHomePage}
+          setActiveHomePage={setActiveHomePage}
+          activeId={activeId}
+          setActiveId={setActiveId}
+        />
+        <AdminStatistic
+          activeHomePage={activeHomePage}
+          setActiveHomePage={setActiveHomePage}
+          activeId={activeId}
+          setActiveId={setActiveId}
+        />
       </div>
     </div>
   )

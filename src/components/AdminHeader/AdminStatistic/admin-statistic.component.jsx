@@ -5,33 +5,34 @@ import { useState } from 'react'
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined'
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined'
 
-function AdminStatistic() {
+function AdminStatistic({ activeHomePage, setActiveHomePage, activeId, setActiveId }) {
   const managements = [
     {
-      id: 1,
+      id: 5,
       title: 'Thống Kê Khách Hàng',
       icon: <ArrowRightOutlinedIcon />,
     },
     {
-      id: 2,
+      id: 6,
       title: 'Thống Kê Sản Phẩm',
       icon: <ArrowRightOutlinedIcon />,
     },
     {
-      id: 3,
+      id: 7,
       title: 'Thống Kê Theo Năm',
       icon: <ArrowRightOutlinedIcon />,
     },
     {
-      id: 4,
+      id: 8,
       title: ' Thống Kê Theo Tháng',
       icon: <ArrowRightOutlinedIcon />,
     },
   ]
 
-  const [activeId, setActiveId] = useState(null)
-
   const handleClick = (id) => {
+    if (activeHomePage) {
+      setActiveHomePage(false)
+    }
     setActiveId(id)
   }
 
@@ -43,7 +44,7 @@ function AdminStatistic() {
       </div>
       {managements.map((management) => (
         <div
-          className={`admin-management--item ${activeId === management.id ? 'active' : ''}`}
+          className={`admin-management--item ${activeId === management.id && !activeHomePage ? 'active' : ''}`}
           key={management.id}
           onClick={() => handleClick(management.id)}
         >
