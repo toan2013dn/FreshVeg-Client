@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined'
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined'
 
-function AdminManagement() {
+function AdminManagement({ activeHomePage, setActiveHomePage }) {
   const managements = [
     {
       id: 1,
@@ -31,6 +31,9 @@ function AdminManagement() {
   const [activeId, setActiveId] = useState(null)
 
   const handleClick = (id) => {
+    if (activeHomePage) {
+      setActiveHomePage(false)
+    }
     setActiveId(id)
   }
 
@@ -42,7 +45,7 @@ function AdminManagement() {
       </div>
       {managements.map((management) => (
         <div
-          className={`admin-management--item ${activeId === management.id ? 'active' : ''}`}
+          className={`admin-management--item ${activeId === management.id && !activeHomePage ? 'active' : ''}`}
           key={management.id}
           onClick={() => handleClick(management.id)}
         >
