@@ -1,9 +1,10 @@
 import './categories-management.styles.scss'
 
-import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { useState } from 'react'
 import Alert from '@mui/joy/Alert'
+
+import AddCategory from '../AddCategoryModal/add-category.component'
 
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
@@ -66,10 +67,12 @@ const rows = [
 ]
 
 function CategoriesManagement() {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   return (
     <div className="categories-management">
       <div className="user-order">
-        <button className="add-btn">Thêm Mới</button>
+        <button className="add-btn" onClick={() => setIsOpenModal(true)}>Thêm Mới</button>
         <input type="text" placeholder="Tìm kiếm..." />
         <DataGrid
           style={{ fontSize: '16px' }}
@@ -80,6 +83,7 @@ function CategoriesManagement() {
           rowsPerPageOptions={[5]}
         />
       </div>
+      <AddCategory isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
     </div>
   )
 }
