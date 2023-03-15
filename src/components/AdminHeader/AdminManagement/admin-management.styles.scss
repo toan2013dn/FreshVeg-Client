@@ -1,0 +1,35 @@
+.admin-management {
+  width: 100;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+
+  &--title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &--item {
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 0 10px 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  }
+
+  .active {
+    color: white;
+    background-color: var(--primary-color);
+    transform: scale(0.95);
+  }
+}
