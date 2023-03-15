@@ -1,0 +1,51 @@
+.categories-management {
+  height: 100%;
+  position: relative;
+
+  .user-order {
+    height: 100%;
+    margin-left: 0;
+    width: 97%;
+    margin: 0 auto;
+
+    .add-btn {
+      background-color: #4caf50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2px;
+
+      &:hover {
+        background-color: #3e8e41;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        background-color: #4caf50;
+        transform: translateY(2px);
+      }
+    }
+
+    input {
+      padding: 10px 10px;
+      position: absolute;
+      right: 0;
+      bottom: 92%;
+      border: none;
+      border: 1px solid var(--primary-color);
+      margin-bottom: 10px;
+      border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
