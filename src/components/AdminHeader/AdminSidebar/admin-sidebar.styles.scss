@@ -1,0 +1,46 @@
+.admin-sidebar {
+  width: 270px;
+  grid-area: sidebar;
+  .logo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid #f4f4f4;
+    border-right: 3px solid #f4f4f4;
+  }
+
+  &--categories {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px 5px 0 0;
+    height: 100%;
+    border-right: 3px solid #f4f4f4;
+    border-bottom: 3px solid #f4f4f4;
+    border-radius: 10px;
+
+    .dashboard {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      margin-left: -10px;
+      cursor: pointer;
+
+      &.active {
+        color: white;
+        background-color: var(--primary-color);
+        transform: scale(0.95);
+      }
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+    }
+  }
+}
