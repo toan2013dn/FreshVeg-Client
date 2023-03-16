@@ -1,19 +1,39 @@
-import Modal from '@mui/material/Modal';
+import './add-category.styles.scss'
+
+import { useState } from 'react'
+import TextField from '@mui/material/TextField'
+
+import Modal from '@mui/material/Modal'
 
 function AddCategory({ isOpen, onClose }) {
-  return <Modal open={isOpen} onClose={onClose}>
-    <span style={{
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 4,
-    }}>dcm</span>
-  </Modal>
+  const [name, setName] = useState('')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('Name:', name)
+  }
+
+  return (
+    <Modal open={isOpen} onClose={onClose}>
+      <span className="modal">
+        <form onSubmit={handleSubmit}>
+          <h4>Thêm Thể Loại Mới</h4>
+          <div className="add-new">
+            <TextField
+              id="standard-multiline-flexible"
+              label="Nhập tên thể loại"
+              multiline
+              maxRows={4}
+              variant="standard"
+            />
+          </div>
+          <button type="submit" className="submit-btn">
+            Thêm
+          </button>
+        </form>
+      </span>
+    </Modal>
+  )
 }
 
-export default AddCategory;
+export default AddCategory
