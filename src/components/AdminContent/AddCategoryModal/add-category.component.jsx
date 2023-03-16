@@ -2,6 +2,7 @@ import './add-category.styles.scss'
 
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
+import CloseIcon from '@mui/icons-material/Close'
 
 import Modal from '@mui/material/Modal'
 
@@ -25,11 +26,13 @@ function AddCategory({ isOpen, onClose }) {
               multiline
               maxRows={4}
               variant="standard"
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
           <button type="submit" className="submit-btn">
             Thêm
           </button>
+          <CloseIcon onClick={onClose} />
         </form>
       </span>
     </Modal>
