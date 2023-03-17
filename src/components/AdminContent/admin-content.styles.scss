@@ -2,8 +2,7 @@
   grid-area: content;
 
   h3 {
-    margin-left: 10px;
-    margin-bottom: 55px;
+    margin-bottom: 53px;
   }
 
   .order-table {
@@ -11,6 +10,11 @@
   }
 
   .categories {
+    height: 100%;
+    margin-left: 10px;
+  }
+
+  .products-management {
     height: 100%;
     margin-left: 10px;
   }
