@@ -1,6 +1,4 @@
 .form {
- 
-
   form {
     display: flex;
     flex-direction: column;
@@ -29,7 +27,7 @@
         border: none;
         border-bottom: 1px solid #000;
         margin-bottom: 20px;
-        background-color: transparent; 
+        background-color: transparent;
 
         &:focus {
           outline: none;
@@ -39,7 +37,8 @@
       svg {
         position: absolute;
         top: 33px;
-        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%) contrast(104%);
+        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%)
+          contrast(104%);
       }
     }
 
@@ -60,16 +59,16 @@
         height: calc(var(--icon-height));
       }
 
-      &--forgot{
-        a{
-        font-size: 14px;
-        font-weight: 700;
-        color: black;
-        cursor: pointer;
+      &--forgot {
+        a {
+          font-size: 14px;
+          font-weight: 700;
+          color: black;
+          cursor: pointer;
         }
       }
     }
-    button {
+    .submit-btn {
       width: 350px;
       margin-top: 20px;
       background-color: var(--primary-color);
@@ -85,6 +84,14 @@
         background-color: var(--hover-color);
         color: white;
       }
+    }
+    .button-toggle {
+      position: absolute;
+      right: 30px;
+      transform: translateY(-50%);
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
     }
   }
 }

@@ -11,7 +11,7 @@ function Login({ onClose }) {
       <Logo to="/" className="logo" />
       <LoginForm />
       <div className="login-social">
-        <span>or continue with</span>
+        <span>hoặc đăng nhập bằng</span>
         <SocialLogin />
       </div>
       <div className="register">
