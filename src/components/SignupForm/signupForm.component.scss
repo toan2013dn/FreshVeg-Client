@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 550px;
-    gap: 30px;
+    gap: 25px;
 
     .form-input {
       display: flex;
@@ -32,17 +32,23 @@
         &:focus {
           outline: none;
         }
+
+        &:invalid {
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid red;
+        }
       }
 
       svg {
         position: absolute;
         top: 33px;
-        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%)
-          hue-rotate(324deg) brightness(96%) contrast(104%);
+        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%)
+          contrast(104%);
       }
     }
 
-    button {
+    .register-btn {
       width: 95%;
       margin-top: 20px;
       background-color: var(--primary-color);
@@ -59,5 +65,19 @@
         color: white;
       }
     }
+    .password {
+      position: relative;
+      .button-toggle {
+        position: absolute;
+        right: 50px;
+        transform: translateY(-50%);
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+  .error {
+    color: #ff2400;
   }
 }

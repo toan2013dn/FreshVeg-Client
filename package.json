@@ -30,8 +30,10 @@
     "react-router-dom": "^6.8.1",
     "react-share": "^4.4.1",
     "react-slick": "^0.29.0",
+    "react-toastify": "^9.1.1",
     "sass": "^1.58.3",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.7.3",
     "vite-plugin-svgr": "^2.4.0",
     "zustand": "^4.3.6"
   },
