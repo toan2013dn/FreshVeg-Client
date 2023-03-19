@@ -131,7 +131,7 @@ function SignupForm() {
       <form onSubmit={handleSubmit}>
         <div className="userName form-input">
           <label className="form-label" htmlFor="userName">
-            User Name
+            Tên người dùng
           </label>
           <UserSignup />
           <input
@@ -139,7 +139,7 @@ function SignupForm() {
             id="userName"
             value={userName}
             onChange={(e) => handleInputChange(e)}
-            placeholder="Enter your User Name"
+            placeholder="VD: Nguyen Van A"
           />
           {errors['userName'] !== '' && <span className="error">{errors['userName']}</span>}
         </div>
@@ -153,7 +153,7 @@ function SignupForm() {
         </div>
         <div className="password form-input">
           <label className="form-label" htmlFor="password">
-            Password
+            Mật khẩu
           </label>
           <Password />
           <input
@@ -161,7 +161,7 @@ function SignupForm() {
             id="password"
             value={password}
             onChange={(e) => handleInputChange(e)}
-            placeholder="Password"
+            placeholder="Nhập mật khẩu của bạn"
           />
           {errors['password'] && <span className="error">{errors['password']}</span>}
           <button type="button" className="button-toggle" onClick={toggleShowPassword}>
@@ -170,7 +170,7 @@ function SignupForm() {
         </div>
         <div className="confirm-password form-input password">
           <label className="form-label" htmlFor="confirmPassword">
-            Confirm Password
+            Xác nhận mật khẩu
           </label>
           <Password />
           <input
@@ -178,7 +178,7 @@ function SignupForm() {
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => handleInputChange(e)}
-            placeholder="Confirm Password"
+            placeholder="Nhập lại mật khẩu của bạn"
           />
           {errors['confirmPassword'] && <span className="error">{errors['confirmPassword']}</span>}
           <button type="button" className="button-toggle" onClick={toggleShowConfirmPassword}>
@@ -186,7 +186,7 @@ function SignupForm() {
           </button>
         </div>
         <button className="register-btn" onClick={(e) => handleSubmit(e)} type="submit">
-          Register
+          Đăng Ký
         </button>
       </form>
     </div>
