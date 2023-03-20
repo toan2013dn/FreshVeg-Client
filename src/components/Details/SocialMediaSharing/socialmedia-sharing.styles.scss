@@ -1,18 +1,17 @@
 .social-media {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
 
   svg {
     width: calc(var(--icon-width) * 2);
     height: calc(var(--icon-height) * 2);
   }
 
-  .share{
+  .share {
     display: flex;
     align-items: center;
     gap: 35px;
   }
-
-
 }

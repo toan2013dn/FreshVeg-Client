@@ -1,5 +1,4 @@
 .products-details {
-
   .header-layout {
     width: 100%;
     display: flex;
@@ -26,16 +25,16 @@
       font-weight: 700;
     }
   }
-  .container{
-    width: 1200px;
 
-    .flex-content{
-      display: flex;
-      gap: 30px;
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
   }
 
-  footer{
+  footer {
     margin-top: 30px;
   }
 }

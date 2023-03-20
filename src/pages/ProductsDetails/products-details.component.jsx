@@ -17,25 +17,17 @@ function ProductsDetails() {
         <div className="line"></div>
       </div>
       <div className="container">
-          <div className="products-details--links">
-            <NavLink to="/">Trang chủ</NavLink>
-            <Next />
-            <NavLink to="/categories">Đi Chợ</NavLink>
-            <Next />
-            <NavLink to="/products-details">Rau củ quả</NavLink>
-          </div>
-        <div className="flex-content">
-          <div>
-            <div className="categories-filter">
-              <FilterPanel />
-            </div>
-          </div>
-          <div className="products-details--content">
-            <Details />
-          </div>
+        <div className="products-details--links">
+          <NavLink to="/">Trang chủ</NavLink>
+          <Next />
+          <NavLink to="/categories">Đi Chợ</NavLink>
+          <Next />
+          <NavLink to="/products-details">Rau củ quả</NavLink>
         </div>
+
+        <Details />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

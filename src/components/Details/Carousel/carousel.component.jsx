@@ -5,9 +5,8 @@ import ProductOne from '@/assets/images/Product-Part-1.webp'
 import ProductInfo from '@/components/ProductInfo/productinfo.component'
 import AliceCarousel from 'react-alice-carousel'
 
-
-import BackArrow from '@mui/icons-material/ArrowBackIosNew';
-import FowardArrow from '@mui/icons-material/ArrowForwardIos';
+import BackArrow from '@mui/icons-material/ArrowBackIosNew'
+import FowardArrow from '@mui/icons-material/ArrowForwardIos'
 
 function CarouselImage() {
   const productLists = [
@@ -36,6 +35,12 @@ function CarouselImage() {
       name: 'Hạt chi đó',
       price: 50000,
     },
+    {
+      id: 5,
+      image: 'https://ychef.files.bbci.co.uk/976x549/p04tx3m6.jpg',
+      name: 'Hạt chi đó',
+      price: 50000,
+    },
   ]
 
   const items = productLists.map((product) => {
@@ -55,7 +60,7 @@ function CarouselImage() {
           responsive={{
             0: { items: 1 },
             568: { items: 2 },
-            1024: { items: 3 },
+            1024: { items: 4 },
           }}
           renderPrevButton={() => <BackArrow />}
           renderNextButton={() => <FowardArrow />}
@@ -66,4 +71,3 @@ function CarouselImage() {
 }
 
 export default CarouselImage
-

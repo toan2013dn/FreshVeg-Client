@@ -52,17 +52,17 @@ function ProductContent() {
       {contents.map((content) => (
         <div className="product-content--item" key={content.id}>
           <div className="product-content--item--name">
-            <h4>{content.name}</h4>
+            <h3>{content.name}</h3>
             <div className="line"></div>
           </div>
           <div className="product-content--item--price">
-            <h4>{content.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+            <h3>{content.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h3>
             <div className="line"></div>
           </div>
           <div className="product-content--item--weight">
             <h4>Khối lượng</h4>
             <div className="product-content--item--weight--select">
-              <FormControl sx={{ m: 1, width: 180, mt: 1 }}>
+              <FormControl sx={{ m: 1, width: 250, mt: 1 }}>
                 <Select
                   displayEmpty
                   value={personName}
@@ -88,11 +88,14 @@ function ProductContent() {
           </div>
           <div className="product-content--item--button">
             <div className="line"></div>
-            <button className="button">
-              <Link to={'/'}>
-                <Cart />
-                <div>Thêm Vào Giỏ Hàng</div>
-              </Link>
+            <button
+              className="button"
+              onClick={() => {
+                window.location.href = '/'
+              }}
+            >
+              <Cart />
+              <div>Thêm Vào Giỏ Hàng</div>
             </button>
           </div>
           <div className="product-content--item--sharing">
