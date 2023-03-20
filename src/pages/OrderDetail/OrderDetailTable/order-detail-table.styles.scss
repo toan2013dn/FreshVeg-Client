@@ -44,27 +44,37 @@
         contrast(104%);
     }
   }
-
 }
-.button{
+.button {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  
-  .home-products--button{
+
+  .home-products--button {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     font-size: 20px;
   }
+  .continue-shopping {
+    background-color: #ffffff;
+    color: black;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
-  .proceed-to-checkout{
+    &:hover {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+  }
+
+  .proceed-to-checkout {
     margin-bottom: 30px;
-    h4{
+    h4 {
       font-weight: 700;
     }
-    .home-products--button{
+    .home-products--button {
       width: 100%;
       font-size: 20px;
       margin-top: 20px;

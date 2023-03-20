@@ -15,6 +15,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import WeightSelect from '@/components/WeightSelect/weight-select.component'
 import BackArrow from '@mui/icons-material/KeyboardBackspace'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function OrderDetailTable() {
   const rows = [
@@ -47,6 +48,24 @@ function OrderDetailTable() {
   useEffect(() => {
     setTotalPrice(calculateTotalPrice())
   }, [rows])
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      html: '<h4>Bạn có muốn xoá sản phẩm này không?</h4>',
+      showDenyButton: true,
+      confirmButtonText: 'Có',
+      denyButtonText: `Huỷ`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          html: '<h4>Xoá thành công!</h4>',
+          icon: 'success',
+        })
+      }
+    })
+  }
+
   return (
     <div>
       <div className="detail-table">
@@ -74,7 +93,7 @@ function OrderDetailTable() {
                   </TableCell>
                   <TableCell align="center">{row.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</TableCell>
                   <TableCell align="center">
-                    <div className="delete-button">
+                    <div className="delete-button" onClick={handleDelete}>
                       <DeleteForeverIcon />
                     </div>
                   </TableCell>
@@ -85,15 +104,14 @@ function OrderDetailTable() {
         </TableContainer>
       </div>
       <div className="button">
-        <button className="home-products--button">
+        <button className="home-products--button continue-shopping">
           <BackArrow />
-
           <Link to={'/categories'}>Tiếp Tục Mua Hàng</Link>
         </button>
         <div className="proceed-to-checkout">
           <h4>Tổng Thanh Toán: {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ </h4>
           <button className="home-products--button">
-            <Link to={'/'}>Tiến Hành Thanh Toán</Link>
+            <Link to={'/order-confirm'}>Tiến Hành Thanh Toán</Link>
           </button>
         </div>
       </div>
