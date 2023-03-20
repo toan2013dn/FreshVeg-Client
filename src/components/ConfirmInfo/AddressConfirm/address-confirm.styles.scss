@@ -1,4 +1,5 @@
 .address-confirm {
+  cursor: pointer;
   width: 700px;
   &--item {
     display: flex;
@@ -8,6 +9,7 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     margin: 20px 0;
     border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
     &:hover,
     &.active {
       background-color: var(--primary-color);
@@ -20,7 +22,7 @@
     .flex {
       display: flex;
       align-items: center;
-    gap: 10px;
+      gap: 10px;
 
       .phone {
         margin-left: 20px;
@@ -45,8 +47,8 @@
         color: var(--primary-color);
       }
     }
-    h4{
-        font-size: 20px;
+    h4 {
+      font-size: 20px;
     }
   }
 }
