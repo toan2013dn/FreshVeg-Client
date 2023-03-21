@@ -12,8 +12,7 @@ function UserAddress() {
       id: 2,
       name: 'Trần Ngọc Toàn',
       phone: '0934795670',
-      address:
-        '120 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn Trà, tp Đà Nẵng',
+      address: '120 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, ',
     },
   ]
 

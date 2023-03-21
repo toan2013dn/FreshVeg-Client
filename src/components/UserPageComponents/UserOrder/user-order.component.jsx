@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useState } from 'react'
 import Alert from '@mui/joy/Alert'
 import Box from '@mui/joy/Box'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 import PendingIcon from '@mui/icons-material/PendingOutlined'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -17,6 +18,22 @@ function StatusRender(props) {
   return <div className="status-render">{value}</div>
 }
 
+const handleDelete = () => {
+  Swal.fire({
+    text: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#e5e5e5',
+    confirmButtonText: 'Xóa',
+    cancelButtonText: 'Hủy',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({ text: 'Đơn hàng đã được huỷ!', icon: 'success' })
+    }
+  })
+}
+
 // a function that renders the action buttons
 function ActionRender(props) {
   const { value } = props
@@ -26,7 +43,7 @@ function ActionRender(props) {
       <button className="action-render__btn info">
         <InfoDetailIcon className="info-btn" />
       </button>
-      <button className="action-render__btn delete">
+      <button className="action-render__btn delete" onClick={handleDelete}>
         <DeleteIcon className="delete-btn" />
       </button>
     </div>
