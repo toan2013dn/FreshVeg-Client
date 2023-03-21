@@ -6,8 +6,11 @@ import { ReactComponent as Next } from '@/assets/icons/Next.svg'
 import ConfirmInfo from '@/components/ConfirmInfo/confirm-info.component'
 import Footer from '@/components/Footer/footer.component'
 import Decoration from '@/assets/images/Decoration.webp'
+import { useState } from 'react'
 
 function OrderConfirm() {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   return (
     <div className="order-confirm">
       <div className="order-confirm--header">
@@ -35,7 +38,7 @@ function OrderConfirm() {
       <div className="order-confirm--image">
         <img src={Decoration} alt="decoration" />
       </div>
-      
+
       <Footer />
     </div>
   )
