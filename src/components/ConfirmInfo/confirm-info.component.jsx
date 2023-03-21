@@ -12,8 +12,12 @@ import AddressConfirm from './AddressConfirm/address-confirm.component'
 import PaymentMethod from './PaymentMethod/payment-method.component'
 import { display } from '@mui/system'
 import FinalOrder from './FinalOrder/final-order.component'
+import { useState } from 'react'
+import AddNewAddress from '../AddNewAddress/add-new-address.component'
 
 function ConfirmInfo() {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   return (
     <div style={{ display: 'flex' }}>
       <div className="confirm-info left">
@@ -25,11 +29,12 @@ function ConfirmInfo() {
 
           <AddressConfirm />
 
-          <button className="home-products--button">
+          <button className="home-products--button" onClick={() => setIsOpenModal(true)}>
             <Link to={''} style={{ fontSize: '20px' }}>
               Thêm Địa Chỉ Mới
             </Link>
           </button>
+          <AddNewAddress isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
         </div>
 
         <div className="line"></div>

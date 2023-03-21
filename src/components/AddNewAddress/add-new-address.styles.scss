@@ -1,0 +1,90 @@
+.add-new-address {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 500px;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .add-new-address--input {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .flex-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .address-input {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      p {
+        margin-top: 15px;
+        color: #ff0000;
+      }
+    }
+    button.submit-btn {
+      background-color: #4caf50; /* Green */
+      border: none;
+      color: white;
+      padding: 20px 35px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2px;
+
+      &:hover {
+        background-color: #3e8e41;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        background-color: #4caf50;
+        transform: translateY(2px);
+      }
+    }
+
+    svg {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: red;
+      }
+    }
+  }
+}
