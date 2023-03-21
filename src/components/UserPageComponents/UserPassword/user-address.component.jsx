@@ -1,6 +1,10 @@
 import './user-address.styles.scss'
 
+import { useState } from 'react'
+
 function UserAddress() {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   const users = [
     {
       id: 1,
@@ -24,7 +28,9 @@ function UserAddress() {
             <h3>Địa Chỉ Của Tôi</h3>
             <h4>Quản lí thông tin địa chỉ để việc giao hàng thuận lợi</h4>
           </div>
-          <button className="button-save">Thêm Địa Chỉ Mới </button>
+          <button className="button-save" onClick={() => setIsOpenModal(true)}>
+            Thêm Địa Chỉ Mới{' '}
+          </button>
         </div>
         <div className="line"></div>
       </div>

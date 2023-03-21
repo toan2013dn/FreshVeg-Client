@@ -1,9 +1,10 @@
 .user-address {
   width: 100%;
   padding: 20px;
-  background-color: var(--profile-color);
   margin-left: 40px;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow-y: scroll;
 
   &--header {
     display: flex;
@@ -16,22 +17,20 @@
 
       h4 {
         margin-top: 15px;
-        color: var(--profile-text-color);
-      }
-      h3 {
-        color: var(--profile-text-color);
       }
 
       button {
         padding: 15px 50px;
         border: none;
         border-radius: 10px;
-        color: var(--profile-text-color);
         font-size: 20px;
+        background-color: var(--primary-color);
+        color: white;
         cursor: pointer;
+        transition: background-color 0.5s ease;
+
         &:hover {
           background-color: var(--hover-color);
-          color: white;
         }
       }
     }
@@ -49,7 +48,6 @@
     flex-direction: column;
 
     &-left {
-      color: var(--profile-text-color);
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -63,11 +61,17 @@
       gap: 20px;
       button {
         border: none;
-        background-color: transparent;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         cursor: pointer;
-        text-decoration: underline;
-        color: var(--profile-text-color);
         font-size: 20px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        color: black;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
       }
     }
   }

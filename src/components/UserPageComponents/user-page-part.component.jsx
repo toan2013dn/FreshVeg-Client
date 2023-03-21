@@ -12,11 +12,11 @@ function UserPagePart() {
         userAvatar="https://www.8newsnow.com/wp-content/uploads/sites/59/2022/08/husky_eyes.jpg?w=1988&h=1440&crop=1"
         username={'Le Anh DUc'}
       />
-      <UserInfoTable
+      {/* <UserInfoTable
         userAvatar="https://www.8newsnow.com/wp-content/uploads/sites/59/2022/08/husky_eyes.jpg?w=1988&h=1440&crop=1"
         password={'091023910230'}
-      />
-      {/* <UserAddress /> */}
+      /> */}
+      <UserAddress />
       {/* <UserOrder /> */}
     </div>
   )
