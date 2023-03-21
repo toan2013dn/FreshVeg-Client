@@ -10,12 +10,7 @@ import Footer from '@/components/Footer/footer.component'
 function ProductsDetails() {
   return (
     <div className="products-details">
-      <div className="header-layout">
-        <div>
-          <Header />
-        </div>
-        <div className="line"></div>
-      </div>
+      <Header />
       <div className="container">
         <div className="products-details--links">
           <NavLink to="/">Trang chủ</NavLink>

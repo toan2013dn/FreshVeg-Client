@@ -9,12 +9,7 @@ import OrderDetailTable from './OrderDetailTable/order-detail-table.component'
 function OrderDetail() {
   return (
     <div className="order-detail">
-      <div className="header-layout">
-        <div>
-          <Header />
-        </div>
-        <div className="line"></div>
-      </div>
+      <Header />
 
       <div className="container">
         <div className="order-detail--links">
@@ -24,12 +19,12 @@ function OrderDetail() {
         </div>
 
         <div className="order-detail--title">
-            <h3>Chi Tiết Đơn Hàng</h3>
-        <div className="line"></div>
+          <h3>Chi Tiết Đơn Hàng</h3>
+          <div className="line"></div>
         </div>
 
         <div className="order-detail--table">
-            <OrderDetailTable/>
+          <OrderDetailTable />
         </div>
       </div>
 

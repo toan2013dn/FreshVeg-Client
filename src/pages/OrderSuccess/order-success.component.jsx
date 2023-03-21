@@ -7,10 +7,7 @@ import Footer from '@/components/Footer/footer.component'
 function OrderSuccess() {
   return (
     <div className="order-success">
-      <div className="order-success--header">
-        <Header />
-        <div className="line"></div>
-      </div>
+      <Header />
 
       <SuccessBill />
 

@@ -1,18 +1,8 @@
 .order-detail {
-  .header-layout {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    .line {
-      width: 100%;
-      height: 0.2px;
-      box-shadow: 0 0 10px black;
-    }
-  }
   .container {
     width: 1300px;
     margin: 0 auto;
-    
+
     .order-detail--links {
       display: flex;
       gap: 10px;
