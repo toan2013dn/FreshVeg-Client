@@ -10,10 +10,7 @@ import Decoration from '@/assets/images/Decoration.webp'
 function OrderConfirm() {
   return (
     <div className="order-confirm">
-      <div className="order-confirm--header">
-        <Header />
-        <div className="line"></div>
-      </div>
+      <Header />
 
       <div className="container">
         <div className="order-confirm--links">
@@ -35,7 +32,7 @@ function OrderConfirm() {
       <div className="order-confirm--image">
         <img src={Decoration} alt="decoration" />
       </div>
-      
+
       <Footer />
     </div>
   )
