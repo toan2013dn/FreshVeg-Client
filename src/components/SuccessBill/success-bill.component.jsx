@@ -11,9 +11,7 @@ function SuccessBill() {
       <div className="success-bill--header">
         <Success />
         <h2>ĐẶT HÀNG THÀNH CÔNG</h2>
-        <p style={{ fontSize: '20px' }}>
-          Đơn hàng của bạn đã được đặt thành công. Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của FreshVeg.
-        </p>
+        <p style={{ fontSize: '20px' }}>Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của FreshVeg.</p>
       </div>
 
       <Bill />
