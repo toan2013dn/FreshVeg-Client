@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal'
 
 import { useState } from 'react'
 
-function AddNewAddress({ isOpen, onClose }) {
+function AddNewAddress({ isOpen, onClose, setUsers }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
@@ -15,7 +15,15 @@ function AddNewAddress({ isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    validateForm()
+    if (validateForm()) {
+      const newUser = {
+        name,
+        phone,
+        address,
+      }
+      setUsers((users) => [...users, newUser])
+      onClose()
+    }
   }
 
   const validateForm = () => {
@@ -25,7 +33,7 @@ function AddNewAddress({ isOpen, onClose }) {
       formIsValid = false
       setErrors((errors) => ({ ...errors, name: 'Vui lòng nhập tên người dùng!' }))
     } else {
-      const nameRegex = /^[a-zA-Z0-9]+$/
+      const nameRegex = /^[\p{L}'][ \p{L}'-]*[\p{L}]$/u
       if (!nameRegex.test(name)) {
         formIsValid = false
         setErrors((errors) => ({ ...errors, name: 'Vui lòng nhập tên người dùng hợp lệ!' }))
@@ -51,7 +59,8 @@ function AddNewAddress({ isOpen, onClose }) {
       formIsValid = false
       setErrors((errors) => ({ ...errors, address: 'Vui lòng nhập địa chỉ người nhận!' }))
     } else {
-      const addressRegex = /^[A-Za-z0-9'\.\-\s\,]+$/
+      const addressRegex =
+        /[^a-z0-9A-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/u
       if (!addressRegex.test(address)) {
         formIsValid = false
         setErrors((errors) => ({ ...errors, address: 'Vui lòng nhập địa chỉ người nhận hợp lệ!' }))
@@ -83,7 +92,11 @@ function AddNewAddress({ isOpen, onClose }) {
                   variant="standard"
                   onChange={(event) => setName(event.target.value)}
                 />
-                {errors.name && <p className="error">{errors.name}</p>}
+                {
+                  <p className="error" style={{ opacity: errors.name ? 1 : 0 }}>
+                    {errors.name}
+                  </p>
+                }
               </div>
               <div className="phone-input">
                 <TextField
@@ -98,7 +111,11 @@ function AddNewAddress({ isOpen, onClose }) {
                   variant="standard"
                   onChange={(event) => setPhone(event.target.value)}
                 />
-                {errors.phone && <p className="error">{errors.phone}</p>}
+                {
+                  <p className="error" style={{ opacity: errors.phone ? 1 : 0 }}>
+                    {errors.phone}
+                  </p>
+                }
               </div>
             </div>
             <div className="address-input">
@@ -114,7 +131,11 @@ function AddNewAddress({ isOpen, onClose }) {
                 variant="standard"
                 onChange={(event) => setAddress(event.target.value)}
               />
-              {errors.address && <p className="error">{errors.address}</p>}
+              {
+                <p className="error" style={{ opacity: errors.address ? 1 : 0 }}>
+                  {errors.address}
+                </p>
+              }
             </div>
           </div>
           <button type="submit" className="submit-btn">
