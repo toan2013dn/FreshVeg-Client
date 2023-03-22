@@ -8,11 +8,12 @@ import EditIcon from '@mui/icons-material/Edit'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
-function UserFilter({ userAvatar, username }) {
+function UserFilter({ userAvatar, username, setTab }) {
   const [activeOption, setActiveOption] = useState('profile')
 
   const handleOptionClick = (option) => {
     setActiveOption(option)
+    setTab(option)
   }
 
   return (

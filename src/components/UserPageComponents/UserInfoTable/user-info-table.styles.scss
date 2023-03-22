@@ -1,8 +1,7 @@
 .user-table {
-  width: 100%;
+  width: 964px;
   position: relative;
-  padding: 30px 20px;
-  margin-left: 40px;
+  padding: 30px 0 30px 30px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 20px;
   background-color: #ade792;
@@ -20,20 +19,20 @@
   }
 
   .button {
-    border:none;
+    border: none;
     background-color: transparent;
     cursor: pointer;
     text-decoration: underline;
     color: var(--profile-text-color);
   }
 
-  .button-save{
+  .button-save {
     cursor: pointer;
-    background-color:white;
+    background-color: white;
     border: none;
     border-radius: 10px;
     color: var(--primary-color);
-    &:hover{
+    &:hover {
       background-color: var(--hover-color);
       color: white;
     }
@@ -99,7 +98,7 @@
           background-color: transparent;
           border: none;
           box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-          &:focus{
+          &:focus {
             outline: none;
           }
         }
