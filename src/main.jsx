@@ -13,6 +13,7 @@ import OrderConfirm from './pages/OrderConfirm/order-confirm.component'
 import OrderSuccess from './pages/OrderSuccess/order-success.component'
 import UserPage from './pages/UserPage/user-page.component'
 import AdminPage from './pages/AdminPage/admin-page.component'
+import UploadImage from './components/AdminContent/UploadImage/upload-image.component'
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
     element: <UserPage />,
   },
   { path: '/admin-page', element: <AdminPage /> },
+  { path: '/upload-image', element: <UploadImage /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

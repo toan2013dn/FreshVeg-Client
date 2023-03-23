@@ -18,18 +18,20 @@ function StatusRender(props) {
   return <div className="status-render">{value}</div>
 }
 
-const handleDelete = () => {
+const handleDelete = (id) => {
   Swal.fire({
-    text: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
+    text: 'Bạn có chắc chắn muốn xoá địa chỉ này?',
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
+    confirmButtonColor: '#FF2400',
     cancelButtonColor: '#e5e5e5',
     confirmButtonText: 'Xóa',
     cancelButtonText: 'Hủy',
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({ text: 'Đơn hàng đã được huỷ!', icon: 'success' })
+      Swal.fire({ text: 'Địa chỉ đã được xoá!', confirmButtonColor: '#3e8e41', icon: 'success' })
+      const updatedRows = rows.filter((row) => row.id !== id)
+      setRows(updatedRows)
     }
   })
 }
@@ -119,58 +121,57 @@ const object = {
   ),
 }
 
-const rows = [
-  {
-    id: 1,
-    date: '21/06/2021',
-    phone: '0934795670',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 2,
-    date: '21/06/2021',
-    phone: '0934795670',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '200đ',
-    status: object.success,
-  },
-  {
-    id: 3,
-    date: '21/06/2021',
-    phone: '0934795670',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.cancel,
-  },
-  {
-    id: 4,
-    date: '21/06/2021',
-    phone: '0934795670',
-    address: '124124 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.success,
-  },
-  {
-    id: 5,
-    date: '21/06/2021',
-    phone: '0934795670',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.success,
-  },
-  {
-    id: 6,
-    date: '21/06/2021',
-    phone: '01245',
-    address: '22 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.success,
-  },
-]
-
 function UserOrder() {
+  const [rows, setRows] = useState([
+    {
+      id: 1,
+      date: '21/06/2021',
+      phone: '0934795670',
+      address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '1000000đ',
+      status: object.pending,
+    },
+    {
+      id: 2,
+      date: '21/06/2021',
+      phone: '0934795670',
+      address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '200đ',
+      status: object.success,
+    },
+    {
+      id: 3,
+      date: '21/06/2021',
+      phone: '0934795670',
+      address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '1000000đ',
+      status: object.cancel,
+    },
+    {
+      id: 4,
+      date: '21/06/2021',
+      phone: '0934795670',
+      address: '124124 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '1000000đ',
+      status: object.success,
+    },
+    {
+      id: 5,
+      date: '21/06/2021',
+      phone: '0934795670',
+      address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '1000000đ',
+      status: object.success,
+    },
+    {
+      id: 6,
+      date: '21/06/2021',
+      phone: '01245',
+      address: '22 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
+      total: '1000000đ',
+      status: object.success,
+    },
+  ])
   return (
     <div className="user-order">
       <input type="text" placeholder="Tìm kiếm đơn hàng..." />

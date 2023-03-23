@@ -1,20 +1,13 @@
 .user-table {
-  width: 964px;
+  width: 970px;
   position: relative;
   padding: 30px 0 30px 30px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
-  background-color: #ade792;
-  h4,
-  h3,
-  span {
-    color: #344d67;
-  }
 
   .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root,
   .css-i4bv87-MuiSvgIcon-root,
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-    color: #344d67;
     font-size: 20px;
   }
 
@@ -28,13 +21,18 @@
 
   .button-save {
     cursor: pointer;
-    background-color: white;
     border: none;
     border-radius: 10px;
-    color: var(--primary-color);
+    background-color: var(--hover-color);
+    color: white;
+
+    transition: all 0.3s ease-in-out;
+
     &:hover {
-      background-color: var(--hover-color);
       color: white;
+      background-color: var(--primary-color);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
     }
   }
 
@@ -63,6 +61,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 910px;
 
     .line {
       margin: 10px 0;
@@ -72,8 +71,9 @@
     width: 600px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-left: 90px;
+    align-items: cen;
+    gap: 35px;
+    margin-left: 30px;
     .flex {
       display: flex;
       justify-content: space-between;
@@ -90,18 +90,22 @@
       justify-content: flex-start;
       gap: 20px;
     }
+
+    .error {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      p {
+        color: #ff0000;
+        height: 5px;
+      }
+    }
+
     &-password {
       .content {
         position: relative;
-        input {
-          padding: 20px;
-          background-color: transparent;
-          border: none;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-          &:focus {
-            outline: none;
-          }
-        }
+
         .button-toggle {
           position: absolute;
           right: 150px;
@@ -112,6 +116,15 @@
           cursor: pointer;
         }
       }
+    }
+  }
+  input {
+    padding: 20px;
+    background-color: transparent;
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    &:focus {
+      outline: none;
     }
   }
 
