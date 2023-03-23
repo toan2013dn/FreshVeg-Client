@@ -12,7 +12,7 @@ function UserPagePart() {
     profile: (
       <UserInfoTable
         userAvatar="https://www.8newsnow.com/wp-content/uploads/sites/59/2022/08/husky_eyes.jpg?w=1988&h=1440&crop=1"
-        password={'091023910230'}
+        password={'Toan2013dn'}
         username={'Le Anh DUc'}
       />
     ),

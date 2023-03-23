@@ -6,15 +6,21 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { fontSize } from '@mui/system'
+import { useUserStore } from '@/store'
 
 import dayjs from 'dayjs'
 import ShowPassword from '@mui/icons-material/Visibility'
 import HiddenPassword from '@mui/icons-material/VisibilityOff'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import CloseIcon from '@mui/icons-material/Close'
+import ChangePassword from '@/components/ChangePassword/change-password.component'
+import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 
-function UserInfoTable({ userAvatar, username, password }) {
+function UserInfoTable({ password }) {
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [showPassword, setShowPassword] = useState(false)
-  const [updatedName, setupdatedName] = useState(username)
+  const [updatedName, setUpdatedName] = useState(userInfo.name)
+  const [updatedImage, setUpdatedImage] = useState(userInfo.image)
   const [errors, setErrors] = useState({})
   const [isOpenModal, setIsOpenModal] = useState(false)
 
@@ -25,6 +31,12 @@ function UserInfoTable({ userAvatar, username, password }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (validateForm()) {
+      const updatedUserInfo = {
+        ...userInfo,
+        name: updatedName,
+        image: updatedImage,
+      }
+      setUserInfo(updatedUserInfo)
       Swal.fire({
         text: 'Cập nhật thành công!',
         showConfirmButton: true,
@@ -62,7 +74,7 @@ function UserInfoTable({ userAvatar, username, password }) {
     <div className="user-table">
       <div className="user-table--text">
         <h3>Hồ Sơ Của Tôi</h3>
-        <span style={{ fontWeight: '400', fontSize: '18px' }}>
+        <span style={{ fontWeight: '400', fontSize: '16px' }}>
           Quản lí thông tin hồ sơ để bảo mật tài khoản của bạn
         </span>
         <div className="line"></div>
@@ -81,7 +93,7 @@ function UserInfoTable({ userAvatar, username, password }) {
                 id="username"
                 type="username"
                 value={updatedName}
-                onChange={(event) => setupdatedName(event.target.value)}
+                onChange={(event) => setUpdatedName(event.target.value)}
               />
               <p className="error" style={{ opacity: errors.updatedName ? 1 : 0 }}>
                 {errors.updatedName}
@@ -111,7 +123,10 @@ function UserInfoTable({ userAvatar, username, password }) {
               <button className="button-toggle" onClick={toggleShowPassword}>
                 {showPassword ? <ShowPassword /> : <HiddenPassword />}
               </button>
-              <button className="button">Thay đổi</button>
+              <button className="button" onClick={() => setIsOpenModal(true)}>
+                Thay đổi
+              </button>
+              <ChangePassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} password={password} />
             </div>
           </div>
 
@@ -134,10 +149,7 @@ function UserInfoTable({ userAvatar, username, password }) {
         </div>
 
         <div className="user-table--image">
-          <div className="image">
-            <img src={userAvatar} alt="" />
-          </div>
-          <button className="button">Thay đổi</button>
+          <UploadImage image={updatedImage} setImage={setUpdatedImage} />
         </div>
       </div>
     </div>

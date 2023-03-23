@@ -9,6 +9,7 @@ import UploadImage from '../UploadImage/upload-image.component'
 
 function AddProduct({ isOpen, onClose }) {
   const [name, setName] = useState('')
+  const [image, setImage] = useState('https://i.ytimg.com/vi/knjLDubhPR4/maxresdefault.jpg')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -20,7 +21,7 @@ function AddProduct({ isOpen, onClose }) {
       <span className="add-product-modal">
         <form onSubmit={handleSubmit}>
           <h3>Thêm Sản Phẩm Mới</h3>
-          <UploadImage />
+          <UploadImage image={image} setImage={setImage} />
           <div className="add-new">
             <div className="column-1">
               <TextField
