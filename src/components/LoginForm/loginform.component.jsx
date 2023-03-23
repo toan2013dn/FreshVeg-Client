@@ -40,7 +40,7 @@ function LoginForm() {
 
   const navigate = useNavigate()
 
-  const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
+  // const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -53,7 +53,7 @@ function LoginForm() {
       })
       .then(function (response) {
         if (response.status === 200 || response.data.userId !== null) {
-          setUserInfo(response.data)
+          // setUserInfo(response.data)
           navigate('/')
         }
       })

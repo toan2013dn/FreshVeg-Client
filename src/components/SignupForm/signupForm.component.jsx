@@ -75,7 +75,7 @@ function SignupForm() {
       formIsValid = false
       setErrors((errors) => ({ ...errors, userName: 'Vui lòng nhập tên người dùng!' }))
     } else {
-      const userNameRegex = /^[a-zA-Z0-9]+$/
+      const userNameRegex = /^[\p{L}'][ \p{L}'-]*[\p{L}]$/u
       if (!userNameRegex.test(userName)) {
         formIsValid = false
         setErrors((errors) => ({ ...errors, userName: 'Vui lòng nhập tên người dùng hợp lệ!' }))

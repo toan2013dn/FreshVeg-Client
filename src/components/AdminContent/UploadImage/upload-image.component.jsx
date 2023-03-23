@@ -3,15 +3,13 @@ import './upload-image.styles.scss'
 import { useState } from 'react'
 import Button from '@mui/material/Button'
 
-function UploadImage() {
-  const [selectedImage, setSelectedImage] = useState('')
-
+function UploadImage({ image, setImage }) {
   const handleImageSelect = (event) => {
     const file = event.target.files[0]
     const reader = new FileReader()
 
     reader.onload = () => {
-      setSelectedImage(reader.result)
+      setImage(reader.result)
     }
 
     if (file) {
@@ -20,7 +18,7 @@ function UploadImage() {
   }
   return (
     <div className="upload-image">
-      <div className="selected-image">{selectedImage && <img src={selectedImage} alt="Selected" />}</div>
+      <div className="selected-image">{image && <img src={image} alt="Selected" />}</div>
       <div className="image-btn">
         <Button variant="contained" component="label" color="success">
           Tải Ảnh Lên

@@ -7,22 +7,25 @@ import EditIcon from '@mui/icons-material/Edit'
 
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
+import { useUserStore } from '@/store'
 
-function UserFilter({ userAvatar, username }) {
+function UserFilter({ setTab }) {
   const [activeOption, setActiveOption] = useState('profile')
+  const [userInfo] = useUserStore((state) => [state.userInfo])
 
   const handleOptionClick = (option) => {
     setActiveOption(option)
+    setTab(option)
   }
 
   return (
     <div className="user-filter">
       <div className="user-filter--display">
         <div className="image">
-          <img src={userAvatar} alt="" />
+          <img src={userInfo.image} alt="" />
         </div>
         <div className="flex">
-          <h4>{username}</h4>
+          <h4>{userInfo.name}</h4>
           <div className="text">
             <EditIcon /> <h4>Sửa hồ sơ</h4>
           </div>
