@@ -53,6 +53,12 @@ function UserFilter({ setTab }) {
             >
               Địa Chỉ
             </span>
+            <span
+              className={`${activeOption === 'password' ? 'active' : ''}`}
+              onClick={() => handleOptionClick('password')}
+            >
+              Đổi Mật Khẩu
+            </span>
           </div>
         </div>
 

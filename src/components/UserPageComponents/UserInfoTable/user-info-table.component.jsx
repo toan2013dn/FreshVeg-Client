@@ -13,7 +13,6 @@ import ShowPassword from '@mui/icons-material/Visibility'
 import HiddenPassword from '@mui/icons-material/VisibilityOff'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import CloseIcon from '@mui/icons-material/Close'
-import ChangePassword from '@/components/ChangePassword/change-password.component'
 import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 
 function UserInfoTable() {
@@ -106,26 +105,6 @@ function UserInfoTable() {
             </div>
             <div className="content">
               <h4>toantnde150316@gmail.com</h4>
-            </div>
-          </div>
-
-          <div className="user-table--content-password flex">
-            <div className="text">
-              <h4>Mật khẩu</h4>
-            </div>
-            <div className="content">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={userInfo.password}
-                style={{ fontSize: '18px', color: '#344d67' }}
-              />
-              <button className="button-toggle" onClick={toggleShowPassword}>
-                {showPassword ? <ShowPassword /> : <HiddenPassword />}
-              </button>
-              <button className="button" onClick={() => setIsOpenModal(true)}>
-                Thay đổi
-              </button>
-              <ChangePassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} password={userInfo.password} />
             </div>
           </div>
 

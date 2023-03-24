@@ -1,18 +1,23 @@
-import './change-password.styles.scss'
+import './user-password.styles.scss'
 
 import { useUserStore } from '@/store'
 import { useState } from 'react'
-
+import { Link } from 'react-router-dom'
 import CloseIcon from '@mui/icons-material/Close'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import ShowPassword from '@mui/icons-material/Visibility'
+import HiddenPassword from '@mui/icons-material/VisibilityOff'
 import Modal from '@mui/material/Modal'
 
-function ChangePassword({ isOpen, onClose }) {
+function UserPassword() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [currentPassword, setCurrentPassword] = useState(userInfo.password)
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [errors, setErrors] = useState({})
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -79,49 +84,55 @@ function ChangePassword({ isOpen, onClose }) {
     }
     return formIsValid
   }
-
   return (
-    <Modal open={isOpen} onClose={onClose}>
-      <div className="change-password">
-        <form onSubmit={handleSubmit}>
+    <div className="change-password">
+      <form onSubmit={handleSubmit}>
+        <div className="change-password--title">
           <h3>Đổi mật khẩu</h3>
+          <h4>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</h4>
+        </div>
+        <div className="flex-content">
           <div className="change-password--currentPassword grid">
             <h4>Mật khẩu hiện tại</h4>
             <div>
               <input
-                type="password"
+                type={showCurrentPassword ? 'text' : 'password'}
                 name="currentPassword"
                 id="currentPassword"
                 onChange={(event) => setCurrentPassword(event.target.value)}
               />
+              <ShowPassword onClick={() => setShowCurrentPassword(!showCurrentPassword)} />
               <p className="error" style={{ opacity: errors.currentPassword ? 1 : 0 }}>
                 {errors.currentPassword}
               </p>
             </div>
-          </div>{' '}
+            <Link>Quên mật khẩu?</Link>
+          </div>
           <div className="change-password--newPassword grid">
             <h4>Mật khẩu mới</h4>
             <div>
               <input
-                type="password"
+                type={showNewPassword ? 'text' : 'password'}
                 name="newPassword"
                 id="newPassword"
                 onChange={(event) => setNewPassword(event.target.value)}
-              />{' '}
+              />
+              <ShowPassword onClick={() => setShowNewPassword(!showNewPassword)} />
               <p className="error" style={{ opacity: errors.newPassword ? 1 : 0 }}>
                 {errors.newPassword}
               </p>
             </div>
-          </div>{' '}
+          </div>
           <div className="change-password--confirmNewPassword grid">
             <h4>Nhập lại mật khẩu mới</h4>
             <div>
               <input
-                type="password"
+                type={showConfirmNewPassword ? 'text' : 'password'}
                 name="confirmNewPassword"
                 id="confirmNewPassword"
                 onChange={(event) => setConfirmNewPassword(event.target.value)}
-              />{' '}
+              />
+              <ShowPassword onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)} />
               <p className="error" style={{ opacity: errors.confirmNewPassword ? 1 : 0 }}>
                 {errors.confirmNewPassword}
               </p>
@@ -129,12 +140,11 @@ function ChangePassword({ isOpen, onClose }) {
           </div>
           <div className="change-password--button">
             <button type="submit">Xác Nhận</button>
-            <CloseIcon onClick={onClose} />
           </div>
-        </form>
-      </div>
-    </Modal>
+        </div>
+      </form>
+    </div>
   )
 }
 
-export default ChangePassword
+export default UserPassword
