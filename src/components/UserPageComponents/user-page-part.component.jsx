@@ -2,7 +2,8 @@ import './user-page-part.styles.scss'
 import UserFilter from './UserFilter/user-filter.component'
 import UserInfoTable from './UserInfoTable/user-info-table.component'
 import UserOrder from './UserOrder/user-order.component'
-import UserAddress from './UserPassword/user-address.component'
+import UserAddress from './UserAddress/user-address.component'
+import UserPassword from './UserPassword/user-password.component'
 import { useState } from 'react'
 
 function UserPagePart() {
@@ -12,6 +13,7 @@ function UserPagePart() {
     profile: <UserInfoTable />,
     bill: <UserOrder />,
     address: <UserAddress />,
+    password: <UserPassword />,
   }
   return (
     <div className="user-page-part">
