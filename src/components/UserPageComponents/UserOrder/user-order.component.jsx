@@ -73,8 +73,7 @@ function StatusRender(props) {
 // a function that renders the action buttons
 function ActionRender(props) {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
-
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     Swal.fire({
       text: 'Bạn có chắc chắn muốn xoá địa chỉ này?',
       icon: 'warning',
@@ -86,7 +85,7 @@ function ActionRender(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({ text: 'Địa chỉ đã được xoá!', confirmButtonColor: '#3e8e41', icon: 'success' })
-        const updatedRows = orders.filter((row) => row.id !== id)
+        const updatedRows = orders.filter((row) => row.id !== props.id)
         setOrders(updatedRows)
       }
       ;('')
