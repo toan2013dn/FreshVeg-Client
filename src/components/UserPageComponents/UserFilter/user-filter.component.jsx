@@ -25,7 +25,7 @@ function UserFilter({ setTab }) {
           <img src={userInfo.image} alt="" />
         </div>
         <div className="flex">
-          <h4>{userInfo.name}</h4>
+          <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userInfo.name}</h4>
           <div className="text">
             <EditIcon /> <h4>Sửa hồ sơ</h4>
           </div>

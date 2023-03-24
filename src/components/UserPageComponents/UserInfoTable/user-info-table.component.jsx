@@ -16,7 +16,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import ChangePassword from '@/components/ChangePassword/change-password.component'
 import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 
-function UserInfoTable({ password }) {
+function UserInfoTable() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [showPassword, setShowPassword] = useState(false)
   const [updatedName, setUpdatedName] = useState(userInfo.name)
@@ -39,10 +39,9 @@ function UserInfoTable({ password }) {
       setUserInfo(updatedUserInfo)
       Swal.fire({
         text: 'Cập nhật thành công!',
-        showConfirmButton: true,
-        confirmButtonText: 'Đóng',
-        confirmButtonColor: '#3e8e41',
+        showConfirmButton: false,
         icon: 'success',
+        timer: 1500,
       }).then((result) => {
         if (result.isConfirmed) {
           onClose()
@@ -117,7 +116,7 @@ function UserInfoTable({ password }) {
             <div className="content">
               <input
                 type={showPassword ? 'text' : 'password'}
-                value={password}
+                value={userInfo.password}
                 style={{ fontSize: '18px', color: '#344d67' }}
               />
               <button className="button-toggle" onClick={toggleShowPassword}>
@@ -126,7 +125,7 @@ function UserInfoTable({ password }) {
               <button className="button" onClick={() => setIsOpenModal(true)}>
                 Thay đổi
               </button>
-              <ChangePassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} password={password} />
+              <ChangePassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} password={userInfo.password} />
             </div>
           </div>
 

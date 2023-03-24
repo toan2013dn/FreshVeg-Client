@@ -9,13 +9,7 @@ function UserPagePart() {
   const [tab, setTab] = useState('profile')
 
   const tabs = {
-    profile: (
-      <UserInfoTable
-        userAvatar="https://www.8newsnow.com/wp-content/uploads/sites/59/2022/08/husky_eyes.jpg?w=1988&h=1440&crop=1"
-        password={'Toan2013dn'}
-        username={'Le Anh DUc'}
-      />
-    ),
+    profile: <UserInfoTable />,
     bill: <UserOrder />,
     address: <UserAddress />,
   }
