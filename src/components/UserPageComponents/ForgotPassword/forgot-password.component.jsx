@@ -2,6 +2,7 @@ import './forgot-password.styles.scss'
 
 import Modal from '@mui/material/Modal'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { useNavigate } from 'react-router-dom'
 import MailLockOutlinedIcon from '@mui/icons-material/MailLockOutlined'
 
 import { useState } from 'react'
@@ -12,17 +13,21 @@ function ForgotPassword({ isOpen, onClose }) {
   const [errors, setErrors] = useState({})
   const [code, setCode] = useState('')
 
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (validateForm()) {
       Swal.fire({
         icon: 'success',
-        text: 'Đặt lại mật khẩu thành công!',
+        text: '',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1200,
       })
-      onClose()
+      setTimeout(() => {
+        navigate('/new-password')
+      }, 1500)
     }
   }
 
