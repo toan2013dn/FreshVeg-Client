@@ -14,6 +14,7 @@ import OrderSuccess from './pages/OrderSuccess/order-success.component'
 import UserPage from './pages/UserPage/user-page.component'
 import AdminPage from './pages/AdminPage/admin-page.component'
 import UploadImage from './components/AdminContent/UploadImage/upload-image.component'
+import NewPassword from './components/UserPageComponents/NewPassword/new-password.component'
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
     element: <UserPage />,
   },
   { path: '/admin-page', element: <AdminPage /> },
+  { path: '/new-password', element: <NewPassword /> },
   { path: '/upload-image', element: <UploadImage /> },
 ])
 

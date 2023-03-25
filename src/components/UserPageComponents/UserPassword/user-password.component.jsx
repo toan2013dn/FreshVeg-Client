@@ -7,12 +7,13 @@ import CloseIcon from '@mui/icons-material/Close'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ShowPassword from '@mui/icons-material/Visibility'
 import HiddenPassword from '@mui/icons-material/VisibilityOff'
-import Modal from '@mui/material/Modal'
+import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [currentPassword, setCurrentPassword] = useState(userInfo.password)
   const [newPassword, setNewPassword] = useState('')
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
@@ -106,7 +107,8 @@ function UserPassword() {
                 {errors.currentPassword}
               </p>
             </div>
-            <Link>Quên mật khẩu?</Link>
+            <Link onClick={() => setIsOpenModal(true)}>Quên mật khẩu?</Link>
+            <ForgotPassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
           </div>
           <div className="change-password--newPassword grid">
             <h4>Mật khẩu mới</h4>
