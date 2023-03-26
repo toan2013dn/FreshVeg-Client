@@ -5,6 +5,7 @@ import Popover from '@mui/material/Popover'
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
+import { useNavigate } from 'react-router-dom'
 
 import { useUserStore } from '@/store'
 import { ReactComponent as User } from '@/assets/icons/User.svg'
@@ -19,6 +20,22 @@ function UserPopover() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const navigate = useNavigate()
+
+  const handleProfile = () => {
+    navigate('/user-page')
+  }
+
+  const handleOrderHistory = () => {
+    navigate('')
+  }
+
+  const handleLogout = () => {
+    // setUserInfo({})
+    // localStorage.removeItem('userInfo')
+    navigate('/')
   }
 
   const open = Boolean(anchorEl)
@@ -55,7 +72,7 @@ function UserPopover() {
             <p>{userInfo.email}</p>
           </div>
           <div className="option-btn">
-            <button>
+            <button onClick={handleProfile}>
               <BadgeOutlinedIcon />
               <p>Trang cá nhân</p>
             </button>
@@ -63,7 +80,7 @@ function UserPopover() {
               <LocalMallOutlinedIcon />
               <p>Lịch sử đơn hàng</p>
             </button>
-            <button>
+            <button onClick={handleLogout}>
               <LogoutOutlinedIcon />
               <p>Đăng xuất</p>
             </button>
