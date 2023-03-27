@@ -68,23 +68,23 @@ function UserPopover() {
       >
         <div className="user-popover--content">
           <div className="user-popover--content-info">
-            <p style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '150px' }}>
+            <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '150px' }}>
               {userInfo.name}
-            </p>
-            <p>{userInfo.email}</p>
+            </h4>
+            <h4>{userInfo.email}</h4>
           </div>
           <div className="option-btn">
             <button onClick={handleProfile}>
               <BadgeOutlinedIcon />
-              <p>Trang cá nhân</p>
+              <h4>Trang cá nhân</h4>
             </button>
             <button>
               <LocalMallOutlinedIcon />
-              <p>Lịch sử đơn hàng</p>
+              <h4>Lịch sử đơn hàng</h4>
             </button>
             <button onClick={handleLogout}>
               <LogoutOutlinedIcon />
-              <p>Đăng xuất</p>
+              <h4>Đăng xuất</h4>
             </button>
           </div>
         </div>
