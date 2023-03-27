@@ -68,7 +68,9 @@ function UserPopover() {
       >
         <div className="user-popover--content">
           <div className="user-popover--content-info">
-            <p>{userInfo.name}</p>
+            <p style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '150px' }}>
+              {userInfo.name}
+            </p>
             <p>{userInfo.email}</p>
           </div>
           <div className="option-btn">
