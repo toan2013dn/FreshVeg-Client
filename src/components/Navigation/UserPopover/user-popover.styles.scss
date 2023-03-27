@@ -1,0 +1,56 @@
+.user-popover--img {
+  transition: opacity 0.2s ease-in-out;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.user-popover--content {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  gap: 5px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  margin-top: 10px;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+  }
+
+  .option-btn {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+
+    button {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border: none;
+      border-radius: 10px;
+      background-color: transparent;
+      padding: 10px;
+      transition: all 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+      h4 {
+        margin-left: 10px;
+      }
+    }
+  }
+}
