@@ -2,18 +2,15 @@ import './navigation.component.scss'
 
 import Badge from '@mui/material/Badge'
 import UserPopover from './UserPopover/user-popover.component'
+import CartPopper from './CartPopper/cart-popper.component'
 
-import { ReactComponent as Shopping } from '@/assets/icons/Shopping-icon.svg'
-import { ReactComponent as User } from '@/assets/icons/User.svg'
 import { ReactComponent as Wishlist } from '@/assets/icons/Wishlist.svg'
 
 function Navigation() {
   return (
     <div className="navigation">
       <div className="navigation-item">
-        <Badge badgeContent={4} color="primary">
-          <Shopping className="navigation-item--icon" />
-        </Badge>
+        <CartPopper />
       </div>
       <div className="navigation-item">
         <Badge badgeContent={4} color="primary">
