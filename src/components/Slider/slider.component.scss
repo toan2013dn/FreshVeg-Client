@@ -1,11 +1,12 @@
 .slider {
-  background-image: url("@/assets/images/thumbnail 1.webp");
+  background-image: url('@/assets/images/thumbnail 1.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
   margin-left: 50px;
   padding: 30px 0;
+  margin-top: 5px;
 
   //CSS for the slider-content
   &-content {
@@ -36,7 +37,7 @@
     left: 50%;
     transform: translateX(-50%);
     top: 30%;
-    & input[type="radio"] {
+    & input[type='radio'] {
       appearance: none;
       width: 20px;
       height: 20px;
@@ -47,7 +48,7 @@
       transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-    & input[type="radio"]:checked {
+    & input[type='radio']:checked {
       background-color: var(--primary-color);
       border-color: var(--primary-color);
     }
@@ -78,14 +79,14 @@
         }
       }
       svg {
-        filter: brightness(0) saturate(100%) invert(56%) sepia(46%)
-          saturate(549%) hue-rotate(73deg) brightness(95%) contrast(91%);
+        filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(549%) hue-rotate(73deg) brightness(95%)
+          contrast(91%);
       }
 
       &:first-child {
         svg {
-          filter: brightness(0) saturate(100%) invert(99%) sepia(1%)
-            saturate(0%) hue-rotate(136deg) brightness(103%) contrast(101%);
+          filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(0%) hue-rotate(136deg) brightness(103%)
+            contrast(101%);
         }
       }
     }

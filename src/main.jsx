@@ -16,6 +16,7 @@ import AdminPage from './pages/AdminPage/admin-page.component'
 import UploadImage from './components/AdminContent/UploadImage/upload-image.component'
 import NewPassword from './components/UserPageComponents/NewPassword/new-password.component'
 import UserPopover from './components/Navigation/UserPopover/user-popover.component'
+import UserOrder from './components/UserPageComponents/UserOrder/user-order.component'
 
 const router = createBrowserRouter([
   {
@@ -63,8 +64,7 @@ const router = createBrowserRouter([
   },
   { path: '/admin-page', element: <AdminPage /> },
   { path: '/new-password', element: <NewPassword /> },
-  { path: '/upload-image', element: <UploadImage /> },
-  { path: '/user-popover', element: <UserPopover /> },
+  { path: '/user-order', element: <UserOrder /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

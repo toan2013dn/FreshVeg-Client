@@ -12,11 +12,7 @@ function Navigation() {
       <div className="navigation-item">
         <CartPopper />
       </div>
-      <div className="navigation-item">
-        <Badge badgeContent={4} color="primary">
-          <Wishlist className="navigation-item--icon" />
-        </Badge>
-      </div>
+
       <div className="navigation-item">
         <UserPopover />
       </div>
