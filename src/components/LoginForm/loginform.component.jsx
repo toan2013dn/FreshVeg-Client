@@ -3,15 +3,15 @@ import { ReactComponent as Gmail } from '@/assets/icons/Gmail.svg'
 import { ReactComponent as Password } from '@/assets/icons/Password.svg'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-import axios from '@/api/axios'
 import { useUserStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 
+import axios from '@/api/axios'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ShowPassword from '@mui/icons-material/Visibility'
 import HiddenPassword from '@mui/icons-material/VisibilityOff'
 
-function LoginForm() {
+function LoginForm({ onClose }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -36,30 +36,56 @@ function LoginForm() {
         setErrors((errors) => ({ ...errors, email: '' }))
       }
     }
+
+    return formIsValid
   }
 
   const navigate = useNavigate()
 
-  // const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
+  const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    validateForm()
 
-    axios
-      .post('/login', {
-        email,
-        password,
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.data.userId !== null) {
-          // setUserInfo(response.data)
-          navigate('/')
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    if (validateForm()) {
+      axios
+        .post('/auth/login', {
+          email,
+          password,
+        })
+        .then(function (response) {
+          if (response.status === 200 || response.data.userId !== null) {
+            // Hiển thị thông báo Swal
+            Swal.fire({
+              title: 'Đăng nhập thành công!',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1100,
+            })
+
+            setTimeout(() => {
+              onClose()
+            }, 1500)
+            const { user } = response.data
+            setUserInfo({
+              name: user.name,
+              email: user.email,
+              image:
+                'https://cdn.tgdd.vn/Files/2022/03/31/1423196/moi-dieu-can-biet-cho-con-cach-nuoi-cham-soc-va-huan-luyen-202203311033114159.jpg',
+            })
+            console.log(response.data)
+          } else {
+            Swal.fire({
+              title: 'Tài khoản email hoặc mật khẩu không đúng!',
+              icon: 'error',
+              showConfirmButton: true,
+            })
+          }
+        })
+        .catch(function (err) {
+          console.log('error', err)
+        })
+    }
   }
 
   return (
