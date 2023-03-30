@@ -3,7 +3,8 @@ import { ReactComponent as AddToCart } from '@/assets/icons/AddToCart.svg'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PriceWithDots from '../PriceWithDots/price-with-dots.component'
-import productBackground from '@/assets/images/Recipe.webp'
+import productBackground from '@/assets/images/Product-Part-1.webp'
+import TextOverflow from '../TextOverflow/text-overflow.component'
 
 function ProductInfo({ product }) {
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ function ProductInfo({ product }) {
     navigate(`/products-details/${product.productId}`)
   }
   return (
-    <div className="product-info" onClick={handleNavigatge}>
+    <div className="product-info">
       <div className="product-info--image">
         <img
           src={product.productImage ? product.productImage : productBackground}
@@ -21,14 +22,14 @@ function ProductInfo({ product }) {
         />
       </div>
       <div className="product-info--flex">
-        <div>
-          <h4 className="product-info--name">{product.productName}</h4>
-          <h4 className="product-info--price">
-            <PriceWithDots price={product.price} />
-          </h4>
-        </div>
-        <AddToCart className="product-info--button" />
+        <h4 className="product-info--name">
+          <TextOverflow width={200} content={product.productName} fontWeight={400} />{' '}
+        </h4>
+        <h4 className="product-info--price">
+          <PriceWithDots price={product.price} />
+        </h4>
       </div>
+      <button onClick={handleNavigatge}>Xem Chi Tiết</button>
     </div>
   )
 }

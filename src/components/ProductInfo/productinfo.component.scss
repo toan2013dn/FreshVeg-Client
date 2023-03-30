@@ -1,28 +1,75 @@
-.product-info{
-    margin-top: 50px;
-    width: 250px;
-    height: 380px;
+.product-info {
+  margin-top: 25px;
+  width: 100%;
+  height: 380px;
+  border: 2px solid transparent;
+  position: relative;
 
-    &--image{
-        width: 250px;
-        height: 315px;
-        object-fit: cover;
+  &:hover {
+    border: 2px solid var(--primary-color);
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  &:hover button {
+    bottom: 20px; /* slide the button up when the parent is hovered */
+    opacity: 1; /* make the button visible when the parent is hovered */
+    transform: translateX(-50%) translateY(-350%);
+    cursor: pointer;
+  }
+
+  &--image {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    &--flex{
-        display: flex;
-        gap: 100px;
-        
-
-        .product-info--icon{
-            width: calc(var(--icon-width) / 2);
-            height: calc(var(--icon-height) / 1.5 );
-        }
-
-        .product-info--button{
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-        }
+  &--flex {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 5px;
+    .product-info--price {
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 18px;
     }
+    // .product-info--icon {
+    //   width: calc(var(--icon-width) / 2);
+    //   height: calc(var(--icon-height) / 1.5);
+    // }
+
+    // .product-info--button {
+    //   width: 50px;
+    //   height: 50px;
+    //   cursor: pointer;
+    // }
+  }
+  button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    padding: 15px 25px;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+  }
 }

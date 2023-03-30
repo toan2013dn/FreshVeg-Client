@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 
+import { useProductStore } from '@/store'
 import axios from '@/api/axios'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import MenuItem from '@mui/material/MenuItem'
@@ -29,13 +30,6 @@ const names = ['100gr', '200gr', '300gr', '400gr', '500gr']
 
 function ProductContent({ productId }) {
   const [content, setContent] = useState()
-  // const contents = [
-  //   {
-  //     id: 1,
-  //     name: 'Rau',
-  //     price: 10000,
-  //   },
-  // ]
 
   useEffect(() => {
     axios
@@ -48,6 +42,10 @@ function ProductContent({ productId }) {
         console.log(err)
       })
   }, [])
+
+  const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
+
+  console.log(products)
 
   const theme = useTheme()
   const [personName, setPersonName] = React.useState([])
