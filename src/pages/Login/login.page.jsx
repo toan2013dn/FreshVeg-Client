@@ -9,7 +9,7 @@ function Login({ onClose }) {
   return (
     <div className="login">
       <Logo to="/" className="logo" />
-      <LoginForm />
+      <LoginForm onClose={onClose} />
       <div className="login-social">
         <span>hoặc đăng nhập bằng</span>
         <SocialLogin />

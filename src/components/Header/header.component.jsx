@@ -48,7 +48,7 @@ const Header = () => {
 
       <SearchBar />
 
-      {userInfo ? (
+      {userInfo !== null ? (
         <Navigation />
       ) : (
         <div className="button">

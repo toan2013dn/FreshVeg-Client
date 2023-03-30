@@ -3,15 +3,12 @@ import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { useState } from 'react'
 import { useOrderStore } from '@/store'
-import Box from '@mui/joy/Box'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import PendingIcon from '@mui/icons-material/PendingOutlined'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
-import TickIcon from '@mui/icons-material/DoneOutlined'
-import CancelIcon from '@mui/icons-material/DoNotDisturbAltRounded'
 import Alert from '@mui/joy/Alert'
+import UserOrderInfo from './UserOrderInfo/user-order-info.component'
 
 const object = {
   pending: (
@@ -73,9 +70,11 @@ function StatusRender(props) {
 // a function that renders the action buttons
 function ActionRender(props) {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   const handleDelete = () => {
     Swal.fire({
-      text: 'Bạn có chắc chắn muốn xoá địa chỉ này?',
+      text: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#FF2400',
@@ -84,7 +83,7 @@ function ActionRender(props) {
       cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({ text: 'Địa chỉ đã được xoá!', confirmButtonColor: '#3e8e41', icon: 'success' })
+        Swal.fire({ text: 'Đơn hàng đã huỷ!', confirmButtonColor: '#3e8e41', icon: 'success' })
         const updatedRows = orders.filter((row) => row.id !== props.id)
         setOrders(updatedRows)
       }
@@ -94,9 +93,10 @@ function ActionRender(props) {
 
   return (
     <div className="action-render">
-      <button className="action-render__btn info">
+      <button className="action-render__btn info" onClick={() => setIsOpenModal(true)}>
         <InfoDetailIcon className="info-btn" />
       </button>
+      <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
       <button className="action-render__btn delete" onClick={handleDelete}>
         <DeleteIcon className="delete-btn" />
       </button>
