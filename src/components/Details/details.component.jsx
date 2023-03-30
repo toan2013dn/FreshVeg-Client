@@ -4,14 +4,15 @@ import ProductContent from './ProductContent/product-content.component'
 import MoreProductInfo from './MoreInfo/more-info.component'
 import CarouselImage from './Carousel/carousel.component'
 function Details() {
+  console.log(productId)
   return (
     <div className="details">
       <div className="details-flex">
         <div className="details-flex--left">
-          <ProductImage />
+          <ProductImage productId={productId} />
         </div>
         <div className="details-flex--right">
-          <ProductContent />
+          <ProductContent productId={productId} />
         </div>
       </div>
       <div className="details-more">
@@ -25,4 +26,3 @@ function Details() {
 }
 
 export default Details
-

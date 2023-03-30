@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     element: <FilterPanel />,
   },
   {
-    path: '/products-details',
+    path: '/products-details/:productId',
     element: <ProductsDetails />,
   },
   {
