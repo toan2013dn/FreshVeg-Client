@@ -104,7 +104,7 @@ function UserInfoTable() {
               <h4>Email</h4>
             </div>
             <div className="content">
-              <h4>toantnde150316@gmail.com</h4>
+              <h4>{userInfo.email}</h4>
             </div>
           </div>
 

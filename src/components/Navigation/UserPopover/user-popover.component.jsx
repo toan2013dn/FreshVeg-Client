@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUserStore } from '@/store'
 import { ReactComponent as User } from '@/assets/icons/User.svg'
 import axios from '@/api/axios'
+import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 
 function UserPopover() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
@@ -91,9 +92,7 @@ function UserPopover() {
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="user-popover--content">
             <div className="user-popover--content-info">
-              <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '150px' }}>
-                {userInfo.name}
-              </h4>
+              <TextOverflow width={150} fontWeight={700} content={userInfo.name} />
               <h4>{userInfo.email}</h4>
             </div>
             <div className="option-btn">
