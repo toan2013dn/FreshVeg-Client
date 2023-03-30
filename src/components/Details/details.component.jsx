@@ -3,8 +3,9 @@ import ProductImage from './ProductImage/product-image.component'
 import ProductContent from './ProductContent/product-content.component'
 import MoreProductInfo from './MoreInfo/more-info.component'
 import CarouselImage from './Carousel/carousel.component'
-function Details() {
-  console.log(productId)
+
+function Details({ productId }) {
+  // console.log(productId)
   return (
     <div className="details">
       <div className="details-flex">

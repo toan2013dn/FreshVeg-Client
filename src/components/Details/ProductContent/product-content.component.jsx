@@ -28,7 +28,7 @@ const MenuProps = {
 const names = ['100gr', '200gr', '300gr', '400gr', '500gr']
 
 function ProductContent({ productId }) {
-  const [content, setContent] = useState({})
+  const [content, setContent] = useState()
   // const contents = [
   //   {
   //     id: 1,
@@ -64,13 +64,13 @@ function ProductContent({ productId }) {
 
   return (
     <div className="product-content">
-      <div className="product-content--item" key={content.categoryId}>
+      <div className="product-content--item" key={content?.productId}>
         <div className="product-content--item--name">
-          <h3>{content.productName}</h3>
+          <h3>{content?.productName}</h3>
           <div className="line"></div>
         </div>
         <div className="product-content--item--price">
-          <h3>{content.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h3>
+          <h3>{content?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h3>
           <div className="line"></div>
         </div>
         <div className="product-content--item--weight">
@@ -113,7 +113,7 @@ function ProductContent({ productId }) {
           </button>
         </div>
         <div className="product-content--item--sharing">
-          <SocialMediaSharing key={content.id} />
+          <SocialMediaSharing key={content?.productId} />
         </div>
       </div>
     </div>

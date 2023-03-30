@@ -12,6 +12,7 @@ import FilterPanel from '@/components/FilterPanel/filter-panel.component'
 import Footer from '@/components/Footer/footer.component'
 
 function ProductsDetails() {
+  let { productId } = useParams()
   return (
     <div className="products-details">
       <Header />
@@ -23,7 +24,7 @@ function ProductsDetails() {
           <Next />
           <NavLink to="/products-details">Rau củ quả</NavLink>
         </div>
-        <Details />
+        <Details productId={productId} />
       </div>
       <Footer />
     </div>
