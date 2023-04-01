@@ -13,15 +13,16 @@ function HomeProducts() {
   const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
 
   useEffect(() => {
-    axios
-      .get('/product/all')
-      .then((response) => {
-        setProducts(response.data)
-        console.log(response.data)
-      })
-      .catch((err) => {
-        console.log('products err', err)
-      })
+    if (products.length === 0) {
+      axios
+        .get('/product/all')
+        .then((response) => {
+          setProducts(response.data)
+        })
+        .catch((err) => {
+          console.log('products err', err)
+        })
+    }
   }, [])
 
   const navigate = useNavigate()

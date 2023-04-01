@@ -12,7 +12,7 @@ function Categories() {
   return (
     <div className="categories">
       <Header />
-     
+
       <div className="categories-background">
         <img src={CategoriesBG} alt="Categories Background" />
         <div className="categories-background--content">
@@ -20,20 +20,20 @@ function Categories() {
           <h4>Rau, củ, quả sạch đến từ các nông trại</h4>
         </div>
       </div>
-      <div className='container'>
-          <div>
-              <div className="categories-links">
-                <NavLink to="/">Trang chủ</NavLink>
-                <Next />
-                <NavLink to="/categories">Đi Chợ</NavLink>
-              </div>
-                <div className="categories-filter">
-                  <FilterPanel />
-                </div>
+      <div className="container">
+        <div>
+          <div className="categories-links">
+            <NavLink to="/">Trang chủ</NavLink>
+            <Next />
+            <NavLink to="/categories">Đi Chợ</NavLink>
           </div>
-            <div className="categories-list">
-              <ProductLists />
-            </div>
+          <div className="categories-filter">
+            <FilterPanel />
+          </div>
+        </div>
+        <div className="categories-list">
+          <ProductLists />
+        </div>
       </div>
       <Footer />
     </div>
