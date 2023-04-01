@@ -18,8 +18,8 @@ import UploadImage from '@/components/AdminContent/UploadImage/upload-image.comp
 function UserInfoTable() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [showPassword, setShowPassword] = useState(false)
-  const [updatedName, setUpdatedName] = useState(userInfo.name)
-  const [updatedImage, setUpdatedImage] = useState(userInfo.image)
+  const [updatedName, setUpdatedName] = useState(userInfo?.name)
+  const [updatedImage, setUpdatedImage] = useState(userInfo?.image)
   const [errors, setErrors] = useState({})
   const [isOpenModal, setIsOpenModal] = useState(false)
 
@@ -104,7 +104,7 @@ function UserInfoTable() {
               <h4>Email</h4>
             </div>
             <div className="content">
-              <h4>{userInfo.email}</h4>
+              <h4>{userInfo?.email}</h4>
             </div>
           </div>
 

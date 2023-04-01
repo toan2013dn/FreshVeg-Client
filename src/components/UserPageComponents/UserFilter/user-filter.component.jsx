@@ -22,10 +22,10 @@ function UserFilter({ setTab }) {
     <div className="user-filter">
       <div className="user-filter--display">
         <div className="image">
-          <img src={userInfo.image} alt="" />
+          <img src={userInfo?.image} alt="anh" />
         </div>
         <div className="flex">
-          <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userInfo.name}</h4>
+          <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userInfo?.name}</h4>
           <div className="text">
             <EditIcon /> <h4>Sửa hồ sơ</h4>
           </div>
