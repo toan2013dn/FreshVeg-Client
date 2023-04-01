@@ -7,33 +7,40 @@ import Popper from '@mui/material/Popper'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useProductCart } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { useUserStore } from '@/store'
 import { ReactComponent as Shopping } from '@/assets/icons/Shopping-icon.svg'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
+import ImageBG from '@/assets/images/Product-Part-1.webp'
 
 function CartPopper() {
-  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'Áo thun nam Áo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun nam',
-      price: 100000,
-      weight: '100gr',
-      image: 'https://alokiddy.com.vn/Uploads/images/huong/tu-vung-tieng-anh-ve-cac-loai-rau-cu-qua.jpg',
-    },
-    {
-      id: 2,
-      name: 'Áo thun nam',
-      price: 100000,
-      weight: '500gr',
-      image: 'https://alokiddy.com.vn/Uploads/images/huong/tu-vung-tieng-anh-ve-cac-loai-rau-cu-qua.jpg',
-    },
-  ])
+  const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
+  // const [products, setProducts] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'Áo thun nam Áo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun namÁo thun nam',
+  //     price: 100000,
+  //     weight: '100gr',
+  //     image: 'https://alokiddy.com.vn/Uploads/images/huong/tu-vung-tieng-anh-ve-cac-loai-rau-cu-qua.jpg',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Áo thun nam',
+  //     price: 100000,
+  //     weight: '500gr',
+  //     image: 'https://alokiddy.com.vn/Uploads/images/huong/tu-vung-tieng-anh-ve-cac-loai-rau-cu-qua.jpg',
+  //   },
+  // ])
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popper' : undefined
+  const navigate = useNavigate()
+
+  const handleToOrderDetail = () => {
+    navigate('/order-detail')
+  }
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
@@ -44,21 +51,23 @@ function CartPopper() {
 
   //handleDelete
   const handleDelete = (id) => {
-    console.log(id)
-    const newCart = products.filter((item) => item.id !== id)
-    setProducts(newCart)
+    const newCart = productCart.filter((item) => item.productId !== id)
+    setProductCart(newCart)
   }
+
+  // Update the badge
+  const [badgeContent, setBadgeContent] = useState(0)
+
+  useEffect(() => {
+    setBadgeContent(productCart.length)
+  }, [productCart])
 
   return (
     <div>
       <div className="user-popover--img" aria-describedby={id} variant="contained" onClick={handleClick}>
-        {userInfo.avatar ? (
-          <img src={userInfo.avatar} alt="avatar" />
-        ) : (
-          <Badge badgeContent={4} color="primary">
-            <Shopping className="navigation-item--icon" />
-          </Badge>
-        )}
+        <Badge badgeContent={badgeContent} color="primary">
+          <Shopping className="navigation-item--icon" />
+        </Badge>
       </div>
       <Popper
         id={id}
@@ -92,29 +101,35 @@ function CartPopper() {
       >
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="cart-popper--content">
-            {products.length > 0 ? (
+            {productCart.length > 0 ? (
               <>
-                {products.map((product) => (
-                  <div key={product.name} className="cart-popper--item">
+                {productCart.map((product) => (
+                  <div key={product.productId} className="cart-popper--item">
                     <div style={{ display: 'flex', gap: '5px' }}>
                       <div className="cart-popper--item-img">
-                        <img src={product.image} alt="product" />
+                        {product.productImage ? (
+                          <img src={product.productImage} alt="product" />
+                        ) : (
+                          <img src={ImageBG} alt="product" />
+                        )}
                       </div>
                       <div className="cart-popper--item-info">
-                        <TextOverflow width={125} fontWeight={700} content={product.name} />
+                        <TextOverflow width={125} fontWeight={700} content={product.productName} />
                         <h4 className="price">{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
                         <p className="weight">{product.weight}</p>
                       </div>
                     </div>
                     <div className="cart-popper--item-btn">
-                      <button onClick={() => handleDelete(product.id)}>
+                      <button onClick={() => handleDelete(product.productId)}>
                         <ClearOutlinedIcon />
                       </button>
                     </div>
                   </div>
                 ))}
                 <div className="cart-popper--btn">
-                  <button className="btn btn--payment">Thanh Toán</button>
+                  <button className="btn btn--payment" onClick={handleToOrderDetail}>
+                    Thanh Toán
+                  </button>
                   <button className="btn btn--viewCart">Xem Giỏ Hàng</button>
                 </div>
               </>
