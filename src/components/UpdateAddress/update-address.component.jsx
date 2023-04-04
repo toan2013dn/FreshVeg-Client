@@ -1,11 +1,14 @@
-import Modal from '@mui/material/Modal'
-
 import { useState } from 'react'
+import { useUserStore } from '@/store'
+
+import Modal from '@mui/material/Modal'
 import CloseIcon from '@mui/icons-material/Close'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import TextField from '@mui/material/TextField'
+import axios from '@/api/axios'
 
-function UpdateAddress({ id, name, phone, address, isOpen, onClose, onUpdate }) {
+function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpdate }) {
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [updatedName, setUpdatedName] = useState(name)
   const [updatedPhone, setUpdatedPhone] = useState(phone)
   const [updatedAddress, setUpdatedAddress] = useState(address)
@@ -13,26 +16,34 @@ function UpdateAddress({ id, name, phone, address, isOpen, onClose, onUpdate }) 
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
     const updatedUser = {
-      id,
+      addressId,
       name: updatedName,
       phone: updatedPhone,
       address: updatedAddress,
     }
     if (validateForm()) {
+      axios
+        .put(`/address/${userInfo.userId}/${addressId}`, {
+          receiverName: updatedName,
+          receiverPhone: updatedPhone,
+          address: updatedAddress,
+        })
+        .then((res) => {
+          console.log(res)
+          onUpdate(updatedUser)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       Swal.fire({
         title: 'Cập nhật thành công!',
-        showConfirmButton: true,
-        confirmButtonText: 'Đóng',
-        confirmButtonColor: '#3e8e41',
-
         icon: 'success',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          onUpdate(updatedUser)
-          onClose()
-        }
+        showConfirmButton: false,
+        timer: 1500,
       })
+      onClose()
     }
   }
 
