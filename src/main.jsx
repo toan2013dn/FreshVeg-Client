@@ -18,6 +18,7 @@ import NewPassword from './components/UserPageComponents/NewPassword/new-passwor
 import UserPopover from './components/Navigation/UserPopover/user-popover.component'
 import UserOrder from './components/UserPageComponents/UserOrder/user-order.component'
 import Test from './pages/TestToan/test'
+import WeightSelect from './components/WeightSelect/weight-select.component'
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
   { path: '/new-password', element: <NewPassword /> },
   { path: '/user-order', element: <UserOrder /> },
   { path: '/test', element: <Test /> },
+  { path: '/select-weight', element: <WeightSelect /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

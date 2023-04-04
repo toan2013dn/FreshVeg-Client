@@ -3,26 +3,53 @@ import './add-new-address.styles.scss'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import Modal from '@mui/material/Modal'
+import axios from '@/api/axios'
 
+import { useUserStore } from '@/store'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 function AddNewAddress({ isOpen, onClose, setUsers }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [errors, setErrors] = useState({})
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+
+  const resetForm = () => {
+    setName('')
+    setPhone('')
+    setAddress('')
+    setErrors({})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (validateForm()) {
-      const newUser = {
-        name,
-        phone,
-        address,
-      }
-      setUsers((users) => [...users, newUser])
-      onClose()
+      axios
+        .post(
+          `/address/${userInfo.userId}`,
+          {
+            receiverName: name,
+            receiverPhone: phone,
+            address,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+        .then((res) => {
+          const newAddress = { receiverName: name, receiverPhone: phone, address }
+          setUsers((users) => [...users, newAddress])
+          resetForm()
+          onClose()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 

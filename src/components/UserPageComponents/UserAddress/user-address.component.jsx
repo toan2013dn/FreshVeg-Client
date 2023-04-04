@@ -1,30 +1,18 @@
 import './user-address.styles.scss'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useUserStore } from '@/store'
+
+import axios from '@/api/axios'
 import AddNewAddress from '@/components/AddNewAddress/add-new-address.component'
 import UpdateAddress from '@/components/UpdateAddress/update-address.component'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function UserAddress() {
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({
-    1: false,
-    2: false,
-  })
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: 'Trần Ngọc Thinh',
-      phone: '0934795670',
-      address: '120 Bùi Hữu Nghĩa, quận Sơn Trà, tp Đà Nẵng',
-    },
-    {
-      id: 2,
-      name: 'Trần Ngọc Toàn',
-      phone: '0934795670',
-      address: '120 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, quận Sơn T20 Bùi Hữu Nghĩa, ',
-    },
-  ])
+  const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
+  const [users, setUsers] = useState([])
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
 
   const handleUpdateUser = (id) => {
     setIsOpenModalUpdate((prev) => {
@@ -32,11 +20,22 @@ function UserAddress() {
     })
   }
 
+  useEffect(() => {
+    axios
+      .get(`/address/${userInfo.userId}`)
+      .then((res) => {
+        setUsers(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
   // Function to update a user
-  const onUpdate = (newUser) => {
+  const onUpdate = () => {
     const updatedUsers = users.map((user) => {
-      if (user.id === newUser.id) {
-        return newUser
+      if (user.id === userInfo.userId) {
+        return userInfo
       }
       return user
     })
@@ -79,29 +78,30 @@ function UserAddress() {
       </div>
 
       {users.map((user) => (
-        <div className="user-address--content" key={user.id}>
+        <div className="user-address--content" key={user.addressId}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div className="user-address--content-left">
-              <h4>{user.name}</h4>
-              <h4>{user.phone}</h4>
+              <h4>{user.receiverName}</h4>
+              <h4>{user.receiverPhone}</h4>
               <h4>{user.address}</h4>
             </div>
             <div className="user-address--content-right">
-              <button onClick={() => handleUpdateUser(user.id)}>Cập nhật</button>
-              <button onClick={() => handleDeleteUser(user.id)}>Xóa</button>
+              <button onClick={() => handleUpdateUser(user.addressId)}>Cập nhật</button>
+              <button onClick={() => handleDeleteUser(user.addressId)}>Xóa</button>
             </div>
             <UpdateAddress
-              isOpen={isOpenModalUpdate[user.id]}
+              isOpen={isOpenModalUpdate[user.addressId]}
               onClose={() =>
                 setIsOpenModalUpdate((prev) => {
-                  return { ...prev, [user.id]: false }
+                  return { ...prev, [user.addressId]: false }
                 })
               }
               onUpdate={onUpdate}
-              id={user.id}
-              name={user.name}
-              phone={user.phone}
+              addressId={user.addressId}
+              name={user.receiverName}
+              phone={user.receiverPhone}
               address={user.address}
+              setUsers={setUsers}
             />
           </div>
           <div className="line"></div>

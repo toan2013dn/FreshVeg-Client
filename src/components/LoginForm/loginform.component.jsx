@@ -67,13 +67,7 @@ function LoginForm({ onClose }) {
               onClose()
             }, 1500)
             const { user } = response.data
-            setUserInfo({
-              name: user.name,
-              email: user.email,
-              image:
-                'https://cdn.tgdd.vn/Files/2022/03/31/1423196/moi-dieu-can-biet-cho-con-cach-nuoi-cham-soc-va-huan-luyen-202203311033114159.jpg',
-            })
-            console.log(response.data)
+            setUserInfo(user)
           } else {
             Swal.fire({
               title: 'Tài khoản email hoặc mật khẩu không đúng!',
