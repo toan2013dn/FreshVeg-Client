@@ -8,7 +8,9 @@ import { useTheme } from '@mui/material/styles'
 import { useProductStore } from '@/store'
 import { useProductCart } from '@/store'
 import { ToastContainer, toast } from 'react-toastify'
+import { useUserStore } from '@/store'
 
+import Modal from '@mui/material/Modal'
 import axios from '@/api/axios'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import MenuItem from '@mui/material/MenuItem'
@@ -17,6 +19,8 @@ import Select from '@mui/material/Select'
 import React from 'react'
 import SocialMediaSharing from '../SocialMediaSharing/socialmedia-sharing.component'
 import CartPopper from '@/components/Navigation/CartPopper/cart-popper.component'
+import Login from '@/pages/Login/login.page'
+import WeightSelect from '@/components/WeightSelect/weight-select.component'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -46,6 +50,8 @@ function ProductContent({ productId }) {
   }, [])
   // console.log(content)
   const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [isOpenModal, setIsOpenModal] = useState(false)
   // const theme = useTheme()
   const [personName, setPersonName] = React.useState([])
 
@@ -59,11 +65,16 @@ function ProductContent({ productId }) {
     )
   }
   const handleClick = () => {
-    if (productCart.some((item) => item.productId === content.productId)) {
-      return toast.error('Sản phẩm đã có trong giỏ hàng!')
+    if (userInfo === null) {
+      setIsOpenModal(true)
+    } else {
+      if (productCart.some((item) => item.productId === content.productId)) {
+        toast.error('Sản phẩm đã có trong giỏ hàng!')
+      } else {
+        setProductCart([...productCart, content])
+        toast.success('Thêm vào giỏ hàng thành công!')
+      }
     }
-    toast.success('Thêm vào giỏ hàng thành công!')
-    setProductCart([...productCart, content])
   }
 
   return (
@@ -74,13 +85,13 @@ function ProductContent({ productId }) {
           <div className="line"></div>
         </div>
         <div className="product-content--item--price">
-          <h3>{content?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ/100gr</h3>
+          <h3>{content?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h3>
           <div className="line"></div>
         </div>
         <div className="product-content--item--weight">
           <h4>Khối lượng</h4>
           <div className="product-content--item--weight--select">
-            <FormControl sx={{ m: 1, width: 250, mt: 1 }}>
+            {/* <FormControl sx={{ m: 1, width: 250, mt: 1 }}>
               <Select
                 displayEmpty
                 value={personName}
@@ -101,7 +112,8 @@ function ProductContent({ productId }) {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
+            <WeightSelect />
           </div>
         </div>
         <div className="product-content--item--button">
@@ -127,6 +139,11 @@ function ProductContent({ productId }) {
         pauseOnHover
         theme="light"
       />
+      <Modal open={isOpenModal} onClose={() => setIsOpenModal(false)}>
+        <div>
+          <Login onClose={() => setIsOpenModal(false)} />
+        </div>
+      </Modal>
     </div>
   )
 }
