@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Modal from '@mui/material/Modal'
 import axios from '@/api/axios'
 
-import { useUserStore } from '@/store'
+import { useUserStore, useTokenStore } from '@/store'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -15,6 +15,7 @@ function AddNewAddress({ isOpen, onClose, setUsers }) {
   const [address, setAddress] = useState('')
   const [errors, setErrors] = useState({})
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
 
   const resetForm = () => {
     setName('')
@@ -22,7 +23,6 @@ function AddNewAddress({ isOpen, onClose, setUsers }) {
     setAddress('')
     setErrors({})
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -37,6 +37,7 @@ function AddNewAddress({ isOpen, onClose, setUsers }) {
           },
           {
             headers: {
+              "Authorization": `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           },

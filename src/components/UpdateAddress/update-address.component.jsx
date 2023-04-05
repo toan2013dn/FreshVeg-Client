@@ -13,14 +13,14 @@ function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpd
   const [updatedPhone, setUpdatedPhone] = useState(phone)
   const [updatedAddress, setUpdatedAddress] = useState(address)
   const [errors, setErrors] = useState({})
-
   const handleSubmit = (event) => {
     event.preventDefault()
-
+console.log(123123, addressId);
     const updatedUser = {
+      id: userInfo.userId,
       addressId,
-      name: updatedName,
-      phone: updatedPhone,
+      receiverName: updatedName,
+      receiverPhone: updatedPhone,
       address: updatedAddress,
     }
     if (validateForm()) {

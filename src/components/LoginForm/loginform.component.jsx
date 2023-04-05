@@ -3,7 +3,7 @@ import { ReactComponent as Gmail } from '@/assets/icons/Gmail.svg'
 import { ReactComponent as Password } from '@/assets/icons/Password.svg'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useUserStore } from '@/store'
+import { useUserStore,useTokenStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 
 import axios from '@/api/axios'
@@ -43,7 +43,7 @@ function LoginForm({ onClose }) {
   const navigate = useNavigate()
 
   const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
-
+  const [setToken] = useTokenStore((state) => [state.setToken])
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -66,8 +66,9 @@ function LoginForm({ onClose }) {
             setTimeout(() => {
               onClose()
             }, 1500)
-            const { user } = response.data
+            const { user, accessToken } = response.data
             setUserInfo(user)
+            setToken(accessToken)
           } else {
             Swal.fire({
               title: 'Tài khoản email hoặc mật khẩu không đúng!',

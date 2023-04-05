@@ -32,13 +32,16 @@ function UserAddress() {
   }, [])
 
   // Function to update a user
-  const onUpdate = () => {
+  const onUpdate = (userAddress) => {
+    console.log(1,users);
+    console.log(userAddress.id==userInfo.userId);
     const updatedUsers = users.map((user) => {
-      if (user.id === userInfo.userId) {
-        return userInfo
+      if (userAddress.addressId === user.addressId) {
+        return userAddress
       }
       return user
     })
+    console.log(updatedUsers);
     setUsers(updatedUsers)
   }
 
