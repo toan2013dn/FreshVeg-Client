@@ -9,7 +9,7 @@ import { useUserStore, useTokenStore } from '@/store'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-function AddNewAddress({ isOpen, onClose, setUsers }) {
+function AddNewAddress({ isOpen, onClose, setUserAddresses }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
@@ -37,14 +37,14 @@ function AddNewAddress({ isOpen, onClose, setUsers }) {
           },
           {
             headers: {
-              "Authorization": `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           },
         )
         .then((res) => {
           const newAddress = { receiverName: name, receiverPhone: phone, address }
-          setUsers((users) => [...users, newAddress])
+          setUserAddresses((userAddress) => [...userAddress, newAddress])
           resetForm()
           onClose()
         })
