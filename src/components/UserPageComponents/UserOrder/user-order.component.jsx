@@ -125,9 +125,7 @@ const columns = [
 function UserOrder() {
   const [orders] = useOrderStore((state) => [state.orders])
 
-  React.useEffect(() => {
-    console.log('orders', orders)
-  }, [orders])
+  React.useEffect(() => {}, [orders])
 
   return (
     <div className="user-order">

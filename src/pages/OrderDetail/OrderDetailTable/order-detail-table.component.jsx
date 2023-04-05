@@ -33,8 +33,6 @@ function OrderDetailTable() {
     setTotalPrice(sum)
   }, [productCart, selectedWeight])
 
-  console.log(productCart)
-
   const handleDelete = (id) => {
     Swal.fire({
       html: '<h4>Bạn có muốn xoá sản phẩm này không?</h4>',

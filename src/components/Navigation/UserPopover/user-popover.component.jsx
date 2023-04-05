@@ -33,7 +33,6 @@ function UserPopover() {
           setUserInfo(null)
           navigate('/')
         }
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)

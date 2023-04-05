@@ -26,7 +26,7 @@ function Test() {
     axios
       .post('https://jsonplaceholder.typicode.com/post')
       .then((response) => {
-        console.log(response)
+        // console.log(response)
       })
       .catch((err) => {
         console.log('err')

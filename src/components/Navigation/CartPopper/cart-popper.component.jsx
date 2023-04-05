@@ -18,7 +18,6 @@ import { ReactComponent as Shopping } from '@/assets/icons/Shopping-icon.svg'
 function CartPopper() {
   const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
   const [selectedWeight] = useSelectedWeight((state) => [state.selectedWeight])
-  console.log(selectedWeight)
   // const [products, setProducts] = useState([
   //   {
   //     id: 1,

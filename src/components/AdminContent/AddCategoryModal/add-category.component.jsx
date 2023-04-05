@@ -11,7 +11,6 @@ function AddCategory({ isOpen, onClose }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Name:', name)
   }
 
   return (

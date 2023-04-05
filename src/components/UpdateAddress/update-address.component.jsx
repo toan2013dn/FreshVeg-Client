@@ -15,7 +15,6 @@ function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpd
   const [errors, setErrors] = useState({})
   const handleSubmit = (event) => {
     event.preventDefault()
-console.log(123123, addressId);
     const updatedUser = {
       id: userInfo.userId,
       addressId,
@@ -31,7 +30,6 @@ console.log(123123, addressId);
           address: updatedAddress,
         })
         .then((res) => {
-          console.log(res)
           onUpdate(updatedUser)
         })
         .catch((err) => {
