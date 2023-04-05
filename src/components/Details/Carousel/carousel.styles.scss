@@ -1,3 +1,21 @@
+// .carousel-product--style {
+//   width: 280px;
+//   .product-info {
+//     width: 10px;
+//     &--image {
+//       width: 100px;
+//       height: 100px;
+//       overflow: hidden;
+
+//       img {
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//       }
+//     }
+//   }
+// }
+
 .carousel {
   width: 100%;
 
@@ -5,16 +23,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    .product-info--image {
-      width: 90%;
-      height: 70%;
-      object-fit: cover;
-      border-radius: 10px;
-    }
 
-    h4 {
-      font-size: 20px;
+    .product-info {
+      width: 230px;
+      height: 350px;
+
+      &:hover {
+        border: 2px solid var(--primary-color);
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      &:hover button {
+        bottom: 20px; /* slide the button up when the parent is hovered */
+        opacity: 1; /* make the button visible when the parent is hovered */
+        transform: translateX(-50%) translateY(-280%);
+        cursor: pointer;
+      }
+      .product-info--image {
+        width: 230px;
+        height: 230px;
+        border-radius: 10px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      h4 {
+        font-size: 20px;
+      }
     }
 
     .product-info--button {
@@ -32,6 +72,10 @@
     position: absolute;
     top: -36px;
     right: 80px;
+  }
+
+  .alice-carousel__wrapper {
+    height: 440px;
   }
 
   .alice-carousel__next-btn {

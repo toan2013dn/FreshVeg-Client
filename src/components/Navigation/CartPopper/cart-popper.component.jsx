@@ -8,16 +8,16 @@ import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 import Badge from '@mui/material/Badge'
 
-import { useProductCart } from '@/store'
+import { useProductCartStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { useUserStore } from '@/store'
 import { useState, useEffect } from 'react'
-import { useSelectedWeight } from '@/store'
+import { useSelectedWeightStore } from '@/store'
 import { ReactComponent as Shopping } from '@/assets/icons/Shopping-icon.svg'
 
 function CartPopper() {
-  const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
-  const [selectedWeight] = useSelectedWeight((state) => [state.selectedWeight])
+  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  const [selectedWeight] = useSelectedWeightStore((state) => [state.selectedWeight])
   // const [products, setProducts] = useState([
   //   {
   //     id: 1,

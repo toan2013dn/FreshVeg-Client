@@ -1,50 +1,19 @@
 import './carousel.styles.scss'
 
+import { useProductStore } from '@/store'
+
 import Products from '@/assets/images/Products.webp'
 import ProductOne from '@/assets/images/Product-Part-1.webp'
 import ProductInfo from '@/components/ProductInfo/productinfo.component'
 import AliceCarousel from 'react-alice-carousel'
-
 import BackArrow from '@mui/icons-material/ArrowBackIosNew'
 import FowardArrow from '@mui/icons-material/ArrowForwardIos'
 
 function CarouselImage() {
-  const productLists = [
-    {
-      id: 1,
-      image: Products,
-      name: 'Hạt chi đó',
-      price: 50000,
-    },
-    {
-      id: 2,
-      image: ProductOne,
-      name: 'Hạt chi đó',
-      price: 50000,
-    },
-    {
-      id: 3,
-      image:
-        'https://images.immediate.co.uk/production/volatile/sites/30/2022/08/Corndogs-7832ef6.jpg?quality=90&resize=556,505',
-      name: 'Hạt chi đó',
-      price: 50000,
-    },
-    {
-      id: 4,
-      image: 'https://ychef.files.bbci.co.uk/976x549/p04tx3m6.jpg',
-      name: 'Hạt chi đó',
-      price: 50000,
-    },
-    {
-      id: 5,
-      image: 'https://ychef.files.bbci.co.uk/976x549/p04tx3m6.jpg',
-      name: 'Hạt chi đó',
-      price: 50000,
-    },
-  ]
+  const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
 
-  const items = productLists.map((product) => {
-    return <ProductInfo key={product.id} product={product} />
+  const items = products.map((product) => {
+    return <ProductInfo key={product.productId} product={product} />
   })
 
   return (

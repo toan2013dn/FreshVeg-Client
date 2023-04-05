@@ -29,7 +29,7 @@ function ProductInfo({ product }) {
           <PriceWithDots price={product.price} />
         </h4>
       </div>
-      <button onClick={handleNavigatge}>Xem Chi Tiết</button>
+      <button onClick={handleNavigatge}>Xem Thêm</button>
     </div>
   )
 }

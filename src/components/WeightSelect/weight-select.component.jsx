@@ -6,35 +6,33 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import { useSelectedWeight } from '@/store'
-import { useProductCart } from '@/store'
+import { useSelectedWeightStore } from '@/store'
+import { useProductCartStore } from '@/store'
 import { useState } from 'react'
 
 function WeightSelect({ productId }) {
-  // const [selectedWeight, setSelectedWeight] = useSelectedWeight((state) => [
+  // const [selectedWeight, setSelectedWeight] = useSelectedWeightStore((state) => [
   //   state.selectedWeight,
   //   state.setSelectedWeight,
   // ])
 
-  const [selectedWeight, setSelectedWeight] = useSelectedWeight((state) => [
-    state.selectedWeight,
-    state.setSelectedWeight,
-  ])
+  // const [selectedWeight, setSelectedWeight] = useSelectedWeightStore((state) => [
+  //   state.selectedWeight,
+  //   state.setSelectedWeight,
+  // ])
 
-  const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
+  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  console.log(productCart)
 
   const handleChange = (event) => {
-    setSelectedWeight(event.target.value)
-
+    // setSelectedWeight(event.target.value)
     // const newProductCart = productCart.map((item) => {
     //   if (item.id === productId) {
     //     console.log(event.target.value)
     //     item.weight = event.target.value
     //   }
-
     //   return item
     // })
-
     // setProductCart(newProductCart)
   }
 
@@ -45,7 +43,7 @@ function WeightSelect({ productId }) {
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={selectedWeight}
+          value={0}
           onChange={handleChange}
         >
           <MenuItem value={1}>100gr</MenuItem>

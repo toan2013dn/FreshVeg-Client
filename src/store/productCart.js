@@ -1,8 +1,21 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-const useProductCart = create((set) => ({
-    productCart: [],
-    setProductCart: (productCart) => set(() => ({ productCart }))
-}))
+// const useProductCartStoreStore = create((set) => ({
+//     productCart: [],
+//     setProductCart: (productCart) => set(() => ({ productCart }))
+// }))
 
-export { useProductCart }
+const useProductCartStore = create(
+    persist(
+        (set) => ({
+            productCart: [],
+            setProductCart: (productCart) => set(() => ({ productCart }))
+        }),
+        {
+            name: 'product-cart-storage',
+        }
+    )
+)
+
+export { useProductCartStore }

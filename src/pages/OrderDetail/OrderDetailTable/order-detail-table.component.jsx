@@ -2,8 +2,8 @@ import './order-detail-table.styles.scss'
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useProductCart } from '@/store'
-import { useSelectedWeight } from '@/store'
+import { useProductCartStore } from '@/store'
+import { useSelectedWeightStore } from '@/store'
 
 import * as React from 'react'
 import ProductOne from '@/assets/images/Product-Part-2.webp'
@@ -21,8 +21,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 
 function OrderDetailTable() {
-  const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
-  const [selectedWeight] = useSelectedWeight((state) => [state.selectedWeight])
+  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  const [selectedWeight] = useSelectedWeightStore((state) => [state.selectedWeight])
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {

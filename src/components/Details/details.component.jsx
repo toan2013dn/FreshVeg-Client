@@ -4,6 +4,8 @@ import ProductContent from './ProductContent/product-content.component'
 import MoreProductInfo from './MoreInfo/more-info.component'
 import CarouselImage from './Carousel/carousel.component'
 
+import { useProductStore } from '@/store'
+
 function Details({ productId }) {
   // console.log(productId)
   return (

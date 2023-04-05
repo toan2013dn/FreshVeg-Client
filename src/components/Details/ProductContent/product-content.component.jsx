@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import { useProductStore } from '@/store'
-import { useProductCart } from '@/store'
+import { useProductCartStore } from '@/store'
 import { ToastContainer, toast } from 'react-toastify'
 import { useUserStore } from '@/store'
 
@@ -47,9 +47,9 @@ function ProductContent({ productId }) {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [productId])
   // console.log(content)
-  const [productCart, setProductCart] = useProductCart((state) => [state.productCart, state.setProductCart])
+  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [isOpenModal, setIsOpenModal] = useState(false)
   // const theme = useTheme()

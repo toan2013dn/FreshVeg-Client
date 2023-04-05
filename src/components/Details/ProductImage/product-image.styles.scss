@@ -1,6 +1,7 @@
 .product-image {
+  width: 500px;
   &--preview {
-    width: 480px;
+    width: 100%;
     height: 450px;
     border-radius: 20px;
     overflow: hidden;
@@ -16,12 +17,11 @@
 
   &--list {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
 
     li {
-      width: 130px;
+      width: 110px;
       height: 110px;
       border: 20px;
       overflow: hidden;
