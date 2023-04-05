@@ -65,7 +65,7 @@ function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpd
       formIsValid = false
       setErrors((errors) => ({ ...errors, updatedPhone: 'Vui lòng nhập số điện thoại!' }))
     } else {
-      const phoneRegex = /^[0-9]+$/
+      const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/
       if (!phoneRegex.test(updatedPhone)) {
         formIsValid = false
         setErrors((errors) => ({ ...errors, updatedPhone: 'Vui lòng nhập số điện thoại hợp lệ!' }))

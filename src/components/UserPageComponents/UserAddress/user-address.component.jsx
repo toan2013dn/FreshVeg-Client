@@ -3,6 +3,10 @@ import './user-address.styles.scss'
 import { useEffect, useState } from 'react'
 import { useUserStore } from '@/store'
 
+import * as React from 'react'
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined'
+import Tooltip from '@mui/material/Tooltip'
 import axios from '@/api/axios'
 import AddNewAddress from '@/components/AddNewAddress/add-new-address.component'
 import UpdateAddress from '@/components/UpdateAddress/update-address.component'
@@ -43,31 +47,26 @@ function UserAddress() {
   }
 
   // Function to delete a user
-  const handleDeleteUser = (id) => {
-    const updatedUsers = userAddresses.filter((userAddress) => userAddress.addressId !== id)
-    setUserAddresses(updatedUsers)
-    ///swal fire here
+  const handleDeleteAddress = (id) => {
     Swal.fire({
       text: 'Bạn có chắc chắn muốn xoá địa chỉ này?',
       icon: 'warning',
       showCancelButton: false,
-      timer: 1500,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`/address/${userInfo.userId}/${id}`)
+          .then((res) => {
+            const updatedUsers = userAddresses.filter((userAddress) => userAddress.addressId !== id)
+            setUserAddresses(updatedUsers)
+            Swal.fire({ text: 'Địa chỉ đã được xoá!', icon: 'success', timer: 1300, showConfirmButton: false })
+            onClose()
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     })
-    // Swal.fire({
-    //   text: 'Bạn có chắc chắn muốn xoá địa chỉ này?',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#FF2400',
-    //   cancelButtonColor: '#e5e5e5',
-    //   confirmButtonText: 'Xóa',
-    //   cancelButtonText: 'Hủy',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     Swal.fire({ text: 'Địa chỉ đã được xoá!', icon: 'success' })
-    //     const updatedUsers = userAddresses.filter((userAddress) => userAddress.addressId !== id)
-    //     setUserAddresses(updatedUsers)
-    //   }
-    // })
   }
 
   return (
@@ -99,8 +98,17 @@ function UserAddress() {
               <h4>{userAddress.address}</h4>
             </div>
             <div className="user-address--content-right">
-              <button onClick={() => handleUpdateUser(userAddress.addressId)}>Cập nhật</button>
-              <button onClick={() => handleDeleteUser(userAddress.addressId)}>Xóa</button>
+              <Tooltip title="Cập Nhật">
+                <button className="btn update-btn" onClick={() => handleUpdateUser(userAddress.addressId)}>
+                  <CreateOutlinedIcon />
+                </button>
+              </Tooltip>
+
+              <Tooltip title="Xoá">
+                <button className="btn delete-btn" onClick={() => handleDeleteAddress(userAddress.addressId)}>
+                  <DeleteForeverOutlinedIcon />
+                </button>
+              </Tooltip>
             </div>
             <UpdateAddress
               isOpen={isOpenModalUpdate[userAddress.addressId]}
