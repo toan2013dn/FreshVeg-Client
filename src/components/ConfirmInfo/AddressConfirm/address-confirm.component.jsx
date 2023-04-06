@@ -1,11 +1,20 @@
 import './address-confirm.styles.scss'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useUserAddressesStore } from '@/store'
+import { useUserStore } from '@/store'
 import { NavLink } from 'react-router-dom'
 
+import UpdateAddress from '@/components/UpdateAddress/update-address.component'
 import Tick from '@mui/icons-material/TaskAlt'
+import axios from '@/api/axios'
 
-function AddressConfirm() {
+function AddressConfirm({ forceUser }) {
+  const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
+    state.userAddresses,
+    state.setUserAddresses,
+  ])
+  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const addresses = [
     {
       id: 1,
@@ -22,6 +31,19 @@ function AddressConfirm() {
       isDefault: false,
     },
   ]
+  const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
+
+  //call address api
+  useEffect(() => {
+    axios
+      .get(`/address/${userInfo.userId}`)
+      .then((res) => {
+        setUserAddresses(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [forceUser])
 
   const defaultAddress = addresses.find((address) => address.isDefault)
 
@@ -38,28 +60,56 @@ function AddressConfirm() {
     setSelectedAddress(id)
   }
 
+  const handleUpdateUser = (id) => {
+    setIsOpenModalUpdate((prev) => {
+      return { ...prev, [id]: true }
+    })
+  }
+
+  const onUpdate = (userAddress) => {
+    const updatedUsers = userAddresses.map((address) => {
+      if (address.addressId === userAddress.addressId) {
+        return userAddress
+      }
+      return address
+    })
+    setUserAddresses(updatedUsers)
+  }
+
   return (
     <div className="address-confirm">
-      {addresses.map((address) => {
+      {userAddresses.map((userAddress) => {
         return (
           <div
-            className={`address-confirm--item ${isThumbnailActive(address.id)}`}
-            key={address.id}
-            onClick={() => handleAddressClick(address.id)}
+            className={`address-confirm--item ${isThumbnailActive(userAddress.addressId)}`}
+            key={userAddress.addressId}
+            onClick={() => handleAddressClick(userAddress.addressId)}
           >
             <div className="flex">
               <Tick />
-              <h4>{address.name}</h4>
-              <h4 className="phone">{address.phone}</h4>
+              <h4>{userAddress.receiverName}</h4>
+              <h4 className="phone">{userAddress.receiverPhone}</h4>
             </div>
             <div className="address">
-              <h4>{address.address}</h4>
+              <h4>{userAddress.address}</h4>
             </div>
-            <div className="edit">
-              <NavLink to={''} style={{ fontSize: '22px' }}>
-                Edit
-              </NavLink>
+            <div className="edit" onClick={() => handleUpdateUser(userAddress.addressId)}>
+              Sửa
             </div>
+            <UpdateAddress
+              isOpen={isOpenModalUpdate[userAddress.addressId]}
+              onClose={() =>
+                setIsOpenModalUpdate((prev) => {
+                  return { ...prev, [userAddress.addressId]: false }
+                })
+              }
+              onUpdate={onUpdate}
+              addressId={userAddress.addressId}
+              name={userAddress.receiverName}
+              phone={userAddress.receiverPhone}
+              address={userAddress.address}
+              setUserAddresses={setUserAddresses}
+            />
           </div>
         )
       })}

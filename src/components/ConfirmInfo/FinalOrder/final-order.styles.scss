@@ -14,22 +14,36 @@
   }
 
   &--details {
-    display: flex;
-    justify-content: space-between;
-    .line {
-      width: 200px;
-      height: 0.2px;
-      margin: 20px 0;
-    }
-    &-left {
-      .products {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    margin-top: 15px;
+
+    .title {
+      h4 {
+        font-weight: 700;
+        font-size: 20px;
       }
     }
-    &-right {
-      text-align: end;
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 15px 0;
+    }
+    .product-items {
+      display: flex;
+      align-items: flex-start;
+      .products {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    .total-cost.flex {
+      border-bottom: none;
+      h4 {
+        font-weight: 700;
+      }
     }
   }
 

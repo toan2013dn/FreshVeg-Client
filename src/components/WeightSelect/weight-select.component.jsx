@@ -22,8 +22,6 @@ function WeightSelect({ productId }) {
   // ])
 
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
-  console.log(productCart)
-
   const handleChange = (event) => {
     // setSelectedWeight(event.target.value)
     // const newProductCart = productCart.map((item) => {

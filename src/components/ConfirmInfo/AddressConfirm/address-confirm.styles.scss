@@ -14,7 +14,7 @@
     &.active {
       background-color: var(--primary-color);
       color: white;
-      .edit a {
+      .edit {
         color: white;
       }
     }
@@ -42,13 +42,9 @@
     .edit {
       position: absolute;
       left: 50%;
-      a {
-        text-decoration: none;
-        color: var(--primary-color);
-      }
-    }
-    h4 {
+      text-decoration: none;
       font-size: 20px;
+      color: var(--primary-color);
     }
   }
 }

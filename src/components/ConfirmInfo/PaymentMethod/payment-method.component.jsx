@@ -16,7 +16,7 @@ function PaymentMethod() {
     },
     {
       id: 2,
-      name: 'Thanh toán qua thẻ ATM',
+      name: 'Thanh toán bằng VNPay',
       isDefault: false,
     },
   ]
