@@ -2,6 +2,7 @@ import './user-address.styles.scss'
 
 import { useEffect, useState } from 'react'
 import { useUserStore } from '@/store'
+import { useUserAddressesStore } from '@/store'
 
 import * as React from 'react'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -15,7 +16,11 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 function UserAddress() {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
-  const [userAddresses, setUserAddresses] = useState([])
+  const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
+    state.userAddresses,
+    state.setUserAddresses,
+  ])
+  const [forceUser, setForceUser] = useState(0)
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
 
   const handleUpdateUser = (id) => {
@@ -33,7 +38,7 @@ function UserAddress() {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [forceUser])
 
   // Function to update a user
   const onUpdate = (userAddress) => {
@@ -60,7 +65,6 @@ function UserAddress() {
             const updatedUsers = userAddresses.filter((userAddress) => userAddress.addressId !== id)
             setUserAddresses(updatedUsers)
             Swal.fire({ text: 'Địa chỉ đã được xoá!', icon: 'success', timer: 1300, showConfirmButton: false })
-            onClose()
           })
           .catch((err) => {
             console.log(err)
@@ -84,6 +88,7 @@ function UserAddress() {
             setUserAddresses={setUserAddresses}
             isOpen={isOpenModal}
             onClose={() => setIsOpenModal(false)}
+            setForceUser={setForceUser}
           />
         </div>
         <div className="line"></div>

@@ -9,12 +9,17 @@ import axios from '@/api/axios'
 import { useUserStore, useTokenStore } from '@/store'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useUserAddressesStore } from '@/store'
 
-function AddNewAddress({ isOpen, onClose, setUserAddresses }) {
+function AddNewAddress({ isOpen, onClose, setForceUser }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [errors, setErrors] = useState({})
+  const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
+    state.userAddresses,
+    state.setUserAddresses,
+  ])
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
 
@@ -38,14 +43,15 @@ function AddNewAddress({ isOpen, onClose, setUserAddresses }) {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              // Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           },
         )
         .then((res) => {
           const newAddress = { receiverName: name, receiverPhone: phone, address }
-          setUserAddresses((userAddress) => [...userAddress, newAddress])
+          setUserAddresses([...userAddresses, newAddress])
+          setForceUser((prev) => prev + 1)
           Swal.fire({ text: 'Thêm địa chỉ thành công!', icon: 'success', timer: 1300, showConfirmButton: false })
           resetForm()
           onClose()

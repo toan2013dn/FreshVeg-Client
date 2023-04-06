@@ -1,22 +1,22 @@
 import './confirm-info.styles.scss'
 
 import { Link } from 'react-router-dom'
+import { display } from '@mui/system'
+import { useState } from 'react'
 
 import Location from '@mui/icons-material/LocationOn'
 import Payment from '@mui/icons-material/AccountBalance'
 import Note from '@mui/icons-material/BorderColor'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-
 import AddressConfirm from './AddressConfirm/address-confirm.component'
 import PaymentMethod from './PaymentMethod/payment-method.component'
-import { display } from '@mui/system'
 import FinalOrder from './FinalOrder/final-order.component'
-import { useState } from 'react'
 import AddNewAddress from '../AddNewAddress/add-new-address.component'
 
 function ConfirmInfo() {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [forceUser, setForceUser] = useState(0)
 
   return (
     <div style={{ display: 'flex' }}>
@@ -27,14 +27,14 @@ function ConfirmInfo() {
             <h4>Địa Chỉ Nhận Hàng</h4>
           </div>
 
-          <AddressConfirm />
+          <AddressConfirm forceUser={forceUser} />
 
           <button className="home-products--button" onClick={() => setIsOpenModal(true)}>
             <Link to={''} style={{ fontSize: '20px' }}>
               Thêm Địa Chỉ Mới
             </Link>
           </button>
-          <AddNewAddress isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
+          <AddNewAddress isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} setForceUser={setForceUser} />
         </div>
 
         <div className="line"></div>
