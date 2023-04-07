@@ -6,6 +6,8 @@ const useOrderInfoStore = create((set) => ({
     setSelectedAddress: (selectedAddress) => set(() => ({ selectedAddress })),
     orderNote: '',
     setOrderNote: (orderNote) => set(() => ({ orderNote })),
+    orderDate: null,
+    setOrderDate: (orderDate) => set(() => ({ orderDate })),
 }))
 
 export { useOrderInfoStore }

@@ -1,17 +1,18 @@
 import './final-order.styles.scss'
 
-import { useProductCartStore, useUserAddressesStore } from '@/store'
+import { useProductCartStore, useUserAddressesStore, useOrderInfoStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
+import React from 'react'
 import useTotalPrice from '@/hooks/useTotalPrice'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
-import { ToastContainer, toast } from 'react-toastify'
 import Decoration from '@/assets/images/Decoration.webp'
 
 function FinalOrder() {
-  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  const [productCart] = useProductCartStore((state) => [state.productCart])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
-  console.log(userAddresses)
+  const [setOrderDate] = useOrderInfoStore((state) => [state.setOrderDate])
   const { totalPrice } = useTotalPrice()
 
   const navigate = useNavigate()
@@ -20,6 +21,8 @@ function FinalOrder() {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
       return
     }
+    const currentDate = new Date()
+    setOrderDate(currentDate)
     navigate('/order-success')
   }
 
