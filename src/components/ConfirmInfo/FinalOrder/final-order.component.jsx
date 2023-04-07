@@ -1,18 +1,25 @@
 import './final-order.styles.scss'
 
-import { useProductCartStore } from '@/store'
+import { useProductCartStore, useUserAddressesStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 
 import useTotalPrice from '@/hooks/useTotalPrice'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
+import { ToastContainer, toast } from 'react-toastify'
 import Decoration from '@/assets/images/Decoration.webp'
 
 function FinalOrder() {
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
+  console.log(userAddresses)
   const { totalPrice } = useTotalPrice()
 
   const navigate = useNavigate()
   const handleClickToOrderSuccess = () => {
+    if (userAddresses.length === 0) {
+      toast.error('Vui lòng thêm địa chỉ giao hàng')
+      return
+    }
     navigate('/order-success')
   }
 
@@ -56,6 +63,18 @@ function FinalOrder() {
       <div className="order-confirm--image">
         <img src={Decoration} alt="decoration" />
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   )
 }
