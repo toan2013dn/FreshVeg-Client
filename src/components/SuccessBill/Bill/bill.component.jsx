@@ -38,12 +38,15 @@ function Bill() {
 
       <div className="bill-details">
         <h4 style={{ fontWeight: '700' }}>CHI TIẾT</h4>
-        <div className="bill-details--address">
+        <div className="bill-details--receiverName flex">
+          <h4 style={{ width: '70%' }}>Tên người nhận:</h4>
+          <h4 style={{ width: '100%' }}>{selectedAddress?.receiverName}</h4>
+        </div>
+        <div className="bill-details--address flex">
           <h4 style={{ width: '70%' }}>Địa chỉ giao hàng:</h4>
-
           <h4 style={{ width: '100%' }}>{selectedAddress?.address}</h4>
         </div>
-        <div className="bill-details--phone">
+        <div className="bill-details--phone flex">
           <h4 style={{ width: '70%' }}>SĐT người nhận:</h4>
           <h4 style={{ width: '100%' }}>{selectedAddress?.receiverPhone}</h4>
         </div>
