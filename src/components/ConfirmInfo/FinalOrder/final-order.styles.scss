@@ -43,6 +43,7 @@
       border-bottom: none;
       h4 {
         font-weight: 700;
+        font-size: 20px;
       }
     }
   }
@@ -54,4 +55,9 @@
     align-items: center;
     font-weight: 700;
   }
+}
+.order-confirm--image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

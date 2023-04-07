@@ -1,36 +1,19 @@
 import './address-confirm.styles.scss'
 
-import { useState, useEffect } from 'react'
-import { useUserAddressesStore } from '@/store'
-import { useUserStore } from '@/store'
-import { NavLink } from 'react-router-dom'
+import { useUserAddressesStore, useUserStore, useOrderInfoStore } from '@/store'
+import { useEffect, useState } from 'react'
 
+import axios from '@/api/axios'
 import UpdateAddress from '@/components/UpdateAddress/update-address.component'
 import Tick from '@mui/icons-material/TaskAlt'
-import axios from '@/api/axios'
 
 function AddressConfirm({ forceUser }) {
   const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
     state.userAddresses,
     state.setUserAddresses,
   ])
-  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
-  const addresses = [
-    {
-      id: 1,
-      name: 'Nguyễn Văn A',
-      phone: '0123456789',
-      address: 'Số 1, Đường 1, Phường 1, Quận 1, Thành Phố 1',
-      isDefault: true,
-    },
-    {
-      id: 2,
-      name: 'Nguyễn Văn B',
-      phone: '0123456789',
-      address: 'Số 2, Đường 2, Phường 2, Quận 2, Thành Phố Da Nang',
-      isDefault: false,
-    },
-  ]
+  const [userInfo] = useUserStore((state) => [state.userInfo])
+
   const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
 
   //call address api
@@ -45,19 +28,29 @@ function AddressConfirm({ forceUser }) {
       })
   }, [forceUser])
 
-  const defaultAddress = addresses.find((address) => address.isDefault)
+  // const defaultAddress = userAddresses.find((userAddress) => userAddress.isDefault)
+  // const defaultAddress = userAddresses[0]
+  // console.log(defaultAddress)
 
-  const [selectedAddress, setSelectedAddress] = useState(defaultAddress.id)
+  const [selectedAddress, setSelectedAddress] = useOrderInfoStore((state) => [
+    state.selectedAddress,
+    state.setSelectedAddress,
+  ])
+  useEffect(() => {
+    if (userAddresses.length > 0) {
+      setSelectedAddress(userAddresses[0])
+    }
+  }, [userAddresses])
 
-  const isThumbnailActive = (id) => {
-    if (selectedAddress === id || (id === addresses[0].id && !selectedAddress)) {
+  const isThumbnailActive = (userAddress) => {
+    if (selectedAddress === userAddress || (userAddress === userAddresses[0] && !selectedAddress)) {
       return 'active'
     }
     return ''
   }
 
-  const handleAddressClick = (id) => {
-    setSelectedAddress(id)
+  const handleAddressClick = (userAddress) => {
+    setSelectedAddress(userAddress)
   }
 
   const handleUpdateUser = (id) => {
@@ -81,9 +74,9 @@ function AddressConfirm({ forceUser }) {
       {userAddresses.map((userAddress) => {
         return (
           <div
-            className={`address-confirm--item ${isThumbnailActive(userAddress.addressId)}`}
+            className={`address-confirm--item ${isThumbnailActive(userAddress)}`}
             key={userAddress.addressId}
-            onClick={() => handleAddressClick(userAddress.addressId)}
+            onClick={() => handleAddressClick(userAddress)}
           >
             <div className="flex">
               <Tick />

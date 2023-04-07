@@ -1,37 +1,10 @@
-import { Link } from 'react-router-dom'
-import { useTheme } from '@mui/material/styles'
-
-import * as React from 'react'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
+import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
-import { useSelectedWeightStore } from '@/store'
-import { useProductCartStore } from '@/store'
-import { useState } from 'react'
 
-function WeightSelect({ productId }) {
-  // const [selectedWeight, setSelectedWeight] = useSelectedWeightStore((state) => [
-  //   state.selectedWeight,
-  //   state.setSelectedWeight,
-  // ])
-
-  // const [selectedWeight, setSelectedWeight] = useSelectedWeightStore((state) => [
-  //   state.selectedWeight,
-  //   state.setSelectedWeight,
-  // ])
-
-  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+function WeightSelect({ weight, setWeight }) {
   const handleChange = (event) => {
-    // setSelectedWeight(event.target.value)
-    // const newProductCart = productCart.map((item) => {
-    //   if (item.id === productId) {
-    //     console.log(event.target.value)
-    //     item.weight = event.target.value
-    //   }
-    //   return item
-    // })
-    // setProductCart(newProductCart)
+    setWeight(event.target.value)
   }
 
   return (
@@ -41,15 +14,15 @@ function WeightSelect({ productId }) {
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={0}
+          value={weight}
           onChange={handleChange}
         >
-          <MenuItem value={1}>100gr</MenuItem>
-          <MenuItem value={2}>200gr</MenuItem>
-          <MenuItem value={3}>300gr</MenuItem>
-          <MenuItem value={4}>400gr</MenuItem>
-          <MenuItem value={5}>500gr</MenuItem>
-          <MenuItem value={6}>600gr</MenuItem>
+          <MenuItem value={100}>100gr</MenuItem>
+          <MenuItem value={200}>200gr</MenuItem>
+          <MenuItem value={300}>300gr</MenuItem>
+          <MenuItem value={400}>400gr</MenuItem>
+          <MenuItem value={500}>500gr</MenuItem>
+          <MenuItem value={600}>600gr</MenuItem>
         </Select>
       </FormControl>
     </div>
