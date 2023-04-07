@@ -5,36 +5,34 @@
   align-items: center;
   margin: 20px 0;
   background-color: var(--primary-color);
-  padding: 50px;
+  padding: 30px 50px;
   color: white;
   border-radius: 10px;
 
   &-info {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    &--left {
-      width: 60%;
+    flex-direction: column;
+
+    .products {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
-      .quantity {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-    &--right {
-      width: 40%;
-      align-items: flex-end;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
     }
 
-    .line {
-      margin: 0;
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid white;
+      padding: 15px 0;
+    }
+
+    .total-cost {
+      h4 {
+        font-size: 18px;
+        font-weight: 700;
+      }
     }
   }
   &-details {
@@ -52,7 +50,7 @@
       display: flex;
     }
   }
-  .line {
-    width: 250px;
+  .bill-details {
+    text-align: left;
   }
 }

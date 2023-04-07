@@ -1,22 +1,27 @@
 import './confirm-info.styles.scss'
 
-import { Link } from 'react-router-dom'
-import { display } from '@mui/system'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useOrderInfoStore } from '@/store'
 
-import Location from '@mui/icons-material/LocationOn'
 import Payment from '@mui/icons-material/AccountBalance'
 import Note from '@mui/icons-material/BorderColor'
-import TextField from '@mui/material/TextField'
+import Location from '@mui/icons-material/LocationOn'
 import Box from '@mui/material/Box'
-import AddressConfirm from './AddressConfirm/address-confirm.component'
-import PaymentMethod from './PaymentMethod/payment-method.component'
-import FinalOrder from './FinalOrder/final-order.component'
+import TextField from '@mui/material/TextField'
 import AddNewAddress from '../AddNewAddress/add-new-address.component'
+import AddressConfirm from './AddressConfirm/address-confirm.component'
+import FinalOrder from './FinalOrder/final-order.component'
+import PaymentMethod from './PaymentMethod/payment-method.component'
 
 function ConfirmInfo() {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [forceUser, setForceUser] = useState(0)
+  const [orderNote, setOrderNote] = useOrderInfoStore((state) => [state.orderNote, state.setOrderNote])
+
+  const handleOrderNoteChange = (event) => {
+    setOrderNote(event.target.value)
+  }
 
   return (
     <div style={{ display: 'flex' }}>
@@ -63,7 +68,12 @@ function ConfirmInfo() {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-multiline-flexible" label="Để lại ghi chú cho đơn hàng của bạn" multiline />
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Để lại ghi chú cho đơn hàng của bạn"
+              multiline
+              onChange={handleOrderNoteChange}
+            />
           </Box>
         </div>
       </div>
