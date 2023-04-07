@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useOrderStore } from '@/store'
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Alert from '@mui/joy/Alert'
 import UserOrderInfo from './UserOrderInfo/user-order-info.component'
@@ -70,24 +70,22 @@ function StatusRender(props) {
 // a function that renders the action buttons
 function ActionRender(props) {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
+  console.log(orders)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
-  const handleDelete = () => {
+  const handleCancelOrder = () => {
     Swal.fire({
       text: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#FF2400',
       cancelButtonColor: '#e5e5e5',
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy',
+      confirmButtonText: 'Huỷ',
+      cancelButtonText: 'Đóng',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({ text: 'Đơn hàng đã huỷ!', confirmButtonColor: '#3e8e41', icon: 'success' })
-        const updatedRows = orders.filter((row) => row.id !== props.id)
-        setOrders(updatedRows)
+        Swal.fire({ text: 'Đơn hàng đã được huỷ!', showConfirmButton: false, icon: 'success', timer: 1200 })
       }
-      ;('')
     })
   }
 
@@ -97,8 +95,8 @@ function ActionRender(props) {
         <InfoDetailIcon className="info-btn" />
       </button>
       <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
-      <button className="action-render__btn delete" onClick={handleDelete}>
-        <DeleteIcon className="delete-btn" />
+      <button className="action-render__btn delete" onClick={handleCancelOrder}>
+        <ClearOutlinedIcon className="delete-btn" />
       </button>
     </div>
   )
