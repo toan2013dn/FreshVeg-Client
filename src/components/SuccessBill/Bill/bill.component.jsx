@@ -8,11 +8,12 @@ import useTotalPrice from '@/hooks/useTotalPrice'
 
 function Bill() {
   const [productCart] = useProductCartStore((state) => [state.productCart])
-  const [selectedAddress, orderNote, orderDate, setOrderDate] = useOrderInfoStore((state) => [
+  const [selectedAddress, orderNote, orderDate, orderTotal] = useOrderInfoStore((state) => [
     state.selectedAddress,
     state.orderNote,
     state.orderDate,
     state.setOrderDate,
+    state.orderTotal,
   ])
 
   const { totalPrice } = useTotalPrice()
@@ -36,7 +37,7 @@ function Bill() {
         <div className="total-cost flex">
           <h4>THANH TOÁN </h4>
           <h4>
-            <PriceWithDots price={totalPrice} />{' '}
+            <PriceWithDots price={totalPrice} />
           </h4>
         </div>
       </div>

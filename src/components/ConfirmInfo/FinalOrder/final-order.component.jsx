@@ -1,26 +1,55 @@
 import './final-order.styles.scss'
 
-import { useProductCartStore, useUserAddressesStore, useOrderInfoStore } from '@/store'
+import { useProductCartStore, useUserAddressesStore, useOrderInfoStore, useUserStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
 import React from 'react'
+import axios from '@/api/axios'
 import useTotalPrice from '@/hooks/useTotalPrice'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import Decoration from '@/assets/images/Decoration.webp'
 
 function FinalOrder() {
+  const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo] = useOrderInfoStore((state) => [
+    state.selectedAddress,
+    state.orderNote,
+    state.orderDate,
+    state.orderTotal,
+    state.orderInfo,
+  ])
+  const [user] = useUserStore((state) => [state.user])
   const [productCart] = useProductCartStore((state) => [state.productCart])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
-  const [setOrderDate] = useOrderInfoStore((state) => [state.setOrderDate])
+  const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
-
   const navigate = useNavigate()
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
       return
+    } else if (productCart.length === 0) {
+      toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
+      return
     }
+
+    axios
+      .post('/order', {
+        userId: user?.userId,
+        phone: selectedAddress?.phone,
+        amount: orderTotal,
+        note: orderNote,
+        orderDate: orderDate,
+        addressId: selectedAddress?.addressId,
+        orderDetails: productCart,
+      })
+      .then((res) => {
+        setOrderInfo(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
     const currentDate = new Date()
     setOrderDate(currentDate)
     navigate('/order-success')
