@@ -1,17 +1,17 @@
 import './user-password.styles.scss'
 
+import { Link } from 'react-router-dom'
 import { useUserStore } from '@/store'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import CloseIcon from '@mui/icons-material/Close'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import axios from '@/api/axios'
 import ShowPassword from '@mui/icons-material/Visibility'
-import HiddenPassword from '@mui/icons-material/VisibilityOff'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
-  const [currentPassword, setCurrentPassword] = useState(userInfo.password)
+  const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -22,22 +22,37 @@ function UserPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     if (validateForm()) {
-      const updatedUserInfo = {
-        ...userInfo,
-        password: newPassword,
-      }
-      setUserInfo(updatedUserInfo)
+      axios
+        .patch(`user/${userInfo.userId}/password`, {
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        })
+        .then((res) => {
+          if (res.data == 'Current password is not correct') {
+            setErrors((errors) => ({ ...errors, currentPassword: 'Mật khẩu cũ sai!' }))
+          } else {
+            Swal.fire({
+              icon: 'success',
+              text: 'Đổi mật khẩu thành công!',
+              showConfirmButton: false,
+              timer: 1500,
+            })
+            onClose()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
 
-      Swal.fire({
-        icon: 'success',
-        text: 'Đổi mật khẩu thành công!',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      onClose()
+      // if (validateForm()) {
+      // const updatedUserInfo = {
+      //   ...userInfo,
+      //   password: newPassword,
+      // }
+      // setUserInfo(updatedUserInfo)
     }
+    // }
   }
 
   const validateForm = () => {
@@ -47,12 +62,7 @@ function UserPassword() {
       formIsValid = false
       setErrors((errors) => ({ ...errors, currentPassword: 'Vui lòng nhập mật khẩu!' }))
     } else {
-      if (currentPassword !== userInfo.password) {
-        formIsValid = false
-        setErrors((errors) => ({ ...errors, currentPassword: 'Mật khẩu không khớp!' }))
-      } else {
-        setErrors((errors) => ({ ...errors, currentPassword: '' }))
-      }
+      setErrors((errors) => ({ ...errors, currentPassword: '' }))
     }
 
     if (!newPassword) {
@@ -85,6 +95,20 @@ function UserPassword() {
     }
     return formIsValid
   }
+
+  const handleForgotPassword = () => {
+    setIsOpenModal(true)
+    axios
+      .post('/auth/rspassword', {
+        email: userInfo.email,
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <div className="change-password">
       <form onSubmit={handleSubmit}>
@@ -107,7 +131,7 @@ function UserPassword() {
                 {errors.currentPassword}
               </p>
             </div>
-            <Link onClick={() => setIsOpenModal(true)}>Quên mật khẩu?</Link>
+            <Link onClick={handleForgotPassword}>Quên mật khẩu?</Link>
             <ForgotPassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
           </div>
           <div className="change-password--newPassword grid">

@@ -2,9 +2,10 @@ import './forgot-password.styles.scss'
 
 import Modal from '@mui/material/Modal'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import { useNavigate } from 'react-router-dom'
 import MailLockOutlinedIcon from '@mui/icons-material/MailLockOutlined'
+import axios from '@/api/axios'
 
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useUserStore } from '@/store'
 
@@ -15,39 +16,63 @@ function ForgotPassword({ isOpen, onClose }) {
 
   const navigate = useNavigate()
 
+  const handleInputChange = (event) => {
+    const value = event.target.value
+    const regex = /^[0-9\b]{0,4}$/ // allow only numbers and limit length to 4
+    if (regex.test(value)) {
+      setCode(value)
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (validateForm()) {
-      Swal.fire({
-        icon: 'success',
-        text: '',
-        showConfirmButton: false,
-        timer: 1200,
+    axios
+      .post('auth/check-rspassword-otp', {
+        otpCode: code,
+        email: userInfo.email,
       })
-      setTimeout(() => {
-        navigate('/new-password')
-      }, 1500)
-    }
+      .then((res) => {
+        if (res.data == 'Cannot Reset Password, Please check input again') {
+          Swal.fire({
+            icon: 'error',
+            text: 'Mã xác minh không khớp!',
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            text: '',
+            showConfirmButton: false,
+            timer: 1200,
+          })
+          setTimeout(() => {
+            navigate('/new-password')
+          }, 1500)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-  const validateForm = () => {
-    let formIsValid = true
-    const OTPCode = '1234'
+  // const validateForm = () => {
+  //   let formIsValid = true
 
-    if (!code) {
-      formIsValid = false
-      setErrors((errors) => ({ ...errors, code: 'Vui lòng nhập mã xác minh!' }))
-    } else {
-      if (code !== OTPCode) {
-        formIsValid = false
-        setErrors((errors) => ({ ...errors, code: 'Mã xác minh không khớp!' }))
-      } else {
-        setErrors((errors) => ({ ...errors, code: '' }))
-      }
-    }
-    return formIsValid
-  }
+  //   if (!code) {
+  //     formIsValid = false
+  //     setErrors((errors) => ({ ...errors, code: 'Vui lòng nhập mã xác minh!' }))
+  //   } else {
+  //     if (code !== OTPCode) {
+  //       formIsValid = false
+  //       setErrors((errors) => ({ ...errors, code: 'Mã xác minh không khớp!' }))
+  //     } else {
+  //       setErrors((errors) => ({ ...errors, code: '' }))
+  //     }
+  //   }
+  //   return formIsValid
+  // }
 
   return (
     <Modal open={isOpen} onClose={onClose}>
@@ -67,8 +92,8 @@ function ForgotPassword({ isOpen, onClose }) {
               name="code"
               placeholder="Nhập mã xác minh"
               value={code}
-              maxlength="4"
-              onChange={(e) => setCode(e.target.value)}
+              maxLength="4"
+              onChange={(e) => handleInputChange(e)}
             />
             <p className="error" style={{ opacity: errors.code ? 1 : 0 }}>
               {errors.code}

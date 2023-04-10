@@ -10,8 +10,11 @@ import { useState } from 'react'
 import { useUserStore } from '@/store'
 import { ReactComponent as Logo } from '@/assets/icons/logo.svg'
 
+import axios from '@/api/axios'
+import { useEffect } from 'react'
+
 function NewPassword() {
-  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [userInfo] = useUserStore((state) => [state.userInfo])
   const [newPassword, setNewPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
@@ -21,43 +24,54 @@ function NewPassword() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (validateForm()) {
-      Swal.fire({
-        icon: 'success',
-        text: 'Thiết lập mật khẩu thành công!',
-        showConfirmButton: false,
-        timer: 1200,
+    axios
+      .post('auth/rspassword', {
+        email: userInfo.email,
+        password: newPassword,
       })
-      setTimeout(() => {
-        navigate('/login')
-      }, 1500)
-    }
+
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    Swal.fire({
+      icon: 'success',
+      text: 'Thiết lập mật khẩu thành công!',
+      showConfirmButton: false,
+      timer: 1200,
+    })
+    setTimeout(() => {
+      navigate('/login')
+    }, 1500)
   }
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
   }
 
-  const validateForm = () => {
-    let formIsValid = true
+  // const validateForm = () => {
+  //   let formIsValid = true
 
-    if (!newPassword) {
-      formIsValid = false
-      setErrors((errors) => ({ ...errors, newPassword: 'Vui lòng nhập mật khẩu mới!' }))
-    } else {
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
-      if (!passwordRegex.test(newPassword)) {
-        formIsValid = false
-        setErrors((errors) => ({
-          ...errors,
-          newPassword: 'Nhập mật khẩu có tối thiểu: 6 ký tự bao gồm số, chữ cái thường và hoa.',
-        }))
-      } else {
-        setErrors((errors) => ({ ...errors, newPassword: '' }))
-      }
-    }
-    return formIsValid
-  }
+  //   if (!newPassword) {
+  //     formIsValid = false
+  //     setErrors((errors) => ({ ...errors, newPassword: 'Vui lòng nhập mật khẩu mới!' }))
+  //   } else {
+  //     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
+  //     if (!passwordRegex.test(newPassword)) {
+  //       formIsValid = false
+  //       setErrors((errors) => ({
+  //         ...errors,
+  //         newPassword: 'Nhập mật khẩu có tối thiểu: 6 ký tự bao gồm số, chữ cái thường và hoa.',
+  //       }))
+  //     } else {
+  //       setErrors((errors) => ({ ...errors, newPassword: '' }))
+  //     }
+  //   }
+  //   return formIsValid
+  // }
 
   return (
     <div className="new-password">
