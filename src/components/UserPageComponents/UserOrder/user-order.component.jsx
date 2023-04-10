@@ -1,17 +1,21 @@
 import './user-order.styles.scss'
-import * as React from 'react'
-import { DataGrid } from '@mui/x-data-grid'
-import { useState } from 'react'
-import { useOrderStore } from '@/store'
 
+import { useOrderStore } from '@/store'
+import { DataGrid } from '@mui/x-data-grid'
+import { useState, useEffect } from 'react'
+
+import * as React from 'react'
+import axios from '@/api/axios'
+import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Alert from '@mui/joy/Alert'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import UserOrderInfo from './UserOrderInfo/user-order-info.component'
 
 const object = {
-  pending: (
+  onWaitingConfirm: (
     <>
       <Alert color="primary" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
@@ -27,7 +31,7 @@ const object = {
       </Alert>
     </>
   ),
-  success: (
+  Confirmed: (
     <>
       <Alert color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
@@ -38,12 +42,12 @@ const object = {
             justifyContent: 'center',
           }}
         >
-          Đã đặt hàng
+          Đang giao hàng
         </span>
       </Alert>
     </>
   ),
-  cancel: (
+  Success: (
     <>
       <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
@@ -54,7 +58,23 @@ const object = {
             justifyContent: 'center',
           }}
         >
-          Đã hủy
+          Thành công
+        </span>
+      </Alert>
+    </>
+  ),
+  Failed: (
+    <>
+      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+        <span
+          style={{
+            width: 90,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Thất bại
         </span>
       </Alert>
     </>
@@ -65,12 +85,11 @@ function StatusRender(props) {
   const { value } = props
 
   return <div className="status-render">{object[value]}</div>
+  // return <div className="status-render">{value}</div>
 }
 
 // a function that renders the action buttons
 function ActionRender(props) {
-  const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
-  console.log(orders)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   const handleCancelOrder = () => {
@@ -80,11 +99,11 @@ function ActionRender(props) {
       showCancelButton: true,
       confirmButtonColor: '#FF2400',
       cancelButtonColor: '#e5e5e5',
-      confirmButtonText: 'Huỷ',
+      confirmButtonText: 'Xác nhận',
       cancelButtonText: 'Đóng',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({ text: 'Đơn hàng đã được huỷ!', showConfirmButton: false, icon: 'success', timer: 1200 })
+        Swal.fire({ text: 'Đơn hàng đã huỷ!', confirmButtonColor: '#3e8e41', icon: 'success' })
       }
     })
   }
@@ -96,34 +115,49 @@ function ActionRender(props) {
       </button>
       <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
       <button className="action-render__btn delete" onClick={handleCancelOrder}>
-        <ClearOutlinedIcon className="delete-btn" />
+
+        <DeleteIcon className="delete-btn" />
+
       </button>
     </div>
   )
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 80 },
-  { field: 'date', headerName: 'Ngày Đặt', width: 130 },
+  { field: 'orderId', headerName: 'ID', width: 80 },
+  { field: 'orderDate', headerName: 'Ngày Đặt', width: 130 },
   { field: 'phone', headerName: 'Số Điện Thoại', width: 130 },
+  // {
+  //   field: 'address',
+  //   headerName: 'Địa Chỉ',
+  //   width: 250,
+  // },
   {
-    field: 'address',
-    headerName: 'Địa Chỉ',
-    width: 250,
-  },
-  {
-    field: 'total',
+    field: 'amount',
     headerName: 'Tổng Số Tiền',
     width: 150,
   },
   { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender, className: 'status-column' },
-  { width: 130, sortable: false, renderCell: ActionRender },
+  { field: 'action', headerName: '', width: 130, sortable: false, renderCell: ActionRender },
 ]
 
 function UserOrder() {
-  const [orders] = useOrderStore((state) => [state.orders])
+  const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
 
-  React.useEffect(() => {}, [orders])
+  useEffect(() => {
+    axios
+      .get('/order/all')
+      .then((res) => {
+        setOrders(res.data)
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+  console.log(orders)
+  // React.useEffect(() => {}, [orders])
 
   return (
     <div className="user-order">
@@ -132,6 +166,7 @@ function UserOrder() {
         style={{ fontSize: '16px' }}
         rowHeight={100}
         rows={orders}
+        getRowId={(row) => row.orderId}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

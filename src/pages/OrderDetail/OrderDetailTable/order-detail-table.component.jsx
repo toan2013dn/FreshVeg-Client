@@ -19,7 +19,11 @@ import TableRow from '@mui/material/TableRow'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function OrderDetailTable() {
-  const [productCart, setProductWeight] = useProductCartStore((state) => [state.productCart, state.setProductWeight])
+  const [productCart, setProductWeight, setProductCart] = useProductCartStore((state) => [
+    state.productCart,
+    state.setProductWeight,
+    state.setProductCart,
+  ])
   const { totalPrice } = useTotalPrice()
 
   const handleDelete = (id) => {
@@ -28,12 +32,18 @@ function OrderDetailTable() {
       showDenyButton: true,
       confirmButtonText: 'Có',
       denyButtonText: `Huỷ`,
+      confirmButtonColor: '#FF0000',
+      denyButtonColor: '#e0e0e0',
+      icon: 'warning',
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        const newCart = productCart.filter((item) => item.productId !== id)
+        setProductCart(newCart)
         Swal.fire({
           html: '<h4>Xoá thành công!</h4>',
           icon: 'success',
+          showConfirmButton: false,
+          timer: 1300,
         })
       }
     })
@@ -78,7 +88,7 @@ function OrderDetailTable() {
                     </div>
                   </TableCell>
                   <TableCell align="center">
-                    <div className="delete-button" onClick={handleDelete}>
+                    <div className="delete-button" onClick={() => handleDelete(row.productId)}>
                       <DeleteForeverIcon />
                     </div>
                   </TableCell>

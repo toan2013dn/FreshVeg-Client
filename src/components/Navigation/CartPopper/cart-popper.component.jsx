@@ -3,7 +3,7 @@ import './cart-popper.styles.scss'
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined'
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Badge from '@mui/material/Badge'
 import Popper from '@mui/material/Popper'
 import * as React from 'react'
@@ -20,6 +20,10 @@ function CartPopper() {
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popper' : undefined
   const navigate = useNavigate()
+
+  const handleToOrderConfirm = () => {
+    navigate('/order-confirm')
+  }
 
   const handleToOrderDetail = () => {
     navigate('/order-detail')
@@ -105,16 +109,18 @@ function CartPopper() {
                     </div>
                     <div className="cart-popper--item-btn">
                       <button onClick={() => handleDelete(product.productId)}>
-                        <ClearOutlinedIcon />
+                        <DeleteForeverOutlinedIcon />
                       </button>
                     </div>
                   </div>
                 ))}
                 <div className="cart-popper--btn">
-                  <button className="btn btn--payment" onClick={handleToOrderDetail}>
+                  <button className="btn btn--payment" onClick={handleToOrderConfirm}>
                     Thanh Toán
                   </button>
-                  <button className="btn btn--viewCart">Xem Giỏ Hàng</button>
+                  <button className="btn btn--viewCart" onClick={handleToOrderDetail}>
+                    Xem Giỏ Hàng
+                  </button>
                 </div>
               </>
             ) : (

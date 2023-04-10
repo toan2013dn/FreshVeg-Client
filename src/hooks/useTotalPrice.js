@@ -1,8 +1,9 @@
-import { useProductCartStore } from "@/store";
+import { useProductCartStore, useOrderInfoStore } from "@/store";
 import { useState, useEffect } from "react";
 
 const useTotalPrice = () => {
     const [totalPrice, setTotalPrice] = useState(0);
+    const [setOrderTotal] = useOrderInfoStore(state => [state.setOrderTotal])
     const { productCart } = useProductCartStore();
 
     useEffect(() => {
@@ -12,6 +13,10 @@ const useTotalPrice = () => {
         });
         setTotalPrice(price);
     }, [productCart]);
+
+    useEffect(() => {
+        setOrderTotal(totalPrice)
+    }, [totalPrice])
 
     return { totalPrice };
 };
