@@ -2,13 +2,10 @@ import './user-order.styles.scss'
 
 import { useOrderStore } from '@/store'
 import { DataGrid } from '@mui/x-data-grid'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-import * as React from 'react'
 import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Alert from '@mui/joy/Alert'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -115,9 +112,7 @@ function ActionRender(props) {
       </button>
       <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
       <button className="action-render__btn delete" onClick={handleCancelOrder}>
-
         <DeleteIcon className="delete-btn" />
-
       </button>
     </div>
   )
