@@ -19,7 +19,7 @@ function FinalOrder() {
     state.orderInfo,
   ])
   const [user] = useUserStore((state) => [state.user])
-  const [productCart] = useProductCartStore((state) => [state.productCart])
+  const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
@@ -36,7 +36,7 @@ function FinalOrder() {
     axios
       .post('/order', {
         userId: user?.userId,
-        phone: selectedAddress?.phone,
+        phone: selectedAddress?.receiverPhone,
         amount: orderTotal,
         note: orderNote,
         orderDate: orderDate,
@@ -53,6 +53,8 @@ function FinalOrder() {
     const currentDate = new Date()
     setOrderDate(currentDate)
     navigate('/order-success')
+
+    setProductCart([])
   }
 
   return (

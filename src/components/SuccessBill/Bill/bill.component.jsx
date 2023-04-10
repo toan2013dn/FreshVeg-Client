@@ -8,7 +8,7 @@ import useTotalPrice from '@/hooks/useTotalPrice'
 
 function Bill() {
   const [productCart] = useProductCartStore((state) => [state.productCart])
-  const [selectedAddress, orderNote, orderDate, orderTotal] = useOrderInfoStore((state) => [
+  const [selectedAddress, orderNote, orderDate] = useOrderInfoStore((state) => [
     state.selectedAddress,
     state.orderNote,
     state.orderDate,
