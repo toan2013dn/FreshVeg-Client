@@ -1,12 +1,12 @@
 import './user-password.styles.scss'
 
+import { Link } from 'react-router-dom'
 import { useUserStore } from '@/store'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import CloseIcon from '@mui/icons-material/Close'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import axios from '@/api/axios'
 import ShowPassword from '@mui/icons-material/Visibility'
-import HiddenPassword from '@mui/icons-material/VisibilityOff'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
@@ -85,6 +85,20 @@ function UserPassword() {
     }
     return formIsValid
   }
+
+  const handleForgotPassword = () => {
+    setIsOpenModal(true)
+    axios
+      .post('/auth/rspassword', {
+        email: userInfo.email,
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <div className="change-password">
       <form onSubmit={handleSubmit}>
@@ -107,7 +121,7 @@ function UserPassword() {
                 {errors.currentPassword}
               </p>
             </div>
-            <Link onClick={() => setIsOpenModal(true)}>Quên mật khẩu?</Link>
+            <Link onClick={handleForgotPassword}>Quên mật khẩu?</Link>
             <ForgotPassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
           </div>
           <div className="change-password--newPassword grid">
