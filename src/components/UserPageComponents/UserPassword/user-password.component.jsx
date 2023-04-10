@@ -11,7 +11,7 @@ import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
-  const [currentPassword, setCurrentPassword] = useState(userInfo.password)
+  const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -22,22 +22,37 @@ function UserPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     if (validateForm()) {
-      const updatedUserInfo = {
-        ...userInfo,
-        password: newPassword,
-      }
-      setUserInfo(updatedUserInfo)
+      axios
+        .patch(`user/${userInfo.userId}/password`, {
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        })
+        .then((res) => {
+          if (res.data == 'Current password is not correct') {
+            setErrors((errors) => ({ ...errors, currentPassword: 'Mật khẩu cũ sai!' }))
+          } else {
+            Swal.fire({
+              icon: 'success',
+              text: 'Đổi mật khẩu thành công!',
+              showConfirmButton: false,
+              timer: 1500,
+            })
+            onClose()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
 
-      Swal.fire({
-        icon: 'success',
-        text: 'Đổi mật khẩu thành công!',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      onClose()
+      // if (validateForm()) {
+      // const updatedUserInfo = {
+      //   ...userInfo,
+      //   password: newPassword,
+      // }
+      // setUserInfo(updatedUserInfo)
     }
+    // }
   }
 
   const validateForm = () => {
@@ -47,12 +62,7 @@ function UserPassword() {
       formIsValid = false
       setErrors((errors) => ({ ...errors, currentPassword: 'Vui lòng nhập mật khẩu!' }))
     } else {
-      if (currentPassword !== userInfo.password) {
-        formIsValid = false
-        setErrors((errors) => ({ ...errors, currentPassword: 'Mật khẩu không khớp!' }))
-      } else {
-        setErrors((errors) => ({ ...errors, currentPassword: '' }))
-      }
+      setErrors((errors) => ({ ...errors, currentPassword: '' }))
     }
 
     if (!newPassword) {
