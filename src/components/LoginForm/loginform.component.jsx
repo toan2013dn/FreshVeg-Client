@@ -3,7 +3,7 @@ import { ReactComponent as Gmail } from '@/assets/icons/Gmail.svg'
 import { ReactComponent as Password } from '@/assets/icons/Password.svg'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useUserStore,useTokenStore } from '@/store'
+import { useUserStore, useTokenStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 
 import axios from '@/api/axios'
@@ -16,6 +16,8 @@ function LoginForm({ onClose }) {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
+  const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
+  const [setToken] = useTokenStore((state) => [state.setToken])
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -42,8 +44,10 @@ function LoginForm({ onClose }) {
 
   const navigate = useNavigate()
 
-  const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
-  const [setToken] = useTokenStore((state) => [state.setToken])
+  const handleToForgotPassword = () => {
+    navigate('/forgot-password')
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -55,7 +59,6 @@ function LoginForm({ onClose }) {
         })
         .then(function (response) {
           if (response.status === 200 || response.data.userId !== null) {
-            // Hiển thị thông báo Swal
             Swal.fire({
               title: 'Đăng nhập thành công!',
               icon: 'success',
@@ -123,7 +126,7 @@ function LoginForm({ onClose }) {
               Nhớ mật khẩu
             </label>
           </div>
-          <div className="form-option--forgot">
+          <div className="form-option--forgot" onClick={handleToForgotPassword}>
             <Link to={''}>Quên mật khẩu?</Link>
           </div>
         </div>

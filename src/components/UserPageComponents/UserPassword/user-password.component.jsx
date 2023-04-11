@@ -10,7 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
-  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [userInfo] = useUserStore((state) => [state.userInfo])
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -19,6 +19,11 @@ function UserPassword() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false)
+  const [formData, setFormData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -38,21 +43,18 @@ function UserPassword() {
               showConfirmButton: false,
               timer: 1500,
             })
+            setFormData({
+              currentPassword: '',
+              newPassword: '',
+              confirmNewPassword: '',
+            })
             onClose()
           }
         })
         .catch((err) => {
           console.log(err)
         })
-
-      // if (validateForm()) {
-      // const updatedUserInfo = {
-      //   ...userInfo,
-      //   password: newPassword,
-      // }
-      // setUserInfo(updatedUserInfo)
     }
-    // }
   }
 
   const validateForm = () => {
