@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useUserStore } from '@/store'
 
 function ForgotPassword({ isOpen, onClose }) {
-  const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [userInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [errors, setErrors] = useState({})
   const [code, setCode] = useState('')
 
@@ -56,23 +56,6 @@ function ForgotPassword({ isOpen, onClose }) {
         console.log(err)
       })
   }
-
-  // const validateForm = () => {
-  //   let formIsValid = true
-
-  //   if (!code) {
-  //     formIsValid = false
-  //     setErrors((errors) => ({ ...errors, code: 'Vui lòng nhập mã xác minh!' }))
-  //   } else {
-  //     if (code !== OTPCode) {
-  //       formIsValid = false
-  //       setErrors((errors) => ({ ...errors, code: 'Mã xác minh không khớp!' }))
-  //     } else {
-  //       setErrors((errors) => ({ ...errors, code: '' }))
-  //     }
-  //   }
-  //   return formIsValid
-  // }
 
   return (
     <Modal open={isOpen} onClose={onClose}>

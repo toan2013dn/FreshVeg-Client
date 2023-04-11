@@ -19,6 +19,10 @@ import UserPopover from './components/Navigation/UserPopover/user-popover.compon
 import UserOrder from './components/UserPageComponents/UserOrder/user-order.component'
 import Test from './pages/TestToan/test'
 import WeightSelect from './components/WeightSelect/weight-select.component'
+import ForgotPasswordHomePage from './components/ForgotPasswordAtHomePage/forgot-password-homepage'
+import ForgotPassword from './components/UserPageComponents/ForgotPassword/forgot-password.component'
+import ForgotPasswordOTP from './components/ForgotPasswordAtHomePage/ForgotPasswordOTP/forgot-password-otp.component'
+import NewPasswordHomepage from './components/ForgotPasswordAtHomePage/SetNewPasswordHomePage/set-new-password-homepage.component'
 
 const router = createBrowserRouter([
   {
@@ -69,6 +73,9 @@ const router = createBrowserRouter([
   { path: '/user-order', element: <UserOrder /> },
   { path: '/test', element: <Test /> },
   { path: '/select-weight', element: <WeightSelect /> },
+  { path: '/forgot-password', element: <ForgotPasswordHomePage /> },
+  { path: '/check-otp', element: <ForgotPasswordOTP /> },
+  { path: '/set-new-password', element: <NewPasswordHomepage /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
