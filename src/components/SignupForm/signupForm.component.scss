@@ -1,11 +1,14 @@
+.loading {
+  z-index: 1;
+}
+
 .signup-form {
   form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 550px;
-    gap: 25px;
-
+    gap: 15px;
     .form-input {
       display: flex;
       flex-direction: column;
