@@ -17,7 +17,7 @@ function UserFilter({ setTab }) {
     setActiveOption(option)
     setTab(option)
   }
-
+console.log(userInfo?.image);
   return (
     <div className="user-filter">
       <div className="user-filter--display">

@@ -72,6 +72,7 @@ function LoginForm({ onClose }) {
             const { user, accessToken } = response.data
             setUserInfo(user)
             setToken(accessToken)
+            navigate("/")
           } else {
             Swal.fire({
               title: 'Tài khoản email hoặc mật khẩu không đúng!',

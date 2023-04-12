@@ -6,15 +6,16 @@ import Button from '@mui/material/Button'
 function UploadImage({ image, setImage }) {
   const handleImageSelect = (event) => {
     const file = event.target.files[0]
-    const reader = new FileReader()
+    setImage(file)
+    // const reader = new FileReader()
 
-    reader.onload = () => {
-      setImage(reader.result)
-    }
+    // reader.onload = () => {
+    //   setImage(reader.result)
+    // }
 
-    if (file) {
-      reader.readAsDataURL(file)
-    }
+    // if (file) {
+    //   reader.readAsDataURL(file)
+    // }
   }
   return (
     <div className="upload-image">
