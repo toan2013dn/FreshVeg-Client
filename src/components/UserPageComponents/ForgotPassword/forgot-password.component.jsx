@@ -33,7 +33,7 @@ function ForgotPassword({ isOpen, onClose }) {
         email: userInfo.email,
       })
       .then((res) => {
-        if (res.data == 'Cannot Reset Password, Please check input again') {
+        if (res.data == 'OTP is not correct') {
           Swal.fire({
             icon: 'error',
             text: 'Mã xác minh không khớp!',

@@ -21,39 +21,35 @@ function NewPassword() {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 1500)
-  }, [])
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (validateForm()) {
+      setLoading(true)
       axios
-        .post('auth/rspassword', {
+        .post('auth/rspassword-otp', {
           email: userInfo.email,
           password: newPassword,
         })
 
         .then((res) => {
           setUserInfo(null)
+          Swal.fire({
+            icon: 'success',
+            text: 'Thiết lập mật khẩu thành công!',
+            showConfirmButton: false,
+            timer: 1200,
+          })
+          setTimeout(() => {
+            navigate('/')
+          }, 1400)
         })
         .catch((err) => {
           console.log(err)
         })
-
-      Swal.fire({
-        icon: 'success',
-        text: 'Thiết lập mật khẩu thành công!',
-        showConfirmButton: false,
-        timer: 1200,
-      })
-      setTimeout(() => {
-        navigate('/')
-      }, 1400)
+        .finally(() => {
+          setIsLoading(false)
+        })
     }
   }
 

@@ -27,7 +27,7 @@ function NewPasswordHomepage() {
     if (validateForm()) {
       setIsLoading(true)
       axios
-        .post('auth/rspassword', {
+        .post('auth/rspassword-otp', {
           email: email,
           password: newPassword,
         })
