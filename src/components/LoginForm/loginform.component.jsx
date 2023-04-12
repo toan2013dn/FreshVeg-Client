@@ -39,6 +39,13 @@ function LoginForm({ onClose }) {
       }
     }
 
+    if (!password) {
+      formIsValid = false
+      setErrors((errors) => ({ ...errors, password: 'Vui lòng nhập password!' }))
+    } else {
+      setErrors((errors) => ({ ...errors, password: '' }))
+    }
+
     return formIsValid
   }
 
@@ -54,13 +61,13 @@ function LoginForm({ onClose }) {
     if (validateForm()) {
       axios
         .post('/auth/login', {
-          email,
-          password,
+          email: email,
+          password: password,
         })
-        .then(function (response) {
+        .then((response) => {
           if (response.status === 200 || response.data.userId !== null) {
             Swal.fire({
-              title: 'Đăng nhập thành công!',
+              html: `<h4>Đăng nhập thành công!</h4>`,
               icon: 'success',
               showConfirmButton: false,
               timer: 1100,
@@ -72,16 +79,15 @@ function LoginForm({ onClose }) {
             const { user, accessToken } = response.data
             setUserInfo(user)
             setToken(accessToken)
-            navigate("/")
-          } else {
-            Swal.fire({
-              title: 'Tài khoản email hoặc mật khẩu không đúng!',
-              icon: 'error',
-              showConfirmButton: true,
-            })
+            navigate('/')
           }
         })
-        .catch(function (err) {
+        .catch((err) => {
+          Swal.fire({
+            html: `<h4>Tài khoản email hoặc mật khẩu không đúng!</h4>`,
+            icon: 'error',
+            showConfirmButton: true,
+          })
           console.log('error', err)
         })
     }
@@ -115,6 +121,7 @@ function LoginForm({ onClose }) {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+          {errors['password'] !== '' && <span className="error">{errors['password']}</span>}
           <button type="button" className="button-toggle" onClick={toggleShowPassword}>
             {showPassword ? <ShowPassword /> : <HiddenPassword />}
           </button>
