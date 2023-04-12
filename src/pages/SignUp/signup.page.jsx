@@ -1,17 +1,27 @@
 import './signup.page.scss'
+
 import { ReactComponent as Logo } from '@/assets/icons/logo.svg'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 import Register from '@/assets/images/Register.webp'
 import SignupForm from '@/components/SignupForm/signupForm.component'
 
 function SignUp() {
+  const navigate = useNavigate()
+  const handleToHomePage = () => {
+    navigate('/')
+  }
+
   return (
-    <div className="signup" style={{ maxHeight: '100vh' }}>
+    <div className="signup">
       <div className="signup-image">
-        <img style={{ maxHeight: '100vh' }} src={Register} alt="signup" />
+        <img src={Register} alt="signup" />
       </div>
       <div className="signup-content">
-        <Logo className="img"></Logo>
+        <button className="home-btn" onClick={handleToHomePage}>
+          <Logo className="img"></Logo>
+        </button>
         <div className="flex">
           <h3>Đăng Kí</h3>
           <h4>Nếu bạn đã có sẵn tài khoản</h4>
