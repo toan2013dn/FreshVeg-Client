@@ -1,33 +1,28 @@
 import './bill.styles.scss'
 
-import { useProductCartStore } from '@/store'
-import { useOrderInfoStore } from '@/store'
+import { useBillInfoStore, useOrderInfoStore } from '@/store'
 
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
-import useTotalPrice from '@/hooks/useTotalPrice'
 
 function Bill() {
-  const [productCart] = useProductCartStore((state) => [state.productCart])
-  const [selectedAddress, orderNote, orderDate] = useOrderInfoStore((state) => [
+  const [selectedAddress, orderNote, orderDate, orderTotal] = useOrderInfoStore((state) => [
     state.selectedAddress,
     state.orderNote,
     state.orderDate,
-    state.setOrderDate,
     state.orderTotal,
   ])
-
-  const { totalPrice } = useTotalPrice()
+  const [billInfo] = useBillInfoStore((state) => [state.billInfo])
 
   return (
     <div className="bill">
       <div className="bill-info">
-        {productCart.map((product) => (
+        {billInfo.map((product) => (
           <div className="product-items flex" key={product.productId}>
             <div className="products ">
               <h4>{product.productName}</h4>
               <h4>{product.weight}gr</h4>
             </div>
-            <h4>{(product?.price * product?.weight).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+            <h4>{((product?.price * product?.weight) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
           </div>
         ))}
         <div className="shipping-cost flex">
@@ -37,7 +32,7 @@ function Bill() {
         <div className="total-cost flex">
           <h4>THANH TOÁN </h4>
           <h4>
-            <PriceWithDots price={totalPrice} />
+            <PriceWithDots price={orderTotal} />
           </h4>
         </div>
       </div>
