@@ -36,7 +36,6 @@ function ProductContent({ productId }) {
       if (productCart.some((item) => item.productId === content.productId)) {
         toast.error('Sản phẩm đã có trong giỏ hàng!')
       } else {
-        console.log(content)
         setProductCart([...productCart, { ...content, weight: weight }])
         toast.success('Thêm vào giỏ hàng thành công!')
       }

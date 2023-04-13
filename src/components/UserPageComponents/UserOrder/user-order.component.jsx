@@ -144,14 +144,12 @@ function UserOrder() {
       .get('/order/all')
       .then((res) => {
         setOrders(res.data)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
 
-  console.log(orders)
   // React.useEffect(() => {}, [orders])
 
   return (

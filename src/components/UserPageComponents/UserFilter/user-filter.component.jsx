@@ -17,7 +17,6 @@ function UserFilter({ setTab }) {
     setActiveOption(option)
     setTab(option)
   }
-console.log(userInfo?.image);
   return (
     <div className="user-filter">
       <div className="user-filter--display">
@@ -44,9 +43,9 @@ console.log(userInfo?.image);
             >
               Hồ Sơ
             </span>
-            <span className={`${activeOption === 'bank' ? 'active' : ''}`} onClick={() => handleOptionClick('bank')}>
+            {/* <span className={`${activeOption === 'bank' ? 'active' : ''}`} onClick={() => handleOptionClick('bank')}>
               Ngân Hàng
-            </span>
+            </span> */}
             <span
               className={`${activeOption === 'address' ? 'active' : ''}`}
               onClick={() => handleOptionClick('address')}

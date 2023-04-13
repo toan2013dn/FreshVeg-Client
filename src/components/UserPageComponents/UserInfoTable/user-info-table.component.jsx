@@ -22,15 +22,14 @@ function UserInfoTable() {
   const [updatedImage, setUpdatedImage] = useState(userInfo?.image)
   const [errors, setErrors] = useState({})
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [userAvatar, setUserAvatar] = useState("") 
+  const [userAvatar, setUserAvatar] = useState('')
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
   }
 
+  //   const handleSubmitImage = async () => {
+  // setUserAvatar(null);
 
-//   const handleSubmitImage = async () => {
-// setUserAvatar(null);
-   
   // }
   const validateForm = () => {
     let formIsValid = true
@@ -50,45 +49,53 @@ function UserInfoTable() {
 
     return formIsValid
   }
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (validateForm()) {
-     
-    
       const data = new FormData()
-      data.append("file", updatedImage)
-      data.append("upload_preset", "freshveg")
-      data.append("cloud_name", "dbwuaoohs")   
+      data.append('file', updatedImage)
+      data.append('upload_preset', 'freshveg')
+      data.append('cloud_name', 'dbwuaoohs')
       try {
-        const res = await fetch("https://api.cloudinary.com/v1_1/dbwuaoohs/image/upload", {
-          method: "post",
-          body: data
+        const res = await fetch('https://api.cloudinary.com/v1_1/dbwuaoohs/image/upload', {
+          method: 'post',
+          body: data,
         })
         const resData = await res.json()
         setUserAvatar(resData.url)
-  console.log(resData);
+        console.log(resData)
         const updatedUserInfo = {
           ...userInfo,
           name: updatedName,
           image: resData.url,
         }
-        await axios.put('/user/'+ userInfo.userId, {
-          email:userInfo.email,
-          name: updatedName,
-          avatar: resData.url
-        })
-        setUserInfo(updatedUserInfo)
-        Swal.fire({
-          text: 'Cập nhật thành công!',
-          showConfirmButton: false,
-          icon: 'success',
-          timer: 1500,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            onClose()
-          }
-        })
+        await axios
+          .put(`/user/${userInfo.userId}`, {
+            email: userInfo.email,
+            name: updatedName,
+            avatar: resData.url,
+          })
+          .then((res) => {
+            console.log(res)
+            // setUserInfo(updatedUserInfo)
+            // Swal.fire({
+            //   text: 'Cập nhật thành công!',
+            //   showConfirmButton: false,
+            //   icon: 'success',
+            //   timer: 1500,
+            // })
+          })
+
+          .catch((err) => {
+            console.log(err)
+            Swal.fire({
+              text: 'Cập nhật thất bại!',
+              showConfirmButton: false,
+              icon: 'error',
+              timer: 1500,
+            })
+          })
       } catch (err) {
         console.log(err)
       }
