@@ -8,6 +8,7 @@ import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Alert from '@mui/joy/Alert'
+import Tooltip from '@mui/material/Tooltip'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import UserOrderInfo from './UserOrderInfo/user-order-info.component'
 
@@ -86,7 +87,7 @@ function StatusRender(props) {
 }
 
 // a function that renders the action buttons
-function ActionRender(props) {
+function ActionRender() {
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   const handleCancelOrder = () => {
@@ -107,30 +108,44 @@ function ActionRender(props) {
 
   return (
     <div className="action-render">
-      <button className="action-render__btn info" onClick={() => setIsOpenModal(true)}>
-        <InfoDetailIcon className="info-btn" />
-      </button>
+      <Tooltip title="Xem chi tiết">
+        <button className="action-render__btn info" onClick={() => setIsOpenModal(true)}>
+          <InfoDetailIcon className="info-btn" />
+        </button>
+      </Tooltip>
       <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
-      <button className="action-render__btn delete" onClick={handleCancelOrder}>
-        <DeleteIcon className="delete-btn" />
-      </button>
+      <Tooltip title="Huỷ đơn hàng">
+        <button className="action-render__btn delete" onClick={handleCancelOrder}>
+          <DeleteIcon className="delete-btn" />
+        </button>
+      </Tooltip>
     </div>
   )
 }
 
 const columns = [
   { field: 'orderId', headerName: 'ID', width: 80 },
-  { field: 'orderDate', headerName: 'Ngày Đặt', width: 130 },
+  {
+    field: 'orderDate',
+    headerName: 'Ngày Đặt',
+    width: 130,
+    valueGetter: (params) => {
+      const date = new Date(params.value * 1000)
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    },
+  },
   { field: 'phone', headerName: 'Số Điện Thoại', width: 130 },
-  // {
-  //   field: 'address',
-  //   headerName: 'Địa Chỉ',
-  //   width: 250,
-  // },
+  {
+    field: 'address',
+    headerName: 'Địa Chỉ',
+    width: 250,
+    valueGetter: (params) => `${params.value.address}`,
+  },
   {
     field: 'amount',
     headerName: 'Tổng Số Tiền',
     width: 150,
+    valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
   },
   { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender, className: 'status-column' },
   { field: 'action', headerName: '', width: 130, sortable: false, renderCell: ActionRender },
@@ -149,8 +164,6 @@ function UserOrder() {
         console.log(err)
       })
   }, [])
-
-  // React.useEffect(() => {}, [orders])
 
   return (
     <div className="user-order">

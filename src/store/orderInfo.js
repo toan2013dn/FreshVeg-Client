@@ -10,7 +10,6 @@ const useOrderInfoStore = create((set) => ({
     setOrderDate: (orderDate) => set(() => ({ orderDate })),
     orderTotal: 0,
     setOrderTotal: (orderTotal) => set(() => ({ orderTotal })),
-
     orderInfo: null,
     setOrderInfo: (orderInfo) => set(() => ({ orderInfo })),
 }))

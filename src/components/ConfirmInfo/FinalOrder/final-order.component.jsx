@@ -1,6 +1,6 @@
 import './final-order.styles.scss'
 
-import { useProductCartStore, useUserAddressesStore, useOrderInfoStore, useUserStore } from '@/store'
+import { useProductCartStore, useUserAddressesStore, useOrderInfoStore, useUserStore, useBillInfoStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
@@ -9,6 +9,7 @@ import axios from '@/api/axios'
 import useTotalPrice from '@/hooks/useTotalPrice'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import Decoration from '@/assets/images/Decoration.webp'
+import { useEffect } from 'react'
 
 function FinalOrder() {
   const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo] = useOrderInfoStore((state) => [
@@ -20,10 +21,14 @@ function FinalOrder() {
   ])
   const [user] = useUserStore((state) => [state.user])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
+  const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
   const navigate = useNavigate()
+  useEffect(() => {
+    setBillInfo(productCart)
+  }, [productCart])
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
@@ -40,7 +45,7 @@ function FinalOrder() {
         amount: orderTotal,
         note: orderNote,
         orderDate: orderDate,
-        addressId: selectedAddress?.addressId,
+        address: selectedAddress,
         orderDetails: productCart,
       })
       .then((res) => {

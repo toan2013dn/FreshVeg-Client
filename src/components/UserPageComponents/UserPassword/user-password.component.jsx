@@ -104,9 +104,7 @@ function UserPassword() {
       .post('/auth/rspassword', {
         email: userInfo.email,
       })
-      .then((res) => {
-        console.log(res)
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err)
       })

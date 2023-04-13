@@ -55,7 +55,7 @@ function SignupForm() {
       setIsLoading(true)
 
       axios
-        .post('/auth/register', {
+        .post('/auth/generate-otp', {
           username: userName,
           email: email,
           password: password,
@@ -77,12 +77,15 @@ function SignupForm() {
               allowOutsideClick: false,
               preConfirm: (code) => {
                 axios
-                  .post('/auth/check-otp', {
+                  .post('/auth/verify-otp', {
+                    username: userName,
                     email,
-                    otpCode: code,
+                    otp: code,
+                    password: password,
                   })
                   .then((res) => {
-                    if (res.data === 'Cannot Register, Please check input again') {
+                    console.log(res)
+                    if (res.data === 'OTP is not correct') {
                       // toast.error('Mã OTP không đúng! Vui lòng thử lại!')
                       Swal.showValidationMessage('Mã OTP không đúng! Vui lòng thử lại!')
                     } else {
