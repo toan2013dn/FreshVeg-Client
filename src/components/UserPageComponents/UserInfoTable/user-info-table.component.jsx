@@ -1,20 +1,15 @@
 import './user-info-table.styles.scss'
 
-import * as React from 'react'
-import { useState } from 'react'
+import { useUserStore } from '@/store'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { fontSize } from '@mui/system'
-import { useUserStore } from '@/store'
+import { useState } from 'react'
 // import cloudinary from 'cloudinary';
-import dayjs from 'dayjs'
-import ShowPassword from '@mui/icons-material/Visibility'
-import HiddenPassword from '@mui/icons-material/VisibilityOff'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import CloseIcon from '@mui/icons-material/Close'
-import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 import axios from '@/api/axios'
+import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
+import dayjs from 'dayjs'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 function UserInfoTable() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [showPassword, setShowPassword] = useState(false)
@@ -75,16 +70,17 @@ function UserInfoTable() {
             email: userInfo.email,
             name: updatedName,
             avatar: resData.url,
+            // birthday:
           })
           .then((res) => {
-            console.log(res)
-            // setUserInfo(updatedUserInfo)
-            // Swal.fire({
-            //   text: 'Cập nhật thành công!',
-            //   showConfirmButton: false,
-            //   icon: 'success',
-            //   timer: 1500,
-            // })
+            // console.log(res)
+            setUserInfo(updatedUserInfo)
+            Swal.fire({
+              text: 'Cập nhật thành công!',
+              showConfirmButton: false,
+              icon: 'success',
+              timer: 1500,
+            })
           })
 
           .catch((err) => {
@@ -101,6 +97,11 @@ function UserInfoTable() {
       }
     }
   }
+
+  // useEffect(() => {
+  //   console.log(userInfo)
+  // })
+
   return (
     <div className="user-table">
       <div className="user-table--text">

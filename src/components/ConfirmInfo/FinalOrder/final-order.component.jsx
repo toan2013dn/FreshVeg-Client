@@ -45,7 +45,7 @@ function FinalOrder() {
         amount: orderTotal,
         note: orderNote,
         orderDate: orderDate,
-        addressId: selectedAddress?.addressId,
+        address: selectedAddress,
         orderDetails: productCart,
       })
       .then((res) => {

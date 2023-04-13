@@ -1,14 +1,18 @@
 import './user-order-info.styles.scss'
 
+import { useState } from 'react'
+import { useBillInfoStore } from '@/store'
+
+import axios from '@/api/axios'
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined'
 import Modal from '@mui/material/Modal'
-import { useState } from 'react'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 
 function UserOrderInfo({ isOpen, onClose }) {
+  const [billInfo] = useBillInfoStore((state) => [state.billInfo])
   const [products, setProducts] = useState([
     {
       id: 1,
