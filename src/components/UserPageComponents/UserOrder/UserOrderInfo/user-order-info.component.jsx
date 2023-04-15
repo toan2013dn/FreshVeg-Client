@@ -1,48 +1,18 @@
 import './user-order-info.styles.scss'
 
-import { useState } from 'react'
-import { useBillInfoStore } from '@/store'
+import { useState, useEffect } from 'react'
 
 import axios from '@/api/axios'
+import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
+import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined'
-import Modal from '@mui/material/Modal'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined'
-import TextOverflow from '@/components/TextOverflow/text-overflow.component'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
+import Modal from '@mui/material/Modal'
 
-function UserOrderInfo({ isOpen, onClose }) {
-  const [billInfo] = useBillInfoStore((state) => [state.billInfo])
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'Áo thun namo thun namo thun namo thun nam',
-      price: '100000',
-      weight: '100gr',
-      img: 'https://tintuc.hoang-phuc.com/wp-content/uploads/2021/12/meme-cheems-17.jpg',
-    },
-    {
-      id: 2,
-      name: 'Áo thun nam',
-      price: '890799070979070',
-      weight: '100gr',
-      img: 'https://tintuc.hoang-phuc.com/wp-content/uploads/2021/12/meme-cheems-17.jpg',
-    },
-    {
-      id: 2,
-      name: 'Áo thun nam',
-      price: '890799070979070',
-      weight: '100gr',
-      img: 'https://tintuc.hoang-phuc.com/wp-content/uploads/2021/12/meme-cheems-17.jpg',
-    },
-    {
-      id: 2,
-      name: 'Áo thun nam',
-      price: '890799070979070',
-      weight: '100gr',
-      img: 'https://tintuc.hoang-phuc.com/wp-content/uploads/2021/12/meme-cheems-17.jpg',
-    },
-  ])
+function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTotal, orderStatusPayment }) {
+  const [products, setProducts] = useState([])
+
   const [displayCount, setDisplayCount] = useState(3) // default display count
 
   const handleShowMore = () => {
@@ -56,16 +26,50 @@ function UserOrderInfo({ isOpen, onClose }) {
   const handleShowLess = () => {
     setDisplayCount(3)
   }
+  useEffect(() => {
+    axios
+      .get(`/order/${orderId}`)
+      .then((res) => {
+        // setProducts(res.data.orderDetails)
+        // console.log(res.data.orderDetails.product)
+
+        res.data.orderDetails.forEach((orderDetail) => {
+          const result = {
+            id: orderDetail.product.productId,
+            price: orderDetail.price,
+            weight: orderDetail.weight,
+            name: orderDetail.product.productName,
+          }
+
+          setProducts((prev) => [...prev, result])
+        })
+      })
+      .catch((err) => {
+        alert('Lỗi')
+        console.log(err)
+      })
+  }, [])
+
+  const dateGetter = () => {
+    const date = new Date(orderDate * 1000)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+  }
+
+  const estimatedDeliveryDate = orderDate + 3 * 24 * 60 * 60
+  const estimatedDeliveryDateGetter = () => {
+    const date = new Date(estimatedDeliveryDate * 1000)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+  }
   return (
     <Modal open={isOpen} onClose={onClose}>
       <div className="user-order-info">
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <div className="order-date">
-            <p>Ngày đặt hàng: 12/12/2021</p>
+            <p>Ngày đặt hàng: {dateGetter()}</p>
           </div>
           <div className="estimate-delivery">
             <AirplanemodeActiveOutlinedIcon />
-            <p>Ngày dự kiến giao hàng: 12/12/2021</p>
+            <p>Ngày dự kiến giao hàng: {estimatedDeliveryDateGetter()}</p>
           </div>
         </div>
         <div className={products.length > 3 ? 'scroll-container' : ''}>
@@ -81,7 +85,7 @@ function UserOrderInfo({ isOpen, onClose }) {
                 <div className="price">
                   <PriceWithDots price={product.price} fontWeight={700} />
                 </div>
-                <div className="weight">{product.weight}</div>
+                <div className="weight">{product.weight}gr</div>
               </div>
             </div>
           ))}
@@ -99,35 +103,23 @@ function UserOrderInfo({ isOpen, onClose }) {
               )}
             </div>
           )}
-          <div className="order-detail">
-            <div className="order-note">
-              <div className="order-note__title">Ghi chú đơn hàng</div>
-              <div className="order-note__content">
-                <p>hôm nay em đến trường mẹ dắt em từng bước hôm nay mẹ lên nương một mình em tới lớp</p>
-              </div>
-            </div>
-            <div className="price-details">
-              <div className="price-total flex">
-                <div className="price-total__title">Tổng tiền hàng</div>
-                <div className="price-total__price">
-                  <PriceWithDots price="1204140" />
-                </div>
-              </div>
-              <div className="shipping-total flex">
-                <div className="shipping-total__title">Phí vận chuyển</div>
-                <div className="shipping-total__price">
-                  <PriceWithDots price="1204140" />
-                </div>
-              </div>
-              <div className="sub-total flex">
-                <div className="sub-total__title" style={{ fontSize: '18px', fontWeight: '700' }}>
-                  Tổng cộng
-                </div>
-                <div className="sub-total__price" style={{ fontWeight: '700', color: 'var(--primary-color)' }}>
-                  <PriceWithDots price="1204140" />
-                </div>
-              </div>
-            </div>
+        </div>
+        <div className="order-note">
+          <div className="order-note__title">Ghi chú đơn hàng: </div>
+          <div className="order-note__content">{orderNote} </div>
+        </div>
+        <div className="payment-status">
+          <div className="payment-status__title">Trạng thái thanh toán: </div>
+          <div className="payment-status__content">
+            {!orderStatusPayment ? 'Thanh toán khi nhận hàng (COD)' : 'Đã thanh toán bằng VNPAY'}
+          </div>
+        </div>
+        <div className="price-details">
+          <div className="sub-total__title" style={{ fontSize: '18px', fontWeight: '700' }}>
+            Tổng cộng:
+          </div>
+          <div className="sub-total__price" style={{ fontWeight: '700', color: 'var(--primary-color)' }}>
+            <PriceWithDots price={orderTotal} />
           </div>
         </div>
       </div>

@@ -81,6 +81,7 @@ function LoginForm({ onClose }) {
             setToken(accessToken)
             navigate('/')
           }
+          console.log(response.data)
         })
         .catch((err) => {
           Swal.fire({

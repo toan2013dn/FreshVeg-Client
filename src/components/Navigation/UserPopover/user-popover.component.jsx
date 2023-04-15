@@ -56,7 +56,13 @@ function UserPopover() {
   return (
     <div>
       <div className="user-popover--img" aria-describedby={id} variant="contained" onClick={handleClick}>
-        {userInfo.avatar ? <img src={userInfo.avatar} alt="avatar" /> : <User className="navigation-item--icon" />}
+        {userInfo.avatar ? (
+          <div className="user-avartar">
+            <img src={userInfo.avatar} alt="avatar" />
+          </div>
+        ) : (
+          <User className="navigation-item--icon" />
+        )}
       </div>
       <Popper
         id={id}

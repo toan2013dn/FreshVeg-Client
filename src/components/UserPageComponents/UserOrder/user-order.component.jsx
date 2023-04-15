@@ -2,7 +2,8 @@ import './user-order.styles.scss'
 
 import { useOrderStore } from '@/store'
 import { DataGrid } from '@mui/x-data-grid'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -18,7 +19,7 @@ const object = {
       <Alert color="primary" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
           style={{
-            width: 90,
+            width: 100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -31,10 +32,10 @@ const object = {
   ),
   Confirmed: (
     <>
-      <Alert color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <Alert color="info" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
           style={{
-            width: 90,
+            width: 100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -47,10 +48,10 @@ const object = {
   ),
   Success: (
     <>
-      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <Alert color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
           style={{
-            width: 90,
+            width: 100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -66,7 +67,7 @@ const object = {
       <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
         <span
           style={{
-            width: 90,
+            width: 100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -77,17 +78,31 @@ const object = {
       </Alert>
     </>
   ),
+  Cancel: (
+    <>
+      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+        <span
+          style={{
+            width: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Đã huỷ
+        </span>
+      </Alert>
+    </>
+  ),
 }
 
 function StatusRender(props) {
   const { value } = props
 
   return <div className="status-render">{object[value]}</div>
-  // return <div className="status-render">{value}</div>
 }
 
-// a function that renders the action buttons
-function ActionRender() {
+function ActionRender(props) {
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   const handleCancelOrder = () => {
@@ -101,7 +116,17 @@ function ActionRender() {
       cancelButtonText: 'Đóng',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({ text: 'Đơn hàng đã huỷ!', confirmButtonColor: '#3e8e41', icon: 'success' })
+        axios
+          .patch(`/order/${props.row.orderId}/cancel`)
+          .then((res) => {
+            Swal.fire({ text: 'Đơn hàng đã huỷ!', showConfirmButton: false, icon: 'success', timer: 1300 })
+            setTimeout(() => {
+              window.location.reload()
+            }, 1000)
+          })
+          .catch((err) => {
+            console.log('cancel order', err)
+          })
       }
     })
   }
@@ -113,7 +138,15 @@ function ActionRender() {
           <InfoDetailIcon className="info-btn" />
         </button>
       </Tooltip>
-      <UserOrderInfo isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
+      <UserOrderInfo
+        isOpen={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        orderId={props.row.orderId}
+        orderDate={props.row.orderDate}
+        orderNote={props.row.note}
+        orderTotal={props.row.amount}
+        orderStatusPayment={props.row.statusPayment}
+      />
       <Tooltip title="Huỷ đơn hàng">
         <button className="action-render__btn delete" onClick={handleCancelOrder}>
           <DeleteIcon className="delete-btn" />
@@ -138,7 +171,7 @@ const columns = [
   {
     field: 'address',
     headerName: 'Địa Chỉ',
-    width: 250,
+    width: 230,
     valueGetter: (params) => `${params.value.address}`,
   },
   {
@@ -147,7 +180,7 @@ const columns = [
     width: 150,
     valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
   },
-  { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender, className: 'status-column' },
+  { field: 'status', headerName: 'Trạng Thái', width: 160, renderCell: StatusRender, className: 'status-column' },
   { field: 'action', headerName: '', width: 130, sortable: false, renderCell: ActionRender },
 ]
 
@@ -159,9 +192,10 @@ function UserOrder() {
       .get('/order/all')
       .then((res) => {
         setOrders(res.data)
+        console.log(res.data)
       })
       .catch((err) => {
-        console.log(err)
+        console.log('get order', err)
       })
   }, [])
 

@@ -30,13 +30,20 @@ function ProductContent({ productId }) {
   const [weight, setWeight] = useState(100)
 
   const handleAddToCart = () => {
+    const product = {
+      product: { productId: content.productId },
+      price: content.price,
+      weight: weight,
+      productName: content.productName,
+    }
     if (userInfo === null) {
       setIsOpenModal(true)
     } else {
-      if (productCart.some((item) => item.productId === content.productId)) {
+      if (productCart.some((item) => item.product.productId === content.productId)) {
         toast.error('Sản phẩm đã có trong giỏ hàng!')
       } else {
-        setProductCart([...productCart, { ...content, weight: weight }])
+        // setProductCart([...productCart, { ...content, weight: weight }])
+        setProductCart([...productCart, product])
         toast.success('Thêm vào giỏ hàng thành công!')
       }
     }
