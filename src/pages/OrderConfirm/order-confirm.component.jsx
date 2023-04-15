@@ -2,12 +2,10 @@ import './order-confirm.styles.scss'
 
 import { ReactComponent as Next } from '@/assets/icons/Next.svg'
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
 
-import Header from '@/components/Header/header.component'
 import ConfirmInfo from '@/components/ConfirmInfo/confirm-info.component'
 import Footer from '@/components/Footer/footer.component'
-import Decoration from '@/assets/images/Decoration.webp'
+import Header from '@/components/Header/header.component'
 
 function OrderConfirm() {
   return (

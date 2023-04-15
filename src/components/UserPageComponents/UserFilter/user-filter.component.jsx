@@ -6,12 +6,19 @@ import RewardIcon from '@mui/icons-material/GradeOutlined'
 import EditIcon from '@mui/icons-material/Edit'
 
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUserStore } from '@/store'
 
 function UserFilter({ setTab }) {
-  const [activeOption, setActiveOption] = useState('profile')
+  const [activeOption, setActiveOption] = useState(() => {
+    const storedOption = localStorage.getItem('activeOption')
+    return storedOption ?? 'profile'
+  })
   const [userInfo] = useUserStore((state) => [state.userInfo])
+
+  useEffect(() => {
+    localStorage.setItem('activeOption', activeOption)
+  }, [activeOption])
 
   const handleOptionClick = (option) => {
     setActiveOption(option)
@@ -21,7 +28,7 @@ function UserFilter({ setTab }) {
     <div className="user-filter">
       <div className="user-filter--display">
         <div className="image">
-          <img src={userInfo?.image} alt="anh" />
+          <img src={userInfo?.image == undefined ? userInfo?.avatar : userInfo?.image} alt="anh" />
         </div>
         <div className="flex">
           <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userInfo?.name}</h4>
@@ -69,13 +76,13 @@ function UserFilter({ setTab }) {
           <h4>Đơn Hàng</h4>
         </div>
 
-        <div
+        {/* <div
           className={`user-filter--option-reward styles ${activeOption === 'reward' ? 'active' : ''}`}
           onClick={() => handleOptionClick('reward')}
         >
           <RewardIcon />
           <h4>Điểm Thưởng</h4>
-        </div>
+        </div> */}
       </div>
     </div>
   )

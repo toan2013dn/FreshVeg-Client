@@ -19,7 +19,7 @@ function FinalOrder() {
     state.orderTotal,
     state.orderInfo,
   ])
-  const [user] = useUserStore((state) => [state.user])
+  const [user] = useUserStore((state) => [state.userInfo])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
@@ -29,6 +29,7 @@ function FinalOrder() {
   useEffect(() => {
     setBillInfo(productCart)
   }, [productCart])
+
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
@@ -42,10 +43,12 @@ function FinalOrder() {
       .post('/order', {
         userId: user?.userId,
         phone: selectedAddress?.receiverPhone,
-        amount: orderTotal,
+        amount: totalPrice,
         note: orderNote,
-        orderDate: orderDate,
-        address: selectedAddress,
+        // date: orderDate,
+        address: {
+          addressId: selectedAddress?.addressId,
+        },
         orderDetails: productCart,
       })
       .then((res) => {

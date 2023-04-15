@@ -13,13 +13,6 @@ function UserPage() {
       <Header />
 
       <div className="container">
-        <div className="user-page--links">
-          <NavLink to="/">Trang chủ</NavLink>
-          <Next />
-          <a to="/">Tài khoản của tôi</a>
-          <Next />
-          <NavLink to="/user-page">Hồ sơ</NavLink>
-        </div>
         <UserPagePart />
       </div>
 
