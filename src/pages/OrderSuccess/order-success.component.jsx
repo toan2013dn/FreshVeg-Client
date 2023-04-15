@@ -1,6 +1,7 @@
 import './order-success.styles.scss'
 
 import React, { useEffect, useState } from 'react'
+import { useOrderInfoStore } from '@/store'
 import ReactLoading from 'react-loading'
 import Header from '@/components/Header/header.component'
 import SuccessBill from '@/components/SuccessBill/success-bill.component'

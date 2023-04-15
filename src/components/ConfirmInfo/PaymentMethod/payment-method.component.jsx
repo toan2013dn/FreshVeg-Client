@@ -5,6 +5,7 @@ import COD from '@mui/icons-material/LocalShipping'
 import ATM from '@mui/icons-material/LocalAtm'
 
 import { useState } from 'react'
+import { useOrderInfoStore } from '@/store'
 
 function PaymentMethod() {
   // payment array
@@ -23,6 +24,7 @@ function PaymentMethod() {
   const defaultPayment = payments.find((payment) => payment.isDefault)
 
   const [selectedPayment, setSelectedPayment] = useState(defaultPayment.id)
+  const [setSelectedPaymentMethod] = useOrderInfoStore((state) => [state.setSelectedPaymentMethod])
 
   const isThumbnailActive = (id) => {
     if (selectedPayment === id || (id === payments[0].id && !selectedPayment)) {
@@ -33,6 +35,7 @@ function PaymentMethod() {
 
   const handlePaymentClick = (id) => {
     setSelectedPayment(id)
+    setSelectedPaymentMethod(id)
   }
 
   return (

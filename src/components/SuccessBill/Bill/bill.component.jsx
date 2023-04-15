@@ -5,12 +5,18 @@ import { useBillInfoStore, useOrderInfoStore } from '@/store'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 
 function Bill() {
-  const [selectedAddress, orderNote, orderDate, orderTotal] = useOrderInfoStore((state) => [
+  const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo] = useOrderInfoStore((state) => [
     state.selectedAddress,
     state.orderNote,
     state.orderDate,
     state.orderTotal,
+    state.orderInfo,
   ])
+  const dateObj = new Date(orderDate)
+  const day = dateObj.getUTCDate().toString().padStart(2, '0')
+  const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0')
+  const year = dateObj.getUTCFullYear().toString()
+
   const [billInfo] = useBillInfoStore((state) => [state.billInfo])
 
   return (
@@ -39,12 +45,10 @@ function Bill() {
 
       <div className="bill-details">
         <h4 style={{ fontWeight: '700' }}>CHI TIẾT</h4>
-        {orderDate && (
-          <div className="bill-details--orderDate flex">
-            <h4 style={{ width: '70%' }}>Ngày đặt hàng:</h4>
-            <h4 style={{ width: '100%' }}>{orderDate.toLocaleDateString()}</h4>
-          </div>
-        )}
+        <div className="bill-details--orderDate flex">
+          <h4 style={{ width: '70%' }}>Ngày đặt hàng:</h4>
+          <h4 style={{ width: '100%' }}>{`${day}/${month}/${year}`}</h4>
+        </div>
         <div className="bill-details--receiverName flex">
           <h4 style={{ width: '70%' }}>Tên người nhận:</h4>
           <h4 style={{ width: '100%' }}>{selectedAddress?.receiverName}</h4>
@@ -57,6 +61,11 @@ function Bill() {
           <h4 style={{ width: '70%' }}>SĐT người nhận:</h4>
           <h4 style={{ width: '100%' }}>{selectedAddress?.receiverPhone}</h4>
         </div>
+        {/* <div className="bill-details--statusPayment flex">
+          <h4 style={{ width: '70%' }}>Phương thức thanh toán: </h4>
+          {/* <h4 style={{ width: '100%' }}>{selectedAddress?.receiverPhone}</h4> 
+          <h4>{!statusPaymentMethod ? 'Thanh toán khi nhận hàng (COD)' : 'Đã thanh toán bằng VNPAY'}</h4>
+        </div> */}
         <div className="bill-details--note">
           {orderNote !== '' ? (
             <>
