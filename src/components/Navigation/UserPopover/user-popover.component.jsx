@@ -56,12 +56,14 @@ function UserPopover() {
   return (
     <div>
       <div className="user-popover--img" aria-describedby={id} variant="contained" onClick={handleClick}>
-        {userInfo.avatar ? (
+        {userInfo?.image ? (
           <div className="user-avartar">
-            <img src={userInfo.avatar} alt="avatar" />
+            <img src={userInfo.image} alt="avatar" />
           </div>
         ) : (
-          <User className="navigation-item--icon" />
+          <div className="user-avartar">
+            <img src={userInfo.avatar ? userInfo.avatar : <User className="navigation-item--icon" />} alt="avatar" />
+          </div>
         )}
       </div>
       <Popper
