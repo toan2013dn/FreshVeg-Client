@@ -111,7 +111,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
         <div className="payment-status">
           <div className="payment-status__title">Trạng thái thanh toán: </div>
           <div className="payment-status__content">
-            {!orderStatusPayment ? 'Thanh toán khi nhận hàng (COD)' : 'Đã thanh toán bằng VNPAY'}
+            {orderStatusPayment ? 'Đã thanh toán bằng VNPAY' : 'Thanh toán khi nhận hàng (COD)'}
           </div>
         </div>
         <div className="price-details">

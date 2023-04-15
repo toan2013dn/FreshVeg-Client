@@ -1,35 +1,32 @@
 import './final-order.styles.scss'
 
-import { useProductCartStore, useUserAddressesStore, useOrderInfoStore, useUserStore, useBillInfoStore } from '@/store'
+import { useBillInfoStore, useOrderInfoStore, useProductCartStore, useUserAddressesStore, useUserStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
-import React from 'react'
 import axios from '@/api/axios'
-import useTotalPrice from '@/hooks/useTotalPrice'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import Decoration from '@/assets/images/Decoration.webp'
-import { useEffect } from 'react'
+import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
+import useTotalPrice from '@/hooks/useTotalPrice'
 
 function FinalOrder() {
-  const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo] = useOrderInfoStore((state) => [
-    state.selectedAddress,
-    state.orderNote,
-    state.orderDate,
-    state.orderTotal,
-    state.orderInfo,
-  ])
+  const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo, selectedPaymentMethod, statusPaymentMethod] =
+    useOrderInfoStore((state) => [
+      state.selectedAddress,
+      state.orderNote,
+      state.orderDate,
+      state.orderTotal,
+      state.orderInfo,
+      state.selectedPaymentMethod,
+      state.statusPaymentMethod,
+    ])
   const [user] = useUserStore((state) => [state.userInfo])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
-  const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
+  const [billInfo, setBillInfo] = useBillInfoStore((state) => [state.billInfo, state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
   const navigate = useNavigate()
-  useEffect(() => {
-    setBillInfo(productCart)
-  }, [productCart])
-
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
@@ -53,16 +50,37 @@ function FinalOrder() {
       })
       .then((res) => {
         setOrderInfo(res.data)
+        const currentDate = new Date()
+        setOrderDate(currentDate)
+        if (selectedPaymentMethod === 2) {
+          axios
+            .post(`/checkout/create-payment/${user?.userId}`, {
+              orderId: res.data?.orderId,
+              amount: res.data.amount,
+              bankCode: 'NCB',
+            })
+            .then((res) => {
+              window.location.href = res.data.url
+              setBillInfo(productCart)
+              setTimeout(() => {
+                setProductCart([])
+              }, 1500)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        } else {
+          const currentDate = new Date()
+          setOrderDate(currentDate)
+          navigate('/order-success')
+          setTimeout(() => {
+            setProductCart([])
+          }, 1500)
+        }
       })
       .catch((err) => {
         console.log(err)
       })
-
-    const currentDate = new Date()
-    setOrderDate(currentDate)
-    navigate('/order-success')
-
-    setProductCart([])
   }
 
   return (
