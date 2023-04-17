@@ -8,6 +8,7 @@ import ProductInfo from '../ProductInfo/productinfo.component'
 import Products from '@/assets/images/Products.webp'
 import Sort from './Sort/sort.component'
 import PaginationComponent from './Pagination/pagination.component'
+import { useSearchParams } from 'react-router-dom'
 
 function ProductLists() {
   // const productLists = [
@@ -68,19 +69,22 @@ function ProductLists() {
   // ]
 
   const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search')
 
   useEffect(() => {
-    if (products.length === 0) {
-      axios
-        .get('/product/all')
-        .then((response) => {
-          setProducts(response.data)
-        })
-        .catch((err) => {
-          console.log('products err', err)
-        })
-    }
-  }, [])
+    axios
+    .get('/product/all')
+    .then((response) => {
+      const products = response.data.filter(product => {
+        return product.productName.toLowerCase().includes(search.toLowerCase())
+      })
+      setProducts(products);
+    })
+    .catch((err) => {
+      console.log('products err', err)
+    })
+  }, [search])
 
   return (
     <div className="product-lists">

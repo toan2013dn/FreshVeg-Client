@@ -5,7 +5,7 @@ import './styles/index.scss'
 import Home from './pages/Home/home.page'
 import Login from './pages/Login/login.page'
 import SignUp from './pages/SignUp/signup.page'
-import Categories from './pages/Categories/categories.page'
+import Products from './pages/Products/products.page'
 import FilterPanel from './components/FilterPanel/filter-panel.component'
 import ProductsDetails from './pages/ProductsDetails/products-details.component'
 import OrderDetail from './pages/OrderDetail/order-detail.component'
@@ -41,8 +41,8 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/categories',
-    element: <Categories />,
+    path: '/products',
+    element: <Products />,
   },
   {
     path: '/filter-panel',
