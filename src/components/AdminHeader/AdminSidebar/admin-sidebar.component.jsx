@@ -1,8 +1,9 @@
-import { useState } from 'react'
 import './admin-sidebar.styles.scss'
 
+import { useState } from 'react'
 import { ReactComponent as Logo } from '@/assets/icons/logo.svg'
 import { Link } from 'react-router-dom'
+import { useActiveAdminPageStore } from '@/store'
 
 import AdminManagement from '../AdminManagement/admin-management.component'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -11,6 +12,7 @@ import AdminStatistic from '../AdminStatistic/admin-statistic.component'
 function AdminSideBar() {
   const [activeHomePage, setActiveHomePage] = useState(true)
   const [activeId, setActiveId] = useState(null)
+  const [tab, setTab] = useActiveAdminPageStore((state) => [state.activeAdminPage, state.setActiveAdminPage])
 
   const handleClick = () => {
     setActiveHomePage(true)
@@ -31,6 +33,7 @@ function AdminSideBar() {
           setActiveHomePage={setActiveHomePage}
           activeId={activeId}
           setActiveId={setActiveId}
+          setTab={setTab}
         />
         <AdminStatistic
           activeHomePage={activeHomePage}

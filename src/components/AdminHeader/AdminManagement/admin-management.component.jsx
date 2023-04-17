@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined'
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined'
 
-function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiveId }) {
+function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiveId, setTab }) {
   const managements = [
     {
       id: 1,
@@ -33,6 +33,7 @@ function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiv
       setActiveHomePage(false)
     }
     setActiveId(id)
+    setTab(id)
   }
 
   return (
@@ -48,7 +49,7 @@ function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiv
           onClick={() => handleClick(management.id)}
         >
           {management.icon}
-          <p>{management.title}</p>
+          <p style={{ marginBottom: '0' }}>{management.title}</p>
         </div>
       ))}
     </div>

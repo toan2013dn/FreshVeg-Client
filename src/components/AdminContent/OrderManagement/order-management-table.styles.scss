@@ -80,6 +80,24 @@
       }
     }
   }
-
-  
+}
+button.action-render__btn.info {
+  border-radius: 50%;
+  padding: 2px 4px;
+  border: 1px solid #3f51b5;
+  svg {
+    filter: brightness(0) saturate(100%) invert(30%) sepia(97%) saturate(783%) hue-rotate(203deg) brightness(86%)
+      contrast(92%);
+  }
+  &:hover {
+    background-color: #3f51b5;
+    color: white;
+    svg {
+      filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(413%) hue-rotate(55deg) brightness(115%)
+        contrast(100%);
+    }
+  }
+}
+button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeSmall.MuiButton-textSizeSmall.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeSmall.MuiButton-textSizeSmall.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+  display: none;
 }

@@ -1,33 +1,41 @@
 import './order-management-table.styles.scss'
 
-import * as React from 'react'
-import { DataGrid } from '@mui/x-data-grid'
+import { useOrderStore } from '@/store'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useState } from 'react'
-import Alert from '@mui/joy/Alert'
-import Box from '@mui/joy/Box'
 
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
+import axios from '@/api/axios'
+import CancelIcon from '@mui/icons-material/Cancel'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import CancelIcon from '@mui/icons-material/Cancel'
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
+import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
+import Tooltip from '@mui/material/Tooltip'
+import { useEffect } from 'react'
+import UserOrderInfo from '@/components/UserPageComponents/UserOrder/UserOrderInfo/user-order-info.component'
 
 function StatusRender(props) {
   // const [isVerified, setIsVerified] = useState('pending')
-  const [status, setStatus] = useState('pending')
-  const { value } = props
+
+  const [status, setStatus] = useState(props.row.status)
 
   const handleConfirm = () => {
-    setStatus('success')
+    setStatus('Confirmed')
+    axios.patch(`/order/${props.row.orderId}/confirmed`).catch((err) => {
+      console.log('cancel order', err)
+    })
   }
 
   const handleCancel = () => {
-    setStatus('cancel')
+    setStatus('Cancel')
+    axios.patch(`/order/${props.row.orderId}/cancel`).catch((err) => {
+      console.log('cancel order', err)
+    })
   }
 
   return (
     <div className="status-render">
-      {status === 'pending' && (
+      {status === 'onWaitingConfirm' && (
         <div className="pending">
           <div className="success" onClick={handleConfirm}>
             <CheckCircleOutlineOutlinedIcon />
@@ -39,13 +47,13 @@ function StatusRender(props) {
           </div>
         </div>
       )}
-      {status === 'success' && (
+      {status === 'Confirmed' && (
         <div className="status-success">
           <CheckCircleIcon />
           <span style={{ color: 'black', fontSize: '16px' }}>Xác Nhận</span>
         </div>
       )}
-      {status === 'cancel' && (
+      {status === 'Cancel' && (
         <div className="status-cancel">
           <CancelIcon />
           <span style={{ color: 'black', fontSize: '16px' }}>Đã Hủy</span>
@@ -56,13 +64,26 @@ function StatusRender(props) {
 }
 
 // Detail Render
-function DetailRender() {
+function DetailRender(props) {
+  console.log(props)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   return (
-    <div
-      className="detail-render"
-      style={{ cursor: 'pointer', display: 'flex', justifyContent: 'center', width: '100%' }}
-    >
-      <InfoOutlinedIcon />
+    <div className="detail-render">
+      <Tooltip title="Xem chi tiết">
+        <button className="action-render__btn info" onClick={() => setIsOpenModal(true)}>
+          <InfoDetailIcon className="info-btn" />
+        </button>
+      </Tooltip>
+      <UserOrderInfo
+        isOpen={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        orderId={props.row.orderId}
+        orderDate={props.row.orderDate}
+        orderNote={props.row.note}
+        orderTotal={props.row.amount}
+        orderStatusPayment={props.row.statusPayment}
+      />
     </div>
   )
 }
@@ -99,100 +120,52 @@ const object = {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 60 },
-  { field: 'name', headerName: 'Tên Khách Hàng', width: 140 },
+  { field: 'orderId', headerName: 'ID', width: 60 },
+  {
+    field: 'receiverName',
+    headerName: 'Tên Người Nhận',
+    width: 140,
+    valueGetter: (params) => `${params.row.address.receiverName}`,
+  },
+
   { field: 'phone', headerName: 'Số Điện Thoại', width: 140 },
   {
-    field: 'date',
+    field: 'orderDate',
     headerName: 'Ngày Đặt Hàng',
     width: 140,
+    valueGetter: (params) => {
+      const date = new Date(params.value * 1000)
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    },
   },
   {
     field: 'address',
     headerName: 'Địa Chỉ',
-    width: 310,
+    width: 300,
+    valueGetter: (params) => `${params.value.address}`,
   },
-  { field: 'total', headerName: 'Tổng Tiền', width: 130 },
+  {
+    field: 'amount',
+    headerName: 'Tổng Tiền',
+    width: 130,
+    valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
+  },
   { field: 'details', headerName: 'Chi Tiết', width: 70, renderCell: DetailRender, sortable: false },
   { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender },
 ]
 
-const rows = [
-  {
-    id: 1,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 2,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.success,
-  },
-  {
-    id: 3,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.cancel,
-  },
-  {
-    id: 4,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 5,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 6,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 7,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-  {
-    id: 8,
-    name: 'Trần Ngọc Toàn',
-    phone: '0934795670',
-    date: '21/06/2021',
-    address: '120 Bùi hữu Nghĩa, phường Phước Mỹ, Quaannj Sơn Trà, thành phố Đà nẵng',
-    total: '1000000đ',
-    status: object.pending,
-  },
-]
-
 function OrderManagementTable() {
+  const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
+  useEffect(() => {
+    axios
+      .get('/order/all')
+      .then((res) => {
+        setOrders(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
   return (
     <div className="order-management">
       <div
@@ -202,14 +175,21 @@ function OrderManagementTable() {
           height: '100%',
         }}
       >
-        <input type="text" placeholder="Tìm kiếm đơn hàng..." />
         <DataGrid
           style={{ fontSize: '16px' }}
           rowHeight={100}
-          rows={rows}
+          rows={orders}
+          getRowId={(row) => row.orderId}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
         />
       </div>
     </div>
