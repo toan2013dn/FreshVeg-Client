@@ -77,7 +77,7 @@ function ProductLists() {
     .get('/product/all')
     .then((response) => {
       const products = response.data.filter(product => {
-        return product.productName.toLowerCase().includes(search.toLowerCase())
+        return search ? product.productName.toLowerCase().includes(search.toLowerCase()) : true
       })
       setProducts(products);
     })
