@@ -1,12 +1,13 @@
 import './user-order.styles.scss'
 
-import { useOrderStore } from '@/store'
-import { DataGrid } from '@mui/x-data-grid'
+import { useOrderStore, useUserStore } from '@/store'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
+import ClearIcon from '@mui/icons-material/Clear'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Alert from '@mui/joy/Alert'
 import Tooltip from '@mui/material/Tooltip'
@@ -98,12 +99,13 @@ const object = {
 
 function StatusRender(props) {
   const { value } = props
-
   return <div className="status-render">{object[value]}</div>
 }
 
 function ActionRender(props) {
   const [isOpenModal, setIsOpenModal] = useState(false)
+
+  const isCancelDisabled = props.row.status === 'Cancel' || props.row.status === 'Confirmed' ? true : false
 
   const handleCancelOrder = () => {
     Swal.fire({
@@ -148,8 +150,12 @@ function ActionRender(props) {
         orderStatusPayment={props.row.statusPayment}
       />
       <Tooltip title="Huỷ đơn hàng">
-        <button className="action-render__btn delete" onClick={handleCancelOrder}>
-          <DeleteIcon className="delete-btn" />
+        <button
+          className={`action-render__btn delete ${isCancelDisabled ? 'disabled-button' : ''}`}
+          onClick={handleCancelOrder}
+          disabled={isCancelDisabled}
+        >
+          <ClearIcon className="delete-btn" />
         </button>
       </Tooltip>
     </div>
@@ -186,10 +192,11 @@ const columns = [
 
 function UserOrder() {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
+  const [user] = useUserStore((state) => [state.userInfo])
 
   useEffect(() => {
     axios
-      .get('/order/all')
+      .get(`/order/all/${user.userId}`)
       .then((res) => {
         setOrders(res.data)
         console.log(res.data)
@@ -201,7 +208,6 @@ function UserOrder() {
 
   return (
     <div className="user-order">
-      <input type="text" placeholder="Tìm kiếm đơn hàng..." />
       <DataGrid
         style={{ fontSize: '16px' }}
         rowHeight={100}
@@ -210,6 +216,13 @@ function UserOrder() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        slots={{ toolbar: GridToolbar }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 },
+          },
+        }}
       />
     </div>
   )

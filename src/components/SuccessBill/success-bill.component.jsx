@@ -1,13 +1,19 @@
 import './success-bill.styles.scss'
 
 import { Link, useNavigate } from 'react-router-dom'
+import { useBillInfoStore, useOrderInfoStore } from '@/store'
 
 import Success from '@mui/icons-material/CheckCircleOutline'
 import Bill from './Bill/bill.component'
 
 function SuccessBill() {
+  const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
+  const [setOrderInfo, setOrderNote] = useOrderInfoStore((state) => [state.setOrderInfo, state.setOrderNote])
   const navigate = useNavigate()
   const handleClickToHome = () => {
+    setBillInfo(null)
+    setOrderInfo(null)
+    setOrderNote('')
     navigate('/')
   }
 
@@ -22,7 +28,7 @@ function SuccessBill() {
       <Bill />
 
       <button className="home-products--button" style={{ fontSize: '20px' }} onClick={handleClickToHome}>
-        <Link>Trang Chủ</Link>
+        <Link onClick={handleClickToHome}>Trang Chủ</Link>
       </button>
     </div>
   )

@@ -1,11 +1,25 @@
 import './admin-content.styles.scss'
+
+import { useActiveAdminPageStore } from '@/store'
+
+// import AdminDashboard from './AdminDashboard/admin-dashboard.component'
 import CategoriesManagement from './CategoriesManagement/categories-management.component'
 import OrderManagementTable from './OrderManagement/order-management-table.component'
 import ProductManagement from './ProductManagement/product-management.component'
 
 function AdminContent() {
+  const [tab, setTab] = useActiveAdminPageStore((state) => [state.activeAdminPage, state.setActiveAdminPage])
+
+  const tabs = {
+    order: { name: 'Đơn hàng', component: <OrderManagementTable /> },
+    category: { name: 'Thể loại', component: <CategoriesManagement /> },
+    product: { name: 'Sản phẩm', component: <ProductManagement /> },
+  }
   return (
     <div className="admin-content">
+      {/* <div className="admin-dashboard">
+        <AdminDashboard />
+      </div> */}
       {/* <div className="order-table">
         <h3>Quản Lý Đơn Hàng</h3>
         <OrderManagementTable />
@@ -14,10 +28,10 @@ function AdminContent() {
         <h3>Quản Lý Thể Loại</h3>
         <CategoriesManagement />
       </div>{' '} */}
-      <div className="products-management">
+      {/* <div className="products-management">
         <h3>Quản Lý Sản Phẩm</h3>
         <ProductManagement />
-      </div>
+      </div> */}
     </div>
   )
 }

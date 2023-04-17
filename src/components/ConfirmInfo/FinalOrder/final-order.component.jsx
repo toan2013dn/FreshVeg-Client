@@ -49,6 +49,7 @@ function FinalOrder() {
         orderDetails: productCart,
       })
       .then((res) => {
+        setBillInfo(productCart)
         setOrderInfo(res.data)
         const currentDate = new Date()
         setOrderDate(currentDate)
