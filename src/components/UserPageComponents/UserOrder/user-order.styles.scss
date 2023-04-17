@@ -63,19 +63,7 @@
   .swal2-styled.swal2-cancel {
     color: black;
   }
-  input {
-    padding: 10px 10px;
-    position: absolute;
-    right: 0;
-    bottom: 98%;
-    border: none;
-    border: 1px solid var(--primary-color);
-    margin-bottom: 10px;
-    border-radius: 5px;
-    &:focus {
-      outline: none;
-    }
-  }
+
   .action-render {
     display: flex;
     justify-content: center;
@@ -106,6 +94,10 @@
         filter: brightness(0) saturate(100%) invert(16%) sepia(49%) saturate(4724%) hue-rotate(341deg) brightness(113%)
           contrast(102%);
       }
+    }
+    .disabled-button {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
     .info {
       border: 1px solid #3f51b5;

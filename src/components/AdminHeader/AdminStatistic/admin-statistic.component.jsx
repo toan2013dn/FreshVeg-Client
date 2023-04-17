@@ -49,7 +49,7 @@ function AdminStatistic({ activeHomePage, setActiveHomePage, activeId, setActive
           onClick={() => handleClick(management.id)}
         >
           {management.icon}
-          <p>{management.title}</p>
+          <p style={{ marginBottom: '0' }}>{management.title}</p>
         </div>
       ))}
     </div>
