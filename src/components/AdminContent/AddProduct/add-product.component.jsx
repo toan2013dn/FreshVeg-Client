@@ -18,11 +18,21 @@ function AddProduct({ isOpen, onClose }) {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <span className="add-product-modal">
-        <form onSubmit={handleSubmit}>
+        <form className="h-full overflow-y-scroll p-4" onSubmit={handleSubmit}>
           <h3>Thêm Sản Phẩm Mới</h3>
-          <UploadImage image={image} setImage={setImage} />
-          <div className="add-new">
-            <div className="column-1">
+
+          <div className="flex w-full items-center">
+            <div className="grow">
+              <UploadImage image={image} setImage={setImage} />
+              {/* <div className="border w-full">1</div>
+              <div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+              </div> */}
+            </div>
+
+            <div className="add-new w-2/3">
               <TextField
                 id="standard-multiline-flexible"
                 label="Nhập tên sản phẩm"
@@ -40,8 +50,7 @@ function AddProduct({ isOpen, onClose }) {
                 variant="standard"
                 onChange={(event) => setName(event.target.value)}
               />
-            </div>
-            <div className="column-2">
+
               <TextField
                 id="standard-multiline-flexible"
                 label="Mô tả sản phẩm"
@@ -60,6 +69,7 @@ function AddProduct({ isOpen, onClose }) {
               />
             </div>
           </div>
+
           <button type="submit" className="submit-btn">
             Thêm Sản Phẩm Mới
           </button>
@@ -71,3 +81,4 @@ function AddProduct({ isOpen, onClose }) {
 }
 
 export default AddProduct
+

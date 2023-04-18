@@ -116,7 +116,7 @@ function ProductManagement() {
   return (
     <div className="product-management">
       <div className="user-order">
-        <button className="add-btn" onClick={() => setIsOpenModal(true)}>
+        <button className="add-btn mb-2" onClick={() => setIsOpenModal(true)}>
           Thêm Mới
         </button>
         <input type="text" placeholder="Tìm kiếm..." />
@@ -135,3 +135,4 @@ function ProductManagement() {
 }
 
 export default ProductManagement
+

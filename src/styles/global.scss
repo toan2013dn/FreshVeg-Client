@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --primary-color: #4caf50;
   --second-color: #f4f4f4;
@@ -74,3 +78,4 @@ body {
 div#simple-popper {
   z-index: 1400 !important;
 }
+
