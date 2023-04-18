@@ -2,17 +2,22 @@ import './avatar.styles.scss'
 
 import { useUserStore } from '@/store'
 
+import axios from '@/api/axios'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import Popper from '@mui/material/Popper'
 import AdminAvatar from '@/assets/images/admin-avatar.png'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
+import { useNavigate } from 'react-router-dom'
 
 import React from 'react'
 
 function Avatar() {
-  const [admin] = useUserStore((state) => [state.userInfo])
+  const [admin, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const navigate = useNavigate()
+
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
   }
@@ -34,12 +39,6 @@ function Avatar() {
   }
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popper' : undefined
-
-  // const admin = {
-  //   id: 1,
-  //   avatar: 'https://ben.com.vn/tin-tuc/wp-content/uploads/2021/12/anh-che-cho-hai-huoc-cho-dien-thoai-4.jpg',
-  //   name: 'Nguyễn Văn A',
-  // }
 
   return (
     <div className="avatar" key={admin?.userId}>
@@ -101,4 +100,3 @@ function Avatar() {
 }
 
 export default Avatar
-
