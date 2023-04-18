@@ -33,19 +33,5 @@
         transform: translateY(2px);
       }
     }
-
-    input {
-      padding: 10px 10px;
-      position: absolute;
-      right: 0;
-      bottom: 92%;
-      border: none;
-      border: 1px solid var(--primary-color);
-      margin-bottom: 10px;
-      border-radius: 5px;
-      &:focus {
-        outline: none;
-      }
-    }
   }
 }
