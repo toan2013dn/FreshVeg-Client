@@ -77,9 +77,16 @@ function LoginForm({ onClose }) {
               onClose()
             }, 1500)
             const { user, accessToken } = response.data
-            setUserInfo(user)
-            setToken(accessToken)
-            navigate('/')
+            const admin = user.roles[0].id
+            if (admin === 1) {
+              setUserInfo(user)
+              setToken(accessToken)
+              navigate('/admin-page')
+            } else {
+              setUserInfo(user)
+              setToken(accessToken)
+              navigate('/')
+            }
           }
           console.log(response.data)
         })
