@@ -196,7 +196,7 @@ function UserOrder() {
 
   useEffect(() => {
     axios
-      .get(`/order/all/${user.userId}`)
+      .get(`/order/user/${user.userId}`)
       .then((res) => {
         setOrders(res.data)
         console.log(res.data)
