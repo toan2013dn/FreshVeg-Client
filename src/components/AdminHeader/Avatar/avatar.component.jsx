@@ -8,6 +8,8 @@ import Popper from '@mui/material/Popper'
 import AdminAvatar from '@/assets/images/admin-avatar.png'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
 
+import React from 'react'
+
 function Avatar() {
   const [admin] = useUserStore((state) => [state.userInfo])
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -40,12 +42,12 @@ function Avatar() {
   // }
 
   return (
-    <div className="avatar" key={admin.userId}>
+    <div className="avatar" key={admin?.userId}>
       <div className="avatar-admin" onClick={handleClick}>
         <img src={AdminAvatar} alt="" />
       </div>
       <div className="avatar-content">
-        <h4>{admin.name}</h4>
+        <h4>{admin?.name}</h4>
         <span style={{ color: '#B3B3B3' }}>Admin</span>
       </div>
 
@@ -82,8 +84,8 @@ function Avatar() {
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="user-popover--content">
             <div className="user-popover--content-info">
-              <TextOverflow width={150} fontWeight={700} content={admin.name} />
-              <h4>{admin.email}</h4>
+              <TextOverflow width={150} fontWeight={700} content={admin?.name} />
+              <h4>{admin?.email}</h4>
             </div>
             <div className="option-btn">
               <button onClick={handleLogout}>
