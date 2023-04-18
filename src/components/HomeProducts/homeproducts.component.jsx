@@ -28,7 +28,7 @@ function HomeProducts() {
   const navigate = useNavigate()
 
   const handleProductClick = () => {
-    navigate('/categories')
+    navigate('/products')
   }
 
   return (
