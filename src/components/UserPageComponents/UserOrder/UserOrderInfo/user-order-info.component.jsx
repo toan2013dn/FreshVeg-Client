@@ -45,7 +45,6 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
         })
       })
       .catch((err) => {
-        alert('Lỗi')
         console.log(err)
       })
   }, [])

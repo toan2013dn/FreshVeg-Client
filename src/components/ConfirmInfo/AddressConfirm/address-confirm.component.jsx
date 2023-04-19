@@ -19,8 +19,9 @@ function AddressConfirm({ forceUser }) {
   //call address api
   useEffect(() => {
     axios
-      .get(`/address/${userInfo.userId}`)
+      .get(`/address/user/${userInfo.userId}`)
       .then((res) => {
+        console.log(res.data)
         setUserAddresses(res.data)
       })
       .catch((err) => {
