@@ -1,0 +1,32 @@
+.number-statistic {
+  grid-area: card;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 10px;
+  gap: 50px;
+
+  .card {
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    .flex {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .trending-down {
+      fill: red;
+    }
+    .moving-up {
+      fill: green;
+    }
+  }
+}
