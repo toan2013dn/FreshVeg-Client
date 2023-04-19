@@ -1,6 +1,6 @@
 import './admin-content.styles.scss'
 
-import { useActiveAdminPageStore } from '@/store'
+import { useAdminStore } from '@/store'
 
 // import AdminDashboard from './AdminDashboard/admin-dashboard.component'
 import CategoriesManagement from './CategoriesManagement/categories-management.component'
@@ -8,12 +8,13 @@ import OrderManagementTable from './OrderManagement/order-management-table.compo
 import ProductManagement from './ProductManagement/product-management.component'
 
 function AdminContent() {
-  const [tab, setTab] = useActiveAdminPageStore((state) => [state.activeAdminPage, state.setActiveAdminPage])
+  const [tabId] = useAdminStore((state) => [state.tabId])
 
   const tabs = {
-    order: { name: 'Đơn hàng', component: <OrderManagementTable /> },
-    category: { name: 'Thể loại', component: <CategoriesManagement /> },
-    product: { name: 'Sản phẩm', component: <ProductManagement /> },
+    3: { name: 'Đơn hàng', component: <OrderManagementTable /> },
+    1: { name: 'Thể loại', component: <CategoriesManagement /> },
+    4: { name: 'Sản phẩm', component: <ProductManagement /> },
+    2: { name: 'Sản phẩm', component: <ProductManagement /> },
   }
   return (
     <div className="admin-content">
@@ -32,6 +33,13 @@ function AdminContent() {
         <h3>Quản Lý Sản Phẩm</h3>
         <ProductManagement />
       </div> */}
+      {tabId === -1 ? (
+        <div>
+          <h1>-1</h1>
+        </div>
+      ) : (
+        tabs[tabId].component
+      )}
     </div>
   )
 }

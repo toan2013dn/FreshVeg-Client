@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import { createTheme } from '@mui/material'
+
+import { ThemeProvider } from '@mui/material/styles'
+
 import './styles/index.scss'
 import Home from './pages/Home/home.page'
 import Login from './pages/Login/login.page'
@@ -23,6 +28,8 @@ import ForgotPasswordHomePage from './components/ForgotPasswordAtHomePage/forgot
 import ForgotPassword from './components/UserPageComponents/ForgotPassword/forgot-password.component'
 import ForgotPasswordOTP from './components/ForgotPasswordAtHomePage/ForgotPasswordOTP/forgot-password-otp.component'
 import NewPasswordHomepage from './components/ForgotPasswordAtHomePage/SetNewPasswordHomePage/set-new-password-homepage.component'
+
+const theme = createTheme()
 
 const router = createBrowserRouter([
   {
@@ -80,6 +87,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />,
+  <ThemeProvider theme={theme}>
+    <RouterProvider router={router} />
+  </ThemeProvider>,
   // </React.StrictMode>,
 )
+

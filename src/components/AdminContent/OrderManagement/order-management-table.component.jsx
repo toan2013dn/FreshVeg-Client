@@ -3,6 +3,7 @@ import './order-management-table.styles.scss'
 import { useOrderStore } from '@/store'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 import axios from '@/api/axios'
 import CancelIcon from '@mui/icons-material/Cancel'
@@ -11,7 +12,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import Tooltip from '@mui/material/Tooltip'
-import { useEffect } from 'react'
 import UserOrderInfo from '@/components/UserPageComponents/UserOrder/UserOrderInfo/user-order-info.component'
 
 function StatusRender(props) {

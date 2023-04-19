@@ -1,11 +1,8 @@
 import './navigation.component.scss'
 
-import Badge from '@mui/material/Badge'
-import UserPopover from './UserPopover/user-popover.component'
-import CartPopper from './CartPopper/cart-popper.component'
 import Tooltip from '@mui/material/Tooltip'
-
-import { ReactComponent as Wishlist } from '@/assets/icons/Wishlist.svg'
+import CartPopper from './CartPopper/cart-popper.component'
+import UserPopover from './UserPopover/user-popover.component'
 
 function Navigation() {
   return (

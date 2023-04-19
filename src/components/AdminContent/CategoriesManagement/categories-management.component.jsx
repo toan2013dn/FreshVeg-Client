@@ -1,89 +1,126 @@
 import './categories-management.styles.scss'
 
-import { DataGrid } from '@mui/x-data-grid'
-import { useState } from 'react'
-import Alert from '@mui/joy/Alert'
+import { useCategoriesStore } from '@/store'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 
-import AddCategory from '../AddCategoryModal/add-category.component'
-
+import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import Tooltip from '@mui/material/Tooltip'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import AddCategory from '../AddCategoryModal/add-category.component'
+import EditCategory from './EditCategory/edit-category.component'
 
-// a function that renders the action buttons
 function ActionRender(props) {
-  const { value } = props
+  const [categories, setCategories] = useCategoriesStore((state) => [state.categories, state.setCategories])
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
+  const handleDelete = () => {
+    Swal.fire({
+      text: 'Bạn có chắc chắn muốn xoá thể loại này?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xoá',
+      cancelButtonText: 'Hủy',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`/category/${props.row.categoryId}`)
+          .then((res) => {
+            const newCategories = categories.filter((category) => category.categoryId !== props.row.categoryId)
+            setCategories(newCategories)
+            toast.success('Xoá thể loại thành công!')
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    })
+  }
+
+  const handleUpdate = () => {
+    setIsOpenModal(true)
+    console.log(props.row.categoryId)
+  }
   return (
     <div className="action-render">
-      <button className="action-render__btn info">
-        <EditOutlinedIcon className="info-btn" />
-      </button>
-      <button className="action-render__btn delete">
-        <DeleteIcon className="delete-btn" />
-      </button>
+      <Tooltip title="Chỉnh sửa">
+        <button className="action-render__btn info" onClick={handleUpdate}>
+          <EditOutlinedIcon className="info-btn" />
+        </button>
+      </Tooltip>
+      <EditCategory
+        isOpen={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        categoryName={props.row.categoryName}
+        categoryId={props.row.categoryId}
+      />
+      <Tooltip title="Xoá thể loại">
+        <button className="action-render__btn delete" onClick={handleDelete}>
+          <DeleteIcon className="delete-btn" />
+        </button>
+      </Tooltip>
     </div>
   )
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 250 },
-  { field: 'categories', headerName: 'Tên Thể Loại', width: 700 },
+  { field: 'categoryId', headerName: 'ID', width: 250 },
+  { field: 'categoryName', headerName: 'Tên Thể Loại', width: 700 },
   { field: 'action', headerName: 'Hành động', width: 130, renderCell: ActionRender, sortable: false },
 ]
-
-const rows = [
-  {
-    id: 1,
-    categories: 'Rau',
-  },
-  {
-    id: 2,
-    categories: 'Củ',
-  },
-  {
-    id: 3,
-    categories: 'Quả ',
-  },
-  {
-    id: 4,
-    categories: 'Quả',
-  },
-  {
-    id: 5,
-    categories: 'Quả',
-  },
-  {
-    id: 6,
-    categories: 'Quả',
-  },
-  {
-    id: 7,
-    categories: 'Quả',
-  },
-  {
-    id: 8,
-    categories: 'Quả',
-  },
-]
-
 function CategoriesManagement() {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [categories, setCategories] = useCategoriesStore((state) => [state.categories, state.setCategories])
+  useEffect(() => {
+    axios
+      .get('/category/all')
+      .then((res) => {
+        setCategories(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [setCategories])
 
   return (
     <div className="categories-management">
       <div className="user-order">
-        <button className="add-btn" onClick={() => setIsOpenModal(true)}>Thêm Mới</button>
-        <input type="text" placeholder="Tìm kiếm..." />
+        <button className="add-btn" onClick={() => setIsOpenModal(true)}>
+          Thêm Mới
+        </button>
         <DataGrid
           style={{ fontSize: '16px' }}
           rowHeight={100}
-          rows={rows}
+          rows={categories}
+          getRowId={(row) => row.categoryId}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
         />
       </div>
       <AddCategory isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }

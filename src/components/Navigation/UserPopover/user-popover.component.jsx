@@ -1,18 +1,17 @@
 import './user-popover.styles.scss'
 
-import * as React from 'react'
+import axios from '@/api/axios'
+import TextOverflow from '@/components/TextOverflow/text-overflow.component'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined'
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import Popper from '@mui/material/Popper'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import * as React from 'react'
 
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useUserStore } from '@/store'
 import { ReactComponent as User } from '@/assets/icons/User.svg'
-import axios from '@/api/axios'
-import TextOverflow from '@/components/TextOverflow/text-overflow.component'
+import { useUserStore } from '@/store'
+import { useNavigate } from 'react-router-dom'
 
 function UserPopover() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])

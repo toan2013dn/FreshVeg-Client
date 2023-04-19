@@ -1,10 +1,11 @@
 import './admin-management.styles.scss'
 
-import { useState } from 'react'
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined'
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined'
 
-function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiveId, setTab }) {
+import { useAdminStore } from '@/store'
+
+function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiveId }) {
   const managements = [
     {
       id: 1,
@@ -28,12 +29,15 @@ function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiv
     },
   ]
 
+  const [setTabId] = useAdminStore((state) => [state.setTabId])
+
   const handleClick = (id) => {
     if (activeHomePage) {
       setActiveHomePage(false)
     }
     setActiveId(id)
-    setTab(id)
+    // setTab(id)
+    setTabId(id)
   }
 
   return (
