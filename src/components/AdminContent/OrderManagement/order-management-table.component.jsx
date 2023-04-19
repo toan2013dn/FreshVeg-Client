@@ -65,7 +65,6 @@ function StatusRender(props) {
 
 // Detail Render
 function DetailRender(props) {
-  console.log(props)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   return (
@@ -150,7 +149,7 @@ const columns = [
     width: 130,
     valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
   },
-  { field: 'details', headerName: 'Chi Tiết', width: 70, renderCell: DetailRender, sortable: false },
+  { field: 'details', headerName: 'Chi Tiết', width: 100, renderCell: DetailRender, sortable: false },
   { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender },
 ]
 
