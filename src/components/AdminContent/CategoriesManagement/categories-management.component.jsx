@@ -42,7 +42,6 @@ function ActionRender(props) {
 
   const handleUpdate = () => {
     setIsOpenModal(true)
-    console.log(props.row.categoryId)
   }
   return (
     <div className="action-render">

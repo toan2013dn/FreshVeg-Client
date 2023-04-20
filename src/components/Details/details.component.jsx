@@ -7,7 +7,6 @@ import CarouselImage from './Carousel/carousel.component'
 import { useProductStore } from '@/store'
 
 function Details({ productId }) {
-  // console.log(productId)
   return (
     <div className="details">
       <div className="details-flex">

@@ -12,8 +12,6 @@ import { useEffect, useState } from 'react'
 import { ImageUploader } from '../ImageUploader/ImageUploader'
 
 function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
-  console.log({ initialValue })
-
   const [form] = Form.useForm()
 
   const [categories, setCategories] = useState([])
@@ -31,9 +29,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
           className="h-max overflow-y-scroll p-10 w-max"
           form={form}
           initialValues={initialValue}
-          onValuesChange={(changes, allValues) => {
-            console.log({ changes, allValues })
-          }}
+          onValuesChange={(changes, allValues) => {}}
         >
           <h3>Thêm Sản Phẩm Mới</h3>
 
@@ -137,4 +133,3 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
 }
 
 export default AddProduct
-

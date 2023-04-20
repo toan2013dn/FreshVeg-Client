@@ -21,17 +21,12 @@ function AddressConfirm({ forceUser }) {
     axios
       .get(`/address/user/${userInfo.userId}`)
       .then((res) => {
-        console.log(res.data)
         setUserAddresses(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [forceUser])
-
-  // const defaultAddress = userAddresses.find((userAddress) => userAddress.isDefault)
-  // const defaultAddress = userAddresses[0]
-  // console.log(defaultAddress)
 
   const [selectedAddress, setSelectedAddress] = useOrderInfoStore((state) => [
     state.selectedAddress,
