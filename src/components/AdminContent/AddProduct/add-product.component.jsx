@@ -62,12 +62,22 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                   type="number"
                   label="Nhập giá sản phẩm"
                   variant="standard"
-                  endAdornment={<InputAdornment position="end">vnd</InputAdornment>}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">vnd</InputAdornment>,
+                  }}
                 />
               </Form.Item>
 
               <Form.Item name="weight" className="w-full">
-                <TextField className="w-full" type="number" label="Nhập khối lượng sản phẩm" variant="standard" />
+                <TextField
+                  className="w-full"
+                  type="number"
+                  label="Nhập khối lượng sản phẩm"
+                  variant="standard"
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                  }}
+                />
               </Form.Item>
 
               <Form.Item name="description" className="w-full">
