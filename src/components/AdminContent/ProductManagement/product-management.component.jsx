@@ -6,6 +6,9 @@ import { useState } from 'react'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AddProduct from '../AddProduct/add-product.component'
+import { useEffect } from 'react'
+import axios from '@/api/axios'
+import Loading from 'react-loading'
 
 function ActionRender(props) {
   const { value } = props
@@ -113,6 +116,22 @@ const rows = [
 
 function ProductManagement() {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [products, setProducts] = useState()
+
+  useEffect(() => {
+    axios.get('/product/all').then(({ data }) => setProducts(data))
+  }, [])
+
+  const rows = products?.map((item) => ({
+    id: item.productId,
+    name: item.productName,
+    categories: item.categoryId,
+    price: item.price,
+    describe: item.description,
+  }))
+
+  if (!products) return <Loading />
+
   return (
     <div className="product-management">
       <div className="user-order">
