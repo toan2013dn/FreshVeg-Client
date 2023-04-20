@@ -9,7 +9,8 @@ import AddProduct from '../AddProduct/add-product.component'
 import { useEffect } from 'react'
 import axios from '@/api/axios'
 import Loading from 'react-loading'
-import { Image } from 'antd'
+import { Button, Image } from 'antd'
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 80 },
@@ -29,7 +30,14 @@ const columns = [
     headerName: '',
     width: 130,
     renderCell: ({ id, row }) => {
-      return 'action'
+      const { onDelete } = row || {}
+
+      return (
+        <div className="flex gap-3">
+          <Button className="border-none" icon={<EditOutlined />} />
+          <Button className="border-none" icon={<DeleteOutlined className="text-red-600" />} onClick={onDelete} />
+        </div>
+      )
     },
     sortable: false,
   },
@@ -54,6 +62,10 @@ function ProductManagement() {
     categories: item.categoryId,
     price: item.price,
     describe: item.description,
+    onDelete: async () => {
+      await axios.delete('/product', { data: { productId: item.productId } })
+      fetchProducts()
+    },
   }))
 
   if (!products) return <Loading />
