@@ -28,8 +28,8 @@ export const ImageUploader = ({ value, onChange, className, ...rest }) => {
       {...rest}
     >
       {loading && 'Uploading'}
-      {!loading && !image && 'Upload your file'}
-      {image && !loading && <img src={image} />}
+      {!loading && !image && !value && 'Upload your file'}
+      {(image || value) && !loading && <img src={image || value} />}
     </StyledUpload>
   )
 }

@@ -30,11 +30,11 @@ const columns = [
     headerName: '',
     width: 130,
     renderCell: ({ id, row }) => {
-      const { onDelete } = row || {}
+      const { onDelete, onEdit } = row || {}
 
       return (
         <div className="flex gap-3">
-          <Button className="border-none" icon={<EditOutlined />} />
+          <Button className="border-none" icon={<EditOutlined />} onClick={onEdit} />
           <Button className="border-none" icon={<DeleteOutlined className="text-red-600" />} onClick={onDelete} />
         </div>
       )
@@ -44,6 +44,9 @@ const columns = [
 ]
 
 function ProductManagement() {
+  const [productId, setProductId] = useState()
+  const [updateValues, setUpdateValues] = useState()
+
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [products, setProducts] = useState()
 
@@ -66,6 +69,20 @@ function ProductManagement() {
       await axios.delete('/product', { data: { productId: item.productId } })
       fetchProducts()
     },
+    onEdit: () => {
+      const [featuredImage, ...restImage] = item.productImages || []
+
+      setProductId(item.productId)
+      setUpdateValues({
+        featuredImage: featuredImage?.imageLink,
+        listImage: restImage?.map((e) => ({
+          uid: e.productImageId,
+          imageLink: e.imageLink,
+        })),
+        ...item,
+      })
+      setIsOpenModal(true)
+    },
   }))
 
   if (!products) return <Loading />
@@ -73,7 +90,14 @@ function ProductManagement() {
   return (
     <div className="product-management">
       <div className="user-order">
-        <button className="add-btn mb-2" onClick={() => setIsOpenModal(true)}>
+        <button
+          className="add-btn mb-2"
+          onClick={() => {
+            setProductId(undefined)
+            setIsOpenModal(true)
+            setUpdateValues(undefined)
+          }}
+        >
           Thêm Mới
         </button>
         <input type="text" placeholder="Tìm kiếm..." />
@@ -86,7 +110,10 @@ function ProductManagement() {
           rowsPerPageOptions={[5]}
         />
         <AddProduct
+          key={productId}
           isOpen={isOpenModal}
+          initialValue={updateValues}
+          productId={productId}
           onClose={() => setIsOpenModal(false)}
           onFinish={() => {
             fetchProducts()

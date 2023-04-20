@@ -11,7 +11,9 @@ import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { ImageUploader } from '../ImageUploader/ImageUploader'
 
-function AddProduct({ isOpen, onClose, onFinish }) {
+function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
+  console.log({ initialValue })
+
   const [form] = Form.useForm()
 
   const [categories, setCategories] = useState([])
@@ -28,6 +30,7 @@ function AddProduct({ isOpen, onClose, onFinish }) {
         <Form
           className="h-max overflow-y-scroll p-10 w-max"
           form={form}
+          initialValues={initialValue}
           onValuesChange={(changes, allValues) => {
             console.log({ changes, allValues })
           }}
@@ -81,19 +84,28 @@ function AddProduct({ isOpen, onClose, onFinish }) {
 
               const images = listImage.map((item) => ({ imageLink: item.url }))
 
-              await axios.post('/product', {
-                productName,
-                price,
-                productImages: [{ imageLink: featuredImage }, ...images],
-                description,
-                status: true,
-                categoryId,
-              })
+              productId
+                ? await axios.put(`/product/${productId}`, {
+                    productName,
+                    price,
+                    productImages: [{ imageLink: featuredImage }, ...images],
+                    description,
+                    status: true,
+                    categoryId,
+                  })
+                : await axios.post('/product', {
+                    productName,
+                    price,
+                    productImages: [{ imageLink: featuredImage }, ...images],
+                    description,
+                    status: true,
+                    categoryId,
+                  })
 
               onFinish?.()
             }}
           >
-            Thêm Sản Phẩm Mới
+            {productId ? 'Cập nhật' : 'Thêm Sản Phẩm Mới'}
           </button>
         </Form>
       </span>

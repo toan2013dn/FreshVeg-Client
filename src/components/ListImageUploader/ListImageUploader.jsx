@@ -3,8 +3,9 @@ import { PlusOutlined } from '@ant-design/icons'
 import { Button, Upload } from 'antd'
 import { useState } from 'react'
 
-export const ListImageUploader = ({ onChange, ...rest }) => {
-  const [images, setImages] = useState([])
+export const ListImageUploader = ({ value, onChange, ...rest }) => {
+  const initList = value?.map((item) => ({ ...item, url: item?.imageLink, name: 'trungluc' }))
+  const [images, setImages] = useState(initList)
 
   const { upload } = useCloudinary({
     onSuccess: (imageUrl, data) => {
