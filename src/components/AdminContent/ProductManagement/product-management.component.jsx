@@ -1,6 +1,6 @@
 import './product-management.styles.scss'
 
-import { DataGrid } from '@mui/x-data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -100,7 +100,6 @@ function ProductManagement() {
         >
           Thêm Mới
         </button>
-        <input type="text" placeholder="Tìm kiếm..." />
         <DataGrid
           style={{ fontSize: '16px' }}
           rowHeight={100}
@@ -108,6 +107,13 @@ function ProductManagement() {
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
         />
         <AddProduct
           key={productId}
@@ -128,4 +134,3 @@ function ProductManagement() {
 }
 
 export default ProductManagement
-
