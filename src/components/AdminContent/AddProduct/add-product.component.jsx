@@ -88,14 +88,14 @@ function AddProduct({ isOpen, onClose }) {
             onClick={async () => {
               const { productName, price, listImage, featuredImage, description, categoryId } = form.getFieldsValue()
 
-              const images = listImage.map((item) => item.url)
+              const images = listImage.map((item) => ({ imageLink: item.url }))
 
               console.log({ images })
 
               const response = await axios.post('/product', {
                 productName,
                 price,
-                productImage: [featuredImage, ...images],
+                productImage: [{ imageLink: featuredImage }, ...images],
                 description,
                 enteredDate: dayjs().valueOf(),
                 status: true,
