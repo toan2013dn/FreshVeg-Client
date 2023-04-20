@@ -4,11 +4,11 @@ import { useUserStore } from '@/store'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Menu from '../Menu/menu.component'
 import Navigation from '../Navigation/navigation.component'
 import SearchBar from '../SearchBar/searchbar.component'
 import Login from '@/pages/Login/login.page'
 import Modal from '@mui/material/Modal'
+import MenuHeader from '../Menu/menu.component'
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -44,7 +44,7 @@ const Header = () => {
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <Logo onClick={handleClickHomePage} className="logo" />
 
-      <Menu />
+      <MenuHeader />
 
       <SearchBar />
 
