@@ -41,7 +41,7 @@ function ImageRender(props) {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 80 },
+  { field: 'userId', headerName: 'ID', width: 80 },
   { field: 'image', headerName: 'Ảnh Đại Diện', width: 130, renderCell: ImageRender, sortable: false },
   { field: 'name', headerName: 'Tên Khách Hàng', width: 300 },
   { field: 'email', headerName: 'Email', width: 500 },
