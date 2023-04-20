@@ -1,11 +1,21 @@
-.menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 35px;
-    flex-shrink: 0;
-   
-    .menu-icon--dropdown{ 
-        margin-left: 5px;
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-shrink: 0;
+
+  .menu-icon--dropdown {
+    margin-left: 5px;
+  }
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: var(--primary-color);
     }
+  }
 }
