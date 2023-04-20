@@ -118,6 +118,8 @@ function ProductManagement() {
           onFinish={() => {
             fetchProducts()
             setIsOpenModal(false)
+            setUpdateValues(undefined)
+            setProductId(undefined)
           }}
         />
       </div>

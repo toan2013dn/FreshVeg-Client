@@ -60,6 +60,10 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                 <TextField className="w-full" type="number" label="Nhập giá sản phẩm" variant="standard" />
               </Form.Item>
 
+              <Form.Item name="weight" className="w-full">
+                <TextField className="w-full" type="number" label="Nhập khối lượng sản phẩm" variant="standard" />
+              </Form.Item>
+
               <Form.Item name="description" className="w-full">
                 <TextField className="w-full" label="Mô tả sản phẩm" variant="standard" multiline maxRows={4} />
               </Form.Item>
@@ -80,7 +84,8 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
             type="submit"
             className="submit-btn"
             onClick={async () => {
-              const { productName, price, listImage, featuredImage, description, categoryId } = form.getFieldsValue()
+              const { productName, price, listImage, featuredImage, description, categoryId, weight } =
+                form.getFieldsValue()
 
               const images = listImage.map((item) => ({ imageLink: item.url }))
 
@@ -92,6 +97,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                     description,
                     status: true,
                     categoryId,
+                    weight,
                   })
                 : await axios.post('/product', {
                     productName,
@@ -100,6 +106,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                     description,
                     status: true,
                     categoryId,
+                    weight,
                   })
 
               onFinish?.()
