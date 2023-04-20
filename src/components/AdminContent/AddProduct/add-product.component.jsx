@@ -1,26 +1,17 @@
 import './add-product.styles.scss'
 
-import CloseIcon from '@mui/icons-material/Close'
 import TextField from '@mui/material/TextField'
 
+import axios from '@/api/axios'
+import { ListImageUploader } from '@/components/ListImageUploader/ListImageUploader'
+import { MenuItem, Select } from '@mui/material'
 import Modal from '@mui/material/Modal'
 import { Form } from 'antd'
-import { ImageUploader } from '../ImageUploader/ImageUploader'
-import { ListImageUploader } from '@/components/ListImageUploader/ListImageUploader'
-import styled from '@emotion/styled'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import axios from '@/api/axios'
-import { MenuItem, Select } from '@mui/material'
 import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
+import { ImageUploader } from '../ImageUploader/ImageUploader'
 
-const StyledModal = styled(Modal)`
-  .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
-    display: none;
-  }
-`
-
-function AddProduct({ isOpen, onClose }) {
+function AddProduct({ isOpen, onClose, onFinish }) {
   const [form] = Form.useForm()
 
   const [categories, setCategories] = useState([])
@@ -32,7 +23,7 @@ function AddProduct({ isOpen, onClose }) {
   }, [])
 
   return (
-    <StyledModal open={isOpen} onClose={onClose}>
+    <Modal open={isOpen} onClose={onClose}>
       <span className="add-product-modal w-max">
         <Form
           className="h-max overflow-y-scroll p-10 w-max"
@@ -90,25 +81,23 @@ function AddProduct({ isOpen, onClose }) {
 
               const images = listImage.map((item) => ({ imageLink: item.url }))
 
-              console.log({ images })
-
-              const response = await axios.post('/product', {
+              await axios.post('/product', {
                 productName,
                 price,
-                productImage: [{ imageLink: featuredImage }, ...images],
+                productImages: [{ imageLink: featuredImage }, ...images],
                 description,
-                enteredDate: dayjs().valueOf(),
                 status: true,
                 categoryId,
               })
+
+              onFinish?.()
             }}
           >
             Thêm Sản Phẩm Mới
           </button>
-          <CloseIcon onClick={onClose} />
         </Form>
       </span>
-    </StyledModal>
+    </Modal>
   )
 }
 
