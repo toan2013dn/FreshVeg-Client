@@ -35,7 +35,7 @@ function Slider() {
       {/* Làm răn để css mỗi button mỗi màu */}
       <div className="slider-buttons">
         <button className="slider-buttons--button ">
-          <Link to={"/categories"}>
+          <Link to={"/products"}>
             Xem Sản Phẩm
             <Arrow className="slider-buttons--icon" />
           </Link>

@@ -171,7 +171,6 @@ function OrderManagementTable() {
       <div
         className="user-order"
         style={{
-          width: '100%',
           height: '100%',
         }}
       >

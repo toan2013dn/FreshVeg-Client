@@ -2,7 +2,7 @@ import './admin-content.styles.scss'
 
 import { useAdminStore } from '@/store'
 
-// import AdminDashboard from './AdminDashboard/admin-dashboard.component'
+import AdminDashboard from './AdminDashboard/admin-dashboard.component'
 import CategoriesManagement from './CategoriesManagement/categories-management.component'
 import OrderManagementTable from './OrderManagement/order-management-table.component'
 import ProductManagement from './ProductManagement/product-management.component'
@@ -18,9 +18,6 @@ function AdminContent() {
   }
   return (
     <div className="admin-content">
-      {/* <div className="admin-dashboard">
-        <AdminDashboard />
-      </div> */}
       {/* <div className="order-table">
         <h3>Quản Lý Đơn Hàng</h3>
         <OrderManagementTable />
@@ -33,13 +30,7 @@ function AdminContent() {
         <h3>Quản Lý Sản Phẩm</h3>
         <ProductManagement />
       </div> */}
-      {tabId === -1 ? (
-        <div>
-          <h1>-1</h1>
-        </div>
-      ) : (
-        tabs[tabId].component
-      )}
+      {tabId === -1 ? <AdminDashboard /> : tabs[tabId].component}
     </div>
   )
 }

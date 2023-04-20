@@ -9,91 +9,81 @@ import axios from '@/api/axios'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import ClearIcon from '@mui/icons-material/Clear'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
-import Alert from '@mui/joy/Alert'
+import { Alert } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import UserOrderInfo from './UserOrderInfo/user-order-info.component'
 
 const object = {
   onWaitingConfirm: (
-    <>
-      <Alert color="primary" style={{ maxWidth: '100%', maxHeight: '100%' }}>
-        <span
-          style={{
-            width: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Chờ xác nhận
-        </span>
-      </Alert>
-    </>
+    <Alert icon={false} color="primary" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <span
+        style={{
+          width: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        Chờ xác nhận
+      </span>
+    </Alert>
   ),
   Confirmed: (
-    <>
-      <Alert color="info" style={{ maxWidth: '100%', maxHeight: '100%' }}>
-        <span
-          style={{
-            width: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Đang giao hàng
-        </span>
-      </Alert>
-    </>
+    <Alert icon={false} color="info" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <span
+        style={{
+          width: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        Đang giao hàng
+      </span>
+    </Alert>
   ),
   Success: (
-    <>
-      <Alert color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
-        <span
-          style={{
-            width: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Thành công
-        </span>
-      </Alert>
-    </>
+    <Alert icon={false} color="success" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <span
+        style={{
+          width: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        Thành công
+      </span>
+    </Alert>
   ),
   Failed: (
-    <>
-      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
-        <span
-          style={{
-            width: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Thất bại
-        </span>
-      </Alert>
-    </>
+    <Alert icon={false} color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <span
+        style={{
+          width: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        Thất bại
+      </span>
+    </Alert>
   ),
   Cancel: (
-    <>
-      <Alert color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
-        <span
-          style={{
-            width: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Đã huỷ
-        </span>
-      </Alert>
-    </>
+    <Alert icon={false} color="warning" style={{ maxWidth: '100%', maxHeight: '100%' }}>
+      <span
+        style={{
+          width: 100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        Đã huỷ
+      </span>
+    </Alert>
   ),
 }
 
@@ -196,10 +186,9 @@ function UserOrder() {
 
   useEffect(() => {
     axios
-      .get(`/order/all/${user.userId}`)
+      .get(`/order/user/${user.userId}`)
       .then((res) => {
         setOrders(res.data)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log('get order', err)

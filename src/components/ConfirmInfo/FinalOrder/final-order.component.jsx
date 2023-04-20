@@ -55,7 +55,7 @@ function FinalOrder() {
         setOrderDate(currentDate)
         if (selectedPaymentMethod === 2) {
           axios
-            .post(`/checkout/create-payment/${user?.userId}`, {
+            .post(`/checkout/create-payment`, {
               orderId: res.data?.orderId,
               amount: res.data.amount,
               bankCode: 'NCB',
