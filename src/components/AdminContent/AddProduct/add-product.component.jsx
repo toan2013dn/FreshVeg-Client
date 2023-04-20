@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 
 import axios from '@/api/axios'
 import { ListImageUploader } from '@/components/ListImageUploader/ListImageUploader'
-import { MenuItem, Select } from '@mui/material'
+import { InputAdornment, MenuItem, Select } from '@mui/material'
 import Modal from '@mui/material/Modal'
 import { Form } from 'antd'
 import dayjs from 'dayjs'
@@ -57,7 +57,13 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
               </Form.Item>
 
               <Form.Item name="price" className="w-full">
-                <TextField className="w-full" type="number" label="Nhập giá sản phẩm" variant="standard" />
+                <TextField
+                  className="w-full"
+                  type="number"
+                  label="Nhập giá sản phẩm"
+                  variant="standard"
+                  endAdornment={<InputAdornment position="end">vnd</InputAdornment>}
+                />
               </Form.Item>
 
               <Form.Item name="weight" className="w-full">

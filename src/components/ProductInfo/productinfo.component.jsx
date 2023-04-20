@@ -15,7 +15,7 @@ function ProductInfo({ product }) {
     <div className="product-info">
       <div className="product-info--image">
         <img
-          src={product.productImage ? product.productImage : productBackground}
+          src={product.productImages ? product.productImages?.[0]?.imageLink : productBackground}
           alt="product"
           className="product-info--image"
           draggable={false}
@@ -35,3 +35,4 @@ function ProductInfo({ product }) {
 }
 
 export default ProductInfo
+
