@@ -12,6 +12,7 @@ import axios from '@/api/axios'
 import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 import dayjs from 'dayjs'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+
 function UserInfoTable() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [showPassword, setShowPassword] = useState(false)
@@ -20,6 +21,8 @@ function UserInfoTable() {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [userAvatar, setUserAvatar] = useState('')
+  const [userBirthday, setUserBirthday] = useState(dayjs(userInfo.birthday))
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
   }
@@ -62,14 +65,14 @@ function UserInfoTable() {
         const updatedUserInfo = {
           ...userInfo,
           name: updatedName,
-          image: resData.url,
+          avatar: resData.url,
+          birthday: userBirthday,
         }
         await axios
           .put(`/user/${userInfo.userId}`, {
-            email: userInfo.email,
             name: updatedName,
             avatar: resData.url,
-            // birthday:
+            birthday: userBirthday,
           })
           .then((res) => {
             // console.log(res)
@@ -148,7 +151,12 @@ function UserInfoTable() {
               </div>
               <div className="content">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="MM/DD/YY" defaultValue={dayjs()} />
+                  <DatePicker
+                    value={userBirthday}
+                    onChange={(value) => setUserBirthday(value)}
+                    label="MM/DD/YY"
+                    defaultValue={dayjs()}
+                  />
                 </LocalizationProvider>
               </div>
             </div>
