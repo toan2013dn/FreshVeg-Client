@@ -12,10 +12,8 @@ export const ListImageUploader = ({ value, onChange, ...rest }) => {
       const fileName = data.original_filename
       const id = data.public_id
 
-      const newImages = [...images, { uid: id, name: fileName, url: imageUrl }]
+      const newImages = [...(images || []), { uid: id, name: fileName, url: imageUrl }]
       setImages(newImages)
-
-      console.log(newImages)
 
       onChange?.(newImages)
     },
@@ -33,7 +31,7 @@ export const ListImageUploader = ({ value, onChange, ...rest }) => {
       className="h-full"
       customRequest={uploadImage}
       onRemove={(image) => {
-        const newImages = images.filter((e) => e.uid !== image.uid)
+        const newImages = images?.filter((e) => e.uid !== image.uid)
         setImages(newImages)
         onChange?.(newImages)
       }}
