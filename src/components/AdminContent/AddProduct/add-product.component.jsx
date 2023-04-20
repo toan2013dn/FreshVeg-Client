@@ -87,13 +87,13 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
               const { productName, price, listImage, featuredImage, description, categoryId, weight } =
                 form.getFieldsValue()
 
-              const images = listImage.map((item) => ({ imageLink: item.url }))
+              const images = listImage?.map((item) => ({ imageLink: item.url }))
 
               productId
                 ? await axios.put(`/product/${productId}`, {
                     productName,
                     price,
-                    productImages: [{ imageLink: featuredImage }, ...images],
+                    productImages: [{ imageLink: featuredImage }, ...(images || [])],
                     description,
                     status: true,
                     categoryId,
@@ -102,7 +102,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                 : await axios.post('/product', {
                     productName,
                     price,
-                    productImages: [{ imageLink: featuredImage }, ...images],
+                    productImages: [{ imageLink: featuredImage }, ...(images || [])],
                     description,
                     status: true,
                     categoryId,
