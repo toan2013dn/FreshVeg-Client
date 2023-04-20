@@ -1,14 +1,14 @@
 import './order-success.styles.scss'
 
-import React, { useEffect, useState } from 'react'
-import { useOrderInfoStore } from '@/store'
-import ReactLoading from 'react-loading'
+import Footer from '@/components/Footer/footer.component'
 import Header from '@/components/Header/header.component'
 import SuccessBill from '@/components/SuccessBill/success-bill.component'
-import Footer from '@/components/Footer/footer.component'
+import { useEffect, useState } from 'react'
+import ReactLoading from 'react-loading'
 
 function OrderSuccess() {
   const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {

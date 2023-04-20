@@ -39,7 +39,7 @@ function UserPopover() {
   }
 
   const handleOrderHistory = () => {
-    navigate('')
+    navigate('/user-order')
   }
 
   const handleClick = (event) => {
@@ -106,7 +106,7 @@ function UserPopover() {
                 <BadgeOutlinedIcon />
                 <h4>Trang cá nhân</h4>
               </button>
-              <button>
+              <button onClick={handleProfile}>
                 <LocalMallOutlinedIcon />
                 <h4>Lịch sử đơn hàng</h4>
               </button>

@@ -17,7 +17,8 @@ import PaymentMethod from './PaymentMethod/payment-method.component'
 function ConfirmInfo() {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [forceUser, setForceUser] = useState(0)
-  const [setOrderNote] = useOrderInfoStore((state) => [state.setOrderNote])
+  // const [setOrderNote] = useOrderInfoStore((state) => [state.setOrderNote])
+  const [orderNote, setOrderNote] = useState('')
 
   const handleOrderNoteChange = (event) => {
     setOrderNote(event.target.value)
@@ -78,7 +79,7 @@ function ConfirmInfo() {
         </div>
       </div>
       <div className="confirm-info right">
-        <FinalOrder />
+        <FinalOrder orderNote={orderNote} />
       </div>
     </div>
   )

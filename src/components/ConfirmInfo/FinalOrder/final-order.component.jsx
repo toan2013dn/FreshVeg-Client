@@ -1,7 +1,7 @@
 import './final-order.styles.scss'
 
 import { useBillInfoStore, useOrderInfoStore, useProductCartStore, useUserAddressesStore, useUserStore } from '@/store'
-import { useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
 import axios from '@/api/axios'
@@ -9,17 +9,24 @@ import Decoration from '@/assets/images/Decoration.webp'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import useTotalPrice from '@/hooks/useTotalPrice'
 
-function FinalOrder() {
-  const [selectedAddress, orderNote, orderDate, orderTotal, orderInfo, selectedPaymentMethod, statusPaymentMethod] =
-    useOrderInfoStore((state) => [
-      state.selectedAddress,
-      state.orderNote,
-      state.orderDate,
-      state.orderTotal,
-      state.orderInfo,
-      state.selectedPaymentMethod,
-      state.statusPaymentMethod,
-    ])
+function FinalOrder({ orderNote }) {
+  const [
+    selectedAddress,
+    orderDate,
+    orderTotal,
+    orderInfo,
+    selectedPaymentMethod,
+    statusPaymentMethod,
+    setSelectedPaymentMethod,
+  ] = useOrderInfoStore((state) => [
+    state.selectedAddress,
+    state.orderDate,
+    state.orderTotal,
+    state.orderInfo,
+    state.selectedPaymentMethod,
+    state.statusPaymentMethod,
+    state.setSelectedPaymentMethod,
+  ])
   const [user] = useUserStore((state) => [state.userInfo])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [billInfo, setBillInfo] = useBillInfoStore((state) => [state.billInfo, state.setBillInfo])
@@ -35,6 +42,7 @@ function FinalOrder() {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
       return
     }
+    alert(totalPrice)
 
     axios
       .post('/order', {
@@ -54,6 +62,7 @@ function FinalOrder() {
         const currentDate = new Date()
         setOrderDate(currentDate)
         if (selectedPaymentMethod === 2) {
+          setSelectedPaymentMethod(1)
           axios
             .post(`/checkout/create-payment`, {
               orderId: res.data?.orderId,
@@ -73,7 +82,9 @@ function FinalOrder() {
         } else {
           const currentDate = new Date()
           setOrderDate(currentDate)
-          navigate('/order-success')
+          // let params = { orderId: orderInfo.orderId }
+          let params = { orderId: res.data?.orderId }
+          navigate({ pathname: '/order-success', search: `?${createSearchParams(params)}` })
           setTimeout(() => {
             setProductCart([])
           }, 1500)
