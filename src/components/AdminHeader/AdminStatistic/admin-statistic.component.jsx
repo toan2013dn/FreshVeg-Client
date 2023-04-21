@@ -1,5 +1,6 @@
 import './admin-statistic.styles.scss'
 
+import { useAdminStore } from '@/store'
 import { useState } from 'react'
 
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined'
@@ -29,11 +30,14 @@ function AdminStatistic({ activeHomePage, setActiveHomePage, activeId, setActive
     },
   ]
 
+  const [setTabId] = useAdminStore((state) => [state.setTabId])
+
   const handleClick = (id) => {
     if (activeHomePage) {
       setActiveHomePage(false)
     }
     setActiveId(id)
+    setTabId(id)
   }
 
   return (
