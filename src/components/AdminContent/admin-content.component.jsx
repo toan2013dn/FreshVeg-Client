@@ -7,6 +7,7 @@ import CategoriesManagement from './CategoriesManagement/categories-management.c
 import OrderManagementTable from './OrderManagement/order-management-table.component'
 import ProductManagement from './ProductManagement/product-management.component'
 import UserManagement from './UserManagement/user-management.component'
+import ProductStatistic from '../AdminHeader/AdminStatistic/ProductStatistic/product-statistic.component'
 
 function AdminContent() {
   const [tabId] = useAdminStore((state) => [state.tabId])
@@ -16,6 +17,7 @@ function AdminContent() {
     2: { name: 'Sản phẩm', component: <ProductManagement /> },
     3: { name: 'Đơn hàng', component: <OrderManagementTable /> },
     4: { name: 'Sản phẩm', component: <UserManagement /> },
+    6: { name: 'Thống kê sản phẩm', component: <ProductStatistic /> },
   }
   return <div className="admin-content">{tabId === -1 ? <AdminDashboard /> : tabs[tabId].component}</div>
 }

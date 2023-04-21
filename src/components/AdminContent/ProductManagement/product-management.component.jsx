@@ -1,16 +1,16 @@
 import './product-management.styles.scss'
 
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
-import { useState } from 'react'
+import { Button, Image } from 'antd'
+import { ToastContainer, toast } from 'react-toastify'
+import { useState, useEffect } from 'react'
 
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import AddProduct from '../AddProduct/add-product.component'
-import { useEffect } from 'react'
 import axios from '@/api/axios'
 import Loading from 'react-loading'
-import { Button, Image } from 'antd'
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 80 },
@@ -34,8 +34,8 @@ const columns = [
 
       return (
         <div className="flex gap-3">
-          <Button className="border-none" icon={<EditOutlined />} onClick={onEdit} />
-          <Button className="border-none" icon={<DeleteOutlined className="text-red-600" />} onClick={onDelete} />
+          <Button className="border-none edit" icon={<EditOutlinedIcon />} onClick={onEdit} />
+          <Button className="border-none delete" icon={<DeleteIcon className="text-red-600" />} onClick={onDelete} />
         </div>
       )
     },
@@ -66,8 +66,19 @@ function ProductManagement() {
     price: item.price,
     describe: item.description,
     onDelete: async () => {
-      await axios.delete('/product', { data: { productId: item.productId } })
-      fetchProducts()
+      const isDelete = await Swal.fire({
+        text: 'Bạn có muốn xoá sản phẩm này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Xoá',
+        cancelButtonText: 'Không',
+      })
+
+      if (isDelete.isConfirmed) {
+        await axios.delete('/product', { data: { productId: item.productId } })
+        fetchProducts()
+        toast.success('Xóa sản phẩm thành công!')
+      }
     },
     onEdit: () => {
       const [featuredImage, ...restImage] = item.productImages || []
@@ -129,6 +140,18 @@ function ProductManagement() {
           }}
         />
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }
