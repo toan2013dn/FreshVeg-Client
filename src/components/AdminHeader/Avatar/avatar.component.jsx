@@ -1,19 +1,22 @@
 import './avatar.styles.scss'
 
 import { useUserStore } from '@/store'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 import axios from '@/api/axios'
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import Popper from '@mui/material/Popper'
 import AdminAvatar from '@/assets/images/admin-avatar.png'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
-import { useNavigate } from 'react-router-dom'
-
+import ForgotPassword from '@/components/UserPageComponents/ForgotPassword/forgot-password.component'
 import React from 'react'
 
 function Avatar() {
   const [admin, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const navigate = useNavigate()
@@ -34,6 +37,19 @@ function Avatar() {
         console.log(err)
       })
   }
+
+  const handleChangePassword = () => {
+    setIsOpenModal(true)
+    axios
+      .post('/auth/rspassword', {
+        email: userInfo.email,
+      })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   const handleClickAway = () => {
     setAnchorEl(null)
   }
@@ -87,6 +103,11 @@ function Avatar() {
               <h4>{admin?.email}</h4>
             </div>
             <div className="option-btn">
+              <button onClick={handleChangePassword}>
+                <VpnKeyOutlinedIcon />
+                <h4>Đổi mật khẩu</h4>
+              </button>
+              <ForgotPassword isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
               <button onClick={handleLogout}>
                 <LogoutOutlinedIcon />
                 <h4>Đăng xuất</h4>
