@@ -12,7 +12,7 @@ export const useCloudinary = (options) => {
     formData.append('file', file)
 
     // TODO: change preset key here
-    formData.append('upload_preset', 'freshveg')
+    formData.append('upload_preset', 'trungluc')
 
     try {
       setLoading(true)
