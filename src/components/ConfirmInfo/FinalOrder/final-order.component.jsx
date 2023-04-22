@@ -42,7 +42,15 @@ function FinalOrder({ orderNote }) {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
       return
     }
-    alert(totalPrice)
+
+    const updatedProductCart = productCart.map((product) => {
+      return {
+        product: { productId: product.product.productId },
+        price: product.price,
+        weight: product.weight / 1000,
+        productName: product.productName,
+      }
+    })
 
     axios
       .post('/order', {
@@ -54,7 +62,7 @@ function FinalOrder({ orderNote }) {
         address: {
           addressId: selectedAddress?.addressId,
         },
-        orderDetails: productCart,
+        orderDetails: updatedProductCart,
       })
       .then((res) => {
         setBillInfo(productCart)
@@ -110,7 +118,7 @@ function FinalOrder({ orderNote }) {
             <div className="product-items flex" key={product.productId}>
               <div className="products">
                 <h4>{product.productName}</h4>
-                <h4>{product.weight}gr</h4>
+                <h4>{product.weight / 1000}kg</h4>
               </div>
               <h4>{((product?.price * product?.weight) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
             </div>

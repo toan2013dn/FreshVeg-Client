@@ -104,7 +104,7 @@ function CartPopper() {
                         <TextOverflow width={125} fontWeight={700} content={product.productName} />
                         <h4 className="price">{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
                         {/* <p className="weight">{product.weight}</p> */}
-                        <p className="weight">{product.weight}gr</p>
+                        <p className="weight">{product.weight / 1000}kg</p>
                       </div>
                     </div>
                     <div className="cart-popper--item-btn">

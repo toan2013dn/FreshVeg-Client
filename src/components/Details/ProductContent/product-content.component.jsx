@@ -25,6 +25,8 @@ function ProductContent({ productId }) {
       })
   }, [productId])
 
+  console.log(content)
+
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userInfo] = useUserStore((state) => [state.userInfo])
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -32,26 +34,39 @@ function ProductContent({ productId }) {
 
   const handleAddToCart = () => {
     if (content) {
-      const product = {
-        product: { productId: content.productId },
-        price: content.price,
-        weight: weight,
-        productName: content.productName,
-      }
-      if (userInfo === null) {
-        setIsOpenModal(true)
+      const weightInKg = weight / 1000
+
+      if (content.weight === 0) {
+        toast.error('Sản phẩm hiện đang hết hàng!')
+        return
+      } else if (content.weight < weightInKg) {
+        toast.error(`Sản phẩm hiện chỉ còn ${content.weight}kg!`)
+        return
+      } else if (weightInKg < 0.1) {
+        toast.error('Khối lượng tối thiểu là 100g!')
+        return
       } else {
-        const existingProductIndex = productCart.findIndex((item) => item.product.productId === content.productId)
-        if (existingProductIndex === -1) {
-          setProductCart([...productCart, product])
-          toast.success('Thêm vào giỏ hàng thành công!')
+        const product = {
+          product: { productId: content.productId },
+          price: content.price,
+          weight,
+          productName: content.productName,
+        }
+        if (userInfo === null) {
+          setIsOpenModal(true)
         } else {
-          const existingProduct = productCart[existingProductIndex]
-          const updatedProduct = { ...existingProduct, weight: existingProduct.weight + weight }
-          const updatedProductCart = [...productCart]
-          updatedProductCart.splice(existingProductIndex, 1, updatedProduct)
-          setProductCart(updatedProductCart)
-          toast.success('Cập nhật giỏ hàng thành công!')
+          const existingProductIndex = productCart.findIndex((item) => item.product.productId === content.productId)
+          if (existingProductIndex === -1) {
+            setProductCart([...productCart, product])
+            toast.success('Thêm vào giỏ hàng thành công!')
+          } else {
+            const existingProduct = productCart[existingProductIndex]
+            const updatedProduct = { ...existingProduct, weight: existingProduct.weight + weight }
+            const updatedProductCart = [...productCart]
+            updatedProductCart.splice(existingProductIndex, 1, updatedProduct)
+            setProductCart(updatedProductCart)
+            toast.success('Cập nhật giỏ hàng thành công!')
+          }
         }
       }
     }

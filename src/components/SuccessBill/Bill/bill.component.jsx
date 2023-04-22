@@ -43,9 +43,9 @@ function Bill() {
           <div className="product-items flex">
             <div className="products ">
               <h4>{item.product.productName}</h4>
-              <h4>{item.weight}gr</h4>
+              <h4>{item.weight}kg</h4>
             </div>
-            <h4>{((item?.price * item?.weight) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+            <h4>{(item?.price * item?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
           </div>
         ))}
         <div className="shipping-cost flex">

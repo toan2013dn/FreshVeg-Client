@@ -84,7 +84,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
                 <div className="price">
                   <PriceWithDots price={product.price} fontWeight={700} />
                 </div>
-                <div className="weight">{product.weight}gr</div>
+                <div className="weight">{product.weight}kg</div>
               </div>
             </div>
           ))}
