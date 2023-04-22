@@ -12,13 +12,13 @@ export const useCloudinary = (options) => {
     formData.append('file', file)
 
     // TODO: change preset key here
-    formData.append('upload_preset', 'trungluc')
+    formData.append('upload_preset', 'freshveg')
 
     try {
       setLoading(true)
 
       // TODO: change cloud name here
-      const response = await axios.post('https://api.cloudinary.com/v1_1/dctfgio0e/image/upload', formData)
+      const response = await axios.post('https://api.cloudinary.com/v1_1/dbwuaoohs/image/upload', formData)
 
       setImage(response.data.secure_url)
 
