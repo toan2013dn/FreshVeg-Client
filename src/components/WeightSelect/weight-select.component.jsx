@@ -1,30 +1,35 @@
-import FormControl from '@mui/material/FormControl'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
+import './weight-select.styles.scss'
+
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined'
 
 function WeightSelect({ weight, setWeight }) {
-  const handleChange = (event) => {
-    setWeight(event.target.value)
+  const handleDecrease = () => {
+    const newWeight = Math.max(weight - 100, 0)
+    setWeight(newWeight)
+  }
+
+  const handleIncrease = () => {
+    const newWeight = weight + 100
+    setWeight(newWeight)
+  }
+
+  const handleInputChange = (event) => {
+    const newWeight = parseInt(event.target.value) || 0
+    setWeight(newWeight)
   }
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 200, mt: 1 }}>
-        {/* <Select displayEmpty value={0} input={<OutlinedInput />} defaultValue={10}> */}
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={weight}
-          onChange={handleChange}
-        >
-          <MenuItem value={100}>100gr</MenuItem>
-          <MenuItem value={200}>200gr</MenuItem>
-          <MenuItem value={300}>300gr</MenuItem>
-          <MenuItem value={400}>400gr</MenuItem>
-          <MenuItem value={500}>500gr</MenuItem>
-          <MenuItem value={600}>600gr</MenuItem>
-        </Select>
-      </FormControl>
+    <div className="weight-select">
+      <button className="decrease-btn" onClick={handleDecrease}>
+        <RemoveOutlinedIcon />
+      </button>
+      <div className="weight">
+        <input type="text" value={`${weight}g`} onChange={handleInputChange} />
+      </div>
+      <button className="increase-btn" onClick={handleIncrease}>
+        <AddOutlinedIcon />
+      </button>
     </div>
   )
 }

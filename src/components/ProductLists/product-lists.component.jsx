@@ -11,79 +11,22 @@ import PaginationComponent from './Pagination/pagination.component'
 import { useSearchParams } from 'react-router-dom'
 
 function ProductLists() {
-  // const productLists = [
-  //   {
-  //     id: 1,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 2,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 3,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 4,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 5,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 6,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 7,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 8,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  //   {
-  //     id: 9,
-  //     image: Products,
-  //     name: 'Hạt chi đó',
-  //     price: 50000,
-  //   },
-  // ]
-
   const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams()
   const search = searchParams.get('search')
 
   useEffect(() => {
     axios
-    .get('/product/all')
-    .then((response) => {
-      const products = response.data.filter(product => {
-        return search ? product.productName.toLowerCase().includes(search.toLowerCase()) : true
+      .get('/product/all')
+      .then((response) => {
+        const products = response.data.filter((product) => {
+          return search ? product.productName.toLowerCase().includes(search.toLowerCase()) : true
+        })
+        setProducts(products)
       })
-      setProducts(products);
-    })
-    .catch((err) => {
-      console.log('products err', err)
-    })
+      .catch((err) => {
+        console.log('products err', err)
+      })
   }, [search])
 
   return (

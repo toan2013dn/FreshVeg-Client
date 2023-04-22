@@ -8,7 +8,7 @@ import TextOverflow from '../TextOverflow/text-overflow.component'
 
 function ProductInfo({ product }) {
   const navigate = useNavigate()
-  const handleNavigatge = () => {
+  const handleNavigate = () => {
     navigate(`/products-details/${product.productId}`)
   }
   return (
@@ -29,10 +29,9 @@ function ProductInfo({ product }) {
           <PriceWithDots price={product.price} />
         </h4>
       </div>
-      <button onClick={handleNavigatge}>Xem Thêm</button>
+      <button onClick={handleNavigate}>Xem Thêm</button>
     </div>
   )
 }
 
 export default ProductInfo
-

@@ -1,13 +1,11 @@
 import './homeproducts.component.scss'
 
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 import { useProductStore } from '@/store'
-
-import ProductInfo from '../ProductInfo/productinfo.component'
-import Products from '@/assets/images/Products.webp'
-import axios from '@/api/axios'
+import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+
+import axios from '@/api/axios'
+import ProductInfo from '../ProductInfo/productinfo.component'
 
 function HomeProducts() {
   const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])

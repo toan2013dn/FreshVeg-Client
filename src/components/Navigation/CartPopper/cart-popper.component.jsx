@@ -1,4 +1,4 @@
-  import './cart-popper.styles.scss'
+import './cart-popper.styles.scss'
 
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 import TextOverflow from '@/components/TextOverflow/text-overflow.component'
