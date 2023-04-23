@@ -159,7 +159,7 @@ const columns = [
     headerName: 'Ngày Đặt',
     width: 130,
     valueGetter: (params) => {
-      const date = new Date(params.value * 1000)
+      const date = new Date(params.value)
       return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     },
   },
@@ -194,6 +194,8 @@ function UserOrder() {
         console.log('get order', err)
       })
   }, [])
+
+  console.log(orders)
 
   return (
     <div className="user-order">

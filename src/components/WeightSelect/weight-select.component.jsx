@@ -25,7 +25,7 @@ function WeightSelect({ weight, setWeight }) {
         <RemoveOutlinedIcon />
       </button>
       <div className="weight">
-        <input type="text" value={`${weight}g`} onChange={handleInputChange} />
+        <input type="text" value={`${weight}gr`} onChange={handleInputChange} />
       </div>
       <button className="increase-btn" onClick={handleIncrease}>
         <AddOutlinedIcon />

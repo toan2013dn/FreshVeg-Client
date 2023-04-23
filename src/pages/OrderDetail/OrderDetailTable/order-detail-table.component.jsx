@@ -80,7 +80,7 @@ function OrderDetailTable() {
                     {(row?.price ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
                   </TableCell>
                   <TableCell align="center">
-                    <WeightSelect weight={row?.weight} setWeight={(value) => setProductWeight(row.productId, value)} />
+                    <WeightSelect weight={row?.weight} setWeight={(value) => setProductWeight(row?.productId, value)} />
                   </TableCell>
                   <TableCell align="center">
                     <div className="total-price">
