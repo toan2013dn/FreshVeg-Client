@@ -56,7 +56,6 @@ function Bill() {
           <h4>THANH TOÁN </h4>
           <h4>
             <PriceWithDots price={orderInfo.amount} />
-            {/* {orderInfo.amount} */}
           </h4>
         </div>
       </div>
@@ -65,7 +64,7 @@ function Bill() {
         <h4 style={{ fontWeight: '700' }}>CHI TIẾT</h4>
         {/* <div className="bill-details--orderDate flex">
           <h4 style={{ width: '70%' }}>Ngày đặt hàng:</h4>
-          <h4 style={{ width: '100%' }}>{`${day}/${month}/${year}`}</h4>
+          <h4 style={{ width: '100%' }}>{formattedDate}</h4>
         </div> */}
         <div className="bill-details--receiverName flex">
           <h4 style={{ width: '70%' }}>Tên người nhận:</h4>
@@ -79,11 +78,6 @@ function Bill() {
           <h4 style={{ width: '70%' }}>SĐT người nhận:</h4>
           <h4 style={{ width: '100%' }}>{orderInfo?.address?.receiverPhone}</h4>
         </div>
-        {/* <div className="bill-details--statusPayment flex">
-          <h4 style={{ width: '70%' }}>Phương thức thanh toán: </h4>
-          {/* <h4 style={{ width: '100%' }}>{selectedAddress?.receiverPhone}</h4> 
-          <h4>{!statusPaymentMethod ? 'Thanh toán khi nhận hàng (COD)' : 'Đã thanh toán bằng VNPAY'}</h4>
-        </div> */}
         <div className="bill-details--note">
           {orderInfo.note !== '' ? (
             <>

@@ -25,8 +25,6 @@ function ProductContent({ productId }) {
       })
   }, [productId])
 
-  console.log(content)
-
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userInfo] = useUserStore((state) => [state.userInfo])
   const [isOpenModal, setIsOpenModal] = useState(false)
