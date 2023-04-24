@@ -29,8 +29,6 @@ function AddNewAddress({ isOpen, onClose, setForceUser }) {
     setErrors({})
   }
 
-  console.log(token);
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -45,10 +43,10 @@ function AddNewAddress({ isOpen, onClose, setForceUser }) {
           },
           {
             headers: {
-              Authorization: "Bearer " + token,
+              // Authorization: "Bearer " + token,
               'Content-Type': 'application/json',
             },
-            withCredentials: true
+            withCredentials: true,
           },
         )
         .then((res) => {
