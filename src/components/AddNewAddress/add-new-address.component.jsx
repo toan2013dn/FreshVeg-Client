@@ -22,13 +22,15 @@ function AddNewAddress({ isOpen, onClose, setForceUser }) {
   ])
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
-
   const resetForm = () => {
     setName('')
     setPhone('')
     setAddress('')
     setErrors({})
   }
+
+  console.log(token);
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -43,9 +45,10 @@ function AddNewAddress({ isOpen, onClose, setForceUser }) {
           },
           {
             headers: {
-              // Authorization: `Bearer ${token}`,
+              Authorization: "Bearer " + token,
               'Content-Type': 'application/json',
             },
+            withCredentials: true
           },
         )
         .then((res) => {

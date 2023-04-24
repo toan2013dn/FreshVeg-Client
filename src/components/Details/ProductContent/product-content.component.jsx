@@ -18,6 +18,7 @@ function ProductContent({ productId }) {
     axios
       .get('/product/' + productId)
       .then((res) => {
+        console.log(res)
         setContent(res.data)
       })
       .catch((err) => {
