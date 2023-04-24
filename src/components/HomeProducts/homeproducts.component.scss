@@ -17,6 +17,11 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+
+    .product-info--image {
+      width: 100%;
+      object-fit: cover;
+    }
   }
   .button {
     display: flex;

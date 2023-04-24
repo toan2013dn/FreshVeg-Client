@@ -195,8 +195,6 @@ function UserOrder() {
       })
   }, [])
 
-  console.log(orders)
-
   return (
     <div className="user-order">
       <DataGrid

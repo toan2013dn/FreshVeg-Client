@@ -38,7 +38,7 @@ function CartPopper() {
 
   //handleDelete
   const handleDelete = (id) => {
-    const newCart = productCart.filter((item) => item.productId !== id)
+    const newCart = productCart.filter((item) => item.product.productId !== id)
     setProductCart(newCart)
   }
 
@@ -91,7 +91,7 @@ function CartPopper() {
             {productCart.length > 0 ? (
               <>
                 {productCart.map((product) => (
-                  <div key={product.productId} className="cart-popper--item">
+                  <div key={product.product.productId} className="cart-popper--item">
                     <div style={{ display: 'flex', gap: '5px' }}>
                       <div className="cart-popper--item-img">
                         {product.productImage ? (
@@ -108,7 +108,7 @@ function CartPopper() {
                       </div>
                     </div>
                     <div className="cart-popper--item-btn">
-                      <button onClick={() => handleDelete(product.productId)}>
+                      <button onClick={() => handleDelete(product.product.productId)}>
                         <DeleteForeverOutlinedIcon />
                       </button>
                     </div>
