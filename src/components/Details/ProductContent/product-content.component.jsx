@@ -82,10 +82,15 @@ function ProductContent({ productId }) {
           <div className="line"></div>
         </div>
         <div className="product-content--item--weight">
-          <h4>Khối lượng</h4>
-          <div className="product-content--item--weight--select">
-            <WeightSelect weight={weight} setWeight={setWeight} />
+          <div className="select-weight">
+            <h4>Khối lượng</h4>
+            <div className="product-content--item--weight--select">
+              <WeightSelect weight={weight} setWeight={setWeight} />
+            </div>
           </div>
+          <h4>
+            Còn lại: <span>{content?.weight < 1 ? content?.weight * 1000 + 'g' : content?.weight + 'kg'}</span>
+          </h4>
         </div>
         <div className="product-content--item--button">
           <div className="line"></div>
