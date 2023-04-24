@@ -37,7 +37,7 @@ function OrderDetailTable() {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        const newCart = productCart.filter((item) => item.productId !== id)
+        const newCart = productCart.filter((item) => item.product.productId !== id)
         setProductCart(newCart)
         Swal.fire({
           html: '<h4>Xoá thành công!</h4>',
@@ -65,7 +65,7 @@ function OrderDetailTable() {
             </TableHead>
             <TableBody>
               {productCart.map((row) => (
-                <TableRow key={row?.productId}>
+                <TableRow key={row?.product.productId}>
                   <TableCell scope="row">
                     <div className="image">
                       {row?.productImage ? (
@@ -80,7 +80,10 @@ function OrderDetailTable() {
                     {(row?.price ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
                   </TableCell>
                   <TableCell align="center">
-                    <WeightSelect weight={row?.weight} setWeight={(value) => setProductWeight(row?.productId, value)} />
+                    <WeightSelect
+                      weight={row?.weight}
+                      setWeight={(value) => setProductWeight(row?.product.productId, value)}
+                    />
                   </TableCell>
                   <TableCell align="center">
                     <div className="total-price">
@@ -88,7 +91,7 @@ function OrderDetailTable() {
                     </div>
                   </TableCell>
                   <TableCell align="center">
-                    <div className="delete-button" onClick={() => handleDelete(row.productId)}>
+                    <div className="delete-button" onClick={() => handleDelete(row.product.productId)}>
                       <DeleteForeverIcon />
                     </div>
                   </TableCell>

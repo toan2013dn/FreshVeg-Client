@@ -8,7 +8,7 @@ const useProductCartStore = create(
             setProductCart: (productCart) => set(() => ({ productCart })),
             setProductWeight: (id, weight) => set((state) => {
                 const productCart = state.productCart.map((product) => {
-                    if (product.productId === id) {
+                    if (product.product.productId === id) {
                         product.weight = weight
                     }
                     return product
