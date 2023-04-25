@@ -1,10 +1,10 @@
-import './sort.styles.scss'
-import { useTheme } from '@mui/material/styles'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
+import MenuItem from '@mui/material/MenuItem'
+import OutlinedInput from '@mui/material/OutlinedInput'
 import Select from '@mui/material/Select'
-import React from 'react'
+import './sort.styles.scss'
+
+import { useProductsContext } from '../../../context/products-list.context'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -17,20 +17,41 @@ const MenuProps = {
   },
 }
 
-const names = ['Giá từ thấp đến cao', 'Giá từ cao đến thấp', 'Bán chạy nhất', 'Mới nhất']
+const selections = {
+  lowToHigh: 'Giá từ thấp đến cao',
+  highToLow: 'Giá từ cao đến thấp',
+  mostSale: 'Bán chạy nhất (TODO)',
+  newest: 'Mới nhất (TODO)',
+}
 
 function Sort() {
-  const theme = useTheme()
-  const [personName, setPersonName] = React.useState([])
+  const { setSort } = useProductsContext()
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    )
+  const handleOnchange = (e) => {
+    let value = e.target.value
+
+    console.log(value)
+    switch (value) {
+      case 'lowToHigh':
+        setSort(() => (a, b) => {
+          return a.price - b.price
+        })
+        break
+      case 'highToLow':
+        setSort(() => (a, b) => {
+          return b.price - a.price
+        })
+        break
+      case 'mostSale':
+        break
+      case 'newest':
+        setSort(() => (a, b) => {
+          return b.enterDate - a.price.enterDate
+        })
+        break
+      default:
+        break
+    }
   }
 
   return (
@@ -40,21 +61,15 @@ function Sort() {
         <FormControl sx={{ m: 1, width: 300, mt: -2.3 }}>
           <Select
             displayEmpty
-            value={personName}
-            onChange={handleChange}
+            defaultValue={'lowToHigh'}
             input={<OutlinedInput />}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return <em>Giá từ thấp đến cao</em>
-              }
-              return selected.join(', ')
-            }}
             MenuProps={MenuProps}
             inputProps={{ 'aria-label': 'Without label' }}
+            onChange={handleOnchange}
           >
-            {names.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
+            {Object.keys(selections).map((key) => (
+              <MenuItem key={key} value={key}>
+                {selections[key]}
               </MenuItem>
             ))}
           </Select>

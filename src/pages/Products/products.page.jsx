@@ -1,12 +1,15 @@
 import './products.page.scss'
+
 import { ReactComponent as Next } from '@/assets/icons/Next.svg'
+import { NavLink, useSearchParams } from 'react-router-dom'
+
 import Header from '@/components/Header/header.component'
 import ProductsBG from '@/assets/images/CategoriesBG.webp'
 import Footer from '@/components/Footer/footer.component'
 import FilterPanel from '@/components/FilterPanel/filter-panel.component'
 import ProductLists from '@/components/ProductLists/product-lists.component'
-import { NavLink, useSearchParams } from 'react-router-dom'
 import React from 'react'
+import { ProductProvider } from '@/context/products-list.context'
 
 function Products() {
   return (
@@ -21,19 +24,21 @@ function Products() {
         </div>
       </div>
       <div className="container">
-        <div>
-          <div className="products-links">
-            <NavLink to="/">Trang chủ</NavLink>
-            <Next />
-            <NavLink to="/products">Đi Chợ</NavLink>
+        <ProductProvider>
+          <div>
+            <div className="products-links">
+              <NavLink to="/">Trang chủ</NavLink>
+              <Next />
+              <NavLink to="/products">Đi Chợ</NavLink>
+            </div>
+            <div className="products-filter">
+              <FilterPanel />
+            </div>
           </div>
-          <div className="products-filter">
-            <FilterPanel />
+          <div className="products-list">
+            <ProductLists />
           </div>
-        </div>
-        <div className="products-list">
-          <ProductLists />
-        </div>
+        </ProductProvider>
       </div>
       <Footer />
     </div>

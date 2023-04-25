@@ -1,22 +1,14 @@
 import './category.component.scss'
+
 import { useEffect, useState } from 'react'
+import { useProductsContext } from '../../../context/products-list.context'
+
 import axios from '@/api/axios'
 
 function Category() {
-  const [categories, setCategories] = useState([
-    // {
-    //   id: 1,
-    //   name: "Rau",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Củ",
-    // },
-    // {
-    //   id: 3,
-    //   name: "Quả",
-    // },
-  ])
+  const [categories, setCategories] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const { products, setFilters } = useProductsContext()
 
   useEffect(() => {
     axios
@@ -29,7 +21,29 @@ function Category() {
       })
   }, [])
 
-  const [selectedCategory, setSelectedCategory] = useState([])
+  useEffect(() => {
+    if (selectedCategories.length === 0) {
+      setFilters('category', undefined)
+    } else {
+      setFilters('category', (product) => {
+        return selectedCategories.includes(product.category.categoryId)
+      })
+    }
+  }, [selectedCategories])
+
+  const hanldeCategoryFilterChange = (e) => {
+    const value = Number(e.target.value)
+    console.log(e.target.checked)
+    if (e.target.checked) {
+      console.log('add')
+      setSelectedCategories([...selectedCategories, value])
+    } else {
+      console.log('remove')
+      selectedCategories.splice(selectedCategories.indexOf(value), 1)
+      console.log(selectedCategories)
+      setSelectedCategories([...selectedCategories])
+    }
+  }
 
   return (
     <div className="category">
@@ -41,8 +55,8 @@ function Category() {
             type="checkbox"
             id={category.categoryId}
             name={category.categoryName}
-            value={category.categoryName}
-            onChange={() => setSelectedCategory(category.categoryId)}
+            value={category.categoryId}
+            onChange={hanldeCategoryFilterChange}
           />
         </div>
       ))}
