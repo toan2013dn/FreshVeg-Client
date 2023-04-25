@@ -2,29 +2,15 @@ import './product-content.styles.scss'
 
 import { ReactComponent as Cart } from '@/assets/icons/Cart.svg'
 import { useProductCartStore, useUserStore } from '@/store'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 
-import axios from '@/api/axios'
 import WeightSelect from '@/components/WeightSelect/weight-select.component'
 import Login from '@/pages/Login/login.page'
 import Modal from '@mui/material/Modal'
 import SocialMediaSharing from '../SocialMediaSharing/socialmedia-sharing.component'
 
-function ProductContent({ productId }) {
-  const [content, setContent] = useState()
-
-  useEffect(() => {
-    axios
-      .get('/product/' + productId)
-      .then((res) => {
-        setContent(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [productId])
-
+function ProductContent({ content }) {
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userInfo] = useUserStore((state) => [state.userInfo])
   const [isOpenModal, setIsOpenModal] = useState(false)

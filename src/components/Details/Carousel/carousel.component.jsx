@@ -2,15 +2,13 @@ import './carousel.styles.scss'
 
 import { useProductStore } from '@/store'
 
-import Products from '@/assets/images/Products.webp'
-import ProductOne from '@/assets/images/Product-Part-1.webp'
 import ProductInfo from '@/components/ProductInfo/productinfo.component'
-import AliceCarousel from 'react-alice-carousel'
 import BackArrow from '@mui/icons-material/ArrowBackIosNew'
 import FowardArrow from '@mui/icons-material/ArrowForwardIos'
+import AliceCarousel from 'react-alice-carousel'
 
 function CarouselImage() {
-  const [products, setProducts] = useProductStore((state) => [state.products, state.setProducts])
+  const [products] = useProductStore((state) => [state.products])
 
   const items = products.map((product) => {
     return <ProductInfo key={product.productId} product={product} />
