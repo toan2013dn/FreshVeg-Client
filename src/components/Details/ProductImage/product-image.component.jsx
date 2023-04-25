@@ -1,40 +1,20 @@
 import './product-image.styles.scss'
 
-import Products from '@/assets/images/Products.webp'
 import { useState } from 'react'
-import ProductOne from '@/assets/images/Product-Part-1.webp'
-import ProductTwo from '@/assets/images/Product-Part-2.webp'
-import ProductThree from '@/assets/images/Product-Part-3.webp'
 
-function ProductImage({ productId }) {
-  const images = [
-    {
-      id: 1,
-      image: Products,
-    },
-    {
-      id: 2,
-      image: ProductOne,
-    },
-    {
-      id: 3,
-      image: ProductTwo,
-    },
-    {
-      id: 4,
-      image: ProductThree,
-    },
-  ]
-  const [selectedImage, setSelectedImage] = useState(images[0].image)
-  const [activeImage, setActiveImage] = useState(images[0].id)
+function ProductImage({ content }) {
+  const productImages = content?.productImages
+
+  const [selectedImage, setSelectedImage] = useState(productImages[0].imageLink)
+  const [activeImage, setActiveImage] = useState(productImages[0].productImageId)
 
   const isThumbnailActive = (id) => {
     return activeImage === id ? 'active' : ''
   }
 
   const handleClick = (id) => {
-    const image = images.find((image) => image.id === id)
-    setSelectedImage(image.image)
+    const image = productImages.find((image) => image?.productImageId === id)
+    setSelectedImage(image.imageLink)
     setActiveImage(id)
   }
 
@@ -44,9 +24,13 @@ function ProductImage({ productId }) {
         <img className="image" src={selectedImage} alt="product" />
       </div>
       <ul className="product-image--list">
-        {images.map((image) => (
-          <li className={isThumbnailActive(image.id)} key={image.id} onClick={() => handleClick(image.id)}>
-            <img className="image" src={image.image} alt="product" />
+        {productImages.map((image) => (
+          <li
+            className={isThumbnailActive(image?.productImageId)}
+            key={image?.productImageId}
+            onClick={() => handleClick(image?.productImageId)}
+          >
+            <img className="image" src={image?.imageLink} alt="product" />
           </li>
         ))}
       </ul>
