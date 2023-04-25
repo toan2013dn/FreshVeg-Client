@@ -1,14 +1,14 @@
 import './category.component.scss'
 
 import { useEffect, useState } from 'react'
-import { useProductStore } from '@/store'
+import { useProductsContext } from '../../../context/products-list.context'
 
 import axios from '@/api/axios'
 
 function Category() {
   const [categories, setCategories] = useState([])
-  const [selectedCategories, setSelectedCategory] = useState([])
-  const { products, filterProducts } = useProductsContext()
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const { products, setFilters } = useProductsContext()
 
   useEffect(() => {
     axios
@@ -22,14 +22,28 @@ function Category() {
   }, [])
 
   useEffect(() => {
-    console.log(products, categories, selectedCategories)
-
-    if (selectedCategories.length !== 0) {
-      filterProducts((product) => {
-        return selectedCategories.map(selected => selected.categoryId).includes(product.categoryId)
-      }
+    if (selectedCategories.length === 0) {
+      setFilters('category', undefined)
+    } else {
+      setFilters('category', (product) => {
+        return selectedCategories.includes(product.category.categoryId)
+      })
     }
   }, [selectedCategories])
+
+  const hanldeCategoryFilterChange = (e) => {
+    const value = Number(e.target.value)
+    console.log(e.target.checked)
+    if (e.target.checked) {
+      console.log('add')
+      setSelectedCategories([...selectedCategories, value])
+    } else {
+      console.log('remove')
+      selectedCategories.splice(selectedCategories.indexOf(value), 1)
+      console.log(selectedCategories)
+      setSelectedCategories([...selectedCategories])
+    }
+  }
 
   return (
     <div className="category">
@@ -41,8 +55,8 @@ function Category() {
             type="checkbox"
             id={category.categoryId}
             name={category.categoryName}
-            value={category.categoryName}
-            onChange={() => setSelectedCategory([...selectedCategories, category.categoryId])}
+            value={category.categoryId}
+            onChange={hanldeCategoryFilterChange}
           />
         </div>
       ))}

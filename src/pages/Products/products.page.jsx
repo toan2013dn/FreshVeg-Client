@@ -9,7 +9,7 @@ import Footer from '@/components/Footer/footer.component'
 import FilterPanel from '@/components/FilterPanel/filter-panel.component'
 import ProductLists from '@/components/ProductLists/product-lists.component'
 import React from 'react'
-import { ProductProvider } from '@/components/ProductLists/products-list.context'
+import { ProductProvider } from '@/context/products-list.context'
 
 function Products() {
   return (

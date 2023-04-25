@@ -1,15 +1,19 @@
-import "./searchbar.component.scss";
-import { ReactComponent as Search } from "@/assets/icons/Search.svg";
-import { useRef } from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import './searchbar.component.scss'
+import { ReactComponent as Search } from '@/assets/icons/Search.svg'
+import { useRef } from 'react'
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
+import { useSearch } from '../../context/header.context'
 
 function SearchBar() {
   const navigate = useNavigate()
-  const searchRef = useRef(null)
+  const location = useLocation()
+  const { searchValue, setSearchValue } = useSearch()
 
   const handleSearch = () => {
-    const params = { search: searchRef.current.value }
-    navigate({ pathname: '/products', search: `?${createSearchParams(params)}` })
+    if (location.pathname !== '/products') {
+      const params = { search: searchValue }
+      navigate({ pathname: '/products', search: `?${createSearchParams(params)}` })
+    }
   }
 
   const handleEnter = (event) => {
@@ -20,12 +24,19 @@ function SearchBar() {
 
   return (
     <div className="search">
-      <input ref={searchRef} type="text" className="search--input" placeholder="Tìm kiếm" onKeyDown={handleEnter} />
+      <input
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        type="text"
+        className="search--input"
+        placeholder="Tìm kiếm"
+        onKeyDown={handleEnter}
+      />
       <div className="icon" onClick={handleSearch}>
         <Search className="icon--search" />
       </div>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar
