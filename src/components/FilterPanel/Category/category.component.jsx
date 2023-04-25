@@ -1,22 +1,14 @@
 import './category.component.scss'
+
 import { useEffect, useState } from 'react'
+import { useProductStore } from '@/store'
+
 import axios from '@/api/axios'
 
 function Category() {
-  const [categories, setCategories] = useState([
-    // {
-    //   id: 1,
-    //   name: "Rau",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Củ",
-    // },
-    // {
-    //   id: 3,
-    //   name: "Quả",
-    // },
-  ])
+  const [categories, setCategories] = useState([])
+  const [selectedCategories, setSelectedCategory] = useState([])
+  const { products, filterProducts } = useProductsContext()
 
   useEffect(() => {
     axios
@@ -29,7 +21,15 @@ function Category() {
       })
   }, [])
 
-  const [selectedCategory, setSelectedCategory] = useState([])
+  useEffect(() => {
+    console.log(products, categories, selectedCategories)
+
+    if (selectedCategories.length !== 0) {
+      filterProducts((product) => {
+        return selectedCategories.map(selected => selected.categoryId).includes(product.categoryId)
+      }
+    }
+  }, [selectedCategories])
 
   return (
     <div className="category">
@@ -42,7 +42,7 @@ function Category() {
             id={category.categoryId}
             name={category.categoryName}
             value={category.categoryName}
-            onChange={() => setSelectedCategory(category.categoryId)}
+            onChange={() => setSelectedCategory([...selectedCategories, category.categoryId])}
           />
         </div>
       ))}
