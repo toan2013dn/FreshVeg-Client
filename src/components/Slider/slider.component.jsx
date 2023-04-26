@@ -30,21 +30,17 @@ function Slider() {
               <h2 className="slider-content--title">Healthy Food</h2>
             </div>
             <h4 className="slider-content--text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel tincidunt lacinia, nunc est
-              ultricies nunc, vel tincidunt nisl lorem eu dolor. Sed euismod, nisl vel tincidunt lacinia, nunc est
-              ultricies nunc, vel tincied euismod, nisl vel tincidunt lacinia, nunc est ultricies nunc, vel tincied
-              euismod, nisl vel tincidunt lacinia, nunc est ultricies nunc, vel tinci
+              FreshVeg là một nơi tuyệt vời để mua sắm cho những người quan tâm đến sức khỏe và an toàn thực phẩm. Tại
+              đây, bạn có thể tìm thấy những loại rau củ quả được trồng và chăm sóc một cách tự nhiên, không sử dụng hóa
+              chất và phân bón độc hại. Ngoài ra, FreshVeg cũng cung cấp thông tin về nguồn gốc của các sản phẩm, giúp
+              cho người mua có thể yên tâm về chất lượng và nguồn gốc của những sản phẩm mình sử dụng. Tất cả những điều
+              này đều giúp tạo ra một môi trường mua sắm an toàn và đáng tin cậy cho những ai quan tâm đến sức khỏe và
+              môi trường sống.
             </h4>
             <div className="slider-buttons">
               <button className="slider-buttons--button ">
                 <Link to={'/products'}>
                   Xem Sản Phẩm
-                  <Arrow className="slider-buttons--icon" />
-                </Link>
-              </button>
-              <button className="slider-buttons--button styles">
-                <Link to={'/recipe'}>
-                  Xem Công Thức
                   <Arrow className="slider-buttons--icon" />
                 </Link>
               </button>

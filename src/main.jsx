@@ -25,6 +25,7 @@ import SignUp from './pages/SignUp/signup.page'
 import Test from './pages/TestToan/test'
 import UserPage from './pages/UserPage/user-page.component'
 import './styles/index.scss'
+import ErrorPage from './pages/ErrorPage/error-page.component'
 
 const theme = createTheme()
 
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
   { path: '/forgot-password', element: <ForgotPasswordHomePage /> },
   { path: '/check-otp', element: <ForgotPasswordOTP /> },
   { path: '/set-new-password', element: <NewPasswordHomepage /> },
+  { path: '/error-page', element: <ErrorPage /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
