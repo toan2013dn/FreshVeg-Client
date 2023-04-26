@@ -8,6 +8,7 @@ import ReactLoading from 'react-loading'
 import Footer from '@/components/Footer/footer.component'
 import ProductBanner from '@/components/ProductBanner/product-banner.component'
 import Contact from '@/components/Contact/contact.component'
+import BackToTopButton from '@/components/BackToTopButton/backtotop-button.component'
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -25,6 +26,8 @@ const Home = () => {
       ) : (
         <div>
           <Header />
+
+          <BackToTopButton />
 
           <Slider />
 
