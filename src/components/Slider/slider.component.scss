@@ -44,14 +44,14 @@
   }
   &-content--text {
     width: 500px;
-    margin-top: 30px;
+    margin-top: 10px;
   }
 
   //CSS for the slider-buttons
   &-buttons {
     display: flex;
     gap: 30px;
-    margin-top: 10px;
+    margin-top: 30px;
     &--button {
       background-color: var(--primary-color);
       border: none;
