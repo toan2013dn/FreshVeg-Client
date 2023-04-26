@@ -1,11 +1,13 @@
+import React, { useEffect, useState } from 'react'
+
 import Header from '@/components/Header/header.component'
 import HomeProducts from '@/components/HomeProducts/homeproducts.component'
 import Slider from '@/components/Slider/slider.component'
 import Statistics from '@/components/Statistics/statistics.component'
-import HomeRecipe from '@/components/HomeRecipe/homerecipe.component'
 import ReactLoading from 'react-loading'
-import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer/footer.component'
+import ProductBanner from '@/components/ProductBanner/product-banner.component'
+import Contact from '@/components/Contact/contact.component'
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -30,7 +32,9 @@ const Home = () => {
 
           <Statistics />
 
-          <HomeRecipe />
+          <ProductBanner />
+
+          <Contact />
 
           <Footer />
         </div>
