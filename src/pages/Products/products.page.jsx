@@ -17,7 +17,9 @@ function Products() {
       <Header />
 
       <div className="products-background">
-        <img src={ProductsBG} alt="Products Background" />
+        <div className="products-background--image">
+          <img src={ProductsBG} alt="Products Background" />
+        </div>
         <div className="products-background--content">
           <h3>Đi Chợ</h3>
           <h4>Rau, củ, quả sạch đến từ các nông trại</h4>

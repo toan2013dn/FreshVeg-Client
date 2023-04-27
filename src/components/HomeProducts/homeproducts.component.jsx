@@ -38,7 +38,7 @@ function HomeProducts() {
       </div>
 
       <div className="product">
-        {products.map((product) => {
+        {products.slice(0, 8).map((product) => {
           return <ProductInfo key={product.productId} product={product} />
         })}
       </div>
