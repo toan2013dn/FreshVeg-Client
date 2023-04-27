@@ -81,7 +81,10 @@ function ProductContent({ content }) {
             </div>
           </div>
           <h4>
-            Còn lại: <span>{content?.weight < 1 ? content?.weight * 1000 + 'g' : content?.weight + 'kg'}</span>
+            Còn lại:{' '}
+            <span style={{ fontSize: '16px', fontWeight: '700' }}>
+              {content?.weight < 1 ? content?.weight * 1000 + 'gr' : content?.weight + 'kg'}
+            </span>
           </h4>
         </div>
         <div className="product-content--item--button">
