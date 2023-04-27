@@ -47,7 +47,7 @@ function FinalOrder({ orderNote }) {
       return {
         product: { productId: product.product.productId },
         price: product.price,
-        weight: product.weight / 1000,
+        weight: product.weight,
         productName: product.productName,
       }
     })
@@ -118,9 +118,9 @@ function FinalOrder({ orderNote }) {
             <div className="product-items flex" key={product.productId}>
               <div className="products">
                 <h4>{product.productName}</h4>
-                <h4>{product.weight / 1000}kg</h4>
+                <h4>{product.weight}kg</h4>
               </div>
-              <h4>{((product?.price * product?.weight) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+              <h4>{(product?.price * product?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
             </div>
           ))}
           <div className="shipping-cost flex">
