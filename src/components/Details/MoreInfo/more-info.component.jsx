@@ -25,7 +25,9 @@ function MoreProductInfo({ content }) {
               <Tab label="Cái Chi Đó" value="3" />
             </TabList>
           </Box>
-          <TabPanel value="1">{content.description}</TabPanel>
+          <TabPanel value="1">
+            <h4>{content.description}</h4>
+          </TabPanel>
           <TabPanel value="2">
             <ul>
               <li>

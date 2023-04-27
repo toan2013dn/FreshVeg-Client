@@ -36,6 +36,8 @@ function Bill() {
 
   if (isLoading) return null
 
+  console.log(orderInfo)
+
   return (
     <div className="bill">
       <div className="bill-info">
@@ -54,9 +56,7 @@ function Bill() {
         </div>
         <div className="total-cost flex">
           <h4>THANH TOÁN </h4>
-          <h4>
-            <PriceWithDots price={orderInfo.amount} />
-          </h4>
+          <h4>{orderInfo.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
         </div>
       </div>
 
