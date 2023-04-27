@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 function UserPopover() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [anchorEl, setAnchorEl] = React.useState(null)
+  console.log(userInfo)
 
   const navigate = useNavigate()
 
@@ -55,15 +56,16 @@ function UserPopover() {
   return (
     <div>
       <div className="user-popover--img" aria-describedby={id} variant="contained" onClick={handleClick}>
-        {userInfo?.image ? (
-          <div className="user-avartar">
-            <img src={userInfo.image} alt="avatar" />
-          </div>
-        ) : (
-          <div className="user-avartar">
-            <img src={userInfo.avatar ? userInfo.avatar : <User className="navigation-item--icon" />} alt="avatar" />
-          </div>
-        )}
+        <div className="user-avartar">
+          <img
+            src={
+              userInfo.avatar
+                ? userInfo.avatar
+                : 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
+            }
+            alt="avatar"
+          />
+        </div>
       </div>
       <Popper
         id={id}

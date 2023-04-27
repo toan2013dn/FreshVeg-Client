@@ -75,9 +75,11 @@
     flex-direction: column;
     gap: 10px;
     width: 910px;
+    border-bottom: 1px solid #e8e8e8;
 
     .line {
       margin: 10px 0;
+      background-color: #e8e8e8 !important;
     }
   }
   &--content {
