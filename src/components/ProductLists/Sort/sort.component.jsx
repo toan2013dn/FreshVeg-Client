@@ -30,7 +30,6 @@ function Sort() {
   const handleOnchange = (e) => {
     let value = e.target.value
 
-    console.log(value)
     switch (value) {
       case 'lowToHigh':
         setSort(() => (a, b) => {

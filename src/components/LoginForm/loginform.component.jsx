@@ -88,7 +88,6 @@ function LoginForm({ onClose }) {
               navigate('/')
             }
           }
-          console.log(response.data)
         })
         .catch((err) => {
           Swal.fire({

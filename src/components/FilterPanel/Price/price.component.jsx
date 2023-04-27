@@ -7,10 +7,9 @@ import './price.styles.scss'
 
 function PriceFilter() {
   const [value, setValue] = useState([0, 100000])
-  const {setFilters } = useProductsContext()
+  const { setFilters } = useProductsContext()
 
   useEffect(() => {
-    console.log(value)
     setFilters('price', (product) => value[0] <= product.price && value[1] >= product.price)
   }, [value])
 

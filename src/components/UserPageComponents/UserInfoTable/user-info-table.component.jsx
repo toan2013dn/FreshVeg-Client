@@ -75,7 +75,6 @@ function UserInfoTable() {
             birthday: userBirthday,
           })
           .then((res) => {
-            // console.log(res)
             setUserInfo(updatedUserInfo)
             Swal.fire({
               text: 'Cập nhật thành công!',

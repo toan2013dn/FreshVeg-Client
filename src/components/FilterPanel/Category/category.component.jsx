@@ -33,14 +33,10 @@ function Category() {
 
   const hanldeCategoryFilterChange = (e) => {
     const value = Number(e.target.value)
-    console.log(e.target.checked)
     if (e.target.checked) {
-      console.log('add')
       setSelectedCategories([...selectedCategories, value])
     } else {
-      console.log('remove')
       selectedCategories.splice(selectedCategories.indexOf(value), 1)
-      console.log(selectedCategories)
       setSelectedCategories([...selectedCategories])
     }
   }

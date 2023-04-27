@@ -12,7 +12,6 @@ import Modal from '@mui/material/Modal'
 
 function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTotal, orderStatusPayment }) {
   const [products, setProducts] = useState([])
-
   const [displayCount, setDisplayCount] = useState(3) // default display count
 
   const handleShowMore = () => {
@@ -31,7 +30,6 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
       .get(`/order/${orderId}`)
       .then((res) => {
         // setProducts(res.data.orderDetails)
-        // console.log(res.data.orderDetails.product)
 
         res.data.orderDetails.forEach((orderDetail) => {
           const result = {
@@ -39,6 +37,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
             price: orderDetail.price,
             weight: orderDetail.weight,
             name: orderDetail.product.productName,
+            image: orderDetail.product.productImages[0].imageLink,
           }
 
           setProducts((prev) => [...prev, result])
@@ -50,15 +49,18 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
   }, [])
 
   const dateGetter = () => {
-    const date = new Date(orderDate * 1000)
+    const date = new Date(orderDate)
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
   }
 
-  const estimatedDeliveryDate = orderDate + 3 * 24 * 60 * 60
+  const estimatedDeliveryDate = new Date()
+  estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 2) // set estimated delivery date as 2 days from now
+
   const estimatedDeliveryDateGetter = () => {
-    const date = new Date(estimatedDeliveryDate * 1000)
+    const date = estimatedDeliveryDate
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
   }
+
   return (
     <Modal open={isOpen} onClose={onClose}>
       <div className="user-order-info">
@@ -75,7 +77,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
           {products.slice(0, displayCount).map((product) => (
             <div className="user-order-info__product" key={product.id}>
               <div className="image">
-                <img src={product.img} alt="" />
+                <img src={product.image} alt="" />
               </div>
               <div className="info">
                 <div className="name">

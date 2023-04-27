@@ -84,7 +84,6 @@ function SignupForm() {
                     password: password,
                   })
                   .then((res) => {
-                    console.log(res)
                     if (res.data === 'OTP is not correct') {
                       // toast.error('Mã OTP không đúng! Vui lòng thử lại!')
                       Swal.showValidationMessage('Mã OTP không đúng! Vui lòng thử lại!')

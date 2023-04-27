@@ -9,12 +9,9 @@ export const ProductProvider = ({ children }) => {
   const [filterFuncs, setFilterFuncs] = useState({})
   const [sortFunc, setSortFunc] = useState(() => () => {})
 
-  console.log('sortFunc', sortFunc)
-
   useEffect(() => {
     let updateProducts = initialProducts.current
 
-    console.log('sort: ', sortFunc, ' ', updateProducts)
     if (sortFunc) updateProducts = updateProducts.sort(sortFunc)
 
     Object.keys(filterFuncs).forEach((key) => {
@@ -25,15 +22,10 @@ export const ProductProvider = ({ children }) => {
   }, [initialProducts.current, filterFuncs, sortFunc])
 
   const setProductFilterFuncs = (type, func) => {
-    console.log(type, func)
-
     filterFuncs[type] = func
 
     setFilterFuncs({ ...filterFuncs })
   }
-
-  console.log(products)
-  console.log(filterFuncs)
 
   useEffect(() => {
     axios
