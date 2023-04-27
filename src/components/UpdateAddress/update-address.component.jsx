@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUserStore } from '@/store'
+import { useUserStore, useTokenStore } from '@/store'
 
 import Modal from '@mui/material/Modal'
 import CloseIcon from '@mui/icons-material/Close'
@@ -9,6 +9,7 @@ import axios from '@/api/axios'
 
 function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpdate }) {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
   const [updatedName, setUpdatedName] = useState(name)
   const [updatedPhone, setUpdatedPhone] = useState(phone)
   const [updatedAddress, setUpdatedAddress] = useState(address)
@@ -24,11 +25,20 @@ function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpd
     }
     if (validateForm()) {
       axios
-        .put(`/address/${userInfo.userId}/${addressId}`, {
-          receiverName: updatedName,
-          receiverPhone: updatedPhone,
-          address: updatedAddress,
-        })
+        .put(
+          `/address/${(user, Info.userId)}/${addressId}`,
+          {
+            receiverName: updatedName,
+            receiverPhone: updatedPhone,
+            address: updatedAddress,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         .then((res) => {
           onUpdate(updatedUser)
         })

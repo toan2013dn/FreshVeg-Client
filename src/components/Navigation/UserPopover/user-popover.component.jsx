@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom'
 function UserPopover() {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
   const [anchorEl, setAnchorEl] = React.useState(null)
-  console.log(userInfo)
 
   const navigate = useNavigate()
 

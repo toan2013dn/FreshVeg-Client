@@ -1,7 +1,7 @@
 import './user-password.styles.scss'
 
 import { Link } from 'react-router-dom'
-import { useUserStore } from '@/store'
+import { useUserStore, useTokenStore } from '@/store'
 import { useState } from 'react'
 
 import axios from '@/api/axios'
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import ForgotPassword from '../ForgotPassword/forgot-password.component'
 
 function UserPassword() {
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
   const [userInfo] = useUserStore((state) => [state.userInfo])
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -29,10 +30,19 @@ function UserPassword() {
     e.preventDefault()
     if (validateForm()) {
       axios
-        .patch(`user/${userInfo.userId}/password`, {
-          currentPassword: currentPassword,
-          newPassword: newPassword,
-        })
+        .patch(
+          `/user/${userInfo.userId}/password`,
+          {
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         .then((res) => {
           if (res.data == 'Current password is not correct') {
             setErrors((errors) => ({ ...errors, currentPassword: 'Mật khẩu cũ sai!' }))

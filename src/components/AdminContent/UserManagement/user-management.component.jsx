@@ -2,13 +2,12 @@ import './user-management.styles.scss'
 
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
+import { useTokenStore } from '@/store'
 
 import axios from '@/api/axios'
-import Tooltip from '@mui/material/Tooltip'
-import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import AddProduct from '../AddProduct/add-product.component'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import Tooltip from '@mui/material/Tooltip'
+import AddProduct from '../AddProduct/add-product.component'
 
 function ActionRender(props) {
   const { value } = props
@@ -51,9 +50,16 @@ const columns = [
 function UserManagement() {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [users, setUsers] = useState([])
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
+
   useEffect(() => {
     axios
-      .get('/user/all')
+      .get('/user/all', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         setUsers(res.data)
       })
