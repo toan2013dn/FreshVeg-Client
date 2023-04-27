@@ -35,6 +35,7 @@ function ProductContent({ content }) {
           price: content.price,
           weight,
           productName: content.productName,
+          productImage: content.productImages[0].imageLink,
         }
         if (userInfo === null) {
           setIsOpenModal(true)

@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom'
 
 function CartPopper() {
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
-
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popper' : undefined
