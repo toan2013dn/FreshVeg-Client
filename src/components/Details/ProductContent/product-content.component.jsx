@@ -70,7 +70,7 @@ function ProductContent({ content }) {
           <div className="line"></div>
         </div>
         <div className="product-content--item--price">
-          <h3>{content?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h3>
+          <h3>{content?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ/100gr</h3>
           <div className="line"></div>
         </div>
         <div className="product-content--item--weight">
