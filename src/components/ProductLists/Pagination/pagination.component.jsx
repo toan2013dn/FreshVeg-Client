@@ -1,10 +1,10 @@
-import "./pagination.styles.scss";
-import Pagination from '@mui/material/Pagination';
+import './pagination.styles.scss'
+import Pagination from '@mui/material/Pagination'
 
-function PaginationComponent() {
-    return ( 
-        <Pagination count={5} size="large" />
-     );
+function PaginationComponent({ currentPage, productsPerPage, totalProducts, handlePageChange }) {
+  const totalPages = Math.ceil(totalProducts / productsPerPage)
+
+  return <Pagination count={totalPages} size="large" page={currentPage} onChange={handlePageChange} />
 }
 
-export default PaginationComponent;
+export default PaginationComponent
