@@ -33,7 +33,7 @@ function ProductContent({ content }) {
         const product = {
           product: { productId: content.productId },
           price: content.price,
-          weight,
+          weight: weightInKg,
           productName: content.productName,
           productImage: content.productImages[0].imageLink,
         }
@@ -46,11 +46,16 @@ function ProductContent({ content }) {
             toast.success('Thêm vào giỏ hàng thành công!')
           } else {
             const existingProduct = productCart[existingProductIndex]
-            const updatedProduct = { ...existingProduct, weight: existingProduct.weight + weight }
-            const updatedProductCart = [...productCart]
-            updatedProductCart.splice(existingProductIndex, 1, updatedProduct)
-            setProductCart(updatedProductCart)
-            toast.success('Cập nhật giỏ hàng thành công!')
+            const updatedWeight = existingProduct.weight + weight / 1000
+            if (updatedWeight > content.weight) {
+              toast.warning('Khối lượng sản phẩm vượt quá Khối lượng có sẵn!')
+            } else {
+              const updatedProduct = { ...existingProduct, weight: updatedWeight }
+              const updatedProductCart = [...productCart]
+              updatedProductCart.splice(existingProductIndex, 1, updatedProduct)
+              setProductCart(updatedProductCart)
+              toast.success('Cập nhật giỏ hàng thành công!')
+            }
           }
         }
       }

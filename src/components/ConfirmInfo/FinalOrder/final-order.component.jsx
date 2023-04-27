@@ -125,14 +125,13 @@ function FinalOrder({ orderNote }) {
           ))}
           <div className="shipping-cost flex">
             <h4>Phí Vận Chuyển</h4>
-            <h4>
-              <PriceWithDots price={0} />
-            </h4>
+            <h4>0đ</h4>
           </div>
           <div className="total-cost flex">
             <h4>Thanh Toán</h4>
             <h4>
-              <PriceWithDots price={totalPrice} />
+              {/* <PriceWithDots price={totalPrice} /> */}
+              {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
             </h4>
           </div>
         </div>
