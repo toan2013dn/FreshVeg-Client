@@ -2,14 +2,17 @@ import '@/components/Menu/menu.component.scss'
 
 import { ReactComponent as Dropdown } from '@/assets/icons/dropdown.svg'
 import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-
+import { useProductStore } from '@/store'
+import { createSearchParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import axios from '@/api/axios'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
 function MenuHeader() {
+  const [products] = useProductStore((state) => [state.products])
+  const location = useLocation()
+
   const items = [
     {
       id: 1,
@@ -30,12 +33,9 @@ function MenuHeader() {
   ]
 
   const [anchorEl, setAnchorEl] = React.useState(null)
-  //another anchorEl
   const [anchorEl2, setAnchorEl2] = React.useState(null)
-
   const [categories, setCategories] = useState([])
   const [selectedItemId, setSelectedItemId] = useState(1)
-
   const open = Boolean(anchorEl)
   const open2 = Boolean(anchorEl2)
 
@@ -62,17 +62,17 @@ function MenuHeader() {
     navigate('/')
   }
 
-  useEffect(() => {
-    axios
-      .get('/category/all')
-      .then((res) => {
-        setCategories(res.data)
-      })
+  const handleToAllProduct = () => {
+    navigate('/products')
+  }
 
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+  const handleClick3 = (categoryId) => {
+    const filteredProducts = products.filter((product) => product.category.categoryId === categoryId)
+    navigate({
+      pathname: '/products',
+      state: { products: filteredProducts },
+    })
+  }
 
   return (
     <ul className="menu">
@@ -116,11 +116,11 @@ function MenuHeader() {
                   },
                 }}
               >
-                {categories.map((category) => (
-                  <MenuItem key={category.categoryId} onClick={handleClose}>
-                    {category.categoryName}
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleToAllProduct}>Xem Tất Cả</MenuItem>
+
+                <MenuItem onClick={() => handleClick3(1)}>Rau</MenuItem>
+                <MenuItem onClick={() => handleClick3(2)}>Củ</MenuItem>
+                <MenuItem onClick={() => handleClick3(3)}>Quả</MenuItem>
               </Menu>
             </div>
           ) : item.id === 3 ? (
