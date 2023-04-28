@@ -25,16 +25,7 @@ function UploadImage({ image, setImage }) {
   return (
     <div className="upload-image">
       <div className="selected-image">
-        <img
-          src={
-            image == undefined
-              ? 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
-              : imageURL == ''
-              ? image
-              : imageURL
-          }
-          alt="Selected"
-        />
+        <img src={image == undefined ? userInfo?.image : imageURL == '' ? image : imageURL} alt="Selected" />
       </div>
       <div className="context">Định dạng: JPEG, PNG</div>
       <div className="image-btn">
