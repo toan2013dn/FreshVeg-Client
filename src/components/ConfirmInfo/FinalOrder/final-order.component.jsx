@@ -41,7 +41,9 @@ function FinalOrder({ orderNote }) {
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
+
   const navigate = useNavigate()
+
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
@@ -89,11 +91,20 @@ function FinalOrder({ orderNote }) {
         if (selectedPaymentMethod === 2) {
           setSelectedPaymentMethod(1)
           axios
-            .post(`/checkout/create-payment`, {
-              orderId: res.data?.orderId,
-              amount: res.data.amount,
-              bankCode: 'NCB',
-            })
+            .post(
+              `/checkout/create-payment`,
+              {
+                orderId: res.data?.orderId,
+                amount: res.data.amount,
+                bankCode: 'NCB',
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
             .then((res) => {
               window.location.href = res.data.url
               setBillInfo(productCart)
