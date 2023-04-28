@@ -25,7 +25,7 @@ function UploadImage({ image, setImage }) {
   return (
     <div className="upload-image">
       <div className="selected-image">
-        <img src={image == undefined ? userInfo?.avatar : imageURL == '' ? image : imageURL} alt="Selected" />
+        <img src={image == undefined ? userInfo?.image : imageURL == '' ? image : imageURL} alt="Selected" />
       </div>
       <div className="context">Định dạng: JPEG, PNG</div>
       <div className="image-btn">

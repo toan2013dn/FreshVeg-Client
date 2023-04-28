@@ -25,7 +25,7 @@ function Products() {
           <h4>Rau, củ, quả sạch đến từ các nông trại</h4>
         </div>
       </div>
-      <div className="container">
+      <div className="container" style={{ marginBottom: '180px' }}>
         <ProductProvider>
           <div>
             <div className="products-links">
