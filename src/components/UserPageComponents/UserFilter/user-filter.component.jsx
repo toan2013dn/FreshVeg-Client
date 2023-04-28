@@ -28,7 +28,16 @@ function UserFilter({ setTab }) {
     <div className="user-filter">
       <div className="user-filter--display">
         <div className="image">
-          <img src={userInfo?.image == undefined ? userInfo?.avatar : userInfo?.image} alt="anh" />
+          <img
+            src={
+              userInfo?.image
+                ? userInfo.image
+                : userInfo?.avatar
+                ? userInfo.avatar
+                : 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
+            }
+            alt="anh"
+          />
         </div>
         <div className="flex">
           <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{userInfo?.name}</h4>
