@@ -1,6 +1,6 @@
 import './edit-category.styles.scss'
 
-import { useCategoriesStore } from '@/store'
+import { useCategoriesStore, useTokenStore } from '@/store'
 import { useState } from 'react'
 
 import axios from '@/api/axios'
@@ -12,14 +12,24 @@ function EditCategory({ isOpen, onClose, categoryName, categoryId }) {
   const [categories, setCategories] = useCategoriesStore((state) => [state.categories, state.setCategories])
   const [updatedName, setUpdatedName] = useState(categoryName)
   const [errors, setErrors] = useState({})
+  const [token] = useTokenStore((state) => [state.token])
 
   const handleSubmit = (event) => {
     event.preventDefault()
     if (validateForm()) {
       axios
-        .put(`/category/${categoryId}`, {
-          categoryName: updatedName,
-        })
+        .put(
+          `/category/${categoryId}`,
+          {
+            categoryName: updatedName,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         .then((res) => {
           const newCategories = categories.map((category) => {
             if (category.categoryId === categoryId) {

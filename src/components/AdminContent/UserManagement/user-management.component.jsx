@@ -54,7 +54,7 @@ function UserManagement() {
 
   useEffect(() => {
     axios
-      .get('/user/all', {
+      .get('/statistic/user/all', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

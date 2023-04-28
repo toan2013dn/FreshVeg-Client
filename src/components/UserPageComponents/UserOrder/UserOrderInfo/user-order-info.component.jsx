@@ -1,6 +1,7 @@
 import './user-order-info.styles.scss'
 
 import { useState, useEffect } from 'react'
+import { useTokenStore } from '@/store'
 
 import axios from '@/api/axios'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
@@ -12,6 +13,7 @@ import Modal from '@mui/material/Modal'
 
 function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTotal, orderStatusPayment }) {
   const [products, setProducts] = useState([])
+  const [token] = useTokenStore((state) => [state.token])
   const [displayCount, setDisplayCount] = useState(3) // default display count
 
   const handleShowMore = () => {
@@ -27,7 +29,12 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
   }
   useEffect(() => {
     axios
-      .get(`/order/${orderId}`)
+      .get(`/order/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         // setProducts(res.data.orderDetails)
 

@@ -26,7 +26,7 @@ function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpd
     if (validateForm()) {
       axios
         .put(
-          `/address/${(user, Info.userId)}/${addressId}`,
+          `/address/${userInfo.userId}/${addressId}`,
           {
             receiverName: updatedName,
             receiverPhone: updatedPhone,

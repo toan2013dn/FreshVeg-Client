@@ -2,15 +2,15 @@ import './bill.styles.scss'
 
 import { useSearchParams } from 'react-router-dom'
 
-import { useBillInfoStore, useOrderInfoStore } from '@/store'
+import { useTokenStore } from '@/store'
 
 import axios from '@/api/axios'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import { useEffect, useState } from 'react'
 
 function Bill() {
   const [orderInfo, setOrderInfo] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [token] = useTokenStore((state) => [state.token])
 
   // const dateObj = new Date(orderDate)
   // const day = dateObj.getUTCDate().toString().padStart(2, '0')
@@ -23,7 +23,12 @@ function Bill() {
 
   useEffect(() => {
     axios
-      .get(`/order/${orderId}`)
+      .get(`/order/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       // .get(`/order/18`)
       .then((res) => {
         setOrderInfo(res.data)

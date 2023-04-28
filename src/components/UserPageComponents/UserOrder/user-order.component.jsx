@@ -1,12 +1,10 @@
 import './user-order.styles.scss'
 
-import { useOrderStore, useUserStore } from '@/store'
+import { useOrderStore, useTokenStore, useUserStore } from '@/store'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import axios from '@/api/axios'
-import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import ClearIcon from '@mui/icons-material/Clear'
 import InfoDetailIcon from '@mui/icons-material/PriorityHighOutlined'
 import { Alert } from '@mui/material'
@@ -94,6 +92,7 @@ function StatusRender(props) {
 
 function ActionRender(props) {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [token] = useTokenStore((state) => [state.token])
 
   const isCancelDisabled = props.row.status === 'Cancel' || props.row.status === 'Confirmed' ? true : false
 
@@ -109,7 +108,12 @@ function ActionRender(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`/order/${props.row.orderId}/cancel`)
+          .patch(`/order/${props.row.orderId}/cancel`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          })
           .then((res) => {
             Swal.fire({ text: 'Đơn hàng đã huỷ!', showConfirmButton: false, icon: 'success', timer: 1300 })
             setTimeout(() => {
@@ -183,10 +187,16 @@ const columns = [
 function UserOrder() {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
   const [user] = useUserStore((state) => [state.userInfo])
+  const [token] = useTokenStore((state) => [state.token])
 
   useEffect(() => {
     axios
-      .get(`/order/user/${user.userId}`)
+      .get(`/order/user/${user.userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         setOrders(res.data)
       })

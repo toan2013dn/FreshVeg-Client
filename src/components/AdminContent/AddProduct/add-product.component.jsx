@@ -1,19 +1,20 @@
 import './add-product.styles.scss'
 
-import TextField from '@mui/material/TextField'
-
-import axios from '@/api/axios'
+import { Form } from 'antd'
 import { ListImageUploader } from '@/components/ListImageUploader/ListImageUploader'
 import { InputAdornment, MenuItem, Select } from '@mui/material'
-import Modal from '@mui/material/Modal'
-import { Form } from 'antd'
-import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { ImageUploader } from '../ImageUploader/ImageUploader'
+import { useTokenStore } from '@/store'
+
+import TextField from '@mui/material/TextField'
+import axios from '@/api/axios'
+import Modal from '@mui/material/Modal'
+import dayjs from 'dayjs'
 
 function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
   const [form] = Form.useForm()
-
+  const [token] = useTokenStore((state) => [state.token])
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -102,24 +103,42 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
               const images = listImage?.map((item) => ({ imageLink: item.url }))
 
               productId
-                ? await axios.put(`/product/${productId}`, {
-                    productName,
-                    price,
-                    productImages: [{ imageLink: featuredImage }, ...(images || [])],
-                    description,
-                    status: true,
-                    categoryId,
-                    weight,
-                  })
-                : await axios.post('/product', {
-                    productName,
-                    price,
-                    productImages: [{ imageLink: featuredImage }, ...(images || [])],
-                    description,
-                    status: true,
-                    categoryId,
-                    weight,
-                  })
+                ? await axios.put(
+                    `/product/${productId}`,
+                    {
+                      productName,
+                      price,
+                      productImages: [{ imageLink: featuredImage }, ...(images || [])],
+                      description,
+                      status: true,
+                      categoryId,
+                      weight,
+                    },
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                      },
+                    },
+                  )
+                : await axios.post(
+                    '/product',
+                    {
+                      productName,
+                      price,
+                      productImages: [{ imageLink: featuredImage }, ...(images || [])],
+                      description,
+                      status: true,
+                      categoryId,
+                      weight,
+                    },
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                      },
+                    },
+                  )
 
               onFinish?.()
             }}

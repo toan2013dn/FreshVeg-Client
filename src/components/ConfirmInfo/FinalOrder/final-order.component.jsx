@@ -1,6 +1,13 @@
 import './final-order.styles.scss'
 
-import { useBillInfoStore, useOrderInfoStore, useProductCartStore, useUserAddressesStore, useUserStore } from '@/store'
+import {
+  useBillInfoStore,
+  useOrderInfoStore,
+  useProductCartStore,
+  useTokenStore,
+  useUserAddressesStore,
+  useUserStore,
+} from '@/store'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
@@ -28,6 +35,7 @@ function FinalOrder({ orderNote }) {
     state.setSelectedPaymentMethod,
   ])
   const [user] = useUserStore((state) => [state.userInfo])
+  const [token] = useTokenStore((state) => [state.token])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [billInfo, setBillInfo] = useBillInfoStore((state) => [state.billInfo, state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
@@ -53,17 +61,26 @@ function FinalOrder({ orderNote }) {
     })
 
     axios
-      .post('/order', {
-        userId: user?.userId,
-        phone: selectedAddress?.receiverPhone,
-        amount: totalPrice,
-        note: orderNote,
-        // date: orderDate,
-        address: {
-          addressId: selectedAddress?.addressId,
+      .post(
+        '/order',
+        {
+          userId: user?.userId,
+          phone: selectedAddress?.receiverPhone,
+          amount: totalPrice,
+          note: orderNote,
+          // date: orderDate,
+          address: {
+            addressId: selectedAddress?.addressId,
+          },
+          orderDetails: updatedProductCart,
         },
-        orderDetails: updatedProductCart,
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
       .then((res) => {
         setBillInfo(productCart)
         setOrderInfo(res.data)

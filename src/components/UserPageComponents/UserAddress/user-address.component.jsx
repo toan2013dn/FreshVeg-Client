@@ -32,7 +32,7 @@ function UserAddress() {
 
   useEffect(() => {
     axios
-      .get(`/address/${userInfo.userId}`, {
+      .get(`/address/user/${userInfo.userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

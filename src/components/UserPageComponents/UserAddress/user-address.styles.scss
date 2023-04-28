@@ -46,6 +46,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 15px 0;
 
     &-left {
       display: flex;
