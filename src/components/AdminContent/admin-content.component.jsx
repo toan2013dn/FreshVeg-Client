@@ -16,7 +16,8 @@ function AdminContent() {
     1: { name: 'Thể loại', component: <CategoriesManagement /> },
     2: { name: 'Sản phẩm', component: <ProductManagement /> },
     3: { name: 'Đơn hàng', component: <OrderManagementTable /> },
-    4: { name: 'Sản phẩm', component: <UserManagement /> },
+
+    5: { name: 'Thống kê người dùng', component: <UserManagement /> },
     6: { name: 'Thống kê sản phẩm', component: <ProductStatistic /> },
   }
   return <div className="admin-content">{tabId === -1 ? <AdminDashboard /> : tabs[tabId].component}</div>

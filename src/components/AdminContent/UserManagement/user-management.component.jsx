@@ -1,24 +1,26 @@
 import './user-management.styles.scss'
 
+import { useTokenStore } from '@/store'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
-import { useTokenStore } from '@/store'
 
 import axios from '@/api/axios'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import Tooltip from '@mui/material/Tooltip'
-import AddProduct from '../AddProduct/add-product.component'
+import UserOrderCount from './UserOrderCount/user-order-count.component'
 
 function ActionRender(props) {
   const { value } = props
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   return (
     <div className="action-render">
       <Tooltip title="Xem chi tiết">
-        <button className="info" style={{ border: 'none' }}>
+        <button className="info" style={{ border: 'none' }} onClick={() => setIsOpenModal(true)}>
           <InfoOutlinedIcon className="info-btn" />
         </button>
       </Tooltip>
+      <UserOrderCount isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
     </div>
   )
 }
@@ -48,7 +50,6 @@ const columns = [
 ]
 
 function UserManagement() {
-  const [isOpenModal, setIsOpenModal] = useState(false)
   const [users, setUsers] = useState([])
   const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
 
@@ -87,7 +88,6 @@ function UserManagement() {
             },
           }}
         />
-        <AddProduct isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
       </div>
     </div>
   )
