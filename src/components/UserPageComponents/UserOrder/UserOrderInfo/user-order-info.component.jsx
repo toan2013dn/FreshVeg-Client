@@ -127,7 +127,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
             Tổng cộng:
           </div>
           <div className="sub-total__price" style={{ fontWeight: '700', color: 'var(--primary-color)' }}>
-            <PriceWithDots price={orderTotal} />
+            {orderTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
           </div>
         </div>
       </div>
