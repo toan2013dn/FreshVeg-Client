@@ -64,7 +64,7 @@ function FinalOrder({ orderNote }) {
 
     axios
       .post(
-        '/order',
+        '/orderUser/add',
         {
           userId: user?.userId,
           phone: selectedAddress?.receiverPhone,

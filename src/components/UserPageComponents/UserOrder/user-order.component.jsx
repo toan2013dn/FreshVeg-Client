@@ -191,7 +191,7 @@ function UserOrder() {
 
   useEffect(() => {
     axios
-      .get(`/order/user/${user.userId}`, {
+      .get(`/orderUser/user/${user.userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

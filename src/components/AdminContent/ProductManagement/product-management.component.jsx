@@ -77,7 +77,7 @@ function ProductManagement() {
 
       if (isDelete.isConfirmed) {
         await axios.delete(
-          '/product',
+          '/product/delete',
           { data: { productId: item.productId } },
           {
             headers: {
