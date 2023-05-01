@@ -108,12 +108,16 @@ function ActionRender(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`/order/${props.row.orderId}/cancel`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
+          .patch(
+            `/order/${props.row.orderId}/cancel`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
             },
-          })
+          )
           .then((res) => {
             Swal.fire({ text: 'Đơn hàng đã huỷ!', showConfirmButton: false, icon: 'success', timer: 1300 })
             setTimeout(() => {

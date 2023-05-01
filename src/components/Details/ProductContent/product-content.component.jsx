@@ -81,7 +81,7 @@ function ProductContent({ content }) {
           <h4>
             Còn lại:{' '}
             <span style={{ fontSize: '16px', fontWeight: '700' }}>
-              {content?.weight < 1 ? content?.weight * 1000 + 'gr' : content?.weight + 'kg'}
+              {content?.weight < 1 ? content?.weight.toFixed(1) * 1000 + 'gr' : content?.weight.toFixed(1) + 'kg'}
             </span>
           </h4>
         </div>

@@ -18,16 +18,20 @@ function StatusRender(props) {
   // const [isVerified, setIsVerified] = useState('pending')
   const [token] = useTokenStore((state) => [state.token])
   const [status, setStatus] = useState(props.row.status)
-
+  console.log(token)
   const handleConfirm = () => {
     setStatus('Confirmed')
     axios
-      .patch(`/orderAdmin/${props.row.orderId}/confirmed`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+      .patch(
+        `/orderAdmin/${props.row.orderId}/confirmed`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
         },
-      })
+      )
       .catch((err) => {
         console.log('cancel order', err)
       })
@@ -36,12 +40,16 @@ function StatusRender(props) {
   const handleCancel = () => {
     setStatus('Cancel')
     axios
-      .patch(`/order/${props.row.orderId}/cancel`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+      .patch(
+        `/order/${props.row.orderId}/cancel`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
         },
-      })
+      )
       .catch((err) => {
         console.log('cancel order', err)
       })

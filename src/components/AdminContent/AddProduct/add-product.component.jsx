@@ -60,7 +60,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                   label="Nhập giá sản phẩm"
                   variant="standard"
                   InputProps={{
-                    endAdornment: <InputAdornment position="end">vnd</InputAdornment>,
+                    endAdornment: <InputAdornment position="end">đ/100gr</InputAdornment>,
                   }}
                 />
               </Form.Item>

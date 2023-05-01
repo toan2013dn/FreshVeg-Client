@@ -21,13 +21,13 @@ function Contact() {
             <h4>
               <LocalPhoneOutlinedIcon />
             </h4>
-            <h4>09249494</h4>
+            <h4> (+84) 934795670</h4>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
             <h4>
               <EmailOutlinedIcon />
             </h4>
-            <h4>freshveg@gmail.com</h4>
+            <h4>freshveg.web@gmail.com</h4>
           </div>
         </div>
       </div>

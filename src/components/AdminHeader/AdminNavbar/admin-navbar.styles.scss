@@ -1,9 +1,10 @@
 .admin-navbar {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  //  margin-left: 800px;
   height: 100px;
   width: 100%;
   border-bottom: 3px solid #f4f4f4;
   grid-area: navbar;
+  position: relative;
 }

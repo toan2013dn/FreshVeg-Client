@@ -139,7 +139,11 @@ function FinalOrder({ orderNote }) {
                 <h4>{product.weight.toFixed(1)}kg</h4>
               </div>
               <h4>
-                {(product?.price * product?.weight.toFixed(1) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                {(product?.price * product?.weight.toFixed(1) * 10)
+                  .toFixed(0)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                đ
               </h4>
             </div>
           ))}
