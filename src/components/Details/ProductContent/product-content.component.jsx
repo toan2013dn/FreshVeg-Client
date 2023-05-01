@@ -14,26 +14,26 @@ function ProductContent({ content }) {
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [userInfo] = useUserStore((state) => [state.userInfo])
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [weight, setWeight] = useState(100)
+  const [weight, setWeight] = useState(0.1)
+
+  console.log(content)
 
   const handleAddToCart = () => {
     if (content) {
-      const weightInKg = weight / 1000
-
       if (content.weight === 0) {
         toast.error('Sản phẩm hiện đang hết hàng!')
         return
-      } else if (content.weight < weightInKg) {
+      } else if (content.weight < weight) {
         toast.error(`Sản phẩm hiện chỉ còn ${content.weight}kg!`)
         return
-      } else if (weightInKg < 0.1) {
+      } else if (weight < 0.1) {
         toast.error('Khối lượng tối thiểu là 100g!')
         return
       } else {
         const product = {
           product: { productId: content.productId },
           price: content.price,
-          weight: weightInKg,
+          weight,
           productName: content.productName,
           productImage: content.productImages[0].imageLink,
         }
@@ -46,7 +46,7 @@ function ProductContent({ content }) {
             toast.success('Thêm vào giỏ hàng thành công!')
           } else {
             const existingProduct = productCart[existingProductIndex]
-            const updatedWeight = existingProduct.weight + weight / 1000
+            const updatedWeight = existingProduct.weight + weight
             if (updatedWeight > content.weight) {
               toast.warning('Khối lượng sản phẩm vượt quá Khối lượng có sẵn!')
             } else {

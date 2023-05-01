@@ -146,9 +146,11 @@ function FinalOrder({ orderNote }) {
             <div className="product-items flex" key={product.productId}>
               <div className="products">
                 <h4>{product.productName}</h4>
-                <h4>{product.weight}kg</h4>
+                <h4>{product.weight.toFixed(1)}kg</h4>
               </div>
-              <h4>{(product?.price * product?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+              <h4>
+                {(product?.price * product?.weight.toFixed(1) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+              </h4>
             </div>
           ))}
           <div className="shipping-cost flex">
@@ -159,7 +161,7 @@ function FinalOrder({ orderNote }) {
             <h4>Thanh Toán</h4>
             <h4>
               {/* <PriceWithDots price={totalPrice} /> */}
-              {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+              {(totalPrice.toFixed(3) * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
             </h4>
           </div>
         </div>

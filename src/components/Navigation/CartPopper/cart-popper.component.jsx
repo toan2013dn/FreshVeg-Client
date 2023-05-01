@@ -104,7 +104,7 @@ function CartPopper() {
                         <h4 className="price">
                           {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ/100gr
                         </h4>
-                        <p className="weight">{product.weight}kg</p>
+                        <p className="weight">{product.weight.toFixed(1)}kg</p>
                       </div>
                     </div>
                     <div className="cart-popper--item-btn">

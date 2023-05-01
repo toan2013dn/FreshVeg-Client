@@ -9,7 +9,7 @@ const useTotalPrice = () => {
     useEffect(() => {
         let price = 0;
         productCart.forEach((product) => {
-            price += product.price * product.weight * 10;
+            price += product.price * product.weight / 100;
         });
         setTotalPrice(price);
     }, [productCart]);

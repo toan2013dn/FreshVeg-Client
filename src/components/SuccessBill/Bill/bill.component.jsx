@@ -50,9 +50,9 @@ function Bill() {
           <div className="product-items flex">
             <div className="products ">
               <h4>{item.product.productName}</h4>
-              <h4>{item.weight}kg</h4>
+              <h4>{item.weight.toFixed(1)}kg</h4>
             </div>
-            <h4>{(item?.price * item?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+            <h4>{(item?.price * item?.weight.toFixed(1) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
           </div>
         ))}
         <div className="shipping-cost flex">
@@ -61,7 +61,7 @@ function Bill() {
         </div>
         <div className="total-cost flex">
           <h4>THANH TOÁN </h4>
-          <h4>{orderInfo.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+          <h4>{(orderInfo.amount * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
         </div>
       </div>
 
