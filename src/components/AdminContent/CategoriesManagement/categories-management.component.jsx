@@ -1,6 +1,6 @@
 import './categories-management.styles.scss'
 
-import { useCategoriesStore } from '@/store'
+import { useCategoriesStore, useTokenStore } from '@/store'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
@@ -16,6 +16,7 @@ import EditCategory from './EditCategory/edit-category.component'
 function ActionRender(props) {
   const [categories, setCategories] = useCategoriesStore((state) => [state.categories, state.setCategories])
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [token] = useTokenStore((state) => [state.token])
 
   const handleDelete = () => {
     Swal.fire({
@@ -27,7 +28,12 @@ function ActionRender(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`/category/${props.row.categoryId}`)
+          .delete(`/category/${props.row.categoryId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          })
           .then((res) => {
             const newCategories = categories.filter((category) => category.categoryId !== props.row.categoryId)
             setCategories(newCategories)

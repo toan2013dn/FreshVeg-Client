@@ -22,11 +22,6 @@ function AdminManagement({ activeHomePage, setActiveHomePage, activeId, setActiv
       title: 'Quản Lý Đơn Hàng',
       icon: <ArrowRightOutlinedIcon />,
     },
-    {
-      id: 4,
-      title: 'Quản Lý Khách Hàng',
-      icon: <ArrowRightOutlinedIcon />,
-    },
   ]
 
   const [setTabId] = useAdminStore((state) => [state.setTabId])

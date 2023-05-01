@@ -1,16 +1,16 @@
 import './user-info-table.styles.scss'
 
-import { useUserStore } from '@/store'
+import { useTokenStore, useUserStore } from '@/store'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // import cloudinary from 'cloudinary';
-import ReactLoading from 'react-loading'
 import axios from '@/api/axios'
 import UploadImage from '@/components/AdminContent/UploadImage/upload-image.component'
 import dayjs from 'dayjs'
+import ReactLoading from 'react-loading'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function UserInfoTable() {
@@ -22,6 +22,7 @@ function UserInfoTable() {
   const [isLoading, setIsLoading] = useState(false)
   const [userAvatar, setUserAvatar] = useState('')
   const [userBirthday, setUserBirthday] = useState(dayjs(userInfo.birthday))
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -69,11 +70,20 @@ function UserInfoTable() {
           birthday: userBirthday,
         }
         await axios
-          .put(`/user/${userInfo.userId}`, {
-            name: updatedName,
-            avatar: resData.url,
-            birthday: userBirthday,
-          })
+          .put(
+            `/user/${userInfo.userId}`,
+            {
+              name: updatedName,
+              avatar: resData.url,
+              birthday: userBirthday,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
           .then((res) => {
             setUserInfo(updatedUserInfo)
             Swal.fire({

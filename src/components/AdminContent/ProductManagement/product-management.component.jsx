@@ -4,6 +4,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { Button, Image } from 'antd'
 import { ToastContainer, toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
+import { useTokenStore } from '@/store'
 
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -46,7 +47,7 @@ const columns = [
 function ProductManagement() {
   const [productId, setProductId] = useState()
   const [updateValues, setUpdateValues] = useState()
-
+  const [token] = useTokenStore((state) => [state.token])
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [products, setProducts] = useState()
 
@@ -75,7 +76,16 @@ function ProductManagement() {
       })
 
       if (isDelete.isConfirmed) {
-        await axios.delete('/product', { data: { productId: item.productId } })
+        await axios.delete(
+          '/product/delete',
+          { data: { productId: item.productId } },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         fetchProducts()
         toast.success('Xóa sản phẩm thành công!')
       }

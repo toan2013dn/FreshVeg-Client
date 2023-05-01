@@ -1,7 +1,7 @@
 import './add-category.styles.scss'
 
 import { useState } from 'react'
-import { useCategoriesStore } from '@/store'
+import { useCategoriesStore, useTokenStore } from '@/store'
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import axios from '@/api/axios'
@@ -13,13 +13,24 @@ function AddCategory({ isOpen, onClose }) {
   const [categories, setCategories] = useCategoriesStore((state) => [state.categories, state.setCategories])
   const [errors, setErrors] = useState({})
   const [name, setName] = useState('')
+  const [token] = useTokenStore((state) => [state.token])
+
   const handleSubmit = (event) => {
     event.preventDefault()
     if (validateForm()) {
       axios
-        .post('/category', {
-          categoryName: name,
-        })
+        .post(
+          '/category',
+          {
+            categoryName: name,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         .then((res) => {
           Swal.fire({ text: 'Thêm thể loại thành công!', icon: 'success', timer: 1300, showConfirmButton: false })
           const categoryId = res.data.categoryId

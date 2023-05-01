@@ -1,7 +1,7 @@
 import './order-detail-table.styles.scss'
 
-import { useProductCartStore, useSelectedWeightStore } from '@/store'
-import { Link } from 'react-router-dom'
+import { useProductCartStore } from '@/store'
+import { Link, useNavigate } from 'react-router-dom'
 
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
@@ -25,6 +25,7 @@ function OrderDetailTable() {
     state.setProductCart,
   ])
   const { totalPrice } = useTotalPrice()
+  const navigate = useNavigate()
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -77,7 +78,7 @@ function OrderDetailTable() {
                     <div className="text">{row?.productName}</div>
                   </TableCell>
                   <TableCell align="center">
-                    {(row?.price ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                    {(row?.price ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ/100gr
                   </TableCell>
                   <TableCell align="center">
                     <WeightSelect
@@ -87,7 +88,11 @@ function OrderDetailTable() {
                   </TableCell>
                   <TableCell align="center">
                     <div className="total-price">
-                      {((row?.price * row?.weight) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                      {((row?.price * row?.weight) / 100)
+                        .toFixed(3)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                      đ
                     </div>
                   </TableCell>
                   <TableCell align="center">
@@ -102,20 +107,24 @@ function OrderDetailTable() {
         </TableContainer>
       </div>
       <div className="button">
-        <button className="home-products--button continue-shopping">
+        <button className="home-products--button continue-shopping" onClick={() => navigate('/products')}>
           <BackArrow />
-          <Link to={'/categories'}>Tiếp Tục Mua Hàng</Link>
+          <Link>Tiếp Tục Mua Hàng</Link>
         </button>
         <div className="proceed-to-checkout">
           <div className="total">
             <h4>Tổng Thanh Toán: </h4>
             <h4>
-              <PriceWithDots price={totalPrice} />
+              {totalPrice
+                .toFixed(3)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+              đ
             </h4>
           </div>
 
-          <button className="home-products--button">
-            <Link to={'/order-confirm'}>Tiến Hành Thanh Toán</Link>
+          <button className="home-products--button" onClick={() => navigate('/order-confirm')}>
+            <Link>Tiến Hành Thanh Toán</Link>
           </button>
         </div>
       </div>

@@ -1,39 +1,36 @@
 import './final-order.styles.scss'
 
-import { useBillInfoStore, useOrderInfoStore, useProductCartStore, useUserAddressesStore, useUserStore } from '@/store'
+import {
+  useBillInfoStore,
+  useOrderInfoStore,
+  useProductCartStore,
+  useTokenStore,
+  useUserAddressesStore,
+  useUserStore,
+} from '@/store'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
 import axios from '@/api/axios'
 import Decoration from '@/assets/images/Decoration.webp'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import useTotalPrice from '@/hooks/useTotalPrice'
 
 function FinalOrder({ orderNote }) {
-  const [
-    selectedAddress,
-    orderDate,
-    orderTotal,
-    orderInfo,
-    selectedPaymentMethod,
-    statusPaymentMethod,
-    setSelectedPaymentMethod,
-  ] = useOrderInfoStore((state) => [
+  const [selectedAddress, selectedPaymentMethod, setSelectedPaymentMethod] = useOrderInfoStore((state) => [
     state.selectedAddress,
-    state.orderDate,
-    state.orderTotal,
-    state.orderInfo,
     state.selectedPaymentMethod,
-    state.statusPaymentMethod,
     state.setSelectedPaymentMethod,
   ])
   const [user] = useUserStore((state) => [state.userInfo])
+  const [token] = useTokenStore((state) => [state.token])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
-  const [billInfo, setBillInfo] = useBillInfoStore((state) => [state.billInfo, state.setBillInfo])
+  const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
+
   const navigate = useNavigate()
+
   const handleClickToOrderSuccess = () => {
     if (userAddresses.length === 0) {
       toast.error('Vui lòng thêm địa chỉ giao hàng')
@@ -53,30 +50,49 @@ function FinalOrder({ orderNote }) {
     })
 
     axios
-      .post('/order', {
-        userId: user?.userId,
-        phone: selectedAddress?.receiverPhone,
-        amount: totalPrice,
-        note: orderNote,
-        // date: orderDate,
-        address: {
-          addressId: selectedAddress?.addressId,
+      .post(
+        '/orderUser/add',
+        {
+          userId: user?.userId,
+          phone: selectedAddress?.receiverPhone,
+          amount: Math.ceil(totalPrice) * 1000,
+          note: orderNote,
+          // date: orderDate,
+          address: {
+            addressId: selectedAddress?.addressId,
+          },
+          orderDetails: updatedProductCart,
         },
-        orderDetails: updatedProductCart,
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
       .then((res) => {
         setBillInfo(productCart)
         setOrderInfo(res.data)
         const currentDate = new Date()
         setOrderDate(currentDate)
+
         if (selectedPaymentMethod === 2) {
           setSelectedPaymentMethod(1)
           axios
-            .post(`/checkout/create-payment`, {
-              orderId: res.data?.orderId,
-              amount: res.data.amount,
-              bankCode: 'NCB',
-            })
+            .post(
+              `/checkout/create-payment`,
+              {
+                orderId: res.data?.orderId,
+                amount: res.data?.amount,
+                bankCode: 'NCB',
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
             .then((res) => {
               window.location.href = res.data.url
               setBillInfo(productCart)
@@ -118,9 +134,15 @@ function FinalOrder({ orderNote }) {
             <div className="product-items flex" key={product.productId}>
               <div className="products">
                 <h4>{product.productName}</h4>
-                <h4>{product.weight}kg</h4>
+                <h4>{product.weight.toFixed(1)}kg</h4>
               </div>
-              <h4>{(product?.price * product?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+              <h4>
+                {(product?.price * product?.weight.toFixed(1) * 10)
+                  .toFixed(0)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                đ
+              </h4>
             </div>
           ))}
           <div className="shipping-cost flex">
@@ -131,7 +153,7 @@ function FinalOrder({ orderNote }) {
             <h4>Thanh Toán</h4>
             <h4>
               {/* <PriceWithDots price={totalPrice} /> */}
-              {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+              {(totalPrice.toFixed(3) * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
             </h4>
           </div>
         </div>

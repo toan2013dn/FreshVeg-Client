@@ -7,9 +7,9 @@ import Notification from '../Notification/notification.component'
 function AdminNavbar() {
   return (
     <div className="admin-navbar">
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Avatar />
-      <Notification />
+      {/* <Notification /> */}
     </div>
   )
 }

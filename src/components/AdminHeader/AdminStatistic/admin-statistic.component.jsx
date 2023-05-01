@@ -18,16 +18,16 @@ function AdminStatistic({ activeHomePage, setActiveHomePage, activeId, setActive
       title: 'Thống Kê Sản Phẩm',
       icon: <ArrowRightOutlinedIcon />,
     },
-    {
-      id: 7,
-      title: 'Thống Kê Theo Năm',
-      icon: <ArrowRightOutlinedIcon />,
-    },
-    {
-      id: 8,
-      title: ' Thống Kê Theo Tháng',
-      icon: <ArrowRightOutlinedIcon />,
-    },
+    // {
+    //   id: 7,
+    //   title: 'Thống Kê Theo Năm',
+    //   icon: <ArrowRightOutlinedIcon />,
+    // },
+    // {
+    //   id: 8,
+    //   title: ' Thống Kê Theo Tháng',
+    //   icon: <ArrowRightOutlinedIcon />,
+    // },
   ]
 
   const [setTabId] = useAdminStore((state) => [state.setTabId])
