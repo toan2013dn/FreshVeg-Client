@@ -51,7 +51,7 @@ const columns = [
 
 function UserManagement() {
   const [users, setUsers] = useState([])
-  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
+  const [token] = useTokenStore((state) => [state.token])
 
   useEffect(() => {
     axios

@@ -9,7 +9,7 @@ import axios from '@/api/axios'
 
 function UpdateAddress({ addressId, name, phone, address, isOpen, onClose, onUpdate }) {
   const [userInfo, setUserInfo] = useUserStore((state) => [state.userInfo, state.setUserInfo])
-  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
+  const [token] = useTokenStore((state) => [state.token])
   const [updatedName, setUpdatedName] = useState(name)
   const [updatedPhone, setUpdatedPhone] = useState(phone)
   const [updatedAddress, setUpdatedAddress] = useState(address)

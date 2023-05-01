@@ -113,8 +113,17 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
           )}
         </div>
         <div className="order-note">
-          <div className="order-note__title">Ghi chú đơn hàng: </div>
-          <div className="order-note__content">{orderNote} </div>
+          {orderNote !== null ? (
+            <>
+              <div className="order-note__title">Ghi chú đơn hàng: </div>
+              <div className="order-note__content">{orderNote} </div>
+            </>
+          ) : (
+            <>
+              <div className="order-note__title">Ghi chú đơn hàng: </div>
+              <div className="order-note__content">Không có</div>
+            </>
+          )}
         </div>
         <div className="payment-status">
           <div className="payment-status__title">Trạng thái thanh toán: </div>
@@ -127,7 +136,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
             Tổng cộng:
           </div>
           <div className="sub-total__price" style={{ fontWeight: '700', color: 'var(--primary-color)' }}>
-            {orderTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+            {(orderTotal * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
           </div>
         </div>
       </div>

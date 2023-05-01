@@ -22,7 +22,7 @@ function StatusRender(props) {
   const handleConfirm = () => {
     setStatus('Confirmed')
     axios
-      .patch(`/order/${props.row.orderId}/confirmed`, {
+      .patch(`/orderAdmin/${props.row.orderId}/confirmed`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ const columns = [
     headerName: 'Ngày Đặt Hàng',
     width: 140,
     valueGetter: (params) => {
-      const date = new Date(params.value * 1000)
+      const date = new Date(params.value)
       return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     },
   },
@@ -161,7 +161,7 @@ const columns = [
     field: 'amount',
     headerName: 'Tổng Tiền',
     width: 130,
-    valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
+    valueGetter: (params) => `${(params.value * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
   },
   { field: 'details', headerName: 'Chi Tiết', width: 100, renderCell: DetailRender, sortable: false },
   { field: 'status', headerName: 'Trạng Thái', width: 130, renderCell: StatusRender },
@@ -169,11 +169,11 @@ const columns = [
 
 function OrderManagementTable() {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
-  const [token] = useTokenStore((state) => state.token)
+  const [token] = useTokenStore((state) => [state.token])
 
   useEffect(() => {
     axios
-      .get('/order/all', {
+      .get('/orderAdmin/all', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

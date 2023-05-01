@@ -15,7 +15,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function UserAddress() {
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
+  const [token] = useTokenStore((state) => [state.token])
   const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
   const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
     state.userAddresses,

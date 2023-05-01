@@ -1,10 +1,9 @@
 import './bill.styles.scss'
 
-import { useSearchParams } from 'react-router-dom'
-
-import { useTokenStore } from '@/store'
-
 import axios from '@/api/axios'
+
+import { useSearchParams } from 'react-router-dom'
+import { useTokenStore } from '@/store'
 import { useEffect, useState } from 'react'
 
 function Bill() {
@@ -12,10 +11,13 @@ function Bill() {
   const [isLoading, setIsLoading] = useState(true)
   const [token] = useTokenStore((state) => [state.token])
 
-  // const dateObj = new Date(orderDate)
-  // const day = dateObj.getUTCDate().toString().padStart(2, '0')
-  // const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0')
-  // const year = dateObj.getUTCFullYear().toString()
+  const formattedDate = () => {
+    const date = new Date(orderInfo?.orderDate)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString()
+    return `${day}/${month}/${year}`
+  }
 
   let [searchParams, setSearchParams] = useSearchParams()
 
@@ -67,10 +69,10 @@ function Bill() {
 
       <div className="bill-details">
         <h4 style={{ fontWeight: '700' }}>CHI TIẾT</h4>
-        {/* <div className="bill-details--orderDate flex">
+        <div className="bill-details--orderDate flex">
           <h4 style={{ width: '70%' }}>Ngày đặt hàng:</h4>
-          <h4 style={{ width: '100%' }}>{formattedDate}</h4>
-        </div> */}
+          <h4 style={{ width: '100%' }}>{formattedDate()}</h4>
+        </div>
         <div className="bill-details--receiverName flex">
           <h4 style={{ width: '70%' }}>Tên người nhận:</h4>
           <h4 style={{ width: '100%' }}>{orderInfo?.address?.receiverName}</h4>
@@ -84,12 +86,17 @@ function Bill() {
           <h4 style={{ width: '100%' }}>{orderInfo?.address?.receiverPhone}</h4>
         </div>
         <div className="bill-details--note">
-          {orderInfo.note !== '' ? (
+          {orderInfo.note !== null ? (
             <>
               <h4 style={{ fontWeight: '700' }}>GHI CHÚ</h4>
               <h4 style={{ textAlign: 'left', marginTop: '20px' }}>{orderInfo.note}</h4>
             </>
-          ) : null}
+          ) : (
+            <>
+              <h4 style={{ fontWeight: '700' }}>GHI CHÚ</h4>
+              <h4 style={{ textAlign: 'left', marginTop: '20px' }}>Không có</h4>
+            </>
+          )}
         </div>
       </div>
     </div>

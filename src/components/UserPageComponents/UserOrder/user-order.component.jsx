@@ -178,7 +178,7 @@ const columns = [
     field: 'amount',
     headerName: 'Tổng Số Tiền',
     width: 150,
-    valueGetter: (params) => `${params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
+    valueGetter: (params) => `${(params.value * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ`,
   },
   { field: 'status', headerName: 'Trạng Thái', width: 160, renderCell: StatusRender, className: 'status-column' },
   { field: 'action', headerName: '', width: 130, sortable: false, renderCell: ActionRender },
