@@ -25,7 +25,6 @@ function SideStatistic() {
         },
       })
       .then((res) => {
-        console.log(res.data)
         setCustomers(res.data)
       })
       .catch((err) => {

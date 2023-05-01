@@ -16,8 +16,6 @@ function ProductContent({ content }) {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [weight, setWeight] = useState(0.1)
 
-  console.log(content)
-
   const handleAddToCart = () => {
     if (content) {
       if (content.weight === 0) {

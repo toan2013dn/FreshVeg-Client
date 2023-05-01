@@ -43,8 +43,6 @@ function Bill() {
 
   if (isLoading) return null
 
-  console.log(orderInfo)
-
   return (
     <div className="bill">
       <div className="bill-info">

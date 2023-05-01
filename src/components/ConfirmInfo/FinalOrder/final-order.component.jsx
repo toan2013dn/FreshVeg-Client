@@ -13,31 +13,18 @@ import { ToastContainer, toast } from 'react-toastify'
 
 import axios from '@/api/axios'
 import Decoration from '@/assets/images/Decoration.webp'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
 import useTotalPrice from '@/hooks/useTotalPrice'
 
 function FinalOrder({ orderNote }) {
-  const [
-    selectedAddress,
-    orderDate,
-    orderTotal,
-    orderInfo,
-    selectedPaymentMethod,
-    statusPaymentMethod,
-    setSelectedPaymentMethod,
-  ] = useOrderInfoStore((state) => [
+  const [selectedAddress, selectedPaymentMethod, setSelectedPaymentMethod] = useOrderInfoStore((state) => [
     state.selectedAddress,
-    state.orderDate,
-    state.orderTotal,
-    state.orderInfo,
     state.selectedPaymentMethod,
-    state.statusPaymentMethod,
     state.setSelectedPaymentMethod,
   ])
   const [user] = useUserStore((state) => [state.userInfo])
   const [token] = useTokenStore((state) => [state.token])
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
-  const [billInfo, setBillInfo] = useBillInfoStore((state) => [state.billInfo, state.setBillInfo])
+  const [setBillInfo] = useBillInfoStore((state) => [state.setBillInfo])
   const [userAddresses] = useUserAddressesStore((state) => [state.userAddresses])
   const [setOrderDate, setOrderInfo] = useOrderInfoStore((state) => [state.setOrderDate, state.setOrderInfo])
   const { totalPrice } = useTotalPrice()
@@ -50,6 +37,9 @@ function FinalOrder({ orderNote }) {
       return
     } else if (productCart.length === 0) {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
+      return
+    } else if (totalPrice < 50) {
+      toast.error('Xin vui lòng đặt đơn hàng với giá trị lớn hơn 50.000đ')
       return
     }
 
