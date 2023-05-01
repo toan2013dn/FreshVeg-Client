@@ -38,9 +38,6 @@ function FinalOrder({ orderNote }) {
     } else if (productCart.length === 0) {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
       return
-    } else if (totalPrice < 50) {
-      toast.error('Xin vui lòng đặt đơn hàng với giá trị lớn hơn 50.000đ')
-      return
     }
 
     const updatedProductCart = productCart.map((product) => {
@@ -58,7 +55,7 @@ function FinalOrder({ orderNote }) {
         {
           userId: user?.userId,
           phone: selectedAddress?.receiverPhone,
-          amount: totalPrice,
+          amount: Math.ceil(totalPrice) * 1000,
           note: orderNote,
           // date: orderDate,
           address: {
@@ -78,6 +75,7 @@ function FinalOrder({ orderNote }) {
         setOrderInfo(res.data)
         const currentDate = new Date()
         setOrderDate(currentDate)
+
         if (selectedPaymentMethod === 2) {
           setSelectedPaymentMethod(1)
           axios
@@ -85,7 +83,7 @@ function FinalOrder({ orderNote }) {
               `/checkout/create-payment`,
               {
                 orderId: res.data?.orderId,
-                amount: res.data.amount,
+                amount: res.data?.amount,
                 bankCode: 'NCB',
               },
               {

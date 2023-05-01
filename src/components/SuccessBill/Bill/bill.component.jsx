@@ -61,7 +61,7 @@ function Bill() {
         </div>
         <div className="total-cost flex">
           <h4>THANH TOÁN </h4>
-          <h4>{(orderInfo.amount * 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+          <h4>{orderInfo.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
         </div>
       </div>
 

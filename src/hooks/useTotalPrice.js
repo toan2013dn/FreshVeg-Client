@@ -18,7 +18,7 @@ const useTotalPrice = () => {
         setOrderTotal(totalPrice)
     }, [totalPrice])
 
-    return { totalPrice };
+    return { totalPrice: Math.ceil(totalPrice) };
 };
 
 export default useTotalPrice;
