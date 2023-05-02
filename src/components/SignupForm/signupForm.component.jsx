@@ -51,6 +51,41 @@ function SignupForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    // Swal.fire({
+    //   title: 'Enter OTP',
+    //   input: 'text',
+    //   inputAttributes: {
+    //     autocapitalize: 'off',
+    //   },
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Submit',
+    //   showLoaderOnConfirm: true,
+    //   preConfirm: (otp) => {
+    //     if (otp === '1234') {
+    //       return true
+    //     } else {
+    //       Swal.showValidationMessage('Incorrect OTP entered.')
+    //       return false
+    //     }
+    //   },
+    //   allowOutsideClick: () => !Swal.isLoading(),
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire({
+    //       icon: 'success',
+    //       title: 'OTP Verified!',
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     }).then(() => {
+    //       Swal.close()
+    //     })
+    //   } else if (result.isDismissed) {
+    //     // User clicked cancel button
+    //   } else {
+    //     // Show prompt again
+    //     showPrompt()
+    //   }
+    // })
     if (validateForm()) {
       setIsLoading(true)
 
@@ -76,7 +111,7 @@ function SignupForm() {
               cancelButtonColor: ' #D3D3D3',
               allowOutsideClick: false,
               preConfirm: (code) => {
-                axios
+                return axios
                   .post('/auth/verify-otp', {
                     username: userName,
                     email,
@@ -84,8 +119,8 @@ function SignupForm() {
                     password: password,
                   })
                   .then((res) => {
+                    console.log(res)
                     if (res.data === 'OTP is not correct') {
-                      // toast.error('Mã OTP không đúng! Vui lòng thử lại!')
                       Swal.showValidationMessage('Mã OTP không đúng! Vui lòng thử lại!')
                     } else {
                       toast.success('Đăng kí thành công!')

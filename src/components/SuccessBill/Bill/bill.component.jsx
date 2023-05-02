@@ -3,14 +3,17 @@ import './bill.styles.scss'
 import axios from '@/api/axios'
 
 import { useSearchParams } from 'react-router-dom'
-import { useTokenStore } from '@/store'
+import { useTokenStore, useProductCartStore } from '@/store'
 import { useEffect, useState } from 'react'
 
 function Bill() {
   const [orderInfo, setOrderInfo] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [token] = useTokenStore((state) => [state.token])
-
+  const [setProductCart] = useProductCartStore((state) => [state.setProductCart])
+  useEffect(() => {
+    setProductCart([])
+  }, [])
   const formattedDate = () => {
     const date = new Date(orderInfo?.orderDate)
     const day = date.getDate().toString().padStart(2, '0')

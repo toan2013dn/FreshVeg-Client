@@ -94,11 +94,9 @@ function FinalOrder({ orderNote }) {
               },
             )
             .then((res) => {
-              window.location.href = res.data.url
               setBillInfo(productCart)
-              setTimeout(() => {
-                setProductCart([])
-              }, 1500)
+              setProductCart([])
+              window.location.href = res.data.url
             })
             .catch((err) => {
               console.log(err)
