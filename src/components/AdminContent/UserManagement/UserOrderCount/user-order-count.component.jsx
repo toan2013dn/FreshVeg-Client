@@ -28,7 +28,6 @@ function UserOrderCount({ isOpen, onClose, userId }) {
       })
   }, [])
 
-  console.log(userOrderCount)
   return (
     <Modal open={isOpen} onClose={onClose}>
       <>

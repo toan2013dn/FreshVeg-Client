@@ -18,7 +18,7 @@ function StatusRender(props) {
   // const [isVerified, setIsVerified] = useState('pending')
   const [token] = useTokenStore((state) => [state.token])
   const [status, setStatus] = useState(props.row.status)
-  console.log(token)
+
   const handleConfirm = () => {
     setStatus('Confirmed')
     axios
