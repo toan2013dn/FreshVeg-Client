@@ -53,7 +53,7 @@ function FinalOrder({ orderNote }) {
       .post(
         '/orderUser/add',
         {
-          userId: user?.userId,
+          // userId: user?.userId,
           phone: selectedAddress?.receiverPhone,
           amount: Math.ceil(totalPrice) * 1000,
           note: orderNote,
@@ -62,6 +62,9 @@ function FinalOrder({ orderNote }) {
             addressId: selectedAddress?.addressId,
           },
           orderDetails: updatedProductCart,
+          user: {
+            userId: user?.userId,
+          },
         },
         {
           headers: {

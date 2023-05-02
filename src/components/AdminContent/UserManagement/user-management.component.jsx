@@ -20,7 +20,7 @@ function ActionRender(props) {
           <InfoOutlinedIcon className="info-btn" />
         </button>
       </Tooltip>
-      <UserOrderCount isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
+      <UserOrderCount isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} userId={props.row.userId} />
     </div>
   )
 }
