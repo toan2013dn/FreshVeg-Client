@@ -2,6 +2,7 @@ import './order-detail-table.styles.scss'
 
 import { useProductCartStore } from '@/store'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 import ImageBG from '@/assets/images/Product-Part-1.webp'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
@@ -48,6 +49,14 @@ function OrderDetailTable() {
         })
       }
     })
+  }
+
+  const handleToOrder = () => {
+    if (totalPrice < 30) {
+      toast.warning('Tổng giá trị đơn hàng phải lớn hơn 30.000đ')
+    } else {
+      navigate('/order-confirm')
+    }
   }
 
   return (
@@ -123,11 +132,23 @@ function OrderDetailTable() {
             </h4>
           </div>
 
-          <button className="home-products--button" onClick={() => navigate('/order-confirm')}>
+          <button className="home-products--button" onClick={handleToOrder}>
             <Link>Tiến Hành Thanh Toán</Link>
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }

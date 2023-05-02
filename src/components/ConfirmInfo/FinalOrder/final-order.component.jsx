@@ -38,6 +38,9 @@ function FinalOrder({ orderNote }) {
     } else if (productCart.length === 0) {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng')
       return
+    } else if (totalPrice < 30) {
+      toast.warning('Đơn hàng phải có giá trị tối thiểu là 30.000đ!')
+      return
     }
 
     const updatedProductCart = productCart.map((product) => {
