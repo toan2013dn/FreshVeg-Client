@@ -90,7 +90,7 @@ function CartPopper() {
             {productCart.length > 0 ? (
               <>
                 {productCart.map((product) => (
-                  <div key={product.product.productId} className="cart-popper--item">
+                  <div key={product.product?.productId} className="cart-popper--item">
                     <div style={{ display: 'flex', gap: '5px' }}>
                       <div className="cart-popper--item-img">
                         {product.productImage ? (
