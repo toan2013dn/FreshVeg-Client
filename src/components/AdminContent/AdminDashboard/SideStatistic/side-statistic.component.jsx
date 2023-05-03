@@ -37,27 +37,18 @@ function SideStatistic() {
   const products = [
     {
       id: 4,
-      avatar:
-        'https://vothisaucamau.edu.vn/wp-content/uploads/2022/12/1670191226_34_Hinh-Anh-Meme-Cheems-Tau-He-Cuc-Manh-Cuoi-Sai.jpg',
-      name: 'Quả chuối',
-
-      orders: '144+ lượt mua',
+      name: 'Chuối tiêu Phan Thiết',
+      orders: '8000+ lượt mua',
     },
     {
       id: 5,
-      avatar:
-        'https://vothisaucamau.edu.vn/wp-content/uploads/2022/12/1670191226_34_Hinh-Anh-Meme-Cheems-Tau-He-Cuc-Manh-Cuoi-Sai.jpg',
-      name: 'Quả chuối',
-
-      orders: '144+ lượt mua',
+      name: 'Hành tây Đà Lạt',
+      orders: '1500+ lượt mua',
     },
     {
       id: 6,
-      avatar:
-        'https://vothisaucamau.edu.vn/wp-content/uploads/2022/12/1670191226_34_Hinh-Anh-Meme-Cheems-Tau-He-Cuc-Manh-Cuoi-Sai.jpg',
-      name: 'Quả chuối',
-
-      orders: '144+ lượt mua',
+      name: 'Dâu tây vườn Đà Lạt',
+      orders: '1000+ lượt mua',
     },
   ]
   return (
@@ -90,14 +81,14 @@ function SideStatistic() {
 
       <div className="side-statistic--products">
         <h3>Thống kê sản phẩm</h3>
-        {products.map((customer, index) => (
+        {products.map((product, index) => (
           <div className="side-statistic--products--item" key={index}>
-            <div className="side-statistic--products--item--avatar">
-              <img src={customer.avatar} alt="" />
-            </div>
-            <h4 className="side-statistic--products--item--name">{customer.name}</h4>
-            <h4 className="side-statistic--products--item--rank">{customer.rank}</h4>
-            <h4 className="side-statistic--products--item--orders">{customer.orders}</h4>
+            <h4 className="side-statistic--products--item--name">
+              {' '}
+              <TextOverflow width={150} content={product.name} />
+            </h4>
+            <h4 className="side-statistic--products--item--rank">{product.rank}</h4>
+            <h4 className="side-statistic--products--item--orders">{product.orders}</h4>
           </div>
         ))}
         <button className="btn" onClick={handleProductClick}>
