@@ -68,7 +68,7 @@ function ProductManagement() {
       'https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg',
     id: item.productId,
     name: item.productName,
-    categories: item.category.categoryName,
+    categories: item.category?.categoryName,
     price: item.price,
     describe: item.description,
     onDelete: async () => {

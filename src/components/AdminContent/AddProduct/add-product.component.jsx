@@ -19,7 +19,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
 
   useEffect(() => {
     axios.get('/category/all').then(({ data }) => {
-      setCategories(data)
+      setCategories(data.filter((item) => item.categoryName && item.categoryId))
     })
   }, [])
 
@@ -84,8 +84,8 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
               <Form.Item name="categoryId" className="w-full">
                 <Select className="w-full" label="Loại sản phẩm" placeholder="Loại sản phẩm">
                   {categories.map((item) => (
-                    <MenuItem key={item.categoryId} value={item.categoryId}>
-                      {item.categoryName}
+                    <MenuItem key={item?.categoryId} value={item?.categoryId}>
+                      {item?.categoryName}
                     </MenuItem>
                   ))}
                 </Select>
@@ -111,7 +111,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                       productImages: [{ imageLink: featuredImage }, ...(images || [])],
                       description,
                       status: true,
-                      categoryId,
+                      category: { categoryId },
                       weight,
                     },
                     {
@@ -129,7 +129,7 @@ function AddProduct({ isOpen, onClose, onFinish, productId, initialValue }) {
                       productImages: [{ imageLink: featuredImage }, ...(images || [])],
                       description,
                       status: true,
-                      categoryId,
+                      category: { categoryId },
                       weight,
                     },
                     {
