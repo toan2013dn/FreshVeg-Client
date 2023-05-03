@@ -16,7 +16,7 @@ function CarouselImage() {
 
   return (
     <div className="carousel">
-      <h3>Sản Phẩm Liên Quan</h3>
+      <h3>Sản Phẩm Khác</h3>
       <div className="carousel-product">
         <AliceCarousel
           autoPlay
