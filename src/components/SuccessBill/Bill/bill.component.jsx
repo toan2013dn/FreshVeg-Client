@@ -1,21 +1,26 @@
 import './bill.styles.scss'
 
-import { useSearchParams } from 'react-router-dom'
-
-import { useBillInfoStore, useOrderInfoStore } from '@/store'
-
 import axios from '@/api/axios'
-import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
+
+import { useSearchParams } from 'react-router-dom'
+import { useTokenStore, useProductCartStore } from '@/store'
 import { useEffect, useState } from 'react'
 
 function Bill() {
   const [orderInfo, setOrderInfo] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-
-  // const dateObj = new Date(orderDate)
-  // const day = dateObj.getUTCDate().toString().padStart(2, '0')
-  // const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0')
-  // const year = dateObj.getUTCFullYear().toString()
+  const [token] = useTokenStore((state) => [state.token])
+  const [setProductCart] = useProductCartStore((state) => [state.setProductCart])
+  useEffect(() => {
+    setProductCart([])
+  }, [])
+  const formattedDate = () => {
+    const date = new Date(orderInfo?.orderDate)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString()
+    return `${day}/${month}/${year}`
+  }
 
   let [searchParams, setSearchParams] = useSearchParams()
 
@@ -23,7 +28,12 @@ function Bill() {
 
   useEffect(() => {
     axios
-      .get(`/order/${orderId}`)
+      .get(`/order/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       // .get(`/order/18`)
       .then((res) => {
         setOrderInfo(res.data)
@@ -36,8 +46,6 @@ function Bill() {
 
   if (isLoading) return null
 
-  console.log(orderInfo)
-
   return (
     <div className="bill">
       <div className="bill-info">
@@ -45,9 +53,9 @@ function Bill() {
           <div className="product-items flex">
             <div className="products ">
               <h4>{item.product.productName}</h4>
-              <h4>{item.weight}kg</h4>
+              <h4>{item.weight.toFixed(1)}kg</h4>
             </div>
-            <h4>{(item?.price * item?.weight * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
+            <h4>{(item?.price * item?.weight.toFixed(1) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ</h4>
           </div>
         ))}
         <div className="shipping-cost flex">
@@ -62,10 +70,10 @@ function Bill() {
 
       <div className="bill-details">
         <h4 style={{ fontWeight: '700' }}>CHI TIẾT</h4>
-        {/* <div className="bill-details--orderDate flex">
+        <div className="bill-details--orderDate flex">
           <h4 style={{ width: '70%' }}>Ngày đặt hàng:</h4>
-          <h4 style={{ width: '100%' }}>{formattedDate}</h4>
-        </div> */}
+          <h4 style={{ width: '100%' }}>{formattedDate()}</h4>
+        </div>
         <div className="bill-details--receiverName flex">
           <h4 style={{ width: '70%' }}>Tên người nhận:</h4>
           <h4 style={{ width: '100%' }}>{orderInfo?.address?.receiverName}</h4>
@@ -79,12 +87,17 @@ function Bill() {
           <h4 style={{ width: '100%' }}>{orderInfo?.address?.receiverPhone}</h4>
         </div>
         <div className="bill-details--note">
-          {orderInfo.note !== '' ? (
+          {orderInfo.note !== null ? (
             <>
               <h4 style={{ fontWeight: '700' }}>GHI CHÚ</h4>
               <h4 style={{ textAlign: 'left', marginTop: '20px' }}>{orderInfo.note}</h4>
             </>
-          ) : null}
+          ) : (
+            <>
+              <h4 style={{ fontWeight: '700' }}>GHI CHÚ</h4>
+              <h4 style={{ textAlign: 'left', marginTop: '20px' }}>Không có</h4>
+            </>
+          )}
         </div>
       </div>
     </div>

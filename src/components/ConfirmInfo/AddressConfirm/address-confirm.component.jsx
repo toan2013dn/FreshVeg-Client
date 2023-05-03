@@ -1,6 +1,6 @@
 import './address-confirm.styles.scss'
 
-import { useUserAddressesStore, useUserStore, useOrderInfoStore } from '@/store'
+import { useUserAddressesStore, useUserStore, useOrderInfoStore, useTokenStore } from '@/store'
 import { useEffect, useState } from 'react'
 
 import axios from '@/api/axios'
@@ -13,13 +13,18 @@ function AddressConfirm({ forceUser }) {
     state.setUserAddresses,
   ])
   const [userInfo] = useUserStore((state) => [state.userInfo])
-
+  const [token, setToken] = useTokenStore((state) => [state.token, state.setToken])
   const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
 
   //call address api
   useEffect(() => {
     axios
-      .get(`/address/user/${userInfo.userId}`)
+      .get(`/address/user/${userInfo.userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         setUserAddresses(res.data)
       })

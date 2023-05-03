@@ -13,7 +13,7 @@ function CardStatistic() {
       icon: <PeopleAltOutlinedIcon />,
       title: 'Khách hàng mới',
       number: 30000,
-      percent: '100%',
+      percent: '3.8%',
       line: <MovingUpIcon className="moving-up" />,
     },
     {
@@ -21,16 +21,16 @@ function CardStatistic() {
       icon: <AttachMoneyOutlinedIcon />,
       title: 'Doanh thu',
       number: 30000,
-      percent: '100%',
-      line: <TrendingDownIcon className="trending-down" />,
+      percent: '10.5%',
+      line: <MovingUpIcon className="moving-up" />,
     },
     {
       id: 3,
       icon: <Inventory2OutlinedIcon />,
       title: 'Nguồn hàng',
       number: 30000,
-      percent: '100%',
-      line: <MovingUpIcon className="moving-up" />,
+      percent: '2.1%',
+      line: <TrendingDownIcon className="trending-down" />,
     },
   ]
 

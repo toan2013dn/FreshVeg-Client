@@ -1,6 +1,6 @@
 import './order-management-table.styles.scss'
 
-import { useOrderStore } from '@/store'
+import { useOrderStore, useTokenStore } from '@/store'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -16,21 +16,43 @@ import UserOrderInfo from '@/components/UserPageComponents/UserOrder/UserOrderIn
 
 function StatusRender(props) {
   // const [isVerified, setIsVerified] = useState('pending')
-
+  const [token] = useTokenStore((state) => [state.token])
   const [status, setStatus] = useState(props.row.status)
 
   const handleConfirm = () => {
     setStatus('Confirmed')
-    axios.patch(`/order/${props.row.orderId}/confirmed`).catch((err) => {
-      console.log('cancel order', err)
-    })
+    axios
+      .patch(
+        `/orderAdmin/${props.row.orderId}/confirmed`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((err) => {
+        console.log('cancel order', err)
+      })
   }
 
   const handleCancel = () => {
     setStatus('Cancel')
-    axios.patch(`/order/${props.row.orderId}/cancel`).catch((err) => {
-      console.log('cancel order', err)
-    })
+    axios
+      .patch(
+        `/order/${props.row.orderId}/cancel`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((err) => {
+        console.log('cancel order', err)
+      })
   }
 
   return (
@@ -133,7 +155,7 @@ const columns = [
     headerName: 'Ngày Đặt Hàng',
     width: 140,
     valueGetter: (params) => {
-      const date = new Date(params.value * 1000)
+      const date = new Date(params.value)
       return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     },
   },
@@ -155,9 +177,16 @@ const columns = [
 
 function OrderManagementTable() {
   const [orders, setOrders] = useOrderStore((state) => [state.orders, state.setOrders])
+  const [token] = useTokenStore((state) => [state.token])
+
   useEffect(() => {
     axios
-      .get('/order/all')
+      .get('/orderAdmin/all', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         setOrders(res.data)
       })

@@ -12,7 +12,7 @@ function Slider() {
   const options = {
     type: 'loop',
     autoplay: true,
-    interval: 1000,
+    interval: 5000,
     pauseOnHover: false,
   }
 

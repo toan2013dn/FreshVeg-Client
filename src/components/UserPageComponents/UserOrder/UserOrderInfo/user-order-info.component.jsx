@@ -1,6 +1,7 @@
 import './user-order-info.styles.scss'
 
 import { useState, useEffect } from 'react'
+import { useTokenStore } from '@/store'
 
 import axios from '@/api/axios'
 import PriceWithDots from '@/components/PriceWithDots/price-with-dots.component'
@@ -12,6 +13,7 @@ import Modal from '@mui/material/Modal'
 
 function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTotal, orderStatusPayment }) {
   const [products, setProducts] = useState([])
+  const [token] = useTokenStore((state) => [state.token])
   const [displayCount, setDisplayCount] = useState(3) // default display count
 
   const handleShowMore = () => {
@@ -27,7 +29,12 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
   }
   useEffect(() => {
     axios
-      .get(`/order/${orderId}`)
+      .get(`/order/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         // setProducts(res.data.orderDetails)
 
@@ -86,7 +93,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
                 <div className="price">
                   <PriceWithDots price={product.price} fontWeight={700} />
                 </div>
-                <div className="weight">{product.weight}kg</div>
+                <div className="weight">{product.weight.toFixed(1)}kg</div>
               </div>
             </div>
           ))}
@@ -106,8 +113,17 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
           )}
         </div>
         <div className="order-note">
-          <div className="order-note__title">Ghi chú đơn hàng: </div>
-          <div className="order-note__content">{orderNote} </div>
+          {orderNote !== null ? (
+            <>
+              <div className="order-note__title">Ghi chú đơn hàng: </div>
+              <div className="order-note__content">{orderNote} </div>
+            </>
+          ) : (
+            <>
+              <div className="order-note__title">Ghi chú đơn hàng: </div>
+              <div className="order-note__content">Không có</div>
+            </>
+          )}
         </div>
         <div className="payment-status">
           <div className="payment-status__title">Trạng thái thanh toán: </div>
@@ -120,7 +136,7 @@ function UserOrderInfo({ isOpen, orderId, orderDate, onClose, orderNote, orderTo
             Tổng cộng:
           </div>
           <div className="sub-total__price" style={{ fontWeight: '700', color: 'var(--primary-color)' }}>
-            <PriceWithDots price={orderTotal} />
+            {orderTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
           </div>
         </div>
       </div>

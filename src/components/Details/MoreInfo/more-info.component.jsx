@@ -22,7 +22,6 @@ function MoreProductInfo({ content }) {
             <TabList onChange={handleChange}>
               <Tab label="Thông Tin Sản Phẩm" value="1" />
               <Tab label="Miễn Phí Vận Chuyển" value="2" />
-              <Tab label="Cái Chi Đó" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1">

@@ -20,8 +20,8 @@ const MenuProps = {
 const selections = {
   lowToHigh: 'Giá từ thấp đến cao',
   highToLow: 'Giá từ cao đến thấp',
-  mostSale: 'Bán chạy nhất (TODO)',
-  newest: 'Mới nhất (TODO)',
+  // mostSale: 'Bán chạy nhất (TODO)',
+  // newest: 'Mới nhất (TODO)',
 }
 
 function Sort() {

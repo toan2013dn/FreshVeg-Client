@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUserStore, useTokenStore } from '@/store'
 import { useNavigate } from 'react-router-dom'
+import { useProductCartStore } from '@/store'
 
 import axios from '@/api/axios'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -18,6 +19,7 @@ function LoginForm({ onClose }) {
   const [errors, setErrors] = useState({})
   const [setUserInfo] = useUserStore((state) => [state.setUserInfo])
   const [setToken] = useTokenStore((state) => [state.setToken])
+  const [setProductCart] = useProductCartStore((state) => [state.setProductCart])
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -72,6 +74,8 @@ function LoginForm({ onClose }) {
               showConfirmButton: false,
               timer: 1100,
             })
+
+            setProductCart([])
 
             setTimeout(() => {
               onClose()

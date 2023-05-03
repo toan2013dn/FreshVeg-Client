@@ -2,7 +2,7 @@ import './user-address.styles.scss'
 
 import { useEffect, useState } from 'react'
 import { useUserStore } from '@/store'
-import { useUserAddressesStore } from '@/store'
+import { useUserAddressesStore, useTokenStore } from '@/store'
 
 import * as React from 'react'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -15,6 +15,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 function UserAddress() {
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [token] = useTokenStore((state) => [state.token])
   const [isOpenModalUpdate, setIsOpenModalUpdate] = useState({})
   const [userAddresses, setUserAddresses] = useUserAddressesStore((state) => [
     state.userAddresses,
@@ -31,7 +32,12 @@ function UserAddress() {
 
   useEffect(() => {
     axios
-      .get(`/address/${userInfo.userId}`)
+      .get(`/address/user/${userInfo.userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         setUserAddresses(res.data)
       })
@@ -60,7 +66,12 @@ function UserAddress() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`/address/${userInfo.userId}/${id}`)
+          .delete(`/address/${userInfo.userId}/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          })
           .then((res) => {
             const updatedUsers = userAddresses.filter((userAddress) => userAddress.addressId !== id)
             setUserAddresses(updatedUsers)

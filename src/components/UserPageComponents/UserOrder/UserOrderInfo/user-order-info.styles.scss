@@ -73,17 +73,12 @@
       }
     }
   }
-  .order-detail {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    .order-note {
-      width: 200px;
-      word-wrap: break-word;
-      display: flex;
-      gap: 5px;
-    }
+  .order-note {
+    width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    gap: 15px;
   }
   .payment-status {
     display: flex;

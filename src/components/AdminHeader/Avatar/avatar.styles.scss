@@ -1,5 +1,10 @@
 .avatar {
-  margin-left: 220px;
+  // margin-left: 220px;
+  // margin: 0 auto;
+
+  position: absolute;
+  right: 120px;
+
   display: flex;
   &-admin {
     width: 50px;
