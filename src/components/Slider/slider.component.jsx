@@ -33,9 +33,7 @@ function Slider() {
               FreshVeg là một nơi tuyệt vời để mua sắm cho những người quan tâm đến sức khỏe và an toàn thực phẩm. Tại
               đây, bạn có thể tìm thấy những loại rau củ quả được trồng và chăm sóc một cách tự nhiên, không sử dụng hóa
               chất và phân bón độc hại. Ngoài ra, FreshVeg cũng cung cấp thông tin về nguồn gốc của các sản phẩm, giúp
-              cho người mua có thể yên tâm về chất lượng và nguồn gốc của những sản phẩm mình sử dụng. Tất cả những điều
-              này đều giúp tạo ra một môi trường mua sắm an toàn và đáng tin cậy cho những ai quan tâm đến sức khỏe và
-              môi trường sống.
+              cho người mua có thể yên tâm về chất lượng và nguồn gốc của những sản phẩm mình sử dụng.
             </h4>
             <div className="slider-buttons">
               <button className="slider-buttons--button ">

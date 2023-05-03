@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { useTokenStore } from '@/store'
 
+import Tooltip from '@mui/material/Tooltip'
 import DeleteIcon from '@mui/icons-material/DeleteForeverOutlined'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
@@ -22,10 +23,10 @@ const columns = [
     renderCell: ({ value }) => <Image src={value} />,
     sortable: false,
   },
-  { field: 'name', headerName: 'Tên Sản Phẩm', width: 130 },
-  { field: 'categories', headerName: 'Thể Loại', width: 130 },
-  { field: 'price', headerName: 'Giá', width: 130 },
-  { field: 'describe', headerName: 'Mô Tả Sản Phẩm', width: 370 },
+  { field: 'name', headerName: 'Tên Sản Phẩm', width: 180 },
+  { field: 'categories', headerName: 'Thể Loại', width: 100 },
+  { field: 'price', headerName: 'Giá', width: 110 },
+  { field: 'describe', headerName: 'Mô Tả Sản Phẩm', width: 470 },
   {
     field: 'action',
     headerName: '',
@@ -35,8 +36,12 @@ const columns = [
 
       return (
         <div className="flex gap-3">
-          <Button className="border-none edit" icon={<EditOutlinedIcon />} onClick={onEdit} />
-          <Button className="border-none delete" icon={<DeleteIcon className="text-red-600" />} onClick={onDelete} />
+          <Tooltip title="Chỉnh sửa">
+            <Button className="border-none edit" icon={<EditOutlinedIcon />} onClick={onEdit} />
+          </Tooltip>
+          <Tooltip title="Xoá sản phẩm">
+            <Button className="border-none delete" icon={<DeleteIcon className="text-red-600" />} onClick={onDelete} />
+          </Tooltip>
         </div>
       )
     },
@@ -63,7 +68,7 @@ function ProductManagement() {
       'https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg',
     id: item.productId,
     name: item.productName,
-    categories: item.categoryId,
+    categories: item.category.categoryName,
     price: item.price,
     describe: item.description,
     onDelete: async () => {

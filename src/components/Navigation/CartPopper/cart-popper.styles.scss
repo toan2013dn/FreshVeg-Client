@@ -39,6 +39,14 @@
       .name {
         font-weight: 700;
       }
+      .productName {
+        cursor: pointer;
+
+        &:hover {
+          color: #4caf50;
+          transition: ease-in-out 0.2s;
+        }
+      }
 
       .price {
         font-weight: 700;

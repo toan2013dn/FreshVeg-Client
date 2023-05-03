@@ -99,7 +99,9 @@ function UserPopover() {
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="user-popover--content">
             <div className="user-popover--content-info">
-              <TextOverflow width={150} fontWeight={700} content={userInfo.name} />
+              <div style={{ lineHeight: '1.3' }}>
+                <TextOverflow width={150} fontWeight={700} content={userInfo.name} />
+              </div>
               <h4>{userInfo.email}</h4>
             </div>
             <div className="option-btn">

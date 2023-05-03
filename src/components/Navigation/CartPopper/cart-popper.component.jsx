@@ -9,15 +9,18 @@ import Popper from '@mui/material/Popper'
 import * as React from 'react'
 
 import { ReactComponent as Shopping } from '@/assets/icons/Shopping-icon.svg'
-import { useProductCartStore } from '@/store'
+import { useProductCartStore, useProductStore } from '@/store'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function CartPopper() {
   const [productCart, setProductCart] = useProductCartStore((state) => [state.productCart, state.setProductCart])
   const [anchorEl, setAnchorEl] = React.useState(null)
+
   const open = Boolean(anchorEl)
+
   const id = open ? 'simple-popper' : undefined
+
   const navigate = useNavigate()
 
   const handleToOrderConfirm = () => {
@@ -26,6 +29,9 @@ function CartPopper() {
 
   const handleToOrderDetail = () => {
     navigate('/order-detail')
+  }
+  const handleToProduct = (productId) => {
+    navigate(`/products-details/${productId}`)
   }
 
   const handleClick = (event) => {
@@ -100,7 +106,9 @@ function CartPopper() {
                         )}
                       </div>
                       <div className="cart-popper--item-info">
-                        <TextOverflow width={125} fontWeight={700} content={product.productName} />
+                        <div className="productName" onClick={() => handleToProduct(product.product?.productId)}>
+                          <TextOverflow width={125} fontWeight={700} content={product.productName} />
+                        </div>
                         <h4 className="price">
                           {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ/100gr
                         </h4>
@@ -116,7 +124,7 @@ function CartPopper() {
                 ))}
                 <div className="cart-popper--btn">
                   <button className="btn btn--payment" onClick={handleToOrderConfirm}>
-                    Thanh Toán
+                    Đặt Hàng
                   </button>
                   <button className="btn btn--viewCart" onClick={handleToOrderDetail}>
                     Xem Giỏ Hàng

@@ -127,7 +127,7 @@ function FinalOrder({ orderNote }) {
     <>
       <div className="final-order">
         <div className="final-order--title">
-          <h4>Đơn Hàng Của Bạn</h4>
+          <h3>Đơn Hàng Của Bạn</h3>
         </div>
         <div className="final-order--details">
           <div className="title flex">
@@ -162,7 +162,7 @@ function FinalOrder({ orderNote }) {
           </div>
         </div>
         <button className="home-products--button" style={{ fontSize: '20px' }} onClick={handleClickToOrderSuccess}>
-          Đặt Hàng
+          Thanh Toán
         </button>
       </div>
       <div className="order-confirm--image">
