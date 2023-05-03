@@ -69,12 +69,7 @@ function ConfirmInfo() {
             noValidate
             autoComplete="off"
           >
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Để lại ghi chú cho đơn hàng của bạn"
-              multiline
-              onChange={handleOrderNoteChange}
-            />
+            <TextField id="outlined-multiline-flexible" label="Ghi chú" multiline onChange={handleOrderNoteChange} />
           </Box>
         </div>
       </div>

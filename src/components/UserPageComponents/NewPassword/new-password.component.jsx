@@ -93,7 +93,7 @@ function NewPassword() {
               <h3>Thiết lập mật khẩu</h3>
               <div>
                 <h4>Tạo mật khẩu mới cho</h4>
-                <h4 style={{ marginTop: '5px' }}>{userInfo.email}</h4>
+                <h4 style={{ marginTop: '5px', color: 'green' }}>{userInfo.email}</h4>
               </div>
               <div style={{ position: 'relative' }}>
                 <input
